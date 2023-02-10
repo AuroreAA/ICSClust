@@ -3,3 +3,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 dev/*
+^LICENSE\.md$
+^README\.Rmd$
+^\.github$
