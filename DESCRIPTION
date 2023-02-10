@@ -10,3 +10,5 @@ Description: One paragraph description of what the package does as one or more f
 License: GPL (>= 2)
 Imports: Rcpp (>= 1.0.8)
 LinkingTo: Rcpp
+URL: https://github.com/AuroreAA/ICSClust
+BugReports: https://github.com/AuroreAA/ICSClust/issues
