@@ -18,7 +18,7 @@ Imports:
     moments,
     Rcpp (>= 1.0.8),
     tclust
-LinkingTo: Rcpp
+LinkingTo: Rcpp, RcppArmadillo
 URL: https://github.com/AuroreAA/ICSClust
 BugReports: https://github.com/AuroreAA/ICSClust/issues
 RoxygenNote: 7.2.3
