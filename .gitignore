@@ -2,6 +2,13 @@
 .Rhistory
 .Rdata
 .httr-oauth
-.DS_Store
 renv/*
 .Rprofile
+
+# C++ binaries
+src/*.o
+src/*.so
+src/*.dll
+
+# MacOS system files
+*.DS_Store
