@@ -3,8 +3,8 @@
  *         Erasmus Universiteit Rotterdam
  */
 
-#include <RcppArmadillo.h>
-#include <math.h>
+#include <RcppArmadillo.h>  // for covariance matrix and inverse
+#include <math.h>           // for exponential function
 
 using namespace Rcpp;
 using namespace arma;
@@ -12,44 +12,52 @@ using namespace arma;
 // [[Rcpp::export]]
 arma::mat tcovCpp(const arma::mat& x, const double& beta) {
   
-  // FIXME: the transpose always creates a copy, hence this code is too slow
-  
   // initializations
-  const int n = x.n_rows;
-  const int p = x.n_cols;
+  const arma::uword n = x.n_rows;
+  const arma::uword p = x.n_cols;
   
-  // transpose the data matrix so that we can easily extract observations as 
-  // column vectors and avoid making copies
-  const arma::mat tx = x.t();
-
   // In the paper, we have w(x) = exp(-x/2). But since we always call 
-  // w(beta * r^2), we instead set b = beta/2 and use w(x) = exp(-x).
-  const double b = beta / 2.0;
+  // w(beta * r^2), we instead set b = -beta/2 and use w(x) = exp(x).
+  const double b = -beta / 2.0;
   
-  // compute covariance matrix and its inverse
-  const arma::mat S = arma::cov(x, 1);  // use denominator n instead of n-1
-  const arma::mat SInv = arma::solve(S, arma::eye<arma::mat>(p, p));
+  // compute inverse of the covariance matrix
+  // (second argument in arma::cov() specifies denominator n)
+  const arma::mat S_inv = arma::solve(arma::cov(x, 1), 
+                                      arma::eye<arma::mat>(p, p));
   
   // loop over pairs of observations
-  arma::mat V(p, p); V.zeros();
-  arma::vec diff(p);
-  arma::rowvec tdiff(p);
-  double rSq, w, denominator = 0;
-  for(arma::uword i = 0; i < n-1; i++) {
-    for (arma::uword j = i+1; j < n; j++) {
-      diff = tx.unsafe_col(i) - tx.unsafe_col(j);
-      tdiff = diff.t();
-      rSq = arma::as_scalar(tdiff * SInv * diff);
-      w = exp(-b*rSq);
-      V = V + (w * (diff * tdiff));
+  arma::uword i, j, k, l;             // running indices
+  arma::vec diff(p);                  // difference of pair of observations
+  arma::mat V(p, p, fill::zeros);     // scatter matrix
+  double r_sq, w, denominator = 0.0;  // squared distance, weight, denominator
+  for(i = 1; i < n; i++) {
+    for(j = 0; j < i; j++) {
+      // compute difference of current pair of observations
+      for(k = 0; k < p; k++) diff(k) = x(i,k) - x(j,k);
+      // compute squared pairwise Mahalanobis distance
+      r_sq = 0.0;
+      for(k = 0; k < p; k++) {
+        for(l = 0; l < p; l++) {
+          r_sq += diff(k) * S_inv(k,l) * diff(l);
+        }
+      }
+      // compute weight for current pair of observations
+      w = exp(b * r_sq);
+      // add weighted contribution of current pair of observations
+      for(k = 0; k < p; k++) {
+        // update diagonal elements
+        V(k,k) += w * diff(k) * diff(k);
+        // update offdiagonal elements
+        for(l = 0; l < k; l++) {
+          V(k,l) += w * diff(k) * diff(l);
+          V(l,k) = V(k,l);
+        }
+      }
+      // add weight of current pair of observations to denominator
       denominator += w;
     }
   }
 
   // return scatter matrix
   return V / denominator;
-}
-
-double w(const double& x) {
-  return exp(-x);
 }

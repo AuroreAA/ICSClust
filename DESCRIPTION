@@ -1,10 +1,8 @@
 Package: ICSClust
 Type: Package
 Title: What the Package Does in One 'Title Case' Line
-Version: 1.0
+Version: 0.1.0
 Date: 2023-01-31
-Author: Your Name
-Maintainer: Your Name <your@email.com>
 Description: One paragraph description of what the package does as one or more full
          sentences.
 License: GPL (>= 3)
@@ -16,11 +14,30 @@ Imports:
     ICtest,
     mclust,
     moments,
-    Rcpp (>= 1.0.8),
     tclust
-LinkingTo: Rcpp, RcppArmadillo
+LinkingTo: 
+    Rcpp, 
+    RcppArmadillo
 URL: https://github.com/AuroreAA/ICSClust
 BugReports: https://github.com/AuroreAA/ICSClust/issues
+Authors@R: 
+    c(person("Aurore", "Archimbaud", 
+             email = "archimbaud@ese.eur.nl", 
+             role = c("aut", "cre"),
+             comment = c(ORCID = "0000-0002-6511-9091")),
+      person("Andreas", "Alfons", 
+             email = "alfons@ese.eur.nl", 
+             role = "aut",
+             comment = c(ORCID = "0000-0002-2513-3788")),
+      person("Klaus", "Nordhausen", 
+             email = "klaus.k.nordhausen@jyu.fi",
+             role = "aut", 
+             comment = c(ORCID = "0000-0002-3758-8501")))
+Author: 
+    Aurore Archimbaud [aut, cre] (<https://orcid.org/0000-0002-6511-9091>),
+    Andreas Alfons [aut] (<https://orcid.org/0000-0002-2513-3788>), 
+    Klaus Nordhausen [aut] (<https://orcid.org/0000-0002-3758-8501>)
+Maintainer: Aurore Archimbaud <archimbaud@ese.eur.nl>
 RoxygenNote: 7.2.3
 Suggests: 
     testthat (>= 3.0.0)
