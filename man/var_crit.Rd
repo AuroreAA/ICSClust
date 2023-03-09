@@ -4,12 +4,12 @@
 \alias{var_crit}
 \title{Rollvar to select the ICS component}
 \usage{
-var_crit(lambda_vec, threshold = NULL)
+var_crit(lambda_vec, comp_max = NULL)
 }
 \arguments{
 \item{lambda_vec}{The vector of lambdas from ICS object}
 
-\item{threshold}{The number of non-gaussian components under the null.}
+\item{comp_max}{The number of non-gaussian components under the null.}
 }
 \description{
 This function selects the components to keep based on the rolling variance criteria used in `ICSboot`.

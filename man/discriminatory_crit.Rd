@@ -8,7 +8,7 @@ discriminatory_crit(
   df_scores,
   groups_vec,
   crit_args = list(method = "eta2"),
-  threshold = NULL
+  comp_max = NULL
 )
 }
 \arguments{
@@ -18,7 +18,7 @@ discriminatory_crit(
 
 \item{crit_args}{}
 
-\item{threshold}{}
+\item{comp_max}{}
 }
 \description{
 This function selects the components to keep based on a discriminatory power (by default "eta2")

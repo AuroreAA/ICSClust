@@ -25,10 +25,10 @@ tcov <- function(x, beta = 2) {
   V
 }
 
-## reference implementation using package 'amap'
-## @importFrom stats var
-## @importFrom amap W
-## @export
+#' reference implementation using package 'amap'
+#' @importFrom stats var
+#' @importFrom amap W
+#' @export
 tcov_amap <- function(x, beta = 2) {
   # initializations
   x <- as.matrix(x)

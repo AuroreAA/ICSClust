@@ -8,7 +8,7 @@ ICS_comp_crit(
   object,
   crit = "normal",
   crit_args = list(),
-  threshold = NULL,
+  comp_max = NULL,
   groups_vec = NULL,
   ...
 )
@@ -19,7 +19,7 @@ ICS_comp_crit(
 \item{crit}{One of teh following criteria: 'normal', 'med', 'var', 
 'discriminatory'.}
 
-\item{threshold}{The maximal number of components to select.}
+\item{comp_max}{The maximal number of components to select.}
 
 \item{...}{}
 

@@ -8,6 +8,7 @@ usethis::use_package("heplots")
 usethis::use_package("tclust")
 usethis::use_package("cluster")
 usethis::use_package("mclust")
+usethis::use_package("amap")
 
 ## Edit DESCRIPTION
 usethis::use_gpl_license(version = 3, include_future = TRUE)
@@ -27,7 +28,7 @@ usethis::use_github()
 # Tests --------------
 usethis::use_testthat(3)
 usethis::use_test("rcpp_fun_test") # to create the test
-testthat::test_file("tests/testthat/test-rcpp_fun_test.R") # to check the test
+testthat::test_file("tests/testthat/test-tcov.R") # to check the test
 
 usethis::use_test("ICSClust") # to create the test
 testthat::test_file("tests/testthat/test-ICSClust.R")

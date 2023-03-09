@@ -9,10 +9,11 @@ ICSClust(
   crit = "normal",
   crit_args = list(),
   groups_vec = NULL,
-  threshold = NULL,
+  comp_max = NULL,
   scaling = FALSE,
   clustering_fun = "kmeansClust",
   clustering_args = list(),
+  nb_clusters = NULL,
   ...
 )
 }
