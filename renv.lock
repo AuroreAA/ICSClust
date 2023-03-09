@@ -191,6 +191,14 @@
       "Hash": "4f57884290cc75ab22f4af9e9d4ca862",
       "Requirements": []
     },
+    "amap": {
+      "Package": "amap",
+      "Version": "0.8-19",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "1b5a878bda18bb41d071cc61e6462398",
+      "Requirements": []
+    },
     "askpass": {
       "Package": "askpass",
       "Version": "1.1",

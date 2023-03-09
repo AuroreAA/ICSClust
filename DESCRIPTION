@@ -8,6 +8,7 @@ Description: One paragraph description of what the package does as one or more f
 License: GPL (>= 3)
 Encoding: UTF-8
 Imports: 
+    amap,
     cluster,
     heplots,
     ICS,
