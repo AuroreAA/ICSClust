@@ -49,8 +49,10 @@ tcov_amap <- function(x, beta = 2) {
 
 #' @export
 ICS_scov <- function(x, beta = 0.2) {
+  # initializations
+  x <- as.matrix(X)
   # compute location and scatter estimates
-  location <- mean(x)
+  location <- colMeans(x)
   scatter <- .scov(x, m = location, beta = beta)
   out <- list(location = location, scatter = scatter, label = "SCOV")
   # add class and return object
@@ -83,8 +85,10 @@ scov <- function(x, beta = 0.2) {
 
 #' @export
 ICS_ucov <- function(x, beta = 0.2) {
+  # initializations
+  x <- as.matrix(X)
   # compute location and scatter estimates
-  location <- mean(x)
+  location <- colMeans(x)
   scatter <- .ucov(x, m = location, beta = beta)
   out <- list(location = location, scatter = scatter, label = "UCOV")
   # add class and return object
