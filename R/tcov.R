@@ -4,7 +4,7 @@
 # ************************************
 
 #' @export
-ICS_tcov <- function(x, beta = 4) {
+ICS_tcov <- function(x, beta = 2) {
   # compute scatter estimate
   out <- list(location = NULL, scatter = tcov(x, beta = beta), label = "TCOV")
   # add class and return object
@@ -14,7 +14,7 @@ ICS_tcov <- function(x, beta = 4) {
 
 #' @useDynLib ICSClust, .registration = TRUE
 #' @export
-tcov <- function(x, beta = 4) {
+tcov <- function(x, beta = 2) {
   # initializations
   x <- as.matrix(x)
   cn <- colnames(x)
