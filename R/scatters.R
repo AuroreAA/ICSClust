@@ -29,6 +29,8 @@ tcov <- function(x, beta = 2) {
 }
 
 # reference implementation using package 'amap'
+#' @importFrom amap W
+#' @importFrom stats var
 tcov_amap <- function(x, beta = 2) {
   # initializations
   x <- as.matrix(x)
@@ -111,7 +113,9 @@ ucov <- function(x, beta = 0.2) {
   solve(scov_inv - beta * cov_inv)
 }
 
-# reference implementation using package 'amap'
+## reference implementation using package 'amap'
+#' @importFrom amap W
+#' @importFrom stats var
 ucov_amap <- function(x, beta = 0.2) {
   # TODO: Is this correct? I get slightly different numbers than with ucov().
   # initializations
