@@ -7,13 +7,13 @@
 normal_crit(
   df_scores,
   crit_args = list(level = 0.05, test = "agostino.test"),
-  threshold = NULL
+  comp_max = NULL
 )
 }
 \arguments{
 \item{crit_args}{}
 
-\item{threshold}{}
+\item{comp_max}{}
 }
 \description{
 Title
