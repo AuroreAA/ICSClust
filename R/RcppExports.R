@@ -5,3 +5,7 @@ tcovCpp <- function(x, beta) {
     .Call(`_ICSClust_tcovCpp`, x, beta)
 }
 
+scovCpp <- function(x, m, beta) {
+    .Call(`_ICSClust_scovCpp`, x, m, beta)
+}
+

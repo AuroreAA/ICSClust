@@ -23,9 +23,23 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// scovCpp
+arma::mat scovCpp(const arma::mat& x, const arma::vec& m, const double& beta);
+RcppExport SEXP _ICSClust_scovCpp(SEXP xSEXP, SEXP mSEXP, SEXP betaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type m(mSEXP);
+    Rcpp::traits::input_parameter< const double& >::type beta(betaSEXP);
+    rcpp_result_gen = Rcpp::wrap(scovCpp(x, m, beta));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_ICSClust_tcovCpp", (DL_FUNC) &_ICSClust_tcovCpp, 2},
+    {"_ICSClust_scovCpp", (DL_FUNC) &_ICSClust_scovCpp, 3},
     {NULL, NULL, 0}
 };
 
