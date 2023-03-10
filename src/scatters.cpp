@@ -23,7 +23,9 @@ arma::mat tcov_cpp(const arma::mat& x, const double& beta) {
   
   // compute inverse of the covariance matrix
   // (second argument in arma::cov() specifies denominator n)
-  const arma::mat cov_inv = arma::solve(arma::cov(x, 1), 
+  // const arma::mat cov_inv = arma::solve(arma::cov(x, 1), 
+  //                                       arma::eye<arma::mat>(p, p));
+  const arma::mat cov_inv = arma::solve(arma::cov(x), 
                                         arma::eye<arma::mat>(p, p));
   
   // loop over pairs of observations

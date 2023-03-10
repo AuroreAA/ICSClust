@@ -54,7 +54,7 @@ ICS_scov <- function(x, beta = 0.2) {
   n <- nrow(x)
   # compute location and scatter estimates
   location <- colMeans(x)
-  S_inv <- solve(var(x) * ((n-1) / n))
+  S_inv <- solve(var(x))
   scatter <- .scov(x, m = location, S_inv = S_inv, beta = beta)
   out <- list(location = location, scatter = scatter, label = "SCOV")
   # add class and return object
@@ -69,7 +69,7 @@ scov <- function(x, beta = 0.2) {
   n <- nrow(x)
   # compute sample means and inverse of covariance matrix
   m <- colMeans(x)
-  S_inv <- solve(var(x) * ((n-1) / n))
+  S_inv <- solve(var(x))
   # call internal function
   .scov(x, m = m, S_inv = S_inv, beta = beta)
 }
@@ -117,7 +117,7 @@ ucov <- function(x, beta = 0.2) {
   # initializations
   n <- nrow(x)
   # compute inverse of sample covariance matrix and inverse of SCOV
-  S_inv <- solve(var(x) * ((n-1) / n))
+  S_inv <- solve(var(x))
   scov_inv <- solve(.scov(x, m = m, S_inv = S_inv, beta = beta))
   # compute UCOV scatter matrix
   solve(scov_inv - beta * S_inv)
