@@ -4,7 +4,7 @@
 # ************************************
 
 
-## TCOV scatter matrix
+# TCOV scatter matrix -----
 
 #' @export
 ICS_tcov <- function(x, beta = 2) {
@@ -22,7 +22,7 @@ tcov <- function(x, beta = 2) {
   x <- as.matrix(x)
   cn <- colnames(x)
   # call internal function (which in turn calls C++ function)
-  V <- tcovCpp(x, beta = beta)
+  V <- tcov_cpp(x, beta = beta)
   # set row and column names and return scatter matrix
   dimnames(V) <- list(cn, cn)
   V
@@ -34,26 +34,28 @@ tcov <- function(x, beta = 2) {
 tcov_amap <- function(x, beta = 2) {
   # initializations
   x <- as.matrix(x)
+  n <- nrow(x)
   cn <- colnames(x)
   # compute inverse of maximum likelihood estimate of covariance matrix
-  n <- nrow(x)
-  cov_inv <- solve(var(x) * (n-1) / n)
-  V <- amap::W(x, h = 1/sqrt(beta), D = cov_inv, kernel = "gaussien")
+  S_inv <- solve(var(x) * ((n-1)/n))
+  V <- amap::W(x, h = 1/sqrt(beta), D = S_inv, kernel = "gaussien")
   # set row and column names and return scatter matrix
   dimnames(V) <- list(cn, cn)
   V
 }
 
 
-## SCOV scatter matrix
+# SCOV scatter matrix -----
 
 #' @export
 ICS_scov <- function(x, beta = 0.2) {
   # initializations
   x <- as.matrix(X)
+  n <- nrow(x)
   # compute location and scatter estimates
   location <- colMeans(x)
-  scatter <- .scov(x, m = location, beta = beta)
+  S_inv <- solve(var(x) * ((n-1) / n))
+  scatter <- .scov(x, m = location, S_inv = S_inv, beta = beta)
   out <- list(location = location, scatter = scatter, label = "SCOV")
   # add class and return object
   class(out) <- "ICS_scatter"
@@ -64,24 +66,28 @@ ICS_scov <- function(x, beta = 0.2) {
 scov <- function(x, beta = 0.2) {
   # initializations
   x <- as.matrix(X)
-  # compute sample means and call internal function
-  .scov(x, m = colMeans(x), beta = beta)
+  n <- nrow(x)
+  # compute sample means and inverse of covariance matrix
+  m <- colMeans(x)
+  S_inv <- solve(var(x) * ((n-1) / n))
+  # call internal function
+  .scov(x, m = m, S_inv = S_inv, beta = beta)
 }
 
 ## internal function to avoid recomputation of sample mean
 #' @useDynLib ICSClust, .registration = TRUE
-.scov <- function(x, m, beta = 0.2) {
+.scov <- function(x, m, S_inv, beta = 0.2) {
   # initializations
   cn <- colnames(x)
   # call internal function (which in turn calls C++ function)
-  V <- scovCpp(x, m = m, beta = beta)
+  V <- scov_cpp(x, m = m, S_inv = S_inv, beta = beta)
   # set row and column names and return scatter matrix
   dimnames(V) <- list(cn, cn)
   V
 }
 
 
-## UCOV scatter matrix
+# UCOV scatter matrix -----
 
 #' @export
 ICS_ucov <- function(x, beta = 0.2) {
@@ -100,38 +106,39 @@ ICS_ucov <- function(x, beta = 0.2) {
 ucov <- function(x, beta = 0.2) {
   # initializations
   x <- as.matrix(X)
-  # compute sample means and call internal function
-  .ucov(x, m = colMeans(x), beta = beta)
+  # compute sample means
+  m <- colMeans(x)
+  # call internal function
+  .ucov(x, m = m, beta = beta)
 }
 
 # internal function to avoid recomputation of sample mean
 .ucov <- function(x, m, beta = 0.2) {
   # initializations
   n <- nrow(x)
-  # compute inverse of SCOV and inverse of sample covariance matrix
-  cov_inv <- solve(var(x) * (n-1) / n)
-  # TODO: make the inverse of the covariance matrix an argument of .scov()
-  #       (avoids computing it twice)
-  scov_inv <- solve(.scov(x, m = m, beta = beta))
+  # compute inverse of sample covariance matrix and inverse of SCOV
+  S_inv <- solve(var(x) * ((n-1) / n))
+  scov_inv <- solve(.scov(x, m = m, S_inv = S_inv, beta = beta))
   # compute UCOV scatter matrix
-  solve(scov_inv - beta * cov_inv)
+  solve(scov_inv - beta * S_inv)
 }
 
 ## reference implementation using package 'amap'
 #' @importFrom amap W
 #' @importFrom stats var
 ucov_amap <- function(x, beta = 0.2) {
-  # TODO: Is this correct? I get slightly different numbers than with ucov().
+  # TODO: Is the correction for the error in 'amap' correct? 
+  #       I get slightly different numbers than with ucov().
   # initializations
   x <- as.matrix(x)
   cn <- colnames(x)
   # compute inverse of maximum likelihood estimate of covariance matrix
   n <- nrow(x)
-  cov_inv <- solve(var(x) * (n-1) / n)
-  # compute inverse of SCOV (error in amap package: should be 1/h^2)
+  S_inv <- solve(var(x) * ((n-1) / n))
+  # compute inverse of SCOV (error in 'amap' package: should be 1/h^2)
   h <- 1/sqrt(beta)
-  scov_inv <- solve(amap::varrob(x, h = h, D = cov_inv, kernel = "gaussien"))
-  V <- solve(scov_inv + (h-1)/(h^2) * cov_inv)
+  scov_inv <- solve(amap::varrob(x, h = h, D = S_inv, kernel = "gaussien"))
+  V <- solve(scov_inv + (h-1)/(h^2) * S_inv)
   # set row and column names and return scatter matrix
   dimnames(V) <- list(cn, cn)
   V

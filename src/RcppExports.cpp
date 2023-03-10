@@ -11,35 +11,36 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// tcovCpp
-arma::mat tcovCpp(const arma::mat& x, const double& beta);
-RcppExport SEXP _ICSClust_tcovCpp(SEXP xSEXP, SEXP betaSEXP) {
+// tcov_cpp
+arma::mat tcov_cpp(const arma::mat& x, const double& beta);
+RcppExport SEXP _ICSClust_tcov_cpp(SEXP xSEXP, SEXP betaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const arma::mat& >::type x(xSEXP);
     Rcpp::traits::input_parameter< const double& >::type beta(betaSEXP);
-    rcpp_result_gen = Rcpp::wrap(tcovCpp(x, beta));
+    rcpp_result_gen = Rcpp::wrap(tcov_cpp(x, beta));
     return rcpp_result_gen;
 END_RCPP
 }
-// scovCpp
-arma::mat scovCpp(const arma::mat& x, const arma::vec& m, const double& beta);
-RcppExport SEXP _ICSClust_scovCpp(SEXP xSEXP, SEXP mSEXP, SEXP betaSEXP) {
+// scov_cpp
+arma::mat scov_cpp(const arma::mat& x, const arma::vec& m, const arma::mat& S_inv, const double& beta);
+RcppExport SEXP _ICSClust_scov_cpp(SEXP xSEXP, SEXP mSEXP, SEXP S_invSEXP, SEXP betaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const arma::mat& >::type x(xSEXP);
     Rcpp::traits::input_parameter< const arma::vec& >::type m(mSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type S_inv(S_invSEXP);
     Rcpp::traits::input_parameter< const double& >::type beta(betaSEXP);
-    rcpp_result_gen = Rcpp::wrap(scovCpp(x, m, beta));
+    rcpp_result_gen = Rcpp::wrap(scov_cpp(x, m, S_inv, beta));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_ICSClust_tcovCpp", (DL_FUNC) &_ICSClust_tcovCpp, 2},
-    {"_ICSClust_scovCpp", (DL_FUNC) &_ICSClust_scovCpp, 3},
+    {"_ICSClust_tcov_cpp", (DL_FUNC) &_ICSClust_tcov_cpp, 2},
+    {"_ICSClust_scov_cpp", (DL_FUNC) &_ICSClust_scov_cpp, 4},
     {NULL, NULL, 0}
 };
 
