@@ -5,12 +5,12 @@ test_that("tcov() works correctly", {
 
 # test_that("scov() works correctly", {
 #   X <- iris[, 1:4]
-#   expect_equal(scov(X, beta = 4), ICSClust:::scov_amap(X, beta = 4))
+#   expect_equal(scov(X), ICSClust:::scov_amap(X))
 # })
+
 test_that("ucov() works correctly", {
   X <- iris[, 1:4]
-  beta = 4
-  expect_equal(ucov(X, beta = beta), ICSClust:::ucov_amap(X, beta = beta))
+  expect_equal(ucov(X), ICSClust:::ucov_amap(X))
 })
 
 

@@ -51,7 +51,7 @@ tcov_amap <- function(x, beta = 2) {
 #' @export
 ICS_scov <- function(x, beta = 0.2) {
   # initializations
-  x <- as.matrix(X)
+  x <- as.matrix(x)
   n <- nrow(x)
   # compute location and scatter estimates
   location <- colMeans(x)
@@ -66,7 +66,7 @@ ICS_scov <- function(x, beta = 0.2) {
 #' @export
 scov <- function(x, beta = 0.2) {
   # initializations
-  x <- as.matrix(X)
+  x <- as.matrix(x)
   n <- nrow(x)
   # compute sample means and inverse of covariance matrix
   m <- colMeans(x)
@@ -93,7 +93,7 @@ scov <- function(x, beta = 0.2) {
 #' @export
 ICS_ucov <- function(x, beta = 0.2) {
   # initializations
-  x <- as.matrix(X)
+  x <- as.matrix(x)
   # compute location and scatter estimates
   location <- colMeans(x)
   scatter <- .ucov(x, m = location, beta = beta)
@@ -106,7 +106,7 @@ ICS_ucov <- function(x, beta = 0.2) {
 #' @export
 ucov <- function(x, beta = 0.2) {
   # initializations
-  x <- as.matrix(X)
+  x <- as.matrix(x)
   # compute sample means
   m <- colMeans(x)
   # call internal function
