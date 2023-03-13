@@ -79,11 +79,13 @@ arma::mat scov_cpp(const arma::mat& x, const arma::vec& m,
   const double b = -beta / 2.0;
 
   // loop over pairs of observations
+  // TODO: should the comments be updated? because it is not pairs of 
+  // observations anymore
   arma::uword i, k, l;                // running indices
   arma::vec diff(p);                  // difference of pair of observations
   arma::mat V(p, p, fill::zeros);     // scatter matrix
   double r_sq, w, denominator = 0.0;  // squared distance, weight, denominator
-  for(i = 1; i < n; i++) {
+  for(i = 0; i < n; i++) {
     // compute difference of current pair of observations
     for(k = 0; k < p; k++) diff(k) = x(i,k) - m(k);
     // compute squared Mahalanobis distance
