@@ -10,6 +10,8 @@ using namespace Rcpp;
 using namespace arma;
 
 // TCOV scatter matrix
+// x ...... data matrix
+// beta ... parameter of the TCOV scatter matrix
 // [[Rcpp::export]]
 arma::mat tcov_cpp(const arma::mat& x, const double& beta) {
   
@@ -21,10 +23,7 @@ arma::mat tcov_cpp(const arma::mat& x, const double& beta) {
   // w(beta * r^2), we instead set b = -beta/2 and use w(x) = exp(x).
   const double b = -beta / 2.0;
   
-  // compute inverse of the covariance matrix
-  // (second argument in arma::cov() specifies denominator n)
-  // const arma::mat cov_inv = arma::solve(arma::cov(x, 1), 
-  //                                       arma::eye<arma::mat>(p, p));
+  // compute inverse of the sample covariance matrix
   const arma::mat cov_inv = arma::solve(arma::cov(x), 
                                         arma::eye<arma::mat>(p, p));
   
@@ -66,6 +65,10 @@ arma::mat tcov_cpp(const arma::mat& x, const double& beta) {
 }
 
 // SCOV scatter matrix
+// x ....... data matrix
+// m ....... vector of sample means
+// S_inv ... inverse of the sample covariance matrix
+// beta .... parameter of the SCOV scatter matrix
 // [[Rcpp::export]]
 arma::mat scov_cpp(const arma::mat& x, const arma::vec& m, 
                    const arma::mat& S_inv, const double& beta) {
@@ -78,15 +81,13 @@ arma::mat scov_cpp(const arma::mat& x, const arma::vec& m,
   // w(beta * r^2), we instead set b = -beta/2 and use w(x) = exp(x).
   const double b = -beta / 2.0;
 
-  // loop over pairs of observations
-  // TODO: should the comments be updated? because it is not pairs of 
-  // observations anymore
+  // loop over observations
   arma::uword i, k, l;                // running indices
-  arma::vec diff(p);                  // difference of pair of observations
+  arma::vec diff(p);                  // difference of observation and mean
   arma::mat V(p, p, fill::zeros);     // scatter matrix
   double r_sq, w, denominator = 0.0;  // squared distance, weight, denominator
   for(i = 0; i < n; i++) {
-    // compute difference of current pair of observations
+    // compute difference of current observation and sample mean
     for(k = 0; k < p; k++) diff(k) = x(i,k) - m(k);
     // compute squared Mahalanobis distance
     r_sq = 0.0;
@@ -95,9 +96,9 @@ arma::mat scov_cpp(const arma::mat& x, const arma::vec& m,
         r_sq += diff(k) * S_inv(k,l) * diff(l);
       }
     }
-    // compute weight for current pair of observations
+    // compute weight for current observation
     w = exp(b * r_sq);
-    // add weighted contribution of current pair of observations
+    // add weighted contribution of current observation
     for(k = 0; k < p; k++) {
       // update diagonal elements
       V(k,k) += w * diff(k) * diff(k);
@@ -107,7 +108,7 @@ arma::mat scov_cpp(const arma::mat& x, const arma::vec& m,
         V(l,k) = V(k,l);
       }
     }
-    // add weight of current pair of observations to denominator
+    // add weight of current observation to denominator
     denominator += w;
   }
   
