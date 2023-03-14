@@ -128,8 +128,6 @@ ucov <- function(x, beta = 0.2) {
 #' @importFrom amap W
 #' @importFrom stats var
 ucov_amap <- function(x, beta = 0.2) {
-  # TODO: Is the correction for the error in 'amap' correct? 
-  #       I get slightly different numbers than with ucov().
   # initializations
   x <- as.matrix(x)
   cn <- colnames(x)

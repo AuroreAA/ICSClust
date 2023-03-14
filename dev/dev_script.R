@@ -1,5 +1,6 @@
 # Package development
 devtools::load_all()
+# renv::install("C:/Users/auror/OneDrive - Erasmus University Rotterdam/Packages/ICS_1.3-2.tar.gz")
 
 usethis::use_package("ICS")
 usethis::use_package("moments")
