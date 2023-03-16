@@ -1,6 +1,10 @@
 # Package development
 devtools::load_all()
-# renv::install("C:/Users/auror/OneDrive - Erasmus University Rotterdam/Packages/ICS_1.3-2.tar.gz")
+#renv::install("C:/Users/auror/OneDrive - Erasmus University Rotterdam/Packages/ICS_1.3-1.tar.gz")
+
+# res = ICS::ICS(iris[,1:4])
+# ICS::components(res, select = "IC.4")
+
 
 usethis::use_package("ICS")
 usethis::use_package("moments")
@@ -10,6 +14,9 @@ usethis::use_package("tclust")
 usethis::use_package("cluster")
 usethis::use_package("mclust")
 usethis::use_package("amap")
+usethis::use_package("fpc")
+
+usethis::rename_files("index_crit.R", "select_crit.R")
 
 ## Edit DESCRIPTION
 usethis::use_gpl_license(version = 3, include_future = TRUE)

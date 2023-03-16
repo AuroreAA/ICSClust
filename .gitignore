@@ -4,6 +4,8 @@
 .httr-oauth
 renv/*
 .Rprofile
+figures/*
+results/*
 
 # C++ binaries
 src/*.o

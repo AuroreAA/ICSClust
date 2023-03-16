@@ -143,3 +143,68 @@ ucov_amap <- function(x, beta = 0.2) {
   dimnames(V) <- list(cn, cn)
   V
 }
+
+
+# MLC scatter matrix -----
+
+#' @export
+#' @importFrom ICS tM
+ICS_mlc <- function(x, location = FALSE, ...) {
+  # compute scatter estimates
+  mlc_out <- ICS::tM(x, df = 1, ...) # we fix the df to have only cauchy estimate
+  location <- isTRUE(location)
+  location <- if (location) mlc_out$mu
+  # compute scatter estimate
+  out <- list(location = location, scatter = mlc_out$V, label = "MLC")
+  # add class and return object
+  class(out) <- "ICS_scatter"
+  out
+}
+
+# LCOV scatter matrix -----
+
+#' @export
+#' @importFrom fpc localshape
+ICS_lcov <- function(x, mscatter = "cov", proportion = 0.1, ...) {
+  # compute scatter estimate
+  out <- list(location = NULL, scatter = fpc::localshape(xdata = x, ...), 
+              label = "LCOV")
+  # add class and return object
+  class(out) <- "ICS_scatter"
+  out
+}
+
+
+
+# MCD scatter matrix -----
+
+#' @export
+#' @importFrom rrcov CovMcd
+ICS_mcd <- function(x, location = FALSE,
+                    nsamp = "deterministic", ...) {
+  # compute scatter estimates
+  mcd_out <- rrcov::CovMcd(x, raw.only = TRUE,...)
+  location <- isTRUE(location)
+  location <- if (location) mcd_out@center
+  # compute scatter estimate
+  out <- list(location = location, scatter = mcd_out@cov, label = "MCD")
+  # add class and return object
+  class(out) <- "ICS_scatter"
+  out
+}
+
+#' @export
+#' @importFrom rrcov CovMcd
+ICS_rmcd <- function(x, location = FALSE,
+                    nsamp = "deterministic", alpha = 0.5, ...) {
+  # compute scatter estimates
+  rmcd_out <- rrcov::CovMcd(x, raw.only = FALSE, alpha = alpha, ...)
+  location <- isTRUE(location)
+  location <- if (location) rmcd_out@center
+  # compute scatter estimate
+  out <- list(location = location, scatter = rmcd_out@cov, 
+              label = "RMCD")
+  # add class and return object
+  class(out) <- "ICS_scatter"
+  out
+}
