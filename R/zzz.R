@@ -204,23 +204,32 @@
 #       true_clusters <- data[,1]
 #       # Update some parameters for criteria
 #       ICS_criteria_args$discriminatory_crit$clusters <- true_clusters
-#       info <- data.frame(Run = r, epsilon = epsilon, q = length(pct_clusters),
+#       info <- data.frame(Run = r, epsilon = epsilon, n = n, p = p, delta = delta,
+#                          q = length(pct_clusters),
 #                          clusters = paste(round(pct_clusters*100), collapse = "-"))
 # 
 #       # No Dimension reduction ----
-#       reduced_df <- scale(data[,-1], center = TRUE, scale = TRUE)
-#       nb_select <- ncol(reduced_df)
-# 
-#       # Compute discriminatory power
-#       eta2 <- eta2_power(reduced_df, clusters = true_clusters,
-#                          select = 1:nb_select)
-# 
 #       # Additional info
-#       criterion = NA_character_
-#       scatter = "Observed~data"
+#       criterion <- NA_character_
+#       scatter <- "Observed~data"
+#       selected <- paste(colnames(data[,-1]), collapse = ",")
 # 
 # 
 #       results_ARI_no_reduction <- lapply(clustering, function(method) {
+#         if (method == "kmeans_clust"){
+#           reduced_df <- scale(data[,-1], center = TRUE, scale = TRUE)
+#         }else{ # robustly center
+#           reduced_df <- scale(data[,-1],
+#                               center = apply(data[,-1], 2, median),
+#                               scale = apply(data[,-1], 2, mad))
+#         }
+# 
+#         nb_select <- ncol(reduced_df)
+# 
+#         # Compute discriminatory power
+#         eta2 <- eta2_power(reduced_df, clusters = true_clusters,
+#                            select = 1:nb_select)
+# 
 #         ARI <- tryCatch({
 #           clusters <- do.call(method,
 #                               append(list(df = reduced_df, k = nb_clusters,
@@ -230,7 +239,7 @@
 #         }, error = function(e) 0, warning = function(w) 0)
 #         cbind(info, criterion = criterion, scatter = scatter,
 #               method = gsub("_clust", "", method), ARI = ARI, eta2 = eta2,
-#               nb_select = nb_select)
+#               nb_select = nb_select, selected = selected)
 #       })
 # 
 #       # combine results
@@ -254,7 +263,8 @@
 #         eta2 <-  tryCatch({eta2_power(PCA_out@scores,
 #                                       clusters = true_clusters, select = select)
 #         },error = function(e) 0, warning = function(w) 0)
-#         reduced_df <- PCA_out@scores[,select]
+#         reduced_df <- PCA_out@scores[,select, drop = FALSE]
+#         selected <- paste(colnames(reduced_df), collapse = ",")
 # 
 #         # clustering ----
 #         results_ARI_PCA <- lapply(clustering, function(method) {
@@ -267,7 +277,7 @@
 #           }, error = function(e) 0, warning = function(w) 0)
 #           cbind(info, criterion = criterion, scatter = scatter,
 #                 method = gsub("_clust", "", method), ARI = ARI, eta2 = eta2,
-#                 nb_select = nb_select)
+#                 nb_select = nb_select, selected = selected)
 #         })
 #         do.call(rbind, results_ARI_PCA)
 #       })
@@ -293,7 +303,8 @@
 #         eta2 <-  tryCatch({eta2_power(PCA_out@scores,
 #                                       clusters = true_clusters, select = select)
 #         },error = function(e) 0, warning = function(w) 0)
-#         reduced_df <- PCA_out@scores[,select]
+#         reduced_df <- PCA_out@scores[, select, drop = FALSE]
+#         selected <- paste(colnames(reduced_df), collapse = ",")
 # 
 #         # clustering ----
 #         results_ARI_PCA <- lapply(clustering, function(method) {
@@ -306,7 +317,7 @@
 #           }, error = function(e) 0, warning = function(w) 0)
 #           cbind(info, criterion = criterion, scatter = scatter,
 #                 method = gsub("_clust", "", method), ARI = ARI, eta2 = eta2,
-#                 nb_select = nb_select)
+#                 nb_select = nb_select, selected = selected)
 #         })
 #         do.call(rbind, results_ARI_PCA)
 #       })
@@ -336,6 +347,7 @@
 #           },error = function(e) 0, warning = function(w) 0)
 # 
 #           reduced_df <- ICS::components(ICS_out, select = select)
+#           selected <- paste(colnames(reduced_df), collapse = ",")
 # 
 #           # clustering ----
 #           results_ARI_ICS_clust <- lapply(clustering, function(method) {
@@ -348,7 +360,7 @@
 #             }, error = function(e) 0, warning = function(w) 0)
 #             cbind(info, criterion =  gsub("_crit", "", criterion), scatter = scatter,
 #                   method = gsub("_clust", "", method), ARI = ARI, eta2 = eta2,
-#                   nb_select = nb_select)
+#                   nb_select = nb_select, selected = selected)
 #           })
 # 
 #           do.call(rbind, results_ARI_ICS_clust)
@@ -392,11 +404,6 @@
 #   geom_boxplot(aes(x = scatter, y = ARI, fill = method)) +
 #   facet_grid(criterion ~ clusters + factor(epsilon))
 # p1
-# # save plot to file
-# # file_plot <- "figures/results_n=%d.pdf"
-# # pdf(file = sprintf(file_plot, n), width = 5, height = 3.5)
-# # print(p)
-# # dev.off()
 # 
 # 
 # 

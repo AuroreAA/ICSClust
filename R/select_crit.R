@@ -146,7 +146,7 @@ var_crit.ICS <- function(object, ...){
 var_crit.default <- function(object, select_max = NULL, select_only = FALSE){
   # Initialization
   select_max <- ifelse(is.null(select_max), length(object)-1, select_max)
-  d = length(object)
+  d <- length(object)
   # if the number of non-gaussian components is equal or higher to p-1,
   # it makes no sense to compute the rolling variance of one component
   if (select_max >= (d-1)){

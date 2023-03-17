@@ -144,14 +144,8 @@ res_df_selected <- res_df %>%
   group_by(n, p, q, clusters, outliers, criterion, scatter, selected) %>%
   summarize(nb_selected = n(), .groups = "drop")
 
-res_df_selected <- res_df %>%
-  filter(outliers %in% keep_outliers,
-         criterion %in% keep_crit) %>%
-  group_by( q, clusters, outliers, criterion, scatter) %>%
-  summarize(nb_selected = n(), .groups = "drop")
-
 # compute normalized variation in which components are selected
-p = 10
+
 res_df_variation <- res_df_selected %>%
   #group_by(n, p, q, clusters, outliers, criterion, scatter) %>%
   group_by( q, clusters, outliers, criterion, scatter) %>%
