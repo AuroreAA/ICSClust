@@ -19,7 +19,11 @@ normal_crit.ICS <- function(object, ...){
 #' @export
 #' @importFrom moments jarque.test anscombe.test bonett.test agostino.test
 #' @importFrom stats shapiro.test
-normal_crit.default <- function(object, level = 0.05,  test = c("jarque.test", "anscombe.test", "bonett.test", "agostino.test", "shapiro.test"), select_max = NULL, select_only = FALSE){
+normal_crit.default <- function(object, level = 0.05,  
+                                test = c("jarque.test", "anscombe.test", 
+                                         "bonett.test", "agostino.test", 
+                                         "shapiro.test"), 
+                                select_max = NULL, select_only = FALSE){
   
   # Initialization
   test <- match.arg(test)
@@ -29,14 +33,16 @@ normal_crit.default <- function(object, level = 0.05,  test = c("jarque.test", "
   # Apply marginal normality tests to all components and keep only the ones lower
   test_pvals <- apply(object, 2, test)
   test_pvals <- unlist(lapply(test_pvals, function(x) x$p.value))
-  out <- list(crit = "normal", level = level,  select_max =  select_max, test = test, pvalues = test_pvals)
+  out <- list(crit = "normal", level = level,  select_max =  select_max, 
+              test = test, pvalues = test_pvals)
   comp_signif <- (test_pvals <= level)
   
   if(sum(comp_signif) == 0){
     select <- vector()
     adjusted_levels <- level
   }else{
-    # We select the components on the extreme left and right while they are not gaussian
+    # We select the components on the extreme left and right while 
+    # they are not gaussian
     temp <- 1
     select <- vector()
     adjusted_levels <- level
@@ -49,7 +55,8 @@ normal_crit.default <- function(object, level = 0.05,  test = c("jarque.test", "
       
       if (left_pval < level & left_pval < right_pval) {
         
-        #we select the first component if its p value is the smallest and significant
+        #we select the first component if its p value is the smallest and 
+        # significant
         select <- c(select, comp_select[1])
         comp_select <- comp_select[-1]
         test_pvals <- test_pvals[-1]
@@ -112,7 +119,8 @@ med_crit.default <- function(object, select_max = NULL, select_only = FALSE){
   out <- names(gen_kurtosis_diff)[0:select_max]
   
   if (!select_only) out <- append(list(crit = "med", select_max =  select_max, 
-                                      gen_kurtosis = object, med_gen_kurtosis = med_gen_kurtosis,
+                                      gen_kurtosis = object, 
+                                      med_gen_kurtosis = med_gen_kurtosis,
                                       gen_kurtosis_diff_med =  gen_kurtosis_diff),
                                  list(select = out))
   out
@@ -131,7 +139,8 @@ var_crit.ICS <- function(object, ...){
 
 #' Rollvar to select the ICS component
 #' 
-#' This function selects the components to keep based on the rolling variance criteria used in `ICSboot`.
+#' This function selects the components to keep based on the rolling variance
+#' criteria used in `ICSboot`.
 #'
 #' @param object The vector of gen_kurtosis from ICS object
 #' @param select_max The number of non-gaussian components under the null.
@@ -150,12 +159,15 @@ var_crit.default <- function(object, select_max = NULL, select_only = FALSE){
   # if the number of non-gaussian components is equal or higher to p-1,
   # it makes no sense to compute the rolling variance of one component
   if (select_max >= (d-1)){
-    warning("The select_max is higher or equal to d-1 so it makes no sense to compute the rolling variance in this context.")
+    warning("The select_max is higher or equal to d-1 so it makes no sense to 
+            compute the rolling variance in this context.")
     out <- vector()
   }else{
     orderD <- ICtest:::fixOrder(object, d-select_max)
     out <- names(object)[orderD$Order[0:select_max]]
-    if (!select_only) out <- append(list(crit = "var", select_max = select_max, gen_kurtosis = object, select = out), orderD)
+    if (!select_only) out <- append(list(crit = "var", select_max = select_max,
+                                         gen_kurtosis = object, select = out), 
+                                    orderD)
   }
   
   out
@@ -173,7 +185,8 @@ discriminatory_crit.ICS <- function(object, ...){
 
 #' Selection of ICS components based on discriminatory power
 #' 
-#' This function selects the components to keep based on a discriminatory power (by default "eta2")
+#' This function selects the components to keep based on a discriminatory power 
+#' (by default "eta2")
 #'
 #' @param object 
 #' @param clusters 
@@ -187,7 +200,8 @@ discriminatory_crit.ICS <- function(object, ...){
 #' @importFrom heplots etasq
 #'
 #' @examples
-discriminatory_crit.default <- function(object, clusters, method = "eta2", select_max = NULL, select_only = FALSE){
+discriminatory_crit.default <- function(object, clusters, method = "eta2", 
+                                        select_max = NULL, select_only = FALSE){
   # Initialization
   method <- match.arg(method)
   select_max <- ifelse(is.null(select_max), ncol(object)-1, select_max)
@@ -214,7 +228,8 @@ discriminatory_crit.default <- function(object, clusters, method = "eta2", selec
   }
   
   
-  # we compute the discriminatory power for each combination to identify which one has the highest power.
+  # we compute the discriminatory power for each combination to identify which
+  # one has the highest power.
   if (method == "eta2"){
     all_power <- sapply(1:ncol(all_comb), function(i){
       eta2_power(object, clusters, select = all_comb[,i])
@@ -244,20 +259,24 @@ discriminatory_crit.default <- function(object, clusters, method = "eta2", selec
 
 eta2_power <- function(object, clusters, select){
   if(is.null(clusters)){
-    warning("The 'clusters' argument is mandatory to compute the discriminatory power of the reduced data frame.")
+    warning("The 'clusters' argument is mandatory to compute the discriminatory 
+            power of the reduced data frame.")
   }else{
     df <- data.frame(clusters = as.factor(clusters), object[, select])
     
     # Univariate case: ANOVA
     if(length(select) == 1){
       
-      ICS_mod <- lm(as.formula(paste("cbind(", colnames(df)[-1], ") ~ clusters")), data = df)
+      ICS_mod <- lm(as.formula(paste("cbind(", colnames(df)[-1], ") ~ clusters")),
+                    data = df)
       etasq(ICS_mod)[1,1]
       
     }else{
       # Multivariate case: MANOVO with Wilks test
       
-      ICS_mod <- manova(as.formula(paste("cbind(", paste(colnames(df)[-1], collapse = ",") , ") ~ clusters")), data = df)
+      ICS_mod <- manova(as.formula(paste("cbind(", 
+                                         paste(colnames(df)[-1], collapse = ","), 
+                                         ") ~ clusters")), data = df)
       etasq(ICS_mod, test = "Wilks")[1,1]
     }
   }

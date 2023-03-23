@@ -164,9 +164,11 @@
 #   # mixture weights --------------------------------------------------------------
 #   # loop over different mixture weights
 #   results_clusters <- lapply(pct_clusters_list, function(pct_clusters) {
-#     # We simulate normal gaussian for each cluster with the first variable being true clusters
+#     # We simulate normal gaussian for each cluster with the first variable
+#     # being true clusters
 # 
-#     data <- mixture_sim(pct_clusters = pct_clusters, n = n, p = p, delta = delta)
+#     data <- mixture_sim(pct_clusters = pct_clusters, n = n, p = p, 
+#                         delta = delta)
 #     nb_clusters <- length(unique(data$cluster))
 #     # define select_max by default equals to the number of clusters -1
 #     select_max <- length(pct_clusters)-1
@@ -204,9 +206,10 @@
 #       true_clusters <- data[,1]
 #       # Update some parameters for criteria
 #       ICS_criteria_args$discriminatory_crit$clusters <- true_clusters
-#       info <- data.frame(Run = r, epsilon = epsilon, n = n, p = p, delta = delta,
-#                          q = length(pct_clusters),
-#                          clusters = paste(round(pct_clusters*100), collapse = "-"))
+#       info <- data.frame(Run = r, epsilon = epsilon, n = n, p = p, 
+#                          delta = delta, q = length(pct_clusters),
+#                          clusters = paste(round(pct_clusters*100), 
+#                                           collapse = "-"))
 # 
 #       # No Dimension reduction ----
 #       # Additional info
@@ -294,7 +297,8 @@
 #         # Select the components
 #         criterion <- names(PCA_criteria_args)[i]
 #         select <- do.call(PCA_criteria[i],
-#                           append(list(object = rob_PCA_out, select_max = select_max),
+#                           append(list(object = rob_PCA_out, 
+#                                       select_max = select_max),
 #                                  PCA_criteria_args[[i]]))
 #         nb_select <- length(select)
 # 
@@ -326,7 +330,8 @@
 # 
 #       # ICS ----
 #       ## scatters ------
-#       results_ARI_ICS_scatters <- lapply(1:length(ICS_scatters_list), function(i) {
+#       results_ARI_ICS_scatters <- lapply(1:length(ICS_scatters_list), 
+#                                          function(i) {
 #         scatter = names(ICS_scatters_list)[i]
 #         ICS_out <- do.call(ICS::ICS,
 #                            append(list(X = data[,-1]), ICS_scatters_list[[i]]))
@@ -343,7 +348,8 @@
 # 
 #           # Compute discriminatory power
 #           eta2 <-  tryCatch({eta2_power(ICS::components(ICS_out),
-#                                         clusters = true_clusters, select = select)
+#                                         clusters = true_clusters, 
+#                                         select = select)
 #           },error = function(e) 0, warning = function(w) 0)
 # 
 #           reduced_df <- ICS::components(ICS_out, select = select)
@@ -358,8 +364,9 @@
 #                                          clustering_args[[method]]))
 #               mclust::adjustedRandIndex(true_clusters, clusters)
 #             }, error = function(e) 0, warning = function(w) 0)
-#             cbind(info, criterion =  gsub("_crit", "", criterion), scatter = scatter,
-#                   method = gsub("_clust", "", method), ARI = ARI, eta2 = eta2,
+#             cbind(info, criterion =  gsub("_crit", "", criterion),
+#                   scatter = scatter, method = gsub("_clust", "", method), 
+#                   ARI = ARI, eta2 = eta2,
 #                   nb_select = nb_select, selected = selected)
 #           })
 # 

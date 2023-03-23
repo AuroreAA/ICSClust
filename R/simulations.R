@@ -23,7 +23,8 @@ mixture_sim = function(pct_clusters = c(0.5,0.5) , n = 500, p = 10, delta = 10){
   }
   n_groups = floor(n*pct_clusters)
   if(sum(n_groups)!= n){
-    n_groups[length(pct_clusters)] <- rev(n-cumsum(n_groups)[1:(length(pct_clusters)-1)])[1]
+    n_groups[length(pct_clusters)] <- 
+      rev(n-cumsum(n_groups)[1:(length(pct_clusters)-1)])[1]
     
   }
   if(sum(n_groups)!= n){
@@ -40,7 +41,8 @@ mixture_sim = function(pct_clusters = c(0.5,0.5) , n = 500, p = 10, delta = 10){
       clusters_means[i-1] = delta
     }
     if(n>0){
-      data.frame(mvtnorm::rmvnorm(n = n, mean = clusters_means, sigma = diag(1,p)))
+      data.frame(mvtnorm::rmvnorm(n = n, mean = clusters_means, 
+                                  sigma = diag(1,p)))
     }
   })
   
