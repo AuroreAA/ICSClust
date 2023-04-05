@@ -10,6 +10,8 @@ Encoding: UTF-8
 Imports: 
     cluster,
     fpc,
+    GGally,
+    ggplot2,
     heplots,
     mclust,
     moments,

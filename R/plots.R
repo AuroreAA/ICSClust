@@ -1,27 +1,65 @@
 
+
+#' @import ICS
+#' @import ggplot2
+#' @export
+screeplot_crit.ICS <- function(object, select = NULL, scale = FALSE, ...) {
+  df <- data.frame(gen_kurtosis = ICS::gen_kurtosis(object, select = select, 
+                                                    scale = scale))
+ 
+  df %>% 
+    ggplot(aes(x = rownames(df), index, y = gen_kurtosis ))+
+    geom_point() +
+    # geom_hline(aes(yintercept = 1))+
+    theme_minimal() +
+    theme(text = element_text(size = 20)) +
+    labs(x = "") +
+    scale_x_discrete(limits = rownames(df))
+}
+
+
+
+
+#' @export
+pairs_plot <- function(object, ...) UseMethod("pairs_plot")
+
 #' @import ICS
 #' @export
-# plot_gen_kurtosis.ICS <- function(object, select = NULL, scale = FALSE,
-#                               ...) {
-#   # back-compatibility check
-#   if (missing(select) && !missing(index)) {
-#     warning("argument 'index' is deprecated, use 'select' instead")
-#     select <- index
-#   }
-#   # extract generalized kurtosis values
-#   gen_kurtosis <- object$gen_kurtosis
-#   p <- length(gen_kurtosis)
-#   # if requested, scale generalized kurtosis values
-#   if (isTRUE(scale)) gen_kurtosis <- gen_kurtosis / prod(gen_kurtosis)^(1/p)
-#   # check if we have argument of components to return
-#   if (!is.null(select)) {
-#     # check argument specifying components
-#     if (check_undefined(select, max = p, names = names(gen_kurtosis))) {
-#       stop("undefined components selected")
-#     }
-#     # select components
-#     gen_kurtosis <- gen_kurtosis[select]
-#   }
-#   # return generalized kurtosis values for selected components
-#   gen_kurtosis
-# }
+pairs_plot.ICS <- function(object, select = NULL, ...){
+  pairs_plot(ICS::components(object, select = select), ...)
+}
+
+#' @import ICS
+#' @export
+pairs_plot.data.frame <- function(object, select = NULL, ...){
+  pairs_plot(object[, select])
+}
+
+#' @import ICS
+#' @import GGally
+#' @importFrom ggthemes scale_colour_colorblind
+#' @export
+pairs_plot.default <- function(object, select = NULL, clusters = NULL, 
+                               text_size_factor = 8/6.5, 
+                               colors = NULL, ...) {
+  if(is.null(clusters)) clusters <- rep("", nrow(object))
+  
+  df_plot <- data.frame(object, clusters  = clusters)
+  column_labels <- paste0(gsub(".", "[", colnames(object), fixed = TRUE), "]")
+  
+  if(is.null(colors)) colors <- scales::hue_pal()(length(unique(clusters)))
+  
+  p <- GGally::ggpairs(df_plot, aes(color = clusters, alpha = 0.4), 
+                      upper = list(continuous = "points"),
+                      columns = seq_along(column_labels), 
+                      columnLabels = column_labels,
+                      labeller = label_parsed) + 
+    scale_color_manual(values = colors) +
+    scale_fill_manual(values = colors) +
+    theme_bw() +
+    theme(axis.text = element_text(size = 9 * text_size_factor), 
+          strip.text = element_text(size = 10 * text_size_factor))
+  
+  p
+  
+}

@@ -17,6 +17,9 @@ usethis::use_package("mclust")
 usethis::use_package("amap")
 usethis::use_package("fpc")
 usethis::use_package("RcppRoll")
+usethis::use_package("GGally")
+usethis::use_package("ggplot2")
+usethis::use_package("ggthemes")
 
 usethis::rename_files("index_crit.R", "select_crit.R")
 
@@ -42,6 +45,10 @@ testthat::test_file("tests/testthat/test-tcov.R") # to check the test
 
 usethis::use_test("ICSClust") # to create the test
 testthat::test_file("tests/testthat/test-ICSClust.R")
+
+usethis::use_test("plots") # to create the test
+testthat::test_file("tests/testthat/test-plots.R")
+
 
 # GitHub Actions ------
 usethis::use_github_action_check_standard()
