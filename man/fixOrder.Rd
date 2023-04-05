@@ -4,12 +4,12 @@
 \alias{fixOrder}
 \title{Fix Order}
 \usage{
-fixOrder(x, k)
+fixOrder(x, nb_gaussian)
 }
 \arguments{
 \item{x}{}
 
-\item{k}{}
+\item{nb_gaussian}{}
 }
 \description{
 Fix Order

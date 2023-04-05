@@ -116,7 +116,7 @@ med_crit.default <- function(object, nb_select = NULL, select_only = FALSE){
   # we take the components associated to the furthest eigenvalues from the median
   med_gen_kurtosis <- median(object)
   gen_kurtosis_diff <- sort(abs(object - med_gen_kurtosis), decreasing = TRUE)
-  out <- names(gen_kurtosis_diff)[0:nb_select]
+  out <- names(gen_kurtosis_diff)[seq(0, nb_select)]
   
   if (!select_only) out <- append(list(crit = "med", nb_select =  nb_select, 
                                       gen_kurtosis = object, 
@@ -151,17 +151,19 @@ var_crit.ICS <- function(object, ...){
 #' @examples
 var_crit.default <- function(object, nb_select = NULL, select_only = FALSE){
   # Initialization
-  nb_select <- ifelse(is.null(nb_select), length(object)-1, nb_select)
   d <- length(object)
+  nb_select <- ifelse(is.null(nb_select), d-1, nb_select)
+  
   # if the number of non-gaussian components is equal or higher to p-1,
   # it makes no sense to compute the rolling variance of one component
   if (nb_select >= (d-1)){
-    warning("The nb_select is higher or equal to d-1 so it makes no sense to 
-            compute the rolling variance in this context.")
+    warning("The nb_select is higher or equal to the number of variables
+            minus one so, it makes no sense to select some components based on
+            the rolling variance of only one invariant component.")
     out <- vector()
   }else{
     orderD <- fixOrder(object, d-nb_select)
-    out <- names(object)[orderD$Order[0:nb_select]]
+    out <- names(object)[orderD$Order[seq(0,nb_select)]]
     if (!select_only) out <- append(list(crit = "var", nb_select = nb_select,
                                          gen_kurtosis = object, select = out), 
                                     orderD)
@@ -174,23 +176,23 @@ var_crit.default <- function(object, nb_select = NULL, select_only = FALSE){
 #' Fix Order
 #'
 #' @param x 
-#' @param k 
+#' @param nb_gaussian
 #'
 #' @return
 #' @export
 #' @examples
 #' @importFrom RcppRoll roll_var 
-fixOrder <- function (x, k) 
+fixOrder <- function (x, nb_gaussian) 
 {
   P <- length(x)
-  Index <- 1:P
-  RollVarX <- RcppRoll::roll_var(x, k)
+  Index <- seq(1, P)
+  RollVarX <- RcppRoll::roll_var(x, nb_gaussian)
   Start <- which.min(RollVarX)
-  End <- Start + k - 1
-  Smallest <- Start:End
+  End <- Start + nb_gaussian - 1
+  Smallest <- seq(Start, End)
   Order <- c(Index[-Smallest], Index[Smallest])
   Ox <- x[Order]
-  RollVarOX <- roll_var(Ox, k)
+  RollVarOX <- roll_var(Ox, nb_gaussian)
   RES <- list(RollVarX = RollVarX, Selected = Smallest, Order = Order, 
               xOrdered = Ox, RollVarOX = RollVarOX)
   RES
@@ -230,17 +232,17 @@ discriminatory_crit.default <- function(object, clusters, method = "eta2",
   # First we construct all potential combinations of first and last components
   # to analyze
   d <- ncol(object)
-  IC_last <- rev(sapply(0:nb_select, function(i){
+  IC_last <- rev(sapply(seq(0, nb_select), function(i){
     if(i == nb_select){
       IC_last <- 0
     }else{
-      IC_last <- d-((nb_select-(i+1)):0)
+      IC_last <- d-(seq((nb_select-(i+1)),0))
     }
   }, simplify = FALSE))
   
-  IC_first <- sapply(0:nb_select, function(i){0:(nb_select-i)})
+  IC_first <- sapply(seq(0, nb_select), function(i){seq(0,(nb_select-i))})
   
-  all_comb <- sapply(1:(nb_select+1), function(i){
+  all_comb <- sapply(seq(1, (nb_select+1)), function(i){
     IC_all = sort(c(IC_first[[i]], IC_last[[i]]))
     IC_all[IC_all != 0]
   })
@@ -253,7 +255,7 @@ discriminatory_crit.default <- function(object, clusters, method = "eta2",
   # we compute the discriminatory power for each combination to identify which
   # one has the highest power.
   if (method == "eta2"){
-    all_power <- sapply(1:ncol(all_comb), function(i){
+    all_power <- sapply(seq(1, ncol(all_comb)), function(i){
       eta2_power(object, clusters, select = all_comb[,i])
     })
     names(all_power) <- apply(all_comb, 2, function(x) 
