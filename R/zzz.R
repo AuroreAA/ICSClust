@@ -10,7 +10,7 @@
 # n <- 1000                               # number of observations
 # p <- 10                                 # number of variables
 # delta <- 10                             # shift location
-# R <- 5                                  # number of simulation runs
+# R <- 2                                  # number of simulation runs
 # seed <- 20230313                        # seed of the random number generator
 # 
 # # control parameters for outliers
@@ -51,16 +51,15 @@
 # 
 # 
 # # control parameters for ICS scatters
-# # TODO: ask Anne what are the values we want for beta for ucov and tcov
 # ICS_scatters_list <- list(
 #   `COV-COV[4]` = c(S1 = ICS_cov, S2 = ICS_cov4),
 #   `MLC-COV` = c(S1 = ICS_mlc, S2 = ICS_cov),
 #   `LCOV-COV` = c(S1 = ICS_lcov, S2 = ICS_cov,
 #                  S1_args = list(mscatter = "cov", proportion = 0.1)),
 #   `TCOV-COV` = c(S1 = ICS_tcov, S2 = ICS_cov,
-#                  S1_args = list(beta = 4)),
+#                  S1_args = list(beta = 2)),
 #   `TCOV-UCOV` = c(S1 = ICS_tcov, S2 = ICS_ucov,
-#                   S1_args = list(beta = 4), S2_args = list(beta = 0.2)),
+#                   S1_args = list(beta = 2), S2_args = list(beta = 0.2)),
 #   `MCD[0.25]-MCD[0.95]` = c(S1 = ICS_mcd, S2 = ICS_mcd,
 #                             S1_args = list(alpha = 0.25),
 #                             S2_args = list(alpha = 0.95)),
@@ -96,18 +95,16 @@
 #   `LCOV-COV` = c(S1 = ICS_lcov, S2 = ICS_cov,
 #                  S1_args = list(mscatter = "cov", proportion = 0.1)),
 #   `TCOV-COV` = c(S1 = ICS_tcov, S2 = ICS_cov,
-#                  S1_args = list(beta = 4)))
-# 
-# 
+#                  S1_args = list(beta = 2)))
 # 
 # 
 # # control parameters for ICS criteria
 # ICS_criteria <- c("normal_crit", "med_crit", "var_crit", "discriminatory_crit")
 # ICS_criteria_args <- list(
 #   normal_crit = list(level = 0.05,  test = "agostino.test"),
-#   med_crit = list(),
-#   var_crit = list(),
-#   discriminatory_crit = list(clusters = vector())
+#   med_crit = list(nb_select = c()),
+#   var_crit = list(nb_select = c()),
+#   discriminatory_crit = list(clusters = vector(), nb_select = c())
 # )
 # 
 # 
@@ -115,14 +112,14 @@
 # PCA_criteria <- c("pct_crit", "min_crit")
 # PCA_criteria_args <- list(
 #   `80%` = c(pct = 0.8),
-#   `k-1` = list()
+#   `k-1` = c(nb_select = c())
 # )
 # 
-# min_crit <- function(object, select_max = NULL){
-#  colnames(object$scores)[0:select_max]
+# min_crit <- function(object, nb_select = NULL){
+#  colnames(object$scores)[0:nb_select]
 # }
 # 
-# pct_crit <- function(object, pct = 0.8, select_max = NULL){
+# pct_crit <- function(object, pct = 0.8){
 #   # select the names of the components which explains xxx pct of the total inertia
 #   nc <- which(cumsum(object$eigenvalues) > pct*sum(object$eigenvalues))[1]
 #   colnames(object$scores)[0:nc]
@@ -167,11 +164,18 @@
 #     # We simulate normal gaussian for each cluster with the first variable
 #     # being true clusters
 # 
-#     data <- mixture_sim(pct_clusters = pct_clusters, n = n, p = p, 
+#     data <- mixture_sim(pct_clusters = pct_clusters, n = n, p = p,
 #                         delta = delta)
 #     nb_clusters <- length(unique(data$cluster))
-#     # define select_max by default equals to the number of clusters -1
-#     select_max <- length(pct_clusters)-1
+#     # define nb_select by default equals to the number of clusters -1
+#     nb_select <- length(pct_clusters)-1
+#     PCA_criteria_args$`k-1` <- c(nb_select = nb_select)
+#     ICS_criteria_args$med_crit <- c(nb_select = nb_select)
+#     ICS_criteria_args$var_crit <- c(nb_select = nb_select)
+#     ICS_criteria_args$discriminatory_crit$nb_select <- nb_select
+# 
+# 
+# 
 # 
 # 
 #     # generate probabilities of being an outlier
@@ -206,9 +210,9 @@
 #       true_clusters <- data[,1]
 #       # Update some parameters for criteria
 #       ICS_criteria_args$discriminatory_crit$clusters <- true_clusters
-#       info <- data.frame(Run = r, epsilon = epsilon, n = n, p = p, 
+#       info <- data.frame(Run = r, epsilon = epsilon, n = n, p = p,
 #                          delta = delta, q = length(pct_clusters),
-#                          clusters = paste(round(pct_clusters*100), 
+#                          clusters = paste(round(pct_clusters*100),
 #                                           collapse = "-"))
 # 
 #       # No Dimension reduction ----
@@ -257,7 +261,7 @@
 #         # Select the components
 #         criterion <- names(PCA_criteria_args)[i]
 #         select <- do.call(PCA_criteria[i],
-#                           append(list(object = PCA_out, select_max = select_max),
+#                           append(list(object = PCA_out),
 #                                  PCA_criteria_args[[i]]))
 #         nb_select <- length(select)
 # 
@@ -297,8 +301,7 @@
 #         # Select the components
 #         criterion <- names(PCA_criteria_args)[i]
 #         select <- do.call(PCA_criteria[i],
-#                           append(list(object = rob_PCA_out, 
-#                                       select_max = select_max),
+#                           append(list(object = rob_PCA_out),
 #                                  PCA_criteria_args[[i]]))
 #         nb_select <- length(select)
 # 
@@ -330,25 +333,24 @@
 # 
 #       # ICS ----
 #       ## scatters ------
-#       results_ARI_ICS_scatters <- lapply(1:length(ICS_scatters_list), 
+#       results_ARI_ICS_scatters <- lapply(1:length(ICS_scatters_list),
 #                                          function(i) {
+# 
 #         scatter = names(ICS_scatters_list)[i]
 #         ICS_out <- do.call(ICS::ICS,
 #                            append(list(X = data[,-1]), ICS_scatters_list[[i]]))
+# 
 #         ## criteria ----
 #         results_ARI_ICS_crit <- lapply(ICS_criteria, function(criterion) {
-#           # Update some arguments depending on criterion
-#           if (criterion == "normal_crit") select_max <- NULL
 #           # Select the components
-#           select <- do.call(criterion,
-#                             append(list(object = ICS_out, select_max = select_max,
-#                                         select_only = TRUE),
-#                                    ICS_criteria_args[[criterion]]))
+#           select <- do.call(criterion, append(list(object = ICS_out,
+#                                                    select_only = TRUE),
+#                                               ICS_criteria_args[[criterion]]))
 #           nb_select <- length(select)
 # 
 #           # Compute discriminatory power
 #           eta2 <-  tryCatch({eta2_power(ICS::components(ICS_out),
-#                                         clusters = true_clusters, 
+#                                         clusters = true_clusters,
 #                                         select = select)
 #           },error = function(e) 0, warning = function(w) 0)
 # 
@@ -365,7 +367,7 @@
 #               mclust::adjustedRandIndex(true_clusters, clusters)
 #             }, error = function(e) 0, warning = function(w) 0)
 #             cbind(info, criterion =  gsub("_crit", "", criterion),
-#                   scatter = scatter, method = gsub("_clust", "", method), 
+#                   scatter = scatter, method = gsub("_clust", "", method),
 #                   ARI = ARI, eta2 = eta2,
 #                   nb_select = nb_select, selected = selected)
 #           })

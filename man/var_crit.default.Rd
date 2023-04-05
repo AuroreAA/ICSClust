@@ -4,15 +4,16 @@
 \alias{var_crit.default}
 \title{Rollvar to select the ICS component}
 \usage{
-\method{var_crit}{default}(object, select_max = NULL, select_only = FALSE)
+\method{var_crit}{default}(object, nb_select = NULL, select_only = FALSE)
 }
 \arguments{
 \item{object}{The vector of gen_kurtosis from ICS object}
 
-\item{select_max}{The number of non-gaussian components under the null.}
+\item{nb_select}{The number of non-gaussian components under the null.}
 
 \item{select_only}{}
 }
 \description{
-This function selects the components to keep based on the rolling variance criteria used in `ICSboot`.
+This function selects the components to keep based on the rolling variance
+criteria used in `ICSboot`.
 }

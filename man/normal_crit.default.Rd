@@ -9,7 +9,7 @@
   level = 0.05,
   test = c("jarque.test", "anscombe.test", "bonett.test", "agostino.test",
     "shapiro.test"),
-  select_max = NULL,
+  max_select = NULL,
   select_only = FALSE
 )
 }
@@ -20,7 +20,7 @@
 
 \item{test}{}
 
-\item{select_max}{}
+\item{max_select}{}
 
 \item{select_only}{}
 }

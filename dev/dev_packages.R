@@ -1,6 +1,11 @@
 # install.packages("robustbase", repos = c("http://R-Forge.R-project.org",
 #                                          "http://cran.at.r-project.org"), dep = TRUE)
-# 
+
+# install.packages("robustbase", repos = c("http://R-Forge.R-project.org",
+#                                          "http://cran.at.r-project.org"), 
+#                  dep = FALSE)
+
+
 # 
 # library(rrcov)
 # data(hbk)

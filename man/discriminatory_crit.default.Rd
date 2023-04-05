@@ -8,7 +8,7 @@
   object,
   clusters,
   method = "eta2",
-  select_max = NULL,
+  nb_select = NULL,
   select_only = FALSE
 )
 }
@@ -19,10 +19,11 @@
 
 \item{method}{}
 
-\item{select_max}{}
+\item{nb_select}{}
 
 \item{select_only}{}
 }
 \description{
-This function selects the components to keep based on a discriminatory power (by default "eta2")
+This function selects the components to keep based on a discriminatory power 
+(by default "eta2")
 }

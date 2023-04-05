@@ -9,7 +9,7 @@ normal_crit.ICS <- function(object, ...){
 }
 #' Title
 #'
-#' @param select_max 
+#' @param max_select 
 #' @param object 
 #' @param level 
 #' @param test 
@@ -23,17 +23,17 @@ normal_crit.default <- function(object, level = 0.05,
                                 test = c("jarque.test", "anscombe.test", 
                                          "bonett.test", "agostino.test", 
                                          "shapiro.test"), 
-                                select_max = NULL, select_only = FALSE){
+                                max_select = NULL, select_only = FALSE){
   
   # Initialization
   test <- match.arg(test)
   comp_select <- colnames(object)
-  select_max <- ifelse(is.null(select_max), ncol(object)-1, select_max)
+  max_select <- ifelse(is.null(max_select), ncol(object)-1, max_select)
 
   # Apply marginal normality tests to all components and keep only the ones lower
   test_pvals <- apply(object, 2, test)
   test_pvals <- unlist(lapply(test_pvals, function(x) x$p.value))
-  out <- list(crit = "normal", level = level,  select_max =  select_max, 
+  out <- list(crit = "normal", level = level,  max_select =  max_select, 
               test = test, pvalues = test_pvals)
   comp_signif <- (test_pvals <= level)
   
@@ -46,7 +46,7 @@ normal_crit.default <- function(object, level = 0.05,
     temp <- 1
     select <- vector()
     adjusted_levels <- level
-    while (temp <= select_max) {
+    while (temp <= max_select) {
       
       #for each iteration we compare the first and last p value
       
@@ -100,7 +100,7 @@ med_crit.ICS <- function(object, ...){
 }
 
 #'
-#' @param select_max 
+#' @param max_select 
 #' @param object The vector of generalized kurtosis from ICS object
 #' @param select_only 
 #'
@@ -109,16 +109,16 @@ med_crit.ICS <- function(object, ...){
 #' 
 #'
 #' @examples
-med_crit.default <- function(object, select_max = NULL, select_only = FALSE){
+med_crit.default <- function(object, nb_select = NULL, select_only = FALSE){
   # Initialization
-  select_max <- ifelse(is.null(select_max), length(object)-1, select_max)
+  nb_select <- ifelse(is.null(nb_select), length(object)-1, nb_select)
   
   # we take the components associated to the furthest eigenvalues from the median
   med_gen_kurtosis <- median(object)
   gen_kurtosis_diff <- sort(abs(object - med_gen_kurtosis), decreasing = TRUE)
-  out <- names(gen_kurtosis_diff)[0:select_max]
+  out <- names(gen_kurtosis_diff)[0:nb_select]
   
-  if (!select_only) out <- append(list(crit = "med", select_max =  select_max, 
+  if (!select_only) out <- append(list(crit = "med", nb_select =  nb_select, 
                                       gen_kurtosis = object, 
                                       med_gen_kurtosis = med_gen_kurtosis,
                                       gen_kurtosis_diff_med =  gen_kurtosis_diff),
@@ -143,35 +143,57 @@ var_crit.ICS <- function(object, ...){
 #' criteria used in `ICSboot`.
 #'
 #' @param object The vector of gen_kurtosis from ICS object
-#' @param select_max The number of non-gaussian components under the null.
+#' @param nb_select The number of non-gaussian components under the null.
 #' @param select_only 
 #'
 #' @return
 #' @export
-#' 
-#' @import ICtest
-#'
 #' @examples
-var_crit.default <- function(object, select_max = NULL, select_only = FALSE){
+var_crit.default <- function(object, nb_select = NULL, select_only = FALSE){
   # Initialization
-  select_max <- ifelse(is.null(select_max), length(object)-1, select_max)
+  nb_select <- ifelse(is.null(nb_select), length(object)-1, nb_select)
   d <- length(object)
   # if the number of non-gaussian components is equal or higher to p-1,
   # it makes no sense to compute the rolling variance of one component
-  if (select_max >= (d-1)){
-    warning("The select_max is higher or equal to d-1 so it makes no sense to 
+  if (nb_select >= (d-1)){
+    warning("The nb_select is higher or equal to d-1 so it makes no sense to 
             compute the rolling variance in this context.")
     out <- vector()
   }else{
-    orderD <- ICtest:::fixOrder(object, d-select_max)
-    out <- names(object)[orderD$Order[0:select_max]]
-    if (!select_only) out <- append(list(crit = "var", select_max = select_max,
+    orderD <- fixOrder(object, d-nb_select)
+    out <- names(object)[orderD$Order[0:nb_select]]
+    if (!select_only) out <- append(list(crit = "var", nb_select = nb_select,
                                          gen_kurtosis = object, select = out), 
                                     orderD)
   }
   
   out
   
+}
+
+#' Fix Order
+#'
+#' @param x 
+#' @param k 
+#'
+#' @return
+#' @export
+#' @examples
+#' @importFrom RcppRoll roll_var 
+fixOrder <- function (x, k) 
+{
+  P <- length(x)
+  Index <- 1:P
+  RollVarX <- RcppRoll::roll_var(x, k)
+  Start <- which.min(RollVarX)
+  End <- Start + k - 1
+  Smallest <- Start:End
+  Order <- c(Index[-Smallest], Index[Smallest])
+  Ox <- x[Order]
+  RollVarOX <- roll_var(Ox, k)
+  RES <- list(RollVarX = RollVarX, Selected = Smallest, Order = Order, 
+              xOrdered = Ox, RollVarOX = RollVarOX)
+  RES
 }
 
 #' @export
@@ -190,7 +212,7 @@ discriminatory_crit.ICS <- function(object, ...){
 #'
 #' @param object 
 #' @param clusters 
-#' @param select_max 
+#' @param nb_select 
 #' @param method 
 #' @param select_only 
 #' 
@@ -201,29 +223,29 @@ discriminatory_crit.ICS <- function(object, ...){
 #'
 #' @examples
 discriminatory_crit.default <- function(object, clusters, method = "eta2", 
-                                        select_max = NULL, select_only = FALSE){
+                                        nb_select = NULL, select_only = FALSE){
   # Initialization
   method <- match.arg(method)
-  select_max <- ifelse(is.null(select_max), ncol(object)-1, select_max)
+  nb_select <- ifelse(is.null(nb_select), ncol(object)-1, nb_select)
   # First we construct all potential combinations of first and last components
   # to analyze
   d <- ncol(object)
-  IC_last <- rev(sapply(0:select_max, function(i){
-    if(i == select_max){
+  IC_last <- rev(sapply(0:nb_select, function(i){
+    if(i == nb_select){
       IC_last <- 0
     }else{
-      IC_last <- d-((select_max-(i+1)):0)
+      IC_last <- d-((nb_select-(i+1)):0)
     }
   }, simplify = FALSE))
   
-  IC_first <- sapply(0:select_max, function(i){0:(select_max-i)})
+  IC_first <- sapply(0:nb_select, function(i){0:(nb_select-i)})
   
-  all_comb <- sapply(1:(select_max+1), function(i){
+  all_comb <- sapply(1:(nb_select+1), function(i){
     IC_all = sort(c(IC_first[[i]], IC_last[[i]]))
     IC_all[IC_all != 0]
   })
   
-  if(select_max == 1){
+  if(nb_select == 1){
     all_comb <- data.frame(all_comb[1], all_comb[2])
   }
   
@@ -249,7 +271,7 @@ discriminatory_crit.default <- function(object, clusters, method = "eta2",
   
   out <- colnames(object)[select]
   if (!select_only) out <- list(crit = "discriminatory",
-                               method = method, select_max = select_max, 
+                               method = method, nb_select = nb_select, 
                                select = out, power = power,
                                power_combinations = all_power)
   out

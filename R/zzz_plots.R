@@ -29,7 +29,7 @@ criterion_label <- "Component selection"
 # import results and renaming certain variables, dimension reduction methods, component selection
 # criteria, etc.
 # load file
-load("results/results_r=5.RData")
+load("results/results_r=2.RData")
 res_df <- results %>%
   # rename some more variables for consistency
   # rename(number = Number, q = k) %>%

@@ -8,15 +8,14 @@ Description: One paragraph description of what the package does as one or more f
 License: GPL (>= 3)
 Encoding: UTF-8
 Imports: 
-    amap,
     cluster,
     fpc,
     heplots,
-    ICS,
-    ICtest,
     mclust,
     moments,
     tclust
+Depends:
+    ICS
 LinkingTo: 
     Rcpp, 
     RcppArmadillo
