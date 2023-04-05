@@ -10,3 +10,4 @@
 # pairs_plot(res, select = c(1,4))
 # pairs_plot(res, clusters = iris[,5])
 # pairs_plot(res, select = c(1,4), clusters = iris[,5])
+# pairs_plot(X, select = c(1,4), clusters = iris[,5])

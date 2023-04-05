@@ -7,7 +7,9 @@ normal_crit <- function(object, ...) UseMethod("normal_crit")
 normal_crit.ICS <- function(object, ...){
   normal_crit(ICS::components(object), ...)
 }
-#' Title
+
+
+#' Normal criterion
 #'
 #' @param max_select 
 #' @param object 
@@ -20,8 +22,8 @@ normal_crit.ICS <- function(object, ...){
 #' @importFrom moments jarque.test anscombe.test bonett.test agostino.test
 #' @importFrom stats shapiro.test
 normal_crit.default <- function(object, level = 0.05,  
-                                test = c("jarque.test", "anscombe.test", 
-                                         "bonett.test", "agostino.test", 
+                                test = c("agostino.test", "jarque.test", 
+                                         "anscombe.test", "bonett.test", 
                                          "shapiro.test"), 
                                 max_select = NULL, select_only = FALSE){
   

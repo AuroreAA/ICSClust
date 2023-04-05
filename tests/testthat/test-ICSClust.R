@@ -1,34 +1,37 @@
-# test_that("multiplication works", {
-#   expect_equal(2 * 2, 4)
-# })
 # 
 # 
-# X <- iris[,1:4]
-# res <- ICS(X, S1 = ICS_cov, S2 = ICS_cov4)
+# X <- iris[,-5]
+# res <- ICSClust(X, nb_select = 2, nb_clusters = 3)
+# table(res$clusters)
+# table(res$clusters, iris[,5])
+# pairs_plot(res$ICS_out, select = res$select, clusters = as.factor(res$clusters))
+# pairs_plot(res$ICS_out, select = res$select, clusters = iris[,5])
 # 
 # 
+# res <- ICSClust(X, nb_select = 1, nb_clusters = 3,
+#                 ICS_args = list(S1 = ICS_mcd, S2 = ICS_cov, 
+#                                 S1_args = list(alpha = 0.5)))
+# table(res$clusters, iris[,5])
+# pairs_plot(res$ICS_out, clusters = as.factor(res$clusters))
+# pairs_plot(res$ICS_out, clusters = iris[,5])
 # 
-# ICS_comp_crit(res, crit = "normal", comp_max = NULL, crit_args = list(level = 0.1, test = "agostino.test"))
 # 
-# ICS_comp_crit(res, crit = "med", comp_max = 2)
+# res <- ICSClust(X, nb_clusters = 3,
+#                 ICS_args = list(S1 = ICS_mcd, S2 = ICS_cov, 
+#                                 S1_args = list(alpha = 0.5)),
+#                 criterion = "normal_crit", 
+#                 ICS_crit_args = list(level = 0.1, test = "anscombe.test",
+#                                      max_select = 1))
+# table(res$clusters, iris[,5])
+# pairs_plot(res$ICS_out, select = res$select, clusters = as.factor(res$clusters))
+# pairs_plot(res$ICS_out, select = res$select, clusters = iris[,5])
 # 
-# ICS_comp_crit(res, crit = "var", comp_max = 1)
-# 
-# ICS_comp_crit(res, crit = "discriminatory", groups_vec = iris[,5], comp_max = 2)
-# 
-# ICSClust(res, crit = "med", comp_max = 2,
-#          clustering_fun = "kmeansClust",
-#          clustering_args = list(), nb_clusters = 3)
-# 
-# res_clust <- ICSClust(res, crit = "med", comp_max = 2,
-#          clustering_fun = "tkmeansClust",
-#          clustering_args = list(alpha = 0.05), nb_clusters = 3,
-#          groups_vec = iris[,5])
-# res_clust
-# 
-# res_clust <- ICSClust(res, crit = "med", comp_max = 1,
-#                       clustering_fun = "kmeansClust", nb_clusters = 3,
-#                       groups_vec = iris[,5])
-# res_clust
-# 
+# res <- ICSClust(X, nb_select = 1, nb_clusters = 3,
+#                 ICS_args = list(S1 = ICS_mcd, S2 = ICS_cov, 
+#                                 S1_args = list(alpha = 0.5)),
+#                 method  = "tkmeans_clust",
+#                 clustering_args = list(alpha = 0.1))
+# table(res$clusters, iris[,5])
+# pairs_plot(res$ICS_out, clusters = as.factor(res$clusters))
+# pairs_plot(res$ICS_out, clusters = iris[,5])
 # 

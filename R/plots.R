@@ -1,5 +1,16 @@
 
+#' Plot the Generalized Kurtosis Values of the ICS Transformation
+#'
+#' Extract the generalized kurtosis values of the components obtained via an
+#' ICS transformation and draw a screeplot.
 
+#' @param object  an object inheriting from class \code{"ICS"} containing
+#' results from an ICS transformation.
+#' @param select  an integer, character, or logical vector specifying for which
+#' components to extract the generalized kurtosis values, or \code{NULL} to
+#' extract the generalized kurtosis values of all components.
+#' @param scale  a logical indicating whether to scale the generalized kurtosis
+#' values to have product 1 (defaults to \code{FALSE}).
 #' @import ICS
 #' @import ggplot2
 #' @export
@@ -26,27 +37,27 @@ pairs_plot <- function(object, ...) UseMethod("pairs_plot")
 #' @import ICS
 #' @export
 pairs_plot.ICS <- function(object, select = NULL, ...){
-  pairs_plot(ICS::components(object, select = select), ...)
+  pairs_plot.default(ICS::components(object, select = select), ...)
 }
 
 #' @import ICS
 #' @export
 pairs_plot.data.frame <- function(object, select = NULL, ...){
-  pairs_plot(object[, select])
+  pairs_plot.default(object[, select], ...)
 }
 
 #' @import ICS
 #' @import GGally
 #' @importFrom ggthemes scale_colour_colorblind
 #' @export
-pairs_plot.default <- function(object, select = NULL, clusters = NULL, 
+pairs_plot.default <- function(object, clusters = NULL, 
                                text_size_factor = 8/6.5, 
                                colors = NULL, ...) {
   if(is.null(clusters)) clusters <- rep("", nrow(object))
   
   df_plot <- data.frame(object, clusters  = clusters)
   column_labels <- paste0(gsub(".", "[", colnames(object), fixed = TRUE), "]")
-  
+
   if(is.null(colors)) colors <- scales::hue_pal()(length(unique(clusters)))
   
   p <- GGally::ggpairs(df_plot, aes(color = clusters, alpha = 0.4), 
