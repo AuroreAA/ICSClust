@@ -1,5 +1,7 @@
 ---
 output: github_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -8,7 +10,7 @@ output: github_document
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "man/figures/README-",
+  fig.path = "man/figuICS_out/README-",
   out.width = "100%"
 )
 ```
@@ -30,27 +32,78 @@ You can install the development version of ICSClust from [GitHub](https://github
 devtools::install_github("AuroreAA/ICSClust")
 ```
 
-## Example
-
-This is a basic example which shows you how to solve a common problem:
+## Example of ICS and some plots
 
 ```{r example}
 library(ICSClust)
-## basic example code
+
+# import data
+X <- iris[,-5]
+
+# run ICS
+ICS_out <- ICS(X)
+ICS_out
+
+# screeplot
+scree_plot(ICS_out)
+scree_plot(ICS_out, type = "lines")
+
+# pairs of all components
+component_plot(ICS_out)
+# pairs of only a the first and fourth components
+component_plot(ICS_out, select = c(1,4))
+# add some colors by clusters
+component_plot(ICS_out, clusters = iris[,5])
+component_plot(ICS_out, select = c(1,4), clusters = iris[,5])
+
+# in case you want to do it for initial data
+component_plot(X, select = c(1,4), clusters = iris[,5])
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
 
-```{r cars}
-summary(cars)
+## Example of ICSClust
+
+```{r ICSClust_ex}
+library(ICSClust)
+
+# ICSClust requiICS_out at least 2 arguments:
+# - X: data
+# - nb_clusters: nb of clusters
+ICS_out <- ICSClust(X, nb_clusters = 3)
+
+# You can also mention the number of invariant components to keep
+ICS_out <- ICSClust(X, nb_select = 2, nb_clusters = 3)
+# confusion table with initial clusters
+table(ICS_out$clusters, iris[,5])
+component_plot(ICS_out$ICS_out, select = ICS_out$select, clusters = as.factor(ICS_out$clusters))
+
+# to change the scatter pair
+ICS_out <- ICSClust(X, nb_select = 1, nb_clusters = 3,
+                ICS_args = list(S1 = ICS_mcd, S2 = ICS_cov,
+                                S1_args = list(alpha = 0.5)))
+table(ICS_out$clusters, iris[,5])
+component_plot(ICS_out$ICS_out, clusters = as.factor(ICS_out$clusters))
+
+
+# to change the criteria to select the invariant components
+ICS_out <- ICSClust(X, nb_clusters = 3,
+                ICS_args = list(S1 = ICS_mcd, S2 = ICS_cov,
+                                S1_args = list(alpha = 0.5)),
+                criterion = "normal_crit",
+                ICS_crit_args = list(level = 0.1, test = "anscombe.test",
+                                     max_select = NULL))
+
+component_plot(ICS_out$ICS_out, select = ICS_out$select, clusters = as.factor(ICS_out$clusters))
+
+
+# to change the clustering method
+ICS_out <- ICSClust(X, nb_select = 1, nb_clusters = 3,
+                ICS_args = list(S1 = ICS_mcd, S2 = ICS_cov,
+                                S1_args = list(alpha = 0.5)),
+                method  = "tkmeans_clust",
+                clustering_args = list(alpha = 0.1))
+table(ICS_out$clusters, iris[,5])
+component_plot(ICS_out$ICS_out, clusters = as.factor(ICS_out$clusters))
+
+
 ```
-
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. You could also use GitHub Actions to re-render `README.Rmd` every time you push. An example workflow can be found here: <https://github.com/r-lib/actions/tree/v1/examples>.
-
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
