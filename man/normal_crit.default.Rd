@@ -2,12 +2,12 @@
 % Please edit documentation in R/select_crit.R
 \name{normal_crit.default}
 \alias{normal_crit.default}
-\title{Title}
+\title{Normal criterion}
 \usage{
 \method{normal_crit}{default}(
   object,
   level = 0.05,
-  test = c("jarque.test", "anscombe.test", "bonett.test", "agostino.test",
+  test = c("agostino.test", "jarque.test", "anscombe.test", "bonett.test",
     "shapiro.test"),
   max_select = NULL,
   select_only = FALSE
@@ -25,5 +25,5 @@
 \item{select_only}{}
 }
 \description{
-Title
+Normal criterion
 }

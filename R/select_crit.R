@@ -178,25 +178,24 @@ var_crit.default <- function(object, nb_select = NULL, select_only = FALSE){
 #' Fix Order
 #'
 #' @param x 
-#' @param nb_gaussian
+#' @param nb_spherical
 #'
 #' @return
-#' @export
 #' @examples
 #' @importFrom RcppRoll roll_var 
-fixOrder <- function (x, nb_gaussian) 
+fixOrder <- function (x, nb_spherical) 
 {
   P <- length(x)
   Index <- seq(1, P)
-  RollVarX <- RcppRoll::roll_var(x, nb_gaussian)
+  RollVarX <- RcppRoll::roll_var(x, nb_spherical)
   Start <- which.min(RollVarX)
-  End <- Start + nb_gaussian - 1
+  End <- Start + nb_spherical - 1
   Smallest <- seq(Start, End)
   Order <- c(Index[-Smallest], Index[Smallest])
   Ox <- x[Order]
-  RollVarOX <- roll_var(Ox, nb_gaussian)
+ # RollVarOX <- roll_var(Ox, nb_spherical)
   RES <- list(RollVarX = RollVarX, Selected = Smallest, Order = Order, 
-              xOrdered = Ox, RollVarOX = RollVarOX)
+              xOrdered = Ox)
   RES
 }
 

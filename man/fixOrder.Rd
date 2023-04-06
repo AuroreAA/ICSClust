@@ -4,12 +4,12 @@
 \alias{fixOrder}
 \title{Fix Order}
 \usage{
-fixOrder(x, nb_gaussian)
+fixOrder(x, nb_spherical)
 }
 \arguments{
 \item{x}{}
 
-\item{nb_gaussian}{}
+\item{nb_spherical}{}
 }
 \description{
 Fix Order

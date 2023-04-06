@@ -1,4 +1,9 @@
 
+
+#' @export
+scree_plot <- function(object, ...) UseMethod("scree_plot")
+
+
 #' Plot the Generalized Kurtosis Values of the ICS Transformation
 #'
 #' Extract the generalized kurtosis values of the components obtained via an
@@ -14,17 +19,22 @@
 #' @import ICS
 #' @import ggplot2
 #' @export
-screeplot_crit.ICS <- function(object, select = NULL, scale = FALSE, ...) {
+scree_plot.ICS <- function(object, select = NULL, scale = FALSE, 
+                           type = c("dots", "lines"), ...) {
+  
+  # Initialization
+  type <- match.arg(type)
   df <- data.frame(gen_kurtosis = ICS::gen_kurtosis(object, select = select, 
                                                     scale = scale))
  
   df %>% 
-    ggplot(aes(x = rownames(df), index, y = gen_kurtosis ))+
+    ggplot(aes(x = rownames(df), index, y = gen_kurtosis, group = 0))+
     geom_point() +
+    {if(type == "lines") geom_line()} +
     # geom_hline(aes(yintercept = 1))+
     theme_minimal() +
     theme(text = element_text(size = 20)) +
-    labs(x = "") +
+    labs(x = NULL, y = "Generalized Kurtosis") +
     scale_x_discrete(limits = rownames(df))
 }
 
@@ -32,31 +42,34 @@ screeplot_crit.ICS <- function(object, select = NULL, scale = FALSE, ...) {
 
 
 #' @export
-pairs_plot <- function(object, ...) UseMethod("pairs_plot")
+component_plot <- function(object, ...) UseMethod("component_plot")
 
 #' @import ICS
 #' @export
-pairs_plot.ICS <- function(object, select = NULL, ...){
-  pairs_plot.default(ICS::components(object, select = select), ...)
+component_plot.ICS <- function(object, select = NULL, ...){
+  df_scores <- ICS::components(object, select = select)
+  colnames(df_scores) <- paste0(gsub(".", "[", colnames(df_scores), 
+                                     fixed = TRUE), "]")
+  component_plot.default(df_scores, ...)
 }
 
 #' @import ICS
 #' @export
-pairs_plot.data.frame <- function(object, select = NULL, ...){
-  pairs_plot.default(object[, select], ...)
+component_plot.data.frame <- function(object, select = NULL, ...){
+  component_plot.default(object[, select], ...)
 }
 
 #' @import ICS
 #' @import GGally
 #' @importFrom ggthemes scale_colour_colorblind
 #' @export
-pairs_plot.default <- function(object, clusters = NULL, 
+component_plot.default <- function(object, clusters = NULL, 
                                text_size_factor = 8/6.5, 
                                colors = NULL, ...) {
   if(is.null(clusters)) clusters <- rep("", nrow(object))
   
   df_plot <- data.frame(object, clusters  = clusters)
-  column_labels <- paste0(gsub(".", "[", colnames(object), fixed = TRUE), "]")
+  column_labels <- colnames(object)
 
   if(is.null(colors)) colors <- scales::hue_pal()(length(unique(clusters)))
   

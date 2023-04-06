@@ -1,13 +1,10 @@
-
-
-
 ICSClust <- function(X, ICS_args = list(S1 = ICS_tcov, S2 = ICS_cov),
                      nb_select = NULL, 
                      criterion = c("med_crit", "normal_crit", "var_crit",
                                    "discriminatory_crit"), 
                      ICS_crit_args = list(),
                      clusters = NULL,
-                     nb_clusters = 1, 
+                     nb_clusters = NULL, 
                      method = c("kmeans_clust", "tkmeans_clust", "pam_clust"),
                      clustering_args = list()
 ){
@@ -15,6 +12,11 @@ ICSClust <- function(X, ICS_args = list(S1 = ICS_tcov, S2 = ICS_cov),
   # Initialization
   criterion <- match.arg(criterion)
   method <- match.arg(method)
+
+  
+  if(is.null(nb_clusters)){
+    stop("You should specify the `nb_clusters` argument.")
+  }
   
   # ICS ----
   ICS_out <-  do.call(ICS::ICS, append(list(X = X), ICS_args))
