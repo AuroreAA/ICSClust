@@ -1,4 +1,20 @@
-ICSClust <- function(X, ICS_args = list(S1 = ICS_tcov, S2 = ICS_cov),
+#' Tandem clustering with ICS
+#'
+#' @param X 
+#' @param ICS_args 
+#' @param nb_select 
+#' @param criterion 
+#' @param ICS_crit_args 
+#' @param clusters 
+#' @param nb_clusters 
+#' @param method 
+#' @param clustering_args 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+ICSClust <- function(X, ICS_args = list(),
                      nb_select = NULL, 
                      criterion = c("med_crit", "normal_crit", "var_crit",
                                    "discriminatory_crit"), 
