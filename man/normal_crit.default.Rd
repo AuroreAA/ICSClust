@@ -10,7 +10,8 @@
   test = c("agostino.test", "jarque.test", "anscombe.test", "bonett.test",
     "shapiro.test"),
   max_select = NULL,
-  select_only = FALSE
+  select_only = FALSE,
+  gen_kurtosis = NULL
 )
 }
 \arguments{

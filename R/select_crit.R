@@ -5,7 +5,8 @@ normal_crit <- function(object, ...) UseMethod("normal_crit")
 #' @import ICS
 #' @export
 normal_crit.ICS <- function(object, ...){
-  normal_crit(ICS::components(object), ...)
+  gen_kurtosis <- ICS::gen_kurtosis(object, scale = FALSE)
+  normal_crit(ICS::components(object), gen_kurtosis = gen_kurtosis, ...)
 }
 
 
@@ -16,6 +17,8 @@ normal_crit.ICS <- function(object, ...){
 #' @param level 
 #' @param test 
 #' @param select_only 
+#' 
+
 #'
 #' @return
 #' @export
@@ -25,13 +28,15 @@ normal_crit.default <- function(object, level = 0.05,
                                 test = c("agostino.test", "jarque.test", 
                                          "anscombe.test", "bonett.test", 
                                          "shapiro.test"), 
-                                max_select = NULL, select_only = FALSE){
-  
+                                max_select = NULL, select_only = FALSE,
+                                gen_kurtosis = NULL){
+
   # Initialization
   test <- match.arg(test)
   comp_select <- colnames(object)
   max_select <- ifelse(is.null(max_select), ncol(object)-1, max_select)
 
+  
   # Apply marginal normality tests to all components and keep only the ones lower
   test_pvals <- apply(object, 2, test)
   test_pvals <- unlist(lapply(test_pvals, function(x) x$p.value))
@@ -85,10 +90,14 @@ normal_crit.default <- function(object, level = 0.05,
     }
   }
   if(select_only){
-    select
+    out <- select
   }else{
-    append(out,  list(adjusted_levels =  adjusted_levels, select = select) )
-  }  
+    out <- append(out, list(adjusted_levels =  adjusted_levels, select = select,
+                            crit = "normal", gen_kurtosis = gen_kurtosis))
+    class(out) <- "ICS_crit"
+  } 
+  
+  out
   
 }
 
@@ -98,17 +107,19 @@ med_crit <- function(object, ...) UseMethod("med_crit")
 #' @import ICS
 #' @export
 med_crit.ICS <- function(object, ...){
-  med_crit(ICS::gen_kurtosis(object), ...)
+  med_crit(ICS::gen_kurtosis(object, scale = FALSE), ...)
 }
 
 #'
 #' @param max_select 
 #' @param object The vector of generalized kurtosis from ICS object
 #' @param select_only 
+#' 
+#' 
 #'
 #' @return
 #' @export
-#' 
+
 #'
 #' @examples
 med_crit.default <- function(object, nb_select = NULL, select_only = FALSE){
@@ -120,11 +131,14 @@ med_crit.default <- function(object, nb_select = NULL, select_only = FALSE){
   gen_kurtosis_diff <- sort(abs(object - med_gen_kurtosis), decreasing = TRUE)
   out <- names(gen_kurtosis_diff)[seq(0, nb_select)]
   
-  if (!select_only) out <- append(list(crit = "med", nb_select =  nb_select, 
-                                      gen_kurtosis = object, 
-                                      med_gen_kurtosis = med_gen_kurtosis,
-                                      gen_kurtosis_diff_med =  gen_kurtosis_diff),
-                                 list(select = out))
+  if (!select_only){
+    out <- append(list(crit = "med", nb_select =  nb_select, 
+                       gen_kurtosis = object, 
+                       med_gen_kurtosis = med_gen_kurtosis,
+                       gen_kurtosis_diff_med = gen_kurtosis_diff),
+                  list(select = out))
+    class(out) <- "ICS_crit"
+  } 
   out
   
 }
@@ -135,7 +149,7 @@ var_crit <- function(object, ...) UseMethod("var_crit")
 #' @import ICS
 #' @export
 var_crit.ICS <- function(object, ...){
-  var_crit(ICS::gen_kurtosis(object), ...)
+  var_crit(ICS::gen_kurtosis(object, scale = FALSE), ...)
 }
 
 
@@ -150,6 +164,8 @@ var_crit.ICS <- function(object, ...){
 #'
 #' @return
 #' @export
+#' 
+
 #' @examples
 var_crit.default <- function(object, nb_select = NULL, select_only = FALSE){
   # Initialization
@@ -169,9 +185,11 @@ var_crit.default <- function(object, nb_select = NULL, select_only = FALSE){
     if (!select_only) out <- append(list(crit = "var", nb_select = nb_select,
                                          gen_kurtosis = object, select = out), 
                                     orderD)
+    class(out) <- "ICS_crit"
   }
   
   out
+  
   
 }
 
@@ -193,10 +211,9 @@ fixOrder <- function (x, nb_spherical)
   Smallest <- seq(Start, End)
   Order <- c(Index[-Smallest], Index[Smallest])
   Ox <- x[Order]
- # RollVarOX <- roll_var(Ox, nb_spherical)
-  RES <- list(RollVarX = RollVarX, Selected = Smallest, Order = Order, 
+  out <- list(RollVarX = RollVarX, Selected = Smallest, Order = Order, 
               xOrdered = Ox)
-  RES
+  out
 }
 
 #' @export
@@ -205,7 +222,9 @@ discriminatory_crit <- function(object, ...) UseMethod("discriminatory_crit")
 #' @import ICS
 #' @export
 discriminatory_crit.ICS <- function(object, ...){
-  discriminatory_crit(ICS::components(object), ...)
+  gen_kurtosis <- ICS::gen_kurtosis(object, scale = FALSE)
+  discriminatory_crit(ICS::components(object), 
+                      gen_kurtosis = gen_kurtosis, ...)
 }
 
 #' Selection of ICS components based on discriminatory power
@@ -226,7 +245,7 @@ discriminatory_crit.ICS <- function(object, ...){
 #'
 #' @examples
 discriminatory_crit.default <- function(object, clusters, method = "eta2", 
-                                        nb_select = NULL, select_only = FALSE){
+                                        nb_select = NULL, select_only = FALSE, gen_kurtosis = NULL){
   # Initialization
   method <- match.arg(method)
   nb_select <- ifelse(is.null(nb_select), ncol(object)-1, nb_select)
@@ -273,11 +292,16 @@ discriminatory_crit.default <- function(object, clusters, method = "eta2",
   }
   
   out <- colnames(object)[select]
-  if (!select_only) out <- list(crit = "discriminatory",
-                               method = method, nb_select = nb_select, 
-                               select = out, power = power,
-                               power_combinations = all_power)
+  if (!select_only){
+    out <- list(crit = "discriminatory",
+                method = method, nb_select = nb_select, 
+                select = out, power = power,
+                power_combinations = all_power,
+                gen_kurtosis = gen_kurtosis )
+    class(out) <- "ICS_crit"
+  }
   out
+  
 }
 
 

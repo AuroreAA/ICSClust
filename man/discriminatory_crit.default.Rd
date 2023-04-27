@@ -9,7 +9,8 @@
   clusters,
   method = "eta2",
   nb_select = NULL,
-  select_only = FALSE
+  select_only = FALSE,
+  gen_kurtosis = NULL
 )
 }
 \arguments{
@@ -24,6 +25,6 @@
 \item{select_only}{}
 }
 \description{
-This function selects the components to keep based on a discriminatory power 
+This function selects the components to keep based on a discriminatory power
 (by default "eta2")
 }

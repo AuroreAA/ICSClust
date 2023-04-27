@@ -2,21 +2,35 @@
 % Please edit documentation in R/clustering.R
 \name{pam_clust}
 \alias{pam_clust}
-\title{Title}
+\title{Partitioning Around Medoids clustering}
 \usage{
-pam_clust(df, k, clusters_only = FALSE, diss = inherits(df, "dist"), ...)
+pam_clust(df, k, clusters_only = FALSE, ...)
 }
 \arguments{
-\item{df}{}
+\item{df}{a numeric matrix or data frame of the data. It corresponds to the argument \code{x}.}
 
-\item{k}{}
+\item{k}{the number of clusters searched for. It corresponds to the argument \code{k}.}
 
-\item{clusters_only}{}
+\item{clusters_only}{boolean. If \code{TRUE} only the partition of the data is returned as a vector. If \code{FALSE} the usual output of the \link[cluster]{pam} function is returned.}
 
-\item{diss}{}
+\item{...}{other arguments to pass to the \code{\link[cluster]{pam}}}
+}
+\value{
+If \code{clusters_only} is \code{TRUE} a vector of the new partition of the data is returned, i.e a vector of integers (from \code{1:k}) indicating the cluster to which each observation is allocated. 0 indicates trimmed observations.
 
-\item{..}{}
+Otherwise a list is returned with the following components:
+\item{clust_method}{the name of the clustering method, i.e "clara_pam".}
+\item{clusters}{the vector of the new partition of the data, i.e a vector of integers (from \code{1:k}) indicating the cluster to which each observation is allocated. 0 indicates outlying observations.}
+\item{...}{an object of class \code{"pam"}}
 }
 \description{
-Title
+Wrapper for performing Partitioning Around Medoids clustering from \code{\link[cluster]{pam}}.
+}
+\examples{
+\dontrun{
+library(ICSClust)
+pam_clust(iris[,1:4], k = 3, clusters_only = TRUE)}#' 
+}
+\seealso{
+\code{\link[cluster]{pam}()}
 }

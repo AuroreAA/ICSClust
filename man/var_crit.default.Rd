@@ -15,5 +15,5 @@
 }
 \description{
 This function selects the components to keep based on the rolling variance
-criteria used in `ICSboot`.
+criteria used in \code{ICSboot}.
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/simulations.R
 \name{mixture_sim}
 \alias{mixture_sim}
-\title{Mixture of gaussian distributions}
+\title{Simulation of mixture of gaussian distributions}
 \usage{
 mixture_sim(pct_clusters = c(0.5, 0.5), n = 500, p = 10, delta = 10)
 }
@@ -24,5 +24,5 @@ mixture_sim(pct_clusters = c(0.5, 0.5), n = 500, p = 10, delta = 10)
 \item{eps}{}
 }
 \description{
-Mixture of gaussian distributions
+Simulation of mixture of gaussian distributions
 }

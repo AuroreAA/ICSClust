@@ -1,4 +1,4 @@
-#' Mixture of gaussian distributions
+#' Simulation of mixture of gaussian distributions
 #'
 #' @param pct_clusters 
 #' @param n 
@@ -46,7 +46,7 @@ mixture_sim = function(pct_clusters = c(0.5,0.5) , n = 500, p = 10, delta = 10){
     }
   })
   
-  data.frame(cluster = rep(paste0("Group",  1:length(pct_clusters)), n_groups),
+  data.frame(cluster = rep(paste0("Group", 1:length(pct_clusters)), n_groups),
                     do.call(rbind, (X_list)))
 }
 
