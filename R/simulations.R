@@ -1,20 +1,29 @@
 #' Simulation of mixture of gaussian distributions
 #'
-#' @param pct_clusters 
-#' @param n 
-#' @param p 
-#' @param delta 
-#' @param sigma 
-#' @param mean_grp 
-#' @param outliers 
-#' @param eps 
+#' @param pct_clusters a vector of marginal probabilities for each group. Default is two 
+#' balanced clusters.
+#' @param n integer. The number of observations.
+#' @param p integer. The number of variables.
+#' @param delta integer. The location shift.
+#' 
+#' @details
+#' A mixture of *k* normal gaussian distributions with the same parameters is generated. 
+#' A location shift is added for each group *j* in only one dimension 
+#' (the variable *j-1*). 
+#' 
 #'
-#' @return
+#' @return A dataframe of *n* observations and *p* variables with the first variable
+#' indicating the cluster assignment.
 #' @export
 #' 
 #' @importFrom mvtnorm rmvnorm
 #'
 #' @examples
+#' \dontrun{
+#' library(ICSClust)
+#' X <- mixture_sim()
+#' summary(X)
+#' }
 mixture_sim = function(pct_clusters = c(0.5,0.5) , n = 500, p = 10, delta = 10){
   
   # Checks and initialization of inputs
@@ -62,10 +71,10 @@ mixture_sim = function(pct_clusters = c(0.5,0.5) , n = 500, p = 10, delta = 10){
 #'            a hyperrectangle for which each side is twice as long.  The data are 
 #'            then drawn from a uniform distribution on the expanded hyperrectangle 
 #'            from which the smaller hyperrectangle around the data is cut out.
-#' @return
+#' @return A matrix of generated points.
+#' 
+#' @importFrom stats runif
 #' @export
-#'
-#' @examples
 runif_outside_range <- function(n, min = 0, max = 1, mult = 2) {
   # center and dimension of hyperrectangles
   m <- (max + min) / 2

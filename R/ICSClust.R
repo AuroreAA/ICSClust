@@ -72,7 +72,8 @@
 #' 
 #' # changing the clustering method
 #' out <- ICSClust(X, nb_clusters = 3, method  = "tkmeans_clust",
-#                 clustering_args = list(alpha = 0.1))}
+#'  clustering_args = list(alpha = 0.1))
+#'  }
 ICSClust <- function(X, ICS_args = list(),
                      criterion = c("med_crit", "normal_crit", "var_crit",
                                    "discriminatory_crit"), 

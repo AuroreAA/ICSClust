@@ -66,6 +66,29 @@ selected based on a criterion.
 of the selected components.
 }
 }
+\examples{
+\dontrun{
+library(ICSClust)
+X <- iris[,1:4]
+ICSClust(X)
+
+# indicating the number of components to retain for the dimension reduction
+step as well as the number of clusters searched for.
+out <- ICSClust(X, nb_select = 2, nb_clusters = 3)
+
+# changing the scatter pair to consider in ICS
+out <- ICSClust(X, nb_select = 1, nb_clusters = 3,
+ ICS_args = list(S1 = ICS_mcd, S2 = ICS_cov,S1_args = list(alpha = 0.5)))
+ 
+# changing the criterion for choosing the invariant coordinates
+out <- ICSClust(X, nb_clusters = 3, criterion = "normal_crit",
+ICS_crit_args = list(level = 0.1, test = "anscombe.test", max_select = NULL))
+
+# changing the clustering method
+out <- ICSClust(X, nb_clusters = 3, method  = "tkmeans_clust",
+ clustering_args = list(alpha = 0.1))
+ }
+}
 \references{
 Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022).
 Tandem clustering with invariant coordinate selection.

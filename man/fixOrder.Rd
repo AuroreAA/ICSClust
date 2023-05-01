@@ -2,15 +2,22 @@
 % Please edit documentation in R/select_crit.R
 \name{fixOrder}
 \alias{fixOrder}
-\title{Fix Order}
+\title{Fix Order based on rolling variances}
 \usage{
 fixOrder(x, nb_spherical)
 }
 \arguments{
-\item{x}{}
+\item{x}{a vector of generalized kurtosis values}
 
-\item{nb_spherical}{}
+\item{nb_spherical}{the number of non spherical components to consider.}
+}
+\value{
+A list with:
+\itemize{
+\item \code{RollVarX}: the rolling variances.
+\item \code{Order}: indexes of the ordered invariant components.
+}
 }
 \description{
-Fix Order
+Simplified version of the non exported function \code{ICtest:::fixOrder()}.
 }

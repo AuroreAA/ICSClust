@@ -19,6 +19,9 @@ a hyperrectangle for which each side is twice as long.  The data are
 then drawn from a uniform distribution on the expanded hyperrectangle
 from which the smaller hyperrectangle around the data is cut out.}
 }
+\value{
+A matrix of generated points.
+}
 \description{
 Draw from a multivariate uniform distribution outside range of a data set
 }

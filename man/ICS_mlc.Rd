@@ -20,28 +20,31 @@ V <- solve(scov_inv + (h-1)/(h^2) * S_inv)set row and column names and return sc
 dimnames(V) <- list(cn, cn)
 V
 }
+Cauchy location and Scatter Estimates for ICS
 }}
 \usage{
 ICS_mlc(x, location = FALSE, ...)
 }
+\arguments{
+\item{x}{a numeric matrix or data frame.}
+
+\item{location}{a logical indicating whether to include the M-estimate of
+location (defaults to \code{FALSE}).}
+
+\item{...}{potential further arguments passed to \code{\link[ICS:ICS_tM]{ICS::ICS_tM()}}.}
+}
+\value{
+An object of class \code{"ICS_scatter"} with the following
+components:
+\item{location}{if requested, a numeric vector giving the location
+estimate.}
+\item{scatter}{a numeric matrix giving the estimate of the scatter matrix.}
+\item{label}{a character string providing a label for the scatter matrix.}
+}
 \description{
-\subsection{reference implementation using package 'amap'}{
-
-#' @importFrom amap W
-#' @importFrom stats var
-ucov_amap <- function(x, beta = 0.2) {initializations
-
-x <- as.matrix(x)
-cn <- colnames(x)compute inverse of maximum likelihood estimate of covariance matrixn <- nrow(x)S_inv <- solve(var(x) * ((n-1) / n))
-
-S_inv <- solve(var(x))compute inverse of SCOV (error in 'amap' package: should be 1/h^2)
-
-h <- 1/sqrt(beta)
-scov_inv <- solve(amap::varrob(x, h = h, D = S_inv, kernel = "gaussien"))
-V <- solve(scov_inv + (h-1)/(h^2) * S_inv)set row and column names and return scatter matrix
-
-dimnames(V) <- list(cn, cn)
-V
+It is a wrapper for the Cauchy estimator of location and scatter
+for a multivariate t-distribution, as computed by \code{\link[ICS:tM]{ICS::tM()}}.
 }
-}
+\seealso{
+\code{\link[ICS:tM]{ICS::tM()}}, \code{\link[ICS:ICS_tM]{ICS::ICS_tM()}}
 }

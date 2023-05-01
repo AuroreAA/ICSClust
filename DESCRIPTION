@@ -13,7 +13,6 @@ Imports:
     GGally,
     ggplot2,
     heplots,
-    mclust,
     moments,
     mvtnorm,
     RcppRoll,
