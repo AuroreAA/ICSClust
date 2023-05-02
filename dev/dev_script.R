@@ -19,7 +19,11 @@ usethis::use_package("fpc")
 usethis::use_package("RcppRoll")
 usethis::use_package("GGally")
 usethis::use_package("ggplot2")
-usethis::use_package("ggthemes")
+usethis::use_package("mvtnorm")
+usethis::use_package("rrcov")
+usethis::use_package("scales")
+
+
 
 usethis::rename_files("index_crit.R", "select_crit.R")
 

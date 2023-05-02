@@ -13,11 +13,14 @@ runif_outside_range(n, min = 0, max = 1, mult = 2)
 
 \item{max}{numeric vector giving the maximum of each variable of the data set}
 
-\item{mult}{multiplication factor to expand the hyperrectangle around the data 
-(which is given by 'min' and 'max'), e.g., the default value 2 gives 
-a hyperrectangle for which each side is twice as long.  The data are 
-then drawn from a uniform distribution on the expanded hyperrectangle 
+\item{mult}{multiplication factor to expand the hyperrectangle around the data
+(which is given by 'min' and 'max'), e.g., the default value 2 gives
+a hyperrectangle for which each side is twice as long.  The data are
+then drawn from a uniform distribution on the expanded hyperrectangle
 from which the smaller hyperrectangle around the data is cut out.}
+}
+\value{
+A matrix of generated points.
 }
 \description{
 Draw from a multivariate uniform distribution outside range of a data set

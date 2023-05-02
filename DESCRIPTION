@@ -13,8 +13,11 @@ Imports:
     GGally,
     ggplot2,
     heplots,
-    mclust,
     moments,
+    mvtnorm,
+    RcppRoll,
+    rrcov,
+    scales,
     tclust
 Depends:
     ICS
@@ -42,6 +45,7 @@ Author:
     Klaus Nordhausen [aut] (<https://orcid.org/0000-0002-3758-8501>)
 Maintainer: Aurore Archimbaud <archimbaud@ese.eur.nl>
 RoxygenNote: 7.2.3
+Roxygen: list(markdown = TRUE)
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

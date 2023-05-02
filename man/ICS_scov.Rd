@@ -2,40 +2,38 @@
 % Please edit documentation in R/scatters.R
 \name{ICS_scov}
 \alias{ICS_scov}
-\title{# reference implementation using package 'amap'
+\title{reference implementation using package 'amap'
+
 #' @importFrom amap W
 #' @importFrom stats var
-tcov_amap <- function(x, beta = 2) {
-  # initializations
-  x <- as.matrix(x)
-  cn <- colnames(x)
-  # compute inverse of maximum likelihood estimate of covariance matrix
-  # n <- nrow(x)
-  # S_inv <- solve(var(x) * ((n-1)/n))
-  S_inv <- solve(var(x))
-  V <- amap::W(x, h = 1/sqrt(beta), D = S_inv, kernel = "gaussien")
-  # set row and column names and return scatter matrix
-  dimnames(V) <- list(cn, cn)
-  V
+tcov_amap <- function(x, beta = 2) {initializations
+
+x <- as.matrix(x)
+cn <- colnames(x)compute inverse of maximum likelihood estimate of covariance matrixn <- nrow(x)S_inv <- solve(var(x) * ((n-1)/n))
+
+S_inv <- solve(var(x))
+V <- amap::W(x, h = 1/sqrt(beta), D = S_inv, kernel = "gaussien")set row and column names and return scatter matrix
+
+dimnames(V) <- list(cn, cn)
+V
 }}
 \usage{
 ICS_scov(x, beta = 0.2)
 }
 \description{
-# reference implementation using package 'amap'
+reference implementation using package 'amap'
+
 #' @importFrom amap W
 #' @importFrom stats var
-tcov_amap <- function(x, beta = 2) {
-  # initializations
-  x <- as.matrix(x)
-  cn <- colnames(x)
-  # compute inverse of maximum likelihood estimate of covariance matrix
-  # n <- nrow(x)
-  # S_inv <- solve(var(x) * ((n-1)/n))
-  S_inv <- solve(var(x))
-  V <- amap::W(x, h = 1/sqrt(beta), D = S_inv, kernel = "gaussien")
-  # set row and column names and return scatter matrix
-  dimnames(V) <- list(cn, cn)
-  V
+tcov_amap <- function(x, beta = 2) {initializations
+
+x <- as.matrix(x)
+cn <- colnames(x)compute inverse of maximum likelihood estimate of covariance matrixn <- nrow(x)S_inv <- solve(var(x) * ((n-1)/n))
+
+S_inv <- solve(var(x))
+V <- amap::W(x, h = 1/sqrt(beta), D = S_inv, kernel = "gaussien")set row and column names and return scatter matrix
+
+dimnames(V) <- list(cn, cn)
+V
 }
 }
