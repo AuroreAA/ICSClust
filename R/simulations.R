@@ -1,26 +1,28 @@
 #' Simulation of mixture of gaussian distributions
 #'
-#' @param pct_clusters a vector of marginal probabilities for each group. Default is two 
+#' @param pct_clusters a vector of marginal probabilities for each group. 
+#' Default is two 
 #' balanced clusters.
 #' @param n integer. The number of observations.
 #' @param p integer. The number of variables.
 #' @param delta integer. The location shift.
 #' 
 #' @details
-#' A mixture of *k* normal gaussian distributions with the same parameters is generated. 
+#' A mixture of *k* normal gaussian distributions with the same parameters is 
+#' generated. 
 #' A location shift is added for each group *j* in only one dimension 
 #' (the variable *j-1*). 
 #' 
 #'
-#' @return A dataframe of *n* observations and *p* variables with the first variable
+#' @return A dataframe of *n* observations and *p* variables with the first
+#'  variable
 #' indicating the cluster assignment.
 #' @export
 #' 
 #' @importFrom mvtnorm rmvnorm
-#'
+#' @author Aurore Archimbaud
 #' @examples
 #' \dontrun{
-#' library(ICSClust)
 #' X <- mixture_sim()
 #' summary(X)
 #' }
@@ -72,7 +74,7 @@ mixture_sim = function(pct_clusters = c(0.5,0.5) , n = 500, p = 10, delta = 10){
 #'            then drawn from a uniform distribution on the expanded hyperrectangle 
 #'            from which the smaller hyperrectangle around the data is cut out.
 #' @return A matrix of generated points.
-#' 
+#' @author Andreas Alfons
 #' @importFrom stats runif
 #' @export
 runif_outside_range <- function(n, min = 0, max = 1, mult = 2) {

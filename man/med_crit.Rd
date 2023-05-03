@@ -2,9 +2,15 @@
 % Please edit documentation in R/select_crit.R
 \name{med_crit}
 \alias{med_crit}
+\alias{med_crit.ICS}
+\alias{med_crit.default}
 \title{Selection of Invariant components using the med criterion}
 \usage{
 med_crit(object, ...)
+
+\method{med_crit}{ICS}(object, ...)
+
+\method{med_crit}{default}(object, nb_select = NULL, select_only = FALSE)
 }
 \arguments{
 \item{object}{object of class \code{ICS}.}
@@ -39,7 +45,6 @@ Only valid if the \code{nb_select} is less than half of the number of components
 }
 \examples{
 \dontrun{
-library(ICSClust)
 X <- iris[,-5]
 out <- ICS(X)
 med_crit(out, nb_select = 2, select_only = FALSE)
@@ -52,4 +57,7 @@ Tandem clustering with invariant coordinate selection.
 }
 \seealso{
 \code{\link[=normal_crit]{normal_crit()}}, \code{\link[=var_crit]{var_crit()}}, \code{\link[=discriminatory_crit]{discriminatory_crit()}}.
+}
+\author{
+Andreas Alfons, Aurore Archimbaud and Klaus Nordhausen
 }

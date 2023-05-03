@@ -2,9 +2,12 @@
 % Please edit documentation in R/select_crit.R
 \name{normal_crit}
 \alias{normal_crit}
+\alias{normal_crit.ICS}
 \title{Selection of Nonnormal Invariant Components Using Marginal Normality Tests}
 \usage{
 normal_crit(object, ...)
+
+\method{normal_crit}{ICS}(object, ...)
 }
 \arguments{
 \item{object}{object of class \code{ICS} or a data frame or matrix.}
@@ -56,7 +59,6 @@ adjusted for multiple testing by taking the level as \code{level}/\emph{j} for t
 }
 \examples{
 \dontrun{
-library(ICSClust)
 X <- iris[,-5]
 out <- ICS(X)
 normal_crit(out, level = 0.1, select_only = FALSE)
@@ -72,4 +74,7 @@ Tandem clustering with invariant coordinate selection.
 \code{\link[=med_crit]{med_crit()}}, \code{\link[=var_crit]{var_crit()}}, \code{\link[=discriminatory_crit]{discriminatory_crit()}},
 \code{\link[ICSOutlier:comp.norm.test]{ICSOutlier::comp.norm.test()}}, \code{\link[=jarque.test]{jarque.test()}}, \code{\link[=anscombe.test]{anscombe.test()}},
 \code{\link[=bonett.test]{bonett.test()}}, \code{\link[=agostino.test]{agostino.test()}}, \code{\link[stats:shapiro.test]{stats::shapiro.test()}}.
+}
+\author{
+Andreas Alfons, Aurore Archimbaud and Klaus Nordhausen
 }

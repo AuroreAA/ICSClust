@@ -39,6 +39,7 @@
 #'  
 #' @export
 #' 
+#' 
 #' @references
 #' Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022). 
 #' Tandem clustering with invariant coordinate selection. 
@@ -48,9 +49,11 @@
 #' [ICSOutlier::comp.norm.test()], [jarque.test()], [anscombe.test()], 
 #' [bonett.test()], [agostino.test()], [stats::shapiro.test()].
 #'
+#' @author Andreas Alfons, Aurore Archimbaud and Klaus Nordhausen
+#' 
+#' @rdname normal_crit
 #' @examples
 #' \dontrun{
-#' library(ICSClust)
 #' X <- iris[,-5]
 #' out <- ICS(X)
 #' normal_crit(out, level = 0.1, select_only = FALSE)
@@ -58,7 +61,9 @@
 #' 
 normal_crit <- function(object, ...) UseMethod("normal_crit")
 
+#' @rdname normal_crit
 #' @import ICS
+#' @method normal_crit ICS
 #' @export
 normal_crit.ICS <- function(object, ...){
   # get the generalized values
@@ -70,6 +75,7 @@ normal_crit.ICS <- function(object, ...){
 
 
 #' @export
+#' @method normal_crit default
 #' @importFrom moments jarque.test anscombe.test bonett.test agostino.test
 #' @importFrom stats shapiro.test
 normal_crit.default <- function(object, level = 0.05,  
@@ -179,6 +185,8 @@ normal_crit.default <- function(object, level = 0.05,
 #'  
 #' @export
 #' 
+#' @rdname med_crit
+#' 
 #' @references
 #' Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022). 
 #' Tandem clustering with invariant coordinate selection. 
@@ -186,11 +194,10 @@ normal_crit.default <- function(object, level = 0.05,
 #' 
 #' @seealso [normal_crit()], [var_crit()], [discriminatory_crit()].
 #'
-#'
+#' @author Andreas Alfons, Aurore Archimbaud and Klaus Nordhausen
 #' @import ICS
 #' @examples
 #' \dontrun{
-#' library(ICSClust)
 #' X <- iris[,-5]
 #' out <- ICS(X)
 #' med_crit(out, nb_select = 2, select_only = FALSE)
@@ -199,11 +206,15 @@ normal_crit.default <- function(object, level = 0.05,
 med_crit <- function(object, ...) UseMethod("med_crit")
 
 #' @import ICS
+#' @method med_crit ICS
+#' @rdname med_crit
 #' @export
 med_crit.ICS <- function(object, ...){
   med_crit(ICS::gen_kurtosis(object, scale = FALSE), ...)
 }
 
+#' @method med_crit default
+#' @rdname med_crit
 #' @export
 med_crit.default <- function(object, nb_select = NULL, select_only = FALSE){
   # Initialization
@@ -256,12 +267,13 @@ med_crit.default <- function(object, nb_select = NULL, select_only = FALSE){
 #' 
 #' @seealso [normal_crit()], [med_crit()], [discriminatory_crit()],
 #' [ICtest::ICSboot()].
+#' 
+#' @rdname var_crit
 #'
-#'
+#' @author Andreas Alfons, Aurore Archimbaud and Klaus Nordhausen
 #' @import ICS
 #' @examples
 #' \dontrun{
-#' library(ICSClust)
 #' X <- iris[,-5]
 #' out <- ICS(X)
 #' var_crit(out, nb_select = 2, select_only = FALSE)
@@ -269,12 +281,15 @@ med_crit.default <- function(object, nb_select = NULL, select_only = FALSE){
 var_crit <- function(object, ...) UseMethod("var_crit")
 
 #' @import ICS
+#' @method var_crit ICS
+#' @rdname var_crit
 #' @export
 var_crit.ICS <- function(object, ...){
   var_crit(ICS::gen_kurtosis(object, scale = FALSE), ...)
 }
 
-
+#' @method var_crit default
+#' @rdname var_crit
 #' @export
 var_crit.default <- function(object, nb_select = NULL, select_only = FALSE){
   # Initialization
@@ -304,7 +319,8 @@ var_crit.default <- function(object, nb_select = NULL, select_only = FALSE){
 
 #' Fix Order based on rolling variances
 #' 
-#' Simplified version of the non exported function `ICtest:::fixOrder()`.
+#' Simplified version of the non exported function `fixOrder` from `ICtest`
+#' package.
 #'
 #' @param x a vector of generalized kurtosis values
 #' @param nb_spherical the number of non spherical components to consider. 
@@ -315,6 +331,7 @@ var_crit.default <- function(object, nb_select = NULL, select_only = FALSE){
 #'  - `Order`: indexes of the ordered invariant components.
 #' 
 #' @importFrom RcppRoll roll_var 
+#' @noRd
 fixOrder <- function (x, nb_spherical) 
 {
   P <- length(x)
@@ -376,6 +393,8 @@ fixOrder <- function (x, nb_spherical)
 #'  
 #' @export
 #' 
+#' @rdname discriminatory_crit
+#' 
 #' @references
 #' Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022). 
 #' Tandem clustering with invariant coordinate selection. 
@@ -383,11 +402,10 @@ fixOrder <- function (x, nb_spherical)
 #' 
 #' @seealso [normal_crit()], [med_crit()] [var_crit()].
 #'
-#'
+#' @author Andreas Alfons, Aurore Archimbaud and Klaus Nordhausen
 #' @import ICS
 #' @examples
 #' \dontrun{
-#' library(ICSClust)
 #' X <- iris[,-5]
 #' out <- ICS(X)
 #' discriminatory_crit(out, clusters = iris[,5], select_only = FALSE)
@@ -397,6 +415,8 @@ fixOrder <- function (x, nb_spherical)
 discriminatory_crit <- function(object, ...) UseMethod("discriminatory_crit")
 
 #' @import ICS
+#' @method discriminatory_crit ICS
+#' @rdname discriminatory_crit
 #' @export
 discriminatory_crit.ICS <- function(object, ...){
   gen_kurtosis <- ICS::gen_kurtosis(object, scale = FALSE)
@@ -406,6 +426,8 @@ discriminatory_crit.ICS <- function(object, ...){
 
 
 #' @export
+#' @method discriminatory_crit default
+#' @rdname discriminatory_crit
 #' @importFrom heplots etasq
 discriminatory_crit.default <- function(object, clusters, method = "eta2", 
                                         nb_select = NULL, select_only = FALSE, gen_kurtosis = NULL){
@@ -471,6 +493,7 @@ discriminatory_crit.default <- function(object, clusters, method = "eta2",
 
 
 #' @importFrom stats as.formula lm manova median var
+#' @noRd
 eta2_power <- function(object, clusters, select){
   if(is.null(clusters)){
     warning("The 'clusters' argument is mandatory to compute the discriminatory 

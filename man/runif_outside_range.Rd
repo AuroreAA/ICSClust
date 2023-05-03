@@ -25,3 +25,6 @@ A matrix of generated points.
 \description{
 Draw from a multivariate uniform distribution outside range of a data set
 }
+\author{
+Andreas Alfons
+}

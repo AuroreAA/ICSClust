@@ -1,18 +1,22 @@
 #' Tandem clustering with ICS
 #' 
-#' Sequential clustering approach: (i) dimension reduction through the Invariant Coordinate Selection method using the [ICS::ICS()] function and (ii) clustering of the transformed data. 
+#' Sequential clustering approach: (i) dimension reduction through the Invariant 
+#' Coordinate Selection method using the \code{\link[=ICS-S3]{ICS}} function and (ii) 
+#' clustering of the transformed data. 
 #'
 #' @param X a numeric matrix or data frame containing the data.
+#' @param nb_select the number of components to select. \code{NULL} by default. 
+#' It is required in case \code{criterion} is either "med_crit", "var_crit" or 
+#' "discriminatory_crit". 
+#' @param nb_clusters the number of clusters searched for. 
 #' @param ICS_args list of \code{\link[ICS]{ICS-S3}} arguments. Otherwise, default 
 #' values of \code{\link[ICS]{ICS-S3}} are used.
 #' @param criterion criterion to automatically decide which invariant components
-#'  to keep. Possible values are "med_crit", "normal_crit", "var_crit" and "discriminatory_crit". The default value is "med_crit". 
+#'  to keep. Possible values are "med_crit", "normal_crit", "var_crit" and 
+#'  "discriminatory_crit". The default value is "med_crit". 
 #'  See below for more details.
-#' @param nb_select the number of components to select. \code{NULL} by default. 
-#' It is required in case \code{criterion} is either "med_crit", "var_crit" or "discriminatory_crit". 
 #' @param ICS_crit_args list of [med_crit()], [normal_crit()], [var_crit()] or 
 #' [discriminatory_crit()], arguments for choosing the components to keep.
-#' @param nb_clusters the number of clusters searched for. 
 #' @param method clustering method to perform. Possible implemented wrapper
 #'  functions are named "kmeans_clust", "tkmeans_clust" or "pam_clust".
 #'  The default value is "kmeans_clust".
@@ -25,7 +29,7 @@
 #' @details
 #' Tandem clusterinf with ICS is a sequential method:
 #' 
-#' - \code{\link[ICS]{ICS-S3}} is performed
+#' - \code{\link[=ICS-S3]{ICS}} is performed
 #' 
 #' - only a subset of the first and/or the last components are
 #'  selected based on a criterion.
@@ -34,10 +38,11 @@
 #'  of the selected components.
 #'  
 #'
-#' @return  An object with the following components:
-#' \item{ICS_out}{An object of class \code{"ICS"}. See \code{\link[ICS]{ICS-S3}}}
-#' \item{select}{a vector of the names of the selected invariant coordinates.}
-#' \item{clusters}{a vector of the new partition of the data, i.e a vector of
+#' @return  
+#' An object with the following components:
+#' - ICS_out: An object of class \code{"ICS"}. See \code{\link[=ICS-S3]{ICS}}
+#' - select: a vector of the names of the selected invariant coordinates.
+#' - clusters: a vector of the new partition of the data, i.e a vector of
 #'  integers (from \code{1:k}) indicating the cluster to which each observation
 #'  is allocated. 0 indicates outlying observations.}
 #'  
@@ -48,15 +53,16 @@
 #' 
 #' @export
 #' 
-#' @seealso [ICS::ICS()], [med_crit()], [normal_crit()], [var_crit()], 
+#' @author Andreas Alfons and Aurore Archimbaud
+#' 
+#' @seealso [med_crit()], [normal_crit()], 
+#' [var_crit()], \link[=ICS-S3]{ICS}, 
 #' [discriminatory_crit()], [kmeans_clust()], [tkmeans_clust()] and 
 #' [pam_clust()]
 #'
 #' @examples
 #' \dontrun{
-#' library(ICSClust)
 #' X <- iris[,1:4]
-#' ICSClust(X)
 #' 
 #' # indicating the number of components to retain for the dimension reduction
 #' step as well as the number of clusters searched for.
@@ -74,12 +80,10 @@
 #' out <- ICSClust(X, nb_clusters = 3, method  = "tkmeans_clust",
 #'  clustering_args = list(alpha = 0.1))
 #'  }
-ICSClust <- function(X, ICS_args = list(),
+ICSClust <- function(X, nb_select = NULL, nb_clusters = NULL, ICS_args = list(),
                      criterion = c("med_crit", "normal_crit", "var_crit",
                                    "discriminatory_crit"), 
-                     nb_select = NULL, 
                      ICS_crit_args = list(),
-                     nb_clusters = NULL, 
                      method = c("kmeans_clust", "tkmeans_clust", "pam_clust"),
                      clustering_args = list(),
                      clusters = NULL
@@ -115,5 +119,32 @@ ICSClust <- function(X, ICS_args = list(),
                                   clusters_only = TRUE),
                              clustering_args))
   
-  return(list(ICS_out = ICS_out, select = select, clusters = clusters))
+  out <- list(ICS_out = ICS_out, select = select, clusters = clusters)
+  class(out) <- "ICSClust"
+  out
+}
+
+
+#' @method summary ICSClust
+#' @export
+summary.ICSClust <- function(object, info = FALSE, digits = 4L, ...) {
+  # print information on ICS
+  print(object$ICS_out, info = info, digits = digits)
+  
+  # print information on selected components
+  cat("\n", length(object$select), "components are selected:", object$select)
+  
+  # print information on clusters
+  cat("\n\n", length(object$clusters), "clusters are identified:\n")
+  print(table(object$clusters))
+  
+  # return object invisibly
+  invisible(object)
+}
+
+#' @method plot ICSClust
+#' @export
+plot.ICSClust <- function(object, ...) {
+  component_plot(object$ICS_out, select = object$select, 
+                 clusters = factor(object$clusters), ...)
 }

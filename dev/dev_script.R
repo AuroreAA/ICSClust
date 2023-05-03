@@ -22,7 +22,7 @@ usethis::use_package("ggplot2")
 usethis::use_package("mvtnorm")
 usethis::use_package("rrcov")
 usethis::use_package("scales")
-
+usethis::use_package("otrimle")
 
 
 usethis::rename_files("index_crit.R", "select_crit.R")

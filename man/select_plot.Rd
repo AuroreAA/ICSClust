@@ -2,15 +2,33 @@
 % Please edit documentation in R/plots.R
 \name{select_plot}
 \alias{select_plot}
+\alias{select_plot.default}
+\alias{select_plot.data.frame}
+\alias{select_plot.ICS_crit}
 \title{Plot the Generalized Kurtosis Values of the ICS Transformation}
 \usage{
 select_plot(object, ...)
+
+\method{select_plot}{default}(
+  object,
+  type = c("dots", "lines"),
+  select = NULL,
+  scale = FALSE,
+  screeplot = TRUE,
+  ...
+)
+
+\method{select_plot}{data.frame}(out, type = c("dots", "lines"), ...)
+
+\method{select_plot}{ICS_crit}(out, ...)
 }
 \arguments{
 \item{object}{an object inheriting from class \code{"ICS"} containing
 results from an ICS transformation or from class \code{ICS_crit}.}
 
 \item{...}{not used}
+
+\item{type}{either "dots" or "lines" for the type of plot}
 
 \item{select}{an integer, character, or logical vector specifying for
 which components to extract the generalized kurtosis values, or
@@ -19,8 +37,6 @@ components.}
 
 \item{scale}{a logical indicating whether to scale the generalized
 kurtosis values to have product 1 (defaults to \code{FALSE}).}
-
-\item{type}{either "dots" or "lines" for the type of plot}
 
 \item{screeplot}{boolean. If \code{TRUE} a plot of the generalized kurtosis
 values is drawn. Otherwise it is context specific to the \code{ICS_crit} object.
@@ -42,4 +58,23 @@ Extract the generalized kurtosis values of the components obtained via an
 ICS transformation and draw either a screeplot or a specific plot for a
 given criterion. If an object of class \code{ICS_crit}  is given, then the
 selected components are shaded on the plot.
+}
+\examples{
+\dontrun{
+X <- iris[,-5]
+out <- ICS(X)
+
+# on an ICS object
+select_plot(out)
+select_plot(out, type = "lines")
+
+# on an ICS_crit object
+select <- med_crit(res, nb_select = 1, select_only = FALSE)
+select_plot(out, type = "lines")
+select_plot(out, screeplot = FALSE, type = "lines", color = "lightblue")
+}
+
+}
+\author{
+Andreas Alfons and Aurore Archimbaud
 }

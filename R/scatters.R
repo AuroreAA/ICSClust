@@ -163,7 +163,7 @@ ucov <- function(x, beta = 0.2) {
 #' estimate.}
 #' \item{scatter}{a numeric matrix giving the estimate of the scatter matrix.}
 #' \item{label}{a character string providing a label for the scatter matrix.}
-#' 
+#' @author Andreas Alfons and Aurore Archimbaud
 #' @seealso [ICS::tM()], [ICS::ICS_tM()]
 #' @export
 #' @importFrom ICS tM
@@ -187,8 +187,9 @@ ICS_mlc <- function(x, location = FALSE, ...) {
 #'  as computed by [fpc::localshape()].
 #' 
 #' @param x a numeric matrix or data frame.
-#' @param mscatter "mcd" or "cov" (default); specified minimum covariance determinant or
-#'  classical covariance matrix to be used for Mahalanobis distance computation.
+#' @param mscatter "mcd" or "cov" (default); specified minimum covariance 
+#' determinant or classical covariance matrix to be used for Mahalanobis
+#'  distance computation.
 #' @param proportion proportion of points to be considered as neighbourhood.
 #' @param ... potential further arguments passed to [fpc::localshape()].
 #'
@@ -198,7 +199,7 @@ ICS_mlc <- function(x, location = FALSE, ...) {
 #' estimate.}
 #' \item{scatter}{a numeric matrix giving the estimate of the scatter matrix.}
 #' \item{label}{a character string providing a label for the scatter matrix.}
-#' 
+#' @author Andreas Alfons and Aurore Archimbaud
 #' @seealso [fpc::localshape()]
 #' 
 #' @export
@@ -220,7 +221,7 @@ ICS_lcov <- function(x, mscatter = "cov", proportion = 0.1, ...) {
 
 #' MCD location and Scatter Estimates for ICS
 #' 
-#' It is a wrapper for the raw MCD estimator of location and scatter
+#' It is a wrapper for the (reweighted) MCD estimators of location and scatter
 #' as computed by [rrcov::CovMcd()].
 #' 
 #' @param x a numeric matrix or data frame.
@@ -233,6 +234,9 @@ ICS_lcov <- function(x, mscatter = "cov", proportion = 0.1, ...) {
 #' @param ... potential further arguments passed to [rrcov::CovMcd()].
 #' 
 #' @details
+#' - [ICS_mcd()]: computes the raw MCD estimates
+#' - [ICS_rmcd()]: computes the reweighted MCD estimates
+#' 
 #' The raw estimates in combination of `nsamp`="deterministic" are available 
 #' in RForge `install.packages("robustbase", 
 #' repos = c("http://R-Forge.R-project.org",
@@ -246,15 +250,16 @@ ICS_lcov <- function(x, mscatter = "cov", proportion = 0.1, ...) {
 #' \item{scatter}{a numeric matrix giving the estimate of the scatter matrix.}
 #' \item{label}{a character string providing a label for the scatter matrix.}
 #' 
-#' @seealso [rrcov::CovMcd()], [ICS_rmcd()]
-#' 
-#' 
+#' @seealso [rrcov::CovMcd()]
+#' @author Andreas Alfons and Aurore Archimbaud
+#' @rdname ICS_mcd
 #' @export
 #' @importFrom rrcov CovMcd
 ICS_mcd <- function(x, location = FALSE,
                     nsamp = "deterministic",  alpha = 0.5, ...) {
   # compute scatter estimates
-  mcd_out <- rrcov::CovMcd(x, raw.only = TRUE, alpha = alpha, nsamp = nsamp, ...)
+  mcd_out <- rrcov::CovMcd(x, raw.only = TRUE, alpha = alpha, nsamp = nsamp, 
+                           ...)
   location <- isTRUE(location)
   location <- if (location) mcd_out@center
   # compute scatter estimate
@@ -264,43 +269,15 @@ ICS_mcd <- function(x, location = FALSE,
   out
 }
 
-#' RMCD location and Scatter Estimates for ICS
-#' 
-#' It is a wrapper for the reweighted MCD estimator of location and scatter
-#' as computed by [rrcov::CovMcd()].
-#' 
-#' @param x a numeric matrix or data frame.
-#' @param location  a logical indicating whether to include the MCD-estimate of
-#' location (defaults to `FALSE`). 
-#' @param nsamp number of subsets used for initial estimates or "best", 
-#' "exact" or "deterministic" (default).
-#' @param alpha numeric parameter controlling the size of the subsets over 
-#' which the determinant is minimized as in [rrcov::CovMcd()].
-#' @param ... potential further arguments passed to [rrcov::CovMcd()].
-#' 
-#' @details
-#' The raw estimates in combination of `nsamp`="deterministic" are available 
-#' in RForge `install.packages("robustbase", 
-#' repos = c("http://R-Forge.R-project.org",
-#' "http://cran.at.r-project.org"), dep = TRUE)`
-#' 
-#' 
-#' 
-#' @return An object of class \code{"ICS_scatter"} with the following
-#' components:
-#' \item{location}{if requested, a numeric vector giving the location
-#' estimate.}
-#' \item{scatter}{a numeric matrix giving the estimate of the scatter matrix.}
-#' \item{label}{a character string providing a label for the scatter matrix.}
-#' 
-#' @seealso [rrcov::CovMcd()], [ICS_mcd()].
-#' 
+
+#' @rdname ICS_mcd
 #' @export
 #' @importFrom rrcov CovMcd
 ICS_rmcd <- function(x, location = FALSE, nsamp = "deterministic",
                      alpha = 0.5, ...) {
   # compute scatter estimates
-  rmcd_out <- rrcov::CovMcd(x, raw.only = FALSE, alpha = alpha, nsamp = nsamp,  ...)
+  rmcd_out <- rrcov::CovMcd(x, raw.only = FALSE, alpha = alpha, nsamp = nsamp,  
+                            ...)
   location <- isTRUE(location)
   location <- if (location) rmcd_out@center
   # compute scatter estimate

@@ -48,3 +48,6 @@ for a multivariate t-distribution, as computed by \code{\link[ICS:tM]{ICS::tM()}
 \seealso{
 \code{\link[ICS:tM]{ICS::tM()}}, \code{\link[ICS:ICS_tM]{ICS::ICS_tM()}}
 }
+\author{
+Andreas Alfons and Aurore Archimbaud
+}

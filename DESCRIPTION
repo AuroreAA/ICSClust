@@ -15,6 +15,7 @@ Imports:
     heplots,
     moments,
     mvtnorm,
+    otrimle,
     RcppRoll,
     rrcov,
     scales,
@@ -28,7 +29,7 @@ URL: https://github.com/AuroreAA/ICSClust
 BugReports: https://github.com/AuroreAA/ICSClust/issues
 Authors@R: 
     c(person("Aurore", "Archimbaud", 
-             email = "archimbaud@ese.eur.nl", 
+             email = "aurore.archimbaud@live.fr", 
              role = c("aut", "cre"),
              comment = c(ORCID = "0000-0002-6511-9091")),
       person("Andreas", "Alfons", 
@@ -38,7 +39,11 @@ Authors@R:
       person("Klaus", "Nordhausen", 
              email = "klaus.k.nordhausen@jyu.fi",
              role = "aut", 
-             comment = c(ORCID = "0000-0002-3758-8501")))
+             comment = c(ORCID = "0000-0002-3758-8501")),
+      person("Anne", "Ruiz-Gazen", 
+             email = "anne.ruiz-gazen@tse-fr.eu",
+             role = "aut", 
+             comment = c(ORCID = "0000-0001-8970-8061")))
 Author: 
     Aurore Archimbaud [aut, cre] (<https://orcid.org/0000-0002-6511-9091>),
     Andreas Alfons [aut] (<https://orcid.org/0000-0002-2513-3788>), 

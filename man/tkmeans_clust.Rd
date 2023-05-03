@@ -7,32 +7,44 @@
 tkmeans_clust(df, k, clusters_only = FALSE, alpha = 0.05, ...)
 }
 \arguments{
-\item{df}{a numeric matrix or data frame of the data. It corresponds to the argument \code{x}.}
+\item{df}{a numeric matrix or data frame of the data. It corresponds to the
+argument \code{x}.}
 
-\item{k}{the number of clusters searched for. It corresponds to the argument \code{k}.}
+\item{k}{the number of clusters searched for. It corresponds to the argument
+\code{k}.}
 
-\item{clusters_only}{boolean. If \code{TRUE} only the partition of the data is returned as a vector. If \code{FALSE} the usual output of the \link[tclust]{tkmeans} function is returned.}
+\item{clusters_only}{boolean. If \code{TRUE} only the partition of the data
+is returned as a vector. If \code{FALSE} the usual output of the
+\link[tclust]{tkmeans} function is returned.}
 
 \item{alpha}{the proportion of observations to be trimmed.}
 
 \item{...}{other arguments to pass to the \code{\link[tclust]{tkmeans}}}
 }
 \value{
-If \code{clusters_only} is \code{TRUE} a vector of the new partition of the data is returned, i.e a vector of integers (from \code{1:k}) indicating the cluster to which each observation is allocated. 0 indicates trimmed observations.
+If \code{clusters_only} is \code{TRUE} a vector of the new partition
+of the data is returned, i.e a vector of integers (from \code{1:k})
+indicating the cluster to which each observation is allocated.
+0 indicates trimmed observations.
 
 Otherwise a list is returned with the following components:
 \item{clust_method}{the name of the clustering method, i.e "tkmeans".}
-\item{clusters}{the vector of the new partition of the data, i.e a vector of integers (from \code{1:k}) indicating the cluster to which each observation is allocated. 0 indicates trimmed observations.}
+\item{clusters}{the vector of the new partition of the data, i.e a vector of
+integers (from \code{1:k}) indicating the cluster to which each observation
+is allocated. 0 indicates trimmed observations.}
 \item{...}{an object of class \code{"tkmeans"}}
 }
 \description{
-Wrapper for performing trimmed k-kmeans clustering from \code{\link[tclust]{tkmeans}}.
+Wrapper for performing trimmed k-kmeans clustering from
+\code{\link[tclust]{tkmeans}}.
 }
 \examples{
 \dontrun{
-library(ICSClust)
 tkmeans_clust(iris[,1:4], k = 3, alpha = 0.1, clusters_only = TRUE)}
 }
 \seealso{
 \code{\link[tclust]{tkmeans}()}
+}
+\author{
+Andreas Alfons and Aurore Archimbaud
 }

@@ -2,9 +2,15 @@
 % Please edit documentation in R/select_crit.R
 \name{var_crit}
 \alias{var_crit}
+\alias{var_crit.ICS}
+\alias{var_crit.default}
 \title{Selection of Invariant components using the var criterion}
 \usage{
 var_crit(object, ...)
+
+\method{var_crit}{ICS}(object, ...)
+
+\method{var_crit}{default}(object, nb_select = NULL, select_only = FALSE)
 }
 \arguments{
 \item{object}{object of class \code{ICS}.}
@@ -35,7 +41,6 @@ criterion used in \code{\link[ICtest:ICSboot]{ICtest::ICSboot()}}.
 }
 \examples{
 \dontrun{
-library(ICSClust)
 X <- iris[,-5]
 out <- ICS(X)
 var_crit(out, nb_select = 2, select_only = FALSE)
@@ -49,4 +54,7 @@ Tandem clustering with invariant coordinate selection.
 \seealso{
 \code{\link[=normal_crit]{normal_crit()}}, \code{\link[=med_crit]{med_crit()}}, \code{\link[=discriminatory_crit]{discriminatory_crit()}},
 \code{\link[ICtest:ICSboot]{ICtest::ICSboot()}}.
+}
+\author{
+Andreas Alfons, Aurore Archimbaud and Klaus Nordhausen
 }

@@ -7,7 +7,8 @@
 mixture_sim(pct_clusters = c(0.5, 0.5), n = 500, p = 10, delta = 10)
 }
 \arguments{
-\item{pct_clusters}{a vector of marginal probabilities for each group. Default is two
+\item{pct_clusters}{a vector of marginal probabilities for each group.
+Default is two
 balanced clusters.}
 
 \item{n}{integer. The number of observations.}
@@ -17,21 +18,25 @@ balanced clusters.}
 \item{delta}{integer. The location shift.}
 }
 \value{
-A dataframe of \emph{n} observations and \emph{p} variables with the first variable
+A dataframe of \emph{n} observations and \emph{p} variables with the first
+variable
 indicating the cluster assignment.
 }
 \description{
 Simulation of mixture of gaussian distributions
 }
 \details{
-A mixture of \emph{k} normal gaussian distributions with the same parameters is generated.
+A mixture of \emph{k} normal gaussian distributions with the same parameters is
+generated.
 A location shift is added for each group \emph{j} in only one dimension
 (the variable \emph{j-1}).
 }
 \examples{
 \dontrun{
-library(ICSClust)
 X <- mixture_sim()
 summary(X)
 }
+}
+\author{
+Aurore Archimbaud
 }

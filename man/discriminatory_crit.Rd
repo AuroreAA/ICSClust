@@ -2,9 +2,22 @@
 % Please edit documentation in R/select_crit.R
 \name{discriminatory_crit}
 \alias{discriminatory_crit}
+\alias{discriminatory_crit.ICS}
+\alias{discriminatory_crit.default}
 \title{Selection of ICS components based on discriminatory power}
 \usage{
 discriminatory_crit(object, ...)
+
+\method{discriminatory_crit}{ICS}(object, ...)
+
+\method{discriminatory_crit}{default}(
+  object,
+  clusters,
+  method = "eta2",
+  nb_select = NULL,
+  select_only = FALSE,
+  gen_kurtosis = NULL
+)
 }
 \arguments{
 \item{object}{object of class \code{ICS}.}
@@ -59,7 +72,6 @@ and \eqn{T} is the total sum of squares and cross-products matrix.
 }
 \examples{
 \dontrun{
-library(ICSClust)
 X <- iris[,-5]
 out <- ICS(X)
 discriminatory_crit(out, clusters = iris[,5], select_only = FALSE)
@@ -72,4 +84,7 @@ Tandem clustering with invariant coordinate selection.
 }
 \seealso{
 \code{\link[=normal_crit]{normal_crit()}}, \code{\link[=med_crit]{med_crit()}} \code{\link[=var_crit]{var_crit()}}.
+}
+\author{
+Andreas Alfons, Aurore Archimbaud and Klaus Nordhausen
 }

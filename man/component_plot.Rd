@@ -17,12 +17,13 @@ component_plot(object, ...)
 )
 }
 \arguments{
-\item{object}{a dataframe or \link[ICS:ICS-S3]{ICS::ICS-S3} class object}
+\item{object}{a dataframe or \code{\link[=ICS-S3]{ICS}} class object}
 
 \item{...}{not used}
 
 \item{select}{a vector of indexes of variables to plot. If \code{NULL} or
-\code{FALSE}, all variables are selected. If \code{TRUE} only the first and last three are considered.}
+\code{FALSE}, all variables are selected. If \code{TRUE} only the first and
+last three are considered.}
 
 \item{clusters}{avector indicating the clusters of the data to color the
 plot. By default \code{NULL}.}
@@ -39,11 +40,13 @@ densities on the diagonal for each cluster.
 }
 \examples{
 \dontrun{
-library(ICSClust)
 X <- iris[,1:4]
 component_plot(X)
 out <- ICS(X)
-component_plot(res, select = c(1,4))
+component_plot(out, select = c(1,4))
 }
 
+}
+\author{
+Andreas Alfons and Aurore Archimbaud
 }
