@@ -39,73 +39,73 @@
 #
 # 
 # 
-pct_clusters = c(0.5,0.5)
-n = 1000
-p = 100
-delta = 10
-epsilons <- c(0, 0.02, 0.05)
-epsilon_max <- max(epsilons)
-epsilon <- 0.05
-mult <- 2
-
-data <- mixture_sim(pct_clusters = pct_clusters, n = n, p = p,
-                    delta = delta)
-nb_clusters <- length(unique(data$cluster))
-# define nb_select by default equals to the number of clusters -1
-nb_select <- length(pct_clusters)-1
-
-
-component_plot(data[,-1], clusters = as.factor(data$cluster))
-
-
-# outliers
-# generate probabilities of being an outlier
-outlier_probabilities <- runif(n)
-order <- order(outlier_probabilities)
-data <- data[order, ]
-outlier_probabilities <- outlier_probabilities[order]
-
-# generate outlying values to be used
-n_outliers_max <- sum(outlier_probabilities < epsilon_max)
-min_all <- apply(data[,-1], 2, min)
-max_all <- apply(data[,-1], 2, max)
-data_outliers <- runif_outside_range(n = n_outliers_max, min = min_all,
-                                     max = max_all, mult = mult)
-data_outliers <- data.frame(clusters = "outliers", data_outliers)
-
-outliers <- which(outlier_probabilities < epsilon)
-data[outliers, ] <- data_outliers[outliers, ]
-
-component_plot(data[,-1], clusters = as.factor(data$cluster))
-
-# clustering
-library(mclust)
-mod1 <- Mclust(data[,-1])
-summary(mod1)
-table(data$cluster, mod1$classification)
-
-
-system.time(fmod1 <- Mclust(data[,-1], initialization = list(noise = TRUE)))
-summary(mod1)
-table(data$cluster, mod1$classification)
-
-system.time(mod2 <- Mclust(data[,-1], modelNames = "EII", G = 2,
-               initialization = list(noise = TRUE)))
-summary(mod2)
-table(data$cluster, mod2$classification)
-component_plot(data[,-1], clusters = as.factor(data$cluster))
-
-
-# rimle
-system.time(clust <- otrimle::rimle(data = data, G = 2, npr.max = 0.05))
-#summary(clust)
-table(data$cluster, clust$cluster)
-
-# otrimle
-system.time(clust <- otrimle::otrimle(data = data, G = 2, npr.max = 0.05))
-#summary(clust)
-table(data$cluster, clust$cluster)
-
+# pct_clusters = c(0.5,0.5)
+# n = 1000
+# p = 100
+# delta = 10
+# epsilons <- c(0, 0.02, 0.05)
+# epsilon_max <- max(epsilons)
+# epsilon <- 0.05
+# mult <- 2
+# 
+# data <- mixture_sim(pct_clusters = pct_clusters, n = n, p = p,
+#                     delta = delta)
+# nb_clusters <- length(unique(data$cluster))
+# # define nb_select by default equals to the number of clusters -1
+# nb_select <- length(pct_clusters)-1
+# 
+# 
+# component_plot(data[,-1], clusters = as.factor(data$cluster))
+# 
+# 
+# # outliers
+# # generate probabilities of being an outlier
+# outlier_probabilities <- runif(n)
+# order <- order(outlier_probabilities)
+# data <- data[order, ]
+# outlier_probabilities <- outlier_probabilities[order]
+# 
+# # generate outlying values to be used
+# n_outliers_max <- sum(outlier_probabilities < epsilon_max)
+# min_all <- apply(data[,-1], 2, min)
+# max_all <- apply(data[,-1], 2, max)
+# data_outliers <- runif_outside_range(n = n_outliers_max, min = min_all,
+#                                      max = max_all, mult = mult)
+# data_outliers <- data.frame(clusters = "outliers", data_outliers)
+# 
+# outliers <- which(outlier_probabilities < epsilon)
+# data[outliers, ] <- data_outliers[outliers, ]
+# 
+# component_plot(data[,-1], clusters = as.factor(data$cluster))
+# 
+# # clustering
+# library(mclust)
+# mod1 <- Mclust(data[,-1])
+# summary(mod1)
+# table(data$cluster, mod1$classification)
+# 
+# 
+# system.time(fmod1 <- Mclust(data[,-1], initialization = list(noise = TRUE)))
+# summary(mod1)
+# table(data$cluster, mod1$classification)
+# 
+# system.time(mod2 <- Mclust(data[,-1], modelNames = "EII", G = 2,
+#                initialization = list(noise = TRUE)))
+# summary(mod2)
+# table(data$cluster, mod2$classification)
+# component_plot(data[,-1], clusters = as.factor(data$cluster))
+# 
+# 
+# # rimle
+# system.time(clust <- otrimle::rimle(data = data, G = 2, npr.max = 0.05))
+# #summary(clust)
+# table(data$cluster, clust$cluster)
+# 
+# # otrimle
+# system.time(clust <- otrimle::otrimle(data = data, G = 2, npr.max = 0.05))
+# #summary(clust)
+# table(data$cluster, clust$cluster)
+# 
 
 
 

@@ -31,7 +31,7 @@ Otherwise a list is returned with the following components:
 integers (from \code{1:k}) indicating the cluster to which each observation
 is allocated.
 0 indicates outlying observations.}
-\item{...}{an object of class \code{"pam"}}
+\item{...}{an object of class \code{"rimle"}}
 }
 \description{
 Wrapper for performing Robust Improper Maximum Likelihood Clustering
