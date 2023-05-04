@@ -27,7 +27,7 @@
 #' discriminatory criterion \code{\link{discriminatory_crit}}.
 #'
 #' @details
-#' Tandem clusterinf with ICS is a sequential method:
+#' Tandem clustering with ICS is a sequential method:
 #' 
 #' - \code{\link[=ICS-S3]{ICS}} is performed
 #' 
@@ -40,11 +40,13 @@
 #'
 #' @return  
 #' An object with the following components:
-#' - ICS_out: An object of class \code{"ICS"}. See \code{\link[=ICS-S3]{ICS}}
-#' - select: a vector of the names of the selected invariant coordinates.
-#' - clusters: a vector of the new partition of the data, i.e a vector of
-#'  integers (from \code{1:k}) indicating the cluster to which each observation
-#'  is allocated. 0 indicates outlying observations.}
+#' - ICS_out: An object of class \code{"ICS"}. 
+#' See \code{\link[=ICS-S3]{ICS}}
+#' - select: a vector of the names of the selected invariant
+#'  coordinates.
+#' - clusters: a vector of the new partition of the data, i.e a vector
+#'  of integers (from \code{1:k}) indicating the cluster to which each
+#'   observation is allocated. 0 indicates outlying observations.
 #'  
 #' @references
 #' Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022). 

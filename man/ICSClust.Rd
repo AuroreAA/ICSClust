@@ -50,11 +50,13 @@ discriminatory criterion \code{\link{discriminatory_crit}}.}
 \value{
 An object with the following components:
 \itemize{
-\item ICS_out: An object of class \code{"ICS"}. See \code{\link[=ICS-S3]{ICS}}
-\item select: a vector of the names of the selected invariant coordinates.
-\item clusters: a vector of the new partition of the data, i.e a vector of
-integers (from \code{1:k}) indicating the cluster to which each observation
-is allocated. 0 indicates outlying observations.}
+\item ICS_out: An object of class \code{"ICS"}.
+See \code{\link[=ICS-S3]{ICS}}
+\item select: a vector of the names of the selected invariant
+coordinates.
+\item clusters: a vector of the new partition of the data, i.e a vector
+of integers (from \code{1:k}) indicating the cluster to which each
+observation is allocated. 0 indicates outlying observations.
 }
 }
 \description{
@@ -63,7 +65,7 @@ Coordinate Selection method using the \code{\link[=ICS-S3]{ICS}} function and (i
 clustering of the transformed data.
 }
 \details{
-Tandem clusterinf with ICS is a sequential method:
+Tandem clustering with ICS is a sequential method:
 \itemize{
 \item \code{\link[=ICS-S3]{ICS}} is performed
 \item only a subset of the first and/or the last components are
