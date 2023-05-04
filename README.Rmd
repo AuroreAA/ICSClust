@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/AuroreAA/ICSClust/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/AuroreAA/ICSClust/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The goal of ICSClust is to ...
+The goal of `ICSClust` is to perform tandem clustering with invariant coordinate selection.
 
 ## Installation
 
@@ -44,9 +44,9 @@ X <- iris[,-5]
 ICS_out <- ICS(X)
 ICS_out
 
-# screeplot
-scree_plot(ICS_out)
-scree_plot(ICS_out, type = "lines")
+# Pot of generalized eigenvalues
+select_plot(ICS_out)
+select_plot(ICS_out, type = "lines")
 
 # pairs of all components
 component_plot(ICS_out)

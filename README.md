@@ -8,7 +8,8 @@
 [![R-CMD-check](https://github.com/AuroreAA/ICSClust/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/AuroreAA/ICSClust/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The goal of ICSClust is to …
+The goal of `ICSClust` is to perform tandem clustering with invariant
+coordinate selection.
 
 ## Installation
 
@@ -52,14 +53,14 @@ ICS_out
 #> IC.3      3.05683     -2.2269      -1.6354      0.3654
 #> IC.4      0.05244      0.6032      -0.3483     -0.3798
 
-# screeplot
-scree_plot(ICS_out)
+# Pot of generalized eigenvalues
+select_plot(ICS_out)
 ```
 
 <img src="man/figuICS_out/README-example-1.png" width="100%" />
 
 ``` r
-scree_plot(ICS_out, type = "lines")
+select_plot(ICS_out, type = "lines")
 ```
 
 <img src="man/figuICS_out/README-example-2.png" width="100%" />
@@ -116,9 +117,9 @@ ICS_out <- ICSClust(X, nb_select = 2, nb_clusters = 3)
 table(ICS_out$clusters, iris[,5])
 #>    
 #>     setosa versicolor virginica
-#>   1     49          0         0
-#>   2      0         25        19
-#>   3      1         25        31
+#>   1      1         25        31
+#>   2     49          0         0
+#>   3      0         25        19
 component_plot(ICS_out$ICS_out, select = ICS_out$select, clusters = as.factor(ICS_out$clusters))
 ```
 
@@ -133,9 +134,9 @@ ICS_out <- ICSClust(X, nb_select = 1, nb_clusters = 3,
 table(ICS_out$clusters, iris[,5])
 #>    
 #>     setosa versicolor virginica
-#>   1     50          0         0
-#>   2      0         45        27
-#>   3      0          5        23
+#>   1      0          5        26
+#>   2      0         45        24
+#>   3     50          0         0
 component_plot(ICS_out$ICS_out, clusters = as.factor(ICS_out$clusters))
 ```
 
