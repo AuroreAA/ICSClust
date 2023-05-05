@@ -245,7 +245,7 @@ rimle_clust <- function(df, k, clusters_only = FALSE, ...){
 #'
 #' @export
 #' @author Andreas Alfons and Aurore Archimbaud
-#' @importFrom mclust Mclust
+#' @importFrom mclust Mclust mclustBIC
 #'
 #' @examples
 #' \dontrun{
