@@ -34,7 +34,7 @@
 #' - only a subset of the first and/or the last components are
 #'  selected based on a criterion.
 #'  
-#' - the clustering method is performed only onto the subspace
+#' - the clustering method is performed only on the subspace
 #'  of the selected components.
 #'  
 #'
