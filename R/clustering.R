@@ -216,7 +216,8 @@ rimle_clust <- function(df, k, clusters_only = FALSE, ...){
 
 #' Model-Based Clustering
 #' 
-#' Wrapper for performing Model-Based Clustering from [mclust::Mclust()].
+#' Wrapper for performing Model-Based Clustering from [mclust::Mclust()]
+#' allowing noise or not.
 #'
 #' @param df a numeric matrix or data frame of the data. It corresponds to the 
 #' argument \code{data}.
@@ -226,6 +227,11 @@ rimle_clust <- function(df, k, clusters_only = FALSE, ...){
 #' is returned as a vector. If \code{FALSE} the usual output of the 
 #' \link[cluster]{pam} function is returned.
 #' @param ... other arguments to pass to [otrimle::rimle()].
+#' 
+#' @details
+#' - [mclust_clust()]: does not allow noise
+#' - [rmclust_clust()]: allow noise
+#' 
 #'
 #' @return If \code{clusters_only} is \code{TRUE} a vector of the new partition
 #'  of the data is returned, i.e a vector of integers (from \code{1:k}) 
@@ -246,13 +252,13 @@ rimle_clust <- function(df, k, clusters_only = FALSE, ...){
 #' @export
 #' @author Andreas Alfons and Aurore Archimbaud
 #' @importFrom mclust Mclust mclustBIC
-#'
+#' @rdname mclust_clust
 #' @examples
 #' \dontrun{
 #' mclust_clust(iris[,1:4], k = 3, clusters_only = TRUE)}
 mclust_clust <- function(df, k, clusters_only = FALSE, ...){
   # Perform rimle
-  clust <- mclust::Mclust(df, G = k, initialization = list(noise = TRUE), ...)
+  clust <- mclust::Mclust(df, G = k, ...)
   # Get the new partition: the additional cluster of outliers are coded by 0
   out <- clust$classification
   
@@ -262,3 +268,18 @@ mclust_clust <- function(df, k, clusters_only = FALSE, ...){
                                     clust)
   out
 }
+#' @rdname mclust_clust
+#' @export
+rmclust_clust <- function(df, k, clusters_only = FALSE, ...){
+  # Perform rimle
+  clust <- mclust::Mclust(df, G = k, initialization = list(noise = TRUE), ...)
+  # Get the new partition: the additional cluster of outliers are coded by 0
+  out <- clust$classification
+  
+  # Return the results
+  if (!clusters_only) out <- append(list(clust_method = "rmclust", 
+                                         clusters = out), 
+                                    clust)
+  out
+}
+

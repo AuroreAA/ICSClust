@@ -2,9 +2,12 @@
 % Please edit documentation in R/clustering.R
 \name{mclust_clust}
 \alias{mclust_clust}
+\alias{rmclust_clust}
 \title{Model-Based Clustering}
 \usage{
 mclust_clust(df, k, clusters_only = FALSE, ...)
+
+rmclust_clust(df, k, clusters_only = FALSE, ...)
 }
 \arguments{
 \item{df}{a numeric matrix or data frame of the data. It corresponds to the
@@ -34,7 +37,14 @@ is allocated.
 \item{...}{an object of class \code{"mclust"}}
 }
 \description{
-Wrapper for performing Model-Based Clustering from \code{\link[mclust:Mclust]{mclust::Mclust()}}.
+Wrapper for performing Model-Based Clustering from \code{\link[mclust:Mclust]{mclust::Mclust()}}
+allowing noise or not.
+}
+\details{
+\itemize{
+\item \code{\link[=mclust_clust]{mclust_clust()}}: does not allow noise
+\item \code{\link[=rmclust_clust]{rmclust_clust()}}: allow noise
+}
 }
 \examples{
 \dontrun{
