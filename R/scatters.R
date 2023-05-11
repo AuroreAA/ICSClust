@@ -15,8 +15,57 @@ ICS_tcov <- function(x, beta = 2) {
   out
 }
 
+
+#' Pairwise one-step M-estimator of scatter
+#' 
+#' Compute a pairwise one-step M-estimator of scatter with weights based on 
+#' pairwise Mahalanobis distances. Note that it is based on pairwise 
+#' differences and therefore does not require a location estimate.
+#' 
+#' For a sample \eqn{\boldsymbol{X}_{n} = (\mathbf{x}_{1}, \dots, 
+#' \mathbf{x}_n)^{\top}}, a positive and decreasing weight function \eqn{w}, 
+#' and a tuning parameter \eqn{\beta > 0}, the pairwise one-step M-estimator 
+#' of scatter is defined as
+#' \deqn{\mathrm{TCOV}_\beta(\boldsymbol{X}_{n}) =
+#' \frac{\sum_{i=1}^{n-1} \sum_{j=i+1}^{n} 
+#' w(\beta \, r^{2}(\mathbf{x}_{i}, \mathbf{x}_{j})) 
+#' (\mathbf{x}_{i} - \mathbf{x}_{j}) 
+#' (\mathbf{x}_{i} - \mathbf{x}_{j})^{\top}}{\sum_{i=1}^{n-1} \sum_{j=i+1}^{n} 
+#' w(\beta \, r^{2}(\mathbf{x}_{i}, \mathbf{x}_{j}))},}
+#' where 
+#' \deqn{r^{2}(\mathbf{x}_{i}, \mathbf{x}_{j}) = 
+#' (\mathbf{x}_{i} - \mathbf{x}_{j})^{\top}
+#' \mathrm{COV}(\boldsymbol{X}_n)^{-1} 
+#' (\mathbf{x}_{i} - \mathbf{x}_{j})}
+#' denotes the squared pairwise Mahalanobis distance between observations 
+#' \eqn{\mathbf{x}_{i}} and \eqn{\mathbf{x}_{j}} based on the sample 
+#' covariance matrix \eqn{\mathrm{COV}(\boldsymbol{X}_n)}. Here, the weight 
+#' function \eqn{w(x) = \exp(-x/2)} is used.
+#' 
+#' @param x  a numeric matrix or data frame.
+#' @param beta  a positive numeric value specifying the tuning parameter of the 
+#' pairwise one-step M-estimator (defaults to 2), see \sQuote{Details}.
+#' 
+#' @return A numeric matrix giving the pairwise one-step M-estimate of scatter.
+#' 
+#' @author Andreas Alfons and Aurore Archimbaud
+#' 
+#' @references 
+#' Caussinus, H. and Ruiz-Gazen, A. (1993) Projection Pursuit and Generalized 
+#' Principal Component Analysis. In Morgenthaler, S., Ronchetti, E., Stahel, 
+#' W.A. (eds.) *New Directions in Statistical Data Analysis and Robustness*, 
+#' 35-46. Monte Verita, Proceedings of the Centro Stefano Franciscini Ascona 
+#' Series. Springer-Verlag.
+#' 
+#' Caussinus, H. and Ruiz-Gazen, A. (1995) Metrics for Finding Typical 
+#' Structures by Means of Principal Component Analysis. In *Data Science and 
+#' its applications*, 177-192. Academic Press.
+#' 
+#' @examples
+#' 
 #' @useDynLib ICSClust, .registration = TRUE
 #' @export
+
 tcov <- function(x, beta = 2) {
   # initializations
   x <- as.matrix(x)
@@ -27,6 +76,7 @@ tcov <- function(x, beta = 2) {
   dimnames(V) <- list(cn, cn)
   V
 }
+
 
 # # reference implementation using package 'amap'
 # #' @importFrom amap W
@@ -63,7 +113,55 @@ ICS_scov <- function(x, beta = 0.2) {
   out
 }
 
+
+#' One-step M-estimator of scatter
+#' 
+#' Compute a one-step M-estimator of scatter with weights based on Mahalanobis 
+#' distances.
+#' 
+#' For a sample \eqn{\boldsymbol{X}_{n} = (\mathbf{x}_{1}, \dots, 
+#' \mathbf{x}_n)^{\top}}, a positive and decreasing weight function \eqn{w}, 
+#' and a tuning parameter \eqn{\beta > 0}, the one-step M-estimator 
+#' of scatter is defined as
+#' \deqn{\mathrm{SCOV}_\beta(\boldsymbol{X}_{n}) =
+#' \frac{\sum_{i=1}^{n} 
+#' w(\beta \, r^{2}(\mathbf{x}_{i})) 
+#' (\mathbf{x}_{i} - \mathbf{\bar{x}}_{n}) 
+#' (\mathbf{x}_{i} -  \mathbf{\bar{x}}_{n})^{\top}}{\sum_{i=1}^{n} 
+#' w(\beta \, r^{2}(\mathbf{x}_{i}))},}
+#' where 
+#' \deqn{r^{2}(\mathbf{x}_{i}) = 
+#' (\mathbf{x}_{i} -  \mathbf{\bar{x}}_{n})^{\top}
+#' \mathrm{COV}(\boldsymbol{X}_n)^{-1} 
+#' (\mathbf{x}_{i} -  \mathbf{\bar{x}}_{n})}
+#' denotes the squared Mahalanobis distance of observation \eqn{\mathbf{x}_{i}} 
+#' from the sample mean \eqn{\mathbf{\bar{x}}_{n}} based on the sample 
+#' covariance matrix \eqn{\mathrm{COV}(\boldsymbol{X}_n)}. Here, the weight 
+#' function \eqn{w(x) = \exp(-x/2)} is used.
+#' 
+#' @param x  a numeric matrix or data frame.
+#' @param beta  a positive numeric value specifying the tuning parameter of the 
+#' one-step M-estimator (defaults to 0.2), see \sQuote{Details}.
+#' 
+#' @return A numeric matrix giving the one-step M-estimate of scatter.
+#' 
+#' @author Andreas Alfons and Aurore Archimbaud
+#' 
+#' @references 
+#' Caussinus, H. and Ruiz-Gazen, A. (1993) Projection Pursuit and Generalized 
+#' Principal Component Analysis. In Morgenthaler, S., Ronchetti, E., Stahel, 
+#' W.A. (eds.) *New Directions in Statistical Data Analysis and Robustness*, 
+#' 35-46. Monte Verita, Proceedings of the Centro Stefano Franciscini Ascona 
+#' Series. Springer-Verlag.
+#' 
+#' Caussinus, H. and Ruiz-Gazen, A. (1995) Metrics for Finding Typical 
+#' Structures by Means of Principal Component Analysis. In *Data Science and 
+#' its applications*, 177-192. Academic Press.
+#' 
+#' @examples
+#' 
 #' @export
+
 scov <- function(x, beta = 0.2) {
   # initializations
   x <- as.matrix(x)
@@ -74,6 +172,7 @@ scov <- function(x, beta = 0.2) {
   # call internal function
   .scov(x, m = m, S_inv = S_inv, beta = beta)
 }
+
 
 ## internal function to avoid recomputation of sample mean
 #' @useDynLib ICSClust, .registration = TRUE
