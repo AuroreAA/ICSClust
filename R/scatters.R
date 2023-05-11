@@ -28,22 +28,22 @@ tcov <- function(x, beta = 2) {
   V
 }
 
-#' # reference implementation using package 'amap'
-#' #' @importFrom amap W
-#' #' @importFrom stats var
-#' tcov_amap <- function(x, beta = 2) {
-#'   # initializations
-#'   x <- as.matrix(x)
-#'   cn <- colnames(x)
-#'   # compute inverse of maximum likelihood estimate of covariance matrix
-#'   # n <- nrow(x)
-#'   # S_inv <- solve(var(x) * ((n-1)/n))
-#'   S_inv <- solve(var(x))
-#'   V <- amap::W(x, h = 1/sqrt(beta), D = S_inv, kernel = "gaussien")
-#'   # set row and column names and return scatter matrix
-#'   dimnames(V) <- list(cn, cn)
-#'   V
-#' }
+# # reference implementation using package 'amap'
+# #' @importFrom amap W
+# #' @importFrom stats var
+# tcov_amap <- function(x, beta = 2) {
+#   # initializations
+#   x <- as.matrix(x)
+#   cn <- colnames(x)
+#   # compute inverse of maximum likelihood estimate of covariance matrix
+#   # n <- nrow(x)
+#   # S_inv <- solve(var(x) * ((n-1)/n))
+#   S_inv <- solve(var(x))
+#   V <- amap::W(x, h = 1/sqrt(beta), D = S_inv, kernel = "gaussien")
+#   # set row and column names and return scatter matrix
+#   dimnames(V) <- list(cn, cn)
+#   V
+# }
 
 
 # SCOV scatter matrix -----
@@ -124,25 +124,25 @@ ucov <- function(x, beta = 0.2) {
   solve(scov_inv - beta * S_inv)
 }
 
-#' ## reference implementation using package 'amap'
-#' #' @importFrom amap W
-#' #' @importFrom stats var
-#' ucov_amap <- function(x, beta = 0.2) {
-#'   # initializations
-#'   x <- as.matrix(x)
-#'   cn <- colnames(x)
-#'   # compute inverse of maximum likelihood estimate of covariance matrix
-#'   # n <- nrow(x)
-#'   # S_inv <- solve(var(x) * ((n-1) / n))
-#'   S_inv <- solve(var(x))
-#'   # compute inverse of SCOV (error in 'amap' package: should be 1/h^2)
-#'   h <- 1/sqrt(beta)
-#'   scov_inv <- solve(amap::varrob(x, h = h, D = S_inv, kernel = "gaussien"))
-#'   V <- solve(scov_inv + (h-1)/(h^2) * S_inv)
-#'   # set row and column names and return scatter matrix
-#'   dimnames(V) <- list(cn, cn)
-#'   V
-#' }
+# ## reference implementation using package 'amap'
+# #' @importFrom amap W
+# #' @importFrom stats var
+# ucov_amap <- function(x, beta = 0.2) {
+#   # initializations
+#   x <- as.matrix(x)
+#   cn <- colnames(x)
+#   # compute inverse of maximum likelihood estimate of covariance matrix
+#   # n <- nrow(x)
+#   # S_inv <- solve(var(x) * ((n-1) / n))
+#   S_inv <- solve(var(x))
+#   # compute inverse of SCOV (error in 'amap' package: should be 1/h^2)
+#   h <- 1/sqrt(beta)
+#   scov_inv <- solve(amap::varrob(x, h = h, D = S_inv, kernel = "gaussien"))
+#   V <- solve(scov_inv + (h-1)/(h^2) * S_inv)
+#   # set row and column names and return scatter matrix
+#   dimnames(V) <- list(cn, cn)
+#   V
+# }
 
 
 # MLC scatter matrix -----
