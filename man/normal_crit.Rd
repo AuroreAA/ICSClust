@@ -48,8 +48,8 @@ is returned with the following objects:
 }
 \description{
 Identifies invariant coordinates that are non-normal using univariate
-normality tests as in \code{ICSOutlier} package function \code{comp.norm.test()}, except that both
-first and last components are investigated.
+normality tests as in \code{ICSOutlier} package function \code{comp.norm.test()},
+except that both first and last components are investigated.
 }
 \details{
 The procedure sequentially tests the first and the last components until

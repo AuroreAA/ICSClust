@@ -31,7 +31,7 @@
 #' 
 #' - \code{\link[=ICS-S3]{ICS}} is performed.
 #' 
-#' - only a subset of the first and/or the last components are
+#' - only a subset of the first and/or the last few components are
 #'  selected based on a criterion.
 #'  
 #' - the clustering method is performed only on the subspace

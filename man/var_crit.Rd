@@ -23,7 +23,7 @@ var_crit(object, ...)
 invariant components is returned. If \code{FALSE} additional details are returned.}
 }
 \value{
-If \code{select_only} is  \code{TRUE} a vector of the names of the invariant
+If \code{select_only} is \code{TRUE} a vector of the names of the invariant
 components or variables to select. If \code{FALSE} an object of class \code{ICS_crit}
 is returned with the following objects:
 \itemize{

@@ -2,7 +2,7 @@
 % Please edit documentation in R/simulations.R
 \name{mixture_sim}
 \alias{mixture_sim}
-\title{Simulation of mixture of gaussian distributions}
+\title{Simulation of mixture of Gaussian distributions}
 \usage{
 mixture_sim(pct_clusters = c(0.5, 0.5), n = 500, p = 10, delta = 10)
 }
@@ -23,10 +23,10 @@ variable
 indicating the cluster assignment.
 }
 \description{
-Simulation of mixture of gaussian distributions
+Simulation of mixture of Gaussian distributions
 }
 \details{
-A mixture of \emph{k} normal gaussian distributions with the same parameters is
+A mixture of \emph{k} normal Gaussian distributions with the same parameters is
 generated.
 A location shift is added for each group \emph{j} in only one dimension
 (the variable \emph{j-1}).

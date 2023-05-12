@@ -68,7 +68,7 @@ clustering of the transformed data.
 Tandem clustering with ICS is a sequential method:
 \itemize{
 \item \code{\link[=ICS-S3]{ICS}} is performed.
-\item only a subset of the first and/or the last components are
+\item only a subset of the first and/or the last few components are
 selected based on a criterion.
 \item the clustering method is performed only on the subspace
 of the selected components.
