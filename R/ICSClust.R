@@ -29,7 +29,7 @@
 #' @details
 #' Tandem clustering with ICS is a sequential method:
 #' 
-#' - \code{\link[=ICS-S3]{ICS}} is performed
+#' - \code{\link[=ICS-S3]{ICS}} is performed.
 #' 
 #' - only a subset of the first and/or the last components are
 #'  selected based on a criterion.

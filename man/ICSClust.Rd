@@ -67,10 +67,10 @@ clustering of the transformed data.
 \details{
 Tandem clustering with ICS is a sequential method:
 \itemize{
-\item \code{\link[=ICS-S3]{ICS}} is performed
+\item \code{\link[=ICS-S3]{ICS}} is performed.
 \item only a subset of the first and/or the last components are
 selected based on a criterion.
-\item the clustering method is performed only onto the subspace
+\item the clustering method is performed only on the subspace
 of the selected components.
 }
 }
@@ -79,7 +79,7 @@ of the selected components.
 X <- iris[,1:4]
 
 # indicating the number of components to retain for the dimension reduction
-step as well as the number of clusters searched for.
+# step as well as the number of clusters searched for.
 out <- ICSClust(X, nb_select = 2, nb_clusters = 3)
 
 # changing the scatter pair to consider in ICS

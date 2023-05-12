@@ -26,7 +26,7 @@ select_plot(object, ...)
 \item{object}{an object inheriting from class \code{"ICS"} containing
 results from an ICS transformation or from class \code{ICS_crit}.}
 
-\item{...}{not used}
+\item{...}{not used.}
 
 \item{type}{either "dots" or "lines" for the type of plot}
 
@@ -56,7 +56,7 @@ an \code{ICS_crit} object is given.}
 \description{
 Extract the generalized kurtosis values of the components obtained via an
 ICS transformation and draw either a screeplot or a specific plot for a
-given criterion. If an object of class \code{ICS_crit}  is given, then the
+given criterion. If an object of class \code{ICS_crit} is given, then the
 selected components are shaded on the plot.
 }
 \examples{

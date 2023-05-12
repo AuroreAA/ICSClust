@@ -3,7 +3,7 @@
 \name{normal_crit}
 \alias{normal_crit}
 \alias{normal_crit.ICS}
-\title{Selection of Nonnormal Invariant Components Using Marginal Normality Tests}
+\title{Selection of Non-normal Invariant Components Using Marginal Normality Tests}
 \usage{
 normal_crit(object, ...)
 
@@ -12,12 +12,12 @@ normal_crit(object, ...)
 \arguments{
 \item{object}{object of class \code{ICS} or a data frame or matrix.}
 
-\item{...}{not used}
+\item{...}{not used.}
 
 \item{level}{the initial level used to make a decision based on the test
 p-values. See details. Default is 0.05.}
 
-\item{test}{name of the normality test to be used. Possibilites are
+\item{test}{name of the normality test to be used. Possibilities are
 "jarque.test", "anscombe.test", "bonett.test", "agostino.test",
 "shapiro.test".
 Default is "agostino.test".}
@@ -35,11 +35,11 @@ If \code{select_only} is  \code{TRUE} a vector of the names of the invariant
 components or variables to select. If \code{FALSE} an object of class \code{ICS_crit}
 is returned with the following objects:
 \itemize{
-\item \code{crit}: the name of the criterion "normal"
-\item \code{level}: the level of the test
+\item \code{crit}: the name of the criterion "normal".
+\item \code{level}: the level of the test.
 \item \code{max_select}: the maximal number of components to select.
-\item \code{test}: name of the normality test to be used
-\item \code{pvalues}: the pvalues of the tests
+\item \code{test}: name of the normality test to be used.
+\item \code{pvalues}: the p-values of the tests.
 \item \code{adjusted_levels}: the adjusted levels.
 \item \code{select}: the names of the invariant components or variables to select.
 \item \code{gen_kurtosis}: the vector of generalized kurtosis values in case of
@@ -47,13 +47,13 @@ is returned with the following objects:
 }
 }
 \description{
-Identifies invariant coordinates that are non normal using univariate
-normality tests as in \code{\link[ICSOutlier:comp.norm.test]{ICSOutlier::comp.norm.test()}}, except that both
+Identifies invariant coordinates that are non-normal using univariate
+normality tests as in \code{ICSOutlier} package function \code{comp.norm.test()}, except that both
 first and last components are investigated.
 }
 \details{
-The procedure sequential tests the first and the last components until
-finding no additional components as non normal. The quantiles levels are
+The procedure sequentially tests the first and the last components until
+finding no additional components as non-normal. The quantile levels are
 adjusted for multiple testing by taking the level as \code{level}/\emph{j} for the
 \emph{j}th component.
 }
@@ -72,7 +72,7 @@ Tandem clustering with invariant coordinate selection.
 }
 \seealso{
 \code{\link[=med_crit]{med_crit()}}, \code{\link[=var_crit]{var_crit()}}, \code{\link[=discriminatory_crit]{discriminatory_crit()}},
-\code{\link[ICSOutlier:comp.norm.test]{ICSOutlier::comp.norm.test()}}, \code{\link[=jarque.test]{jarque.test()}}, \code{\link[=anscombe.test]{anscombe.test()}},
+\code{\link[=jarque.test]{jarque.test()}}, \code{\link[=anscombe.test]{anscombe.test()}},
 \code{\link[=bonett.test]{bonett.test()}}, \code{\link[=agostino.test]{agostino.test()}}, \code{\link[stats:shapiro.test]{stats::shapiro.test()}}.
 }
 \author{

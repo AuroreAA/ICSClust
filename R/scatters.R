@@ -47,7 +47,6 @@ tcov <- function(x, beta = 2) {
 
 
 # SCOV scatter matrix -----
-
 #' @export
 ICS_scov <- function(x, beta = 0.2) {
   # initializations
@@ -124,25 +123,25 @@ ucov <- function(x, beta = 0.2) {
   solve(scov_inv - beta * S_inv)
 }
 
-#' ## reference implementation using package 'amap'
-#' #' @importFrom amap W
-#' #' @importFrom stats var
-#' ucov_amap <- function(x, beta = 0.2) {
-#'   # initializations
-#'   x <- as.matrix(x)
-#'   cn <- colnames(x)
-#'   # compute inverse of maximum likelihood estimate of covariance matrix
-#'   # n <- nrow(x)
-#'   # S_inv <- solve(var(x) * ((n-1) / n))
-#'   S_inv <- solve(var(x))
-#'   # compute inverse of SCOV (error in 'amap' package: should be 1/h^2)
-#'   h <- 1/sqrt(beta)
-#'   scov_inv <- solve(amap::varrob(x, h = h, D = S_inv, kernel = "gaussien"))
-#'   V <- solve(scov_inv + (h-1)/(h^2) * S_inv)
-#'   # set row and column names and return scatter matrix
-#'   dimnames(V) <- list(cn, cn)
-#'   V
-#' }
+# ## reference implementation using package 'amap'
+# #' @importFrom amap W
+# #' @importFrom stats var
+# ucov_amap <- function(x, beta = 0.2) {
+#   # initializations
+#   x <- as.matrix(x)
+#   cn <- colnames(x)
+#   # compute inverse of maximum likelihood estimate of covariance matrix
+#   # n <- nrow(x)
+#   # S_inv <- solve(var(x) * ((n-1) / n))
+#   S_inv <- solve(var(x))
+#   # compute inverse of SCOV (error in 'amap' package: should be 1/h^2)
+#   h <- 1/sqrt(beta)
+#   scov_inv <- solve(amap::varrob(x, h = h, D = S_inv, kernel = "gaussien"))
+#   V <- solve(scov_inv + (h-1)/(h^2) * S_inv)
+#   # set row and column names and return scatter matrix
+#   dimnames(V) <- list(cn, cn)
+#   V
+# }
 
 
 # MLC scatter matrix -----
@@ -184,7 +183,7 @@ ICS_mlc <- function(x, location = FALSE, ...) {
 #' Local Shape Scatter Estimates for ICS
 #' 
 #' It is a wrapper for the local shape estimator of scatter
-#'  as computed by [fpc::localshape()].
+#' as computed by [fpc::localshape()].
 #' 
 #' @param x a numeric matrix or data frame.
 #' @param mscatter "mcd" or "cov" (default); specified minimum covariance 
@@ -234,8 +233,8 @@ ICS_lcov <- function(x, mscatter = "cov", proportion = 0.1, ...) {
 #' @param ... potential further arguments passed to [rrcov::CovMcd()].
 #' 
 #' @details
-#' - [ICS_mcd()]: computes the raw MCD estimates
-#' - [ICS_rmcd()]: computes the reweighted MCD estimates
+#' - [ICS_mcd()]: computes the raw MCD estimates.
+#' - [ICS_rmcd()]: computes the reweighted MCD estimates.
 #' 
 #' The raw estimates in combination of `nsamp`="deterministic" are available 
 #' in RForge `install.packages("robustbase", 

@@ -15,7 +15,7 @@ var_crit(object, ...)
 \arguments{
 \item{object}{object of class \code{ICS}.}
 
-\item{...}{not used}
+\item{...}{not used.}
 
 \item{nb_select}{the exact number of components to select.}
 

@@ -15,7 +15,7 @@ med_crit(object, ...)
 \arguments{
 \item{object}{object of class \code{ICS}.}
 
-\item{...}{not used}
+\item{...}{not used.}
 
 \item{nb_select}{the exact number of components to select.}
 
@@ -27,7 +27,7 @@ If \code{select_only} is  \code{TRUE} a vector of the names of the invariant
 components or variables to select. If \code{FALSE} an object of class \code{ICS_crit}
 is returned with the following objects:
 \itemize{
-\item \code{crit}: the name of the criterion "med"
+\item \code{crit}: the name of the criterion "med".
 \item \code{nb_select}: the number of components to select.
 \item \code{gen_kurtosis}: the vector of generalized kurtosis values.
 \item \code{med_gen_kurtosis}: the median of the generalized kurtosis values.

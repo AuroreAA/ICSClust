@@ -37,8 +37,8 @@ as computed by \code{\link[rrcov:CovMcd]{rrcov::CovMcd()}}.
 }
 \details{
 \itemize{
-\item \code{\link[=ICS_mcd]{ICS_mcd()}}: computes the raw MCD estimates
-\item \code{\link[=ICS_rmcd]{ICS_rmcd()}}: computes the reweighted MCD estimates
+\item \code{\link[=ICS_mcd]{ICS_mcd()}}: computes the raw MCD estimates.
+\item \code{\link[=ICS_rmcd]{ICS_rmcd()}}: computes the reweighted MCD estimates.
 }
 
 The raw estimates in combination of \code{nsamp}="deterministic" are available

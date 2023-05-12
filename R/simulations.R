@@ -1,4 +1,4 @@
-#' Simulation of mixture of gaussian distributions
+#' Simulation of mixture of Gaussian distributions
 #'
 #' @param pct_clusters a vector of marginal probabilities for each group. 
 #' Default is two 
@@ -8,14 +8,14 @@
 #' @param delta integer. The location shift.
 #' 
 #' @details
-#' A mixture of *k* normal gaussian distributions with the same parameters is 
+#' A mixture of *k* normal Gaussian distributions with the same parameters is 
 #' generated. 
 #' A location shift is added for each group *j* in only one dimension 
 #' (the variable *j-1*). 
 #' 
 #'
 #' @return A dataframe of *n* observations and *p* variables with the first
-#'  variable
+#' variable
 #' indicating the cluster assignment.
 #' @export
 #' 
@@ -65,9 +65,9 @@ mixture_sim = function(pct_clusters = c(0.5,0.5) , n = 500, p = 10, delta = 10){
 #' 
 #' Draw from a multivariate uniform distribution outside range of a data set
 #'
-#' @param n number of observations to generate
-#' @param min numeric vector giving the minimum of each variable of the data set
-#' @param max numeric vector giving the maximum of each variable of the data set
+#' @param n number of observations to generate.
+#' @param min numeric vector giving the minimum of each variable of the data set.
+#' @param max numeric vector giving the maximum of each variable of the data set.
 #' @param mult multiplication factor to expand the hyperrectangle around the data 
 #'            (which is given by 'min' and 'max'), e.g., the default value 2 gives 
 #'            a hyperrectangle for which each side is twice as long.  The data are 
