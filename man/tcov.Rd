@@ -25,7 +25,7 @@ For a sample \eqn{\boldsymbol{X}_{n} = (\mathbf{x}_{1}, \dots,
 \mathbf{x}_n)^{\top}}, a positive and decreasing weight function \eqn{w},
 and a tuning parameter \eqn{\beta > 0}, the pairwise one-step M-estimator
 of scatter is defined as
-\deqn{\mathrm{TCOV}_\beta(\boldsymbol{X}_{n}) =
+\deqn{\mathrm{TCOV}_{\beta}(\boldsymbol{X}_{n}) =
 \frac{\sum_{i=1}^{n-1} \sum_{j=i+1}^{n} 
 w(\beta \, r^{2}(\mathbf{x}_{i}, \mathbf{x}_{j})) 
 (\mathbf{x}_{i} - \mathbf{x}_{j}) 
@@ -50,7 +50,10 @@ Series. Springer-Verlag.
 
 Caussinus, H. and Ruiz-Gazen, A. (1995) Metrics for Finding Typical
 Structures by Means of Principal Component Analysis. In \emph{Data Science and
-its applications}, 177-192. Academic Press.
+its Applications}, 177-192. Academic Press.
+}
+\seealso{
+\code{\link{ICS_tcov}()}, \code{\link{ucov}()}, \code{\link{ICS_ucov}()}
 }
 \author{
 Andreas Alfons and Aurore Archimbaud

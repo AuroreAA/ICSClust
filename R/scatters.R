@@ -6,7 +6,36 @@
 
 # TCOV scatter matrix -----
 
+
+#' Pairwise one-step M-estimator of scatter for ICS
+#' 
+#' Wrapper function for the pairwise one-step M-estimator of scatter with 
+#' weights based on pairwise Mahalanobis distances, as computed by 
+#' \code{\link{tcov}()}. Note that this estimator is based on pairwise 
+#' differences and therefore no location estimate is returned.
+#' 
+#' @param x  a numeric matrix or data frame.
+#' @param beta  a positive numeric value specifying the tuning parameter of the 
+#' pairwise one-step M-estimator (defaults to 2), see \code{\link{tcov}()}.
+#'
+#' @return An object of class \code{"ICS_scatter"} with the following
+#' components:
+#' \item{location}{this is \code{NULL} as the estimator is based on pairwise 
+#' differences and does not use a location estimate.}
+#' \item{scatter}{a numeric matrix giving the estimate of the scatter matrix.}
+#' \item{label}{a character string providing a label for the scatter matrix.}
+#' 
+#' @author Andreas Alfons and Aurore Archimbaud
+#'
+#' @seealso
+#' \code{\link[ICS]{ICS}()}
+#'
+#' \code{\link{tcov}()}, \code{\link{ucov}()}, \code{\link{ICS_ucov}()}
+#' 
+#' @examples
+#' 
 #' @export
+
 ICS_tcov <- function(x, beta = 2) {
   # compute scatter estimate
   out <- list(location = NULL, scatter = tcov(x, beta = beta), label = "TCOV")
@@ -26,7 +55,7 @@ ICS_tcov <- function(x, beta = 2) {
 #' \mathbf{x}_n)^{\top}}, a positive and decreasing weight function \eqn{w}, 
 #' and a tuning parameter \eqn{\beta > 0}, the pairwise one-step M-estimator 
 #' of scatter is defined as
-#' \deqn{\mathrm{TCOV}_\beta(\boldsymbol{X}_{n}) =
+#' \deqn{\mathrm{TCOV}_{\beta}(\boldsymbol{X}_{n}) =
 #' \frac{\sum_{i=1}^{n-1} \sum_{j=i+1}^{n} 
 #' w(\beta \, r^{2}(\mathbf{x}_{i}, \mathbf{x}_{j})) 
 #' (\mathbf{x}_{i} - \mathbf{x}_{j}) 
@@ -59,7 +88,10 @@ ICS_tcov <- function(x, beta = 2) {
 #' 
 #' Caussinus, H. and Ruiz-Gazen, A. (1995) Metrics for Finding Typical 
 #' Structures by Means of Principal Component Analysis. In *Data Science and 
-#' its applications*, 177-192. Academic Press.
+#' its Applications*, 177-192. Academic Press.
+#'
+#' @seealso
+#' \code{\link{ICS_tcov}()}, \code{\link{ucov}()}, \code{\link{ICS_ucov}()}
 #' 
 #' @examples
 #' 
@@ -98,70 +130,25 @@ tcov <- function(x, beta = 2) {
 
 # SCOV scatter matrix -----
 
+#' @name ICS_ucov
 #' @export
-ICS_scov <- function(x, beta = 0.2) {
+ICS_scov <- function(x, location = TRUE, beta = 0.2) {
   # initializations
   x <- as.matrix(x)
   n <- nrow(x)
+  location <- isTRUE(location)
   # compute location and scatter estimates
-  location <- colMeans(x)
+  m <- colMeans(x)
   S_inv <- solve(var(x))
-  scatter <- .scov(x, m = location, S_inv = S_inv, beta = beta)
-  out <- list(location = location, scatter = scatter, label = "SCOV")
+  scatter <- .scov(x, m = m, S_inv = S_inv, beta = beta)
+  out <- list(location = if (location) m, scatter = scatter, label = "SCOV")
   # add class and return object
   class(out) <- "ICS_scatter"
   out
 }
 
-
-#' One-step M-estimator of scatter
-#' 
-#' Compute a one-step M-estimator of scatter with weights based on Mahalanobis 
-#' distances.
-#' 
-#' For a sample \eqn{\boldsymbol{X}_{n} = (\mathbf{x}_{1}, \dots, 
-#' \mathbf{x}_n)^{\top}}, a positive and decreasing weight function \eqn{w}, 
-#' and a tuning parameter \eqn{\beta > 0}, the one-step M-estimator 
-#' of scatter is defined as
-#' \deqn{\mathrm{SCOV}_\beta(\boldsymbol{X}_{n}) =
-#' \frac{\sum_{i=1}^{n} 
-#' w(\beta \, r^{2}(\mathbf{x}_{i})) 
-#' (\mathbf{x}_{i} - \mathbf{\bar{x}}_{n}) 
-#' (\mathbf{x}_{i} -  \mathbf{\bar{x}}_{n})^{\top}}{\sum_{i=1}^{n} 
-#' w(\beta \, r^{2}(\mathbf{x}_{i}))},}
-#' where 
-#' \deqn{r^{2}(\mathbf{x}_{i}) = 
-#' (\mathbf{x}_{i} -  \mathbf{\bar{x}}_{n})^{\top}
-#' \mathrm{COV}(\boldsymbol{X}_n)^{-1} 
-#' (\mathbf{x}_{i} -  \mathbf{\bar{x}}_{n})}
-#' denotes the squared Mahalanobis distance of observation \eqn{\mathbf{x}_{i}} 
-#' from the sample mean \eqn{\mathbf{\bar{x}}_{n}} based on the sample 
-#' covariance matrix \eqn{\mathrm{COV}(\boldsymbol{X}_n)}. Here, the weight 
-#' function \eqn{w(x) = \exp(-x/2)} is used.
-#' 
-#' @param x  a numeric matrix or data frame.
-#' @param beta  a positive numeric value specifying the tuning parameter of the 
-#' one-step M-estimator (defaults to 0.2), see \sQuote{Details}.
-#' 
-#' @return A numeric matrix giving the one-step M-estimate of scatter.
-#' 
-#' @author Andreas Alfons and Aurore Archimbaud
-#' 
-#' @references 
-#' Caussinus, H. and Ruiz-Gazen, A. (1993) Projection Pursuit and Generalized 
-#' Principal Component Analysis. In Morgenthaler, S., Ronchetti, E., Stahel, 
-#' W.A. (eds.) *New Directions in Statistical Data Analysis and Robustness*, 
-#' 35-46. Monte Verita, Proceedings of the Centro Stefano Franciscini Ascona 
-#' Series. Springer-Verlag.
-#' 
-#' Caussinus, H. and Ruiz-Gazen, A. (1995) Metrics for Finding Typical 
-#' Structures by Means of Principal Component Analysis. In *Data Science and 
-#' its applications*, 177-192. Academic Press.
-#' 
-#' @examples
-#' 
+#' @name ucov
 #' @export
-
 scov <- function(x, beta = 0.2) {
   # initializations
   x <- as.matrix(x)
@@ -172,7 +159,6 @@ scov <- function(x, beta = 0.2) {
   # call internal function
   .scov(x, m = m, S_inv = S_inv, beta = beta)
 }
-
 
 ## internal function to avoid recomputation of sample mean
 #' @useDynLib ICSClust, .registration = TRUE
@@ -189,20 +175,112 @@ scov <- function(x, beta = 0.2) {
 
 # UCOV scatter matrix -----
 
+
+#' Simple robust estimators of scatter for ICS
+#' 
+#' Wrapper functions for the one-step M-estimator of scatter with weights based 
+#' on Mahalanobis distances as computed by \code{\link{scov}()}, or the simple 
+#' related estimator that is based on a transformation as computed by 
+#' \code{\link{ucov}()}.
+#' 
+#' @param x  a numeric matrix or data frame.
+#' @param location  a logical indicating whether to include the sample
+#' mean as location estimate (defaults to \code{TRUE}).
+#' @param beta  a positive numeric value specifying the tuning parameter of the 
+#' estimator (defaults to 0.2), see \code{\link{ucov}()}.
+#'
+#' @return An object of class \code{"ICS_scatter"} with the following
+#' components:
+#' \item{location}{if requested, a numeric vector giving the location estimate.}
+#' \item{scatter}{a numeric matrix giving the estimate of the scatter matrix.}
+#' \item{label}{a character string providing a label for the scatter matrix.}
+#' 
+#' @author Andreas Alfons and Aurore Archimbaud
+#'
+#' @seealso
+#' \code{\link[ICS]{ICS}()}
+#'
+#' \code{\link{tcov}()}, \code{\link{ICS_tcov}()}, \code{\link{ucov}()}
+#' 
+#' @examples
+#' 
 #' @export
-ICS_ucov <- function(x, beta = 0.2) {
+
+ICS_ucov <- function(x, location = TRUE, beta = 0.2) {
   # initializations
   x <- as.matrix(x)
+  location <- isTRUE(location)
   # compute location and scatter estimates
-  location <- colMeans(x)
-  scatter <- .ucov(x, m = location, beta = beta)
-  out <- list(location = location, scatter = scatter, label = "UCOV")
+  m <- colMeans(x)
+  scatter <- .ucov(x, m = m, beta = beta)
+  out <- list(location = if (location) m, scatter = scatter, label = "UCOV")
   # add class and return object
   class(out) <- "ICS_scatter"
   out
 }
 
+
+#' Simple robust estimators of scatter
+#' 
+#' Compute a one-step M-estimator of scatter with weights based on Mahalanobis 
+#' distances, or a simple related estimator that is based on a transformation.
+#' 
+#' For a sample \eqn{\boldsymbol{X}_{n} = (\mathbf{x}_{1}, \dots, 
+#' \mathbf{x}_n)^{\top}}, a positive and decreasing weight function \eqn{w}, 
+#' and a tuning parameter \eqn{\beta > 0}, the one-step M-estimator 
+#' of scatter is defined as
+#' \deqn{\mathrm{SCOV}_{\beta}(\boldsymbol{X}_{n}) =
+#' \frac{\sum_{i=1}^{n} 
+#' w(\beta \, r^{2}(\mathbf{x}_{i})) 
+#' (\mathbf{x}_{i} - \mathbf{\bar{x}}_{n}) 
+#' (\mathbf{x}_{i} -  \mathbf{\bar{x}}_{n})^{\top}}{\sum_{i=1}^{n} 
+#' w(\beta \, r^{2}(\mathbf{x}_{i}))},}
+#' where 
+#' \deqn{r^{2}(\mathbf{x}_{i}) = 
+#' (\mathbf{x}_{i} -  \mathbf{\bar{x}}_{n})^{\top}
+#' \mathrm{COV}(\boldsymbol{X}_n)^{-1} 
+#' (\mathbf{x}_{i} -  \mathbf{\bar{x}}_{n})}
+#' denotes the squared Mahalanobis distance of observation \eqn{\mathbf{x}_{i}} 
+#' from the sample mean \eqn{\mathbf{\bar{x}}_{n}} based on the sample 
+#' covariance matrix \eqn{\mathrm{COV}(\boldsymbol{X}_n)}. Here, the weight 
+#' function \eqn{w(x) = \exp(-x/2)} is used.
+#' 
+#' A simple robust estimator that is consistent under normality is obtained via 
+#' the transformation
+#' \deqn{\mathrm{UCOV}_{\beta}(\boldsymbol{X}_{n}) = 
+#' (\mathrm{SCOV}_{\beta}(\boldsymbol{X}_{n})^{-1} - 
+#' \beta \, \mathrm{COV}(\boldsymbol{X}_{n})^{-1})^{-1}.}
+#' 
+#' @param x  a numeric matrix or data frame.
+#' @param beta  a positive numeric value specifying the tuning parameter of the 
+#' estimator (defaults to 0.2), see \sQuote{Details}.
+#' 
+#' @return A numeric matrix giving the estimate of the scatter matrix.
+#' 
+#' @author Andreas Alfons and Aurore Archimbaud
+#' 
+#' @references 
+#' Caussinus, H. and Ruiz-Gazen, A. (1993) Projection Pursuit and Generalized 
+#' Principal Component Analysis. In Morgenthaler, S., Ronchetti, E., Stahel, 
+#' W.A. (eds.) *New Directions in Statistical Data Analysis and Robustness*, 
+#' 35-46. Monte Verita, Proceedings of the Centro Stefano Franciscini Ascona 
+#' Series. Springer-Verlag.
+#' 
+#' Caussinus, H. and Ruiz-Gazen, A. (1995) Metrics for Finding Typical 
+#' Structures by Means of Principal Component Analysis. In *Data Science and 
+#' its Applications*, 177-192. Academic Press.
+#' 
+#' Ruiz-Gazen, A. (1996) A Very Simple Robust Estimator of a Dispersion Matrix. 
+#' *Computational Statistics & Data Analysis*, **21**(2), 149-162. 
+#' \doi{10.1016/0167-9473(95)00009-7}.
+#'
+#' @seealso
+#' \code{\link{ICS_ucov}()}, \code{\link{tcov}()}, \code{\link{ICS_tcov}()}
+#' 
+#' @examples
+#' 
 #' @export
+
 ucov <- function(x, beta = 0.2) {
   # initializations
   x <- as.matrix(x)
@@ -211,6 +289,7 @@ ucov <- function(x, beta = 0.2) {
   # call internal function
   .ucov(x, m = m, beta = beta)
 }
+
 
 # internal function to avoid recomputation of sample mean
 .ucov <- function(x, m, beta = 0.2) {
@@ -222,6 +301,7 @@ ucov <- function(x, beta = 0.2) {
   # compute UCOV scatter matrix
   solve(scov_inv - beta * S_inv)
 }
+
 
 # ## reference implementation using package 'amap'
 # #' @importFrom amap W
