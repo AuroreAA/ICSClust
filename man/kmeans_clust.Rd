@@ -2,7 +2,7 @@
 % Please edit documentation in R/clustering.R
 \name{kmeans_clust}
 \alias{kmeans_clust}
-\title{k-means clustering}
+\title{\emph{k}-means clustering}
 \usage{
 kmeans_clust(df, k, clusters_only = FALSE, iter.max = 100, nstart = 20, ...)
 }

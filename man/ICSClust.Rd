@@ -11,7 +11,7 @@ ICSClust(
   ICS_args = list(),
   criterion = c("med_crit", "normal_crit", "var_crit", "discriminatory_crit"),
   ICS_crit_args = list(),
-  method = c("kmeans_clust", "tkmeans_clust", "pam_clust"),
+  method = c("kmeans_clust", "tkmeans_clust", "pam_clust", "mclust_clust", "rimle_clust"),
   clustering_args = list(),
   clusters = NULL
 )
@@ -37,11 +37,13 @@ See below for more details.}
 \code{\link[=discriminatory_crit]{discriminatory_crit()}}, arguments for choosing the components to keep.}
 
 \item{method}{clustering method to perform. Possible implemented wrapper
-functions are named "kmeans_clust", "tkmeans_clust" or "pam_clust".
+functions are named "kmeans_clust", "tkmeans_clust", "pam_clust",
+"mclust_clust" or "rimle_clust".
 The default value is "kmeans_clust".}
 
 \item{clustering_args}{list of \code{\link[=kmeans_clust]{kmeans_clust()}},
-\code{\link[=tkmeans_clust]{tkmeans_clust()}} or \code{\link[=pam_clust]{pam_clust()}} arguments for performing cluster analysis.}
+\code{\link[=tkmeans_clust]{tkmeans_clust()}},  \code{\link[=pam_clust]{pam_clust()}}, \code{\link[=rimle_clust]{rimle_clust()}} or \code{\link[=mclust_clust]{mclust_clust()}}
+arguments for performing cluster analysis.}
 
 \item{clusters}{a vector indicating the true clusters of the data. By default,
 it is \code{NULL} but it is required to choose the components based on the
@@ -103,8 +105,8 @@ Tandem clustering with invariant coordinate selection.
 \seealso{
 \code{\link[=med_crit]{med_crit()}}, \code{\link[=normal_crit]{normal_crit()}},
 \code{\link[=var_crit]{var_crit()}}, \link[=ICS-S3]{ICS},
-\code{\link[=discriminatory_crit]{discriminatory_crit()}}, \code{\link[=kmeans_clust]{kmeans_clust()}}, \code{\link[=tkmeans_clust]{tkmeans_clust()}} and
-\code{\link[=pam_clust]{pam_clust()}}
+\code{\link[=discriminatory_crit]{discriminatory_crit()}}, \code{\link[=kmeans_clust]{kmeans_clust()}}, \code{\link[=tkmeans_clust]{tkmeans_clust()}},
+\code{\link[=pam_clust]{pam_clust()}}, \code{\link[=rimle_clust]{rimle_clust()}}, \code{\link[=mclust_clust]{mclust_clust()}}
 }
 \author{
 Andreas Alfons and Aurore Archimbaud

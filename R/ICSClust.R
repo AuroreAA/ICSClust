@@ -14,14 +14,17 @@
 #' @param criterion criterion to automatically decide which invariant components
 #'  to keep. Possible values are "med_crit", "normal_crit", "var_crit" and 
 #'  "discriminatory_crit". The default value is "med_crit". 
-#'  See below for more details.
-#' @param ICS_crit_args list of [med_crit()], [normal_crit()], [var_crit()] or 
-#' [discriminatory_crit()], arguments for choosing the components to keep.
+#'  See [med_crit()], [normal_crit()], [var_crit()] or 
+#' [discriminatory_crit()] for more details.
+#' @param ICS_crit_args list of arguments passed to [med_crit()], [normal_crit()],
+#' [var_crit()] or [discriminatory_crit()] for choosing the components to keep.
 #' @param method clustering method to perform. Possible implemented wrapper
-#'  functions are named "kmeans_clust", "tkmeans_clust" or "pam_clust".
+#'  functions are named "kmeans_clust", "tkmeans_clust", "pam_clust",
+#'  "mclust_clust" or "rimle_clust".
 #'  The default value is "kmeans_clust".
 #' @param clustering_args list of [kmeans_clust()], 
-#' [tkmeans_clust()] or [pam_clust()] arguments for performing cluster analysis.
+#' [tkmeans_clust()],  [pam_clust()], [rimle_clust()] or [mclust_clust()] 
+#' arguments for performing cluster analysis.
 #' @param clusters a vector indicating the true clusters of the data. By default,
 #' it is \code{NULL} but it is required to choose the components based on the 
 #' discriminatory criterion \code{\link{discriminatory_crit}}.
@@ -59,8 +62,8 @@
 #' 
 #' @seealso [med_crit()], [normal_crit()], 
 #' [var_crit()], \link[=ICS-S3]{ICS}, 
-#' [discriminatory_crit()], [kmeans_clust()], [tkmeans_clust()] and 
-#' [pam_clust()]
+#' [discriminatory_crit()], [kmeans_clust()], [tkmeans_clust()], 
+#' [pam_clust()], [rimle_clust()], [mclust_clust()]
 #'
 #' @examples
 #' \dontrun{
@@ -86,7 +89,8 @@ ICSClust <- function(X, nb_select = NULL, nb_clusters = NULL, ICS_args = list(),
                      criterion = c("med_crit", "normal_crit", "var_crit",
                                    "discriminatory_crit"), 
                      ICS_crit_args = list(),
-                     method = c("kmeans_clust", "tkmeans_clust", "pam_clust"),
+                     method = c("kmeans_clust", "tkmeans_clust", "pam_clust",
+                                "mclust_clust", "rimle_clust"),
                      clustering_args = list(),
                      clusters = NULL
 ){
@@ -137,7 +141,7 @@ summary.ICSClust <- function(object, info = FALSE, digits = 4L, ...) {
   cat("\n", length(object$select), "components are selected:", object$select)
   
   # print information on clusters
-  cat("\n\n", length(object$clusters), "clusters are identified:\n")
+  cat("\n\n", length(unique(object$clusters)), "clusters are identified:\n")
   print(table(object$clusters))
   
   # return object invisibly

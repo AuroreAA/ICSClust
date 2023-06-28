@@ -1,8 +1,9 @@
 #' Selection of Non-normal Invariant Components Using Marginal Normality Tests
 #' 
-#' Identifies invariant coordinates that are non-normal using univariate 
-#' normality tests as in `ICSOutlier` package function `comp.norm.test()`,
-#'  except that both first and last components are investigated.
+#' Identifies invariant coordinates that are non normal using univariate 
+#' normality tests as in
+#' [ICSOutlier::comp.norm.test()], except that both
+#' first and last components are investigated.
 #'
 #' @param object object of class `ICS` or a data frame or matrix.
 #' @param level the initial level used to make a decision based on the test 

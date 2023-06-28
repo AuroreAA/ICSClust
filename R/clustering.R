@@ -1,4 +1,4 @@
-#' k-means clustering
+#' *k*-means clustering
 #' 
 #' Wrapper for performing k-means clustering from \code{\link[stats]{kmeans}}.
 #'
@@ -10,7 +10,7 @@
   #'  is returned as a vector. If \code{FALSE} the usual output of 
   #'  the \link[stats]{kmeans} function is returned.
 #' @param iter.max the maximum number of iterations allowed.
-#' @param nstart if \code{centers} is a number, how many random sets should be 
+#' @param nstart if `centers` is a number, how many random sets should be 
 #' chosen?
 #' @param ... other arguments to pass to the \code{\link[stats]{kmeans}} function.
 #'
@@ -174,7 +174,7 @@ pam_clust <- function(df, k, clusters_only = FALSE, ...){
 #'  \code{G}.
 #' @param clusters_only boolean. If \code{TRUE} only the partition of the data 
 #' is returned as a vector. If \code{FALSE} the usual output of the 
-#' \link[cluster]{pam} function is returned.
+#' [otrimle::rimle()] function is returned.
 #' @param ... other arguments to pass to [otrimle::rimle()].
 #'
 #' @return If \code{clusters_only} is \code{TRUE} a vector of the new partition
@@ -189,13 +189,13 @@ pam_clust <- function(df, k, clusters_only = FALSE, ...){
 #' integers (from \code{1:k}) indicating the cluster to which each observation 
 #' is allocated.
 #'  0 indicates outlying observations.}
-#' \item{...}{an object of class \code{"pam"}.}
+#' \item{...}{an object of class \code{"rimle"}}
 #' 
 #' @seealso [otrimle::rimle()]
 #'
 #' @export
 #' @author Andreas Alfons and Aurore Archimbaud
-#' @importFrom cluster pam
+#' @importFrom otrimle rimle
 #'
 #' @examples
 #' \dontrun{
@@ -214,19 +214,72 @@ rimle_clust <- function(df, k, clusters_only = FALSE, ...){
   out
 }
 
-# methodparams[["rimle"]] <- list(logicd = log(0.05), npr.max = 0.05)
-# methodparams[["otrimle"]] <- list(logicd = log(0.05), npr.max = 0.05)
-# # otrimle() uses a data-driven choice for the size of the noise component in the improper likelihood, whereas rimle() e…
-# mclust_clust <- function(df, k, clusters_only = FALSE, ...){
-#   # Perform rimle
-#   clust <- otrimle::rimle(data = df, G = k,  ...)
-#   
-#   # Get the new partition: the additional cluster of outliers are coded by 0
-#   out <- clust$cluster
-#   
-#   # Return the results
-#   if (!clusters_only) out <- append(list(clust_method = "rimle", 
-#                                          clusters = out), 
-#                                     clust)
-#   out
-# }
+#' Model-Based Clustering
+#' 
+#' Wrapper for performing Model-Based Clustering from [mclust::Mclust()]
+#' allowing noise or not.
+#'
+#' @param df a numeric matrix or data frame of the data. It corresponds to the 
+#' argument \code{data}.
+#' @param k the number of clusters searched for. It corresponds to the argument
+#'  \code{G}.
+#' @param clusters_only boolean. If \code{TRUE} only the partition of the data 
+#' is returned as a vector. If \code{FALSE} the usual output of the 
+#' [mclust::Mclust()] function is returned.
+#' @param ... other arguments to pass to [otrimle::rimle()].
+#' 
+#' @details
+#' - [mclust_clust()]: does not allow noise
+#' - [rmclust_clust()]: allow noise
+#' 
+#'
+#' @return If \code{clusters_only} is \code{TRUE} a vector of the new partition
+#'  of the data is returned, i.e a vector of integers (from \code{1:k}) 
+#'  indicating the cluster to which each observation is allocated.
+#'   0 indicates trimmed observations.
+#' 
+#' 
+#' Otherwise a list is returned with the following components:
+#' \item{clust_method}{the name of the clustering method, i.e "rimle".}
+#' \item{clusters}{the vector of the new partition of the data, i.e a vector of 
+#' integers (from \code{1:k}) indicating the cluster to which each observation 
+#' is allocated.
+#'  0 indicates outlying observations.}
+#' \item{...}{an object of class \code{"mclust"}}
+#' 
+#' @seealso [mclust::Mclust()]
+#'
+#' @export
+#' @author Andreas Alfons and Aurore Archimbaud
+#' @importFrom mclust Mclust mclustBIC
+#' @rdname mclust_clust
+#' @examples
+#' \dontrun{
+#' mclust_clust(iris[,1:4], k = 3, clusters_only = TRUE)}
+mclust_clust <- function(df, k, clusters_only = FALSE, ...){
+  # Perform rimle
+  clust <- mclust::Mclust(df, G = k, ...)
+  # Get the new partition: the additional cluster of outliers are coded by 0
+  out <- clust$classification
+  
+  # Return the results
+  if (!clusters_only) out <- append(list(clust_method = "mclust", 
+                                         clusters = out), 
+                                    clust)
+  out
+}
+#' @rdname mclust_clust
+#' @export
+rmclust_clust <- function(df, k, clusters_only = FALSE, ...){
+  # Perform rimle
+  clust <- mclust::Mclust(df, G = k, initialization = list(noise = TRUE), ...)
+  # Get the new partition: the additional cluster of outliers are coded by 0
+  out <- clust$classification
+  
+  # Return the results
+  if (!clusters_only) out <- append(list(clust_method = "rmclust", 
+                                         clusters = out), 
+                                    clust)
+  out
+}
+
