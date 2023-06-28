@@ -17,7 +17,7 @@ argument \code{x}.}
 is returned as a vector. If \code{FALSE} the usual output of the
 \link[cluster]{pam} function is returned.}
 
-\item{...}{other arguments to pass to the \code{\link[cluster]{pam}}}
+\item{...}{other arguments to pass to the \code{\link[cluster]{pam}}.}
 }
 \value{
 If \code{clusters_only} is \code{TRUE} a vector of the new partition
@@ -31,7 +31,7 @@ Otherwise a list is returned with the following components:
 integers (from \code{1:k}) indicating the cluster to which each observation
 is allocated.
 0 indicates outlying observations.}
-\item{...}{an object of class \code{"pam"}}
+\item{...}{an object of class \code{"pam"}}.
 }
 \description{
 Wrapper for performing Partitioning Around Medoids clustering from

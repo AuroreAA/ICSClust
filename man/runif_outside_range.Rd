@@ -7,11 +7,11 @@
 runif_outside_range(n, min = 0, max = 1, mult = 2)
 }
 \arguments{
-\item{n}{number of observations to generate}
+\item{n}{number of observations to generate.}
 
-\item{min}{numeric vector giving the minimum of each variable of the data set}
+\item{min}{numeric vector giving the minimum of each variable of the data set.}
 
-\item{max}{numeric vector giving the maximum of each variable of the data set}
+\item{max}{numeric vector giving the maximum of each variable of the data set.}
 
 \item{mult}{multiplication factor to expand the hyperrectangle around the data
 (which is given by 'min' and 'max'), e.g., the default value 2 gives

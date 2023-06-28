@@ -20,11 +20,11 @@
 #' 
 #' 
 #' Otherwise a list is returned with the following components:
-#' \item{clust_method}{the name of the clustering method, i.e "kmeans".}
-#' \item{clusters}{the vector of the new partition of the data, i.e a vector of 
+#' \item{clust_method}{the name of the clustering method, i.e. "kmeans".}
+#' \item{clusters}{the vector of the new partition of the data, i.e. a vector of 
 #' integers (from \code{1:k}) indicating the cluster to which each observation 
 #' is allocated.}
-#' \item{...}{an object of class \code{"kmeans"}}
+#' \item{...}{an object of class \code{"kmeans"}}.
 #' 
 #' @seealso \code{\link[stats]{kmeans}()}
 #' @export
@@ -77,11 +77,11 @@ kmeans_clust <- function(df, k, clusters_only = FALSE, iter.max = 100,
 #' 
 #' 
 #' Otherwise a list is returned with the following components:
-#' \item{clust_method}{the name of the clustering method, i.e "tkmeans".}
-#' \item{clusters}{the vector of the new partition of the data, i.e a vector of 
+#' \item{clust_method}{the name of the clustering method, i.e. "tkmeans".}
+#' \item{clusters}{the vector of the new partition of the data, i.e. a vector of 
 #' integers (from \code{1:k}) indicating the cluster to which each observation
-#'  is allocated. 0 indicates trimmed observations.}
-#' \item{...}{an object of class \code{"tkmeans"}}
+#'  is allocated. 0 indicates trimmed observations.}.
+#' \item{...}{an object of class \code{"tkmeans"}}.
 #' 
 #' @seealso \code{\link[tclust]{tkmeans}()}
 #' @export
@@ -120,7 +120,7 @@ tkmeans_clust <- function(df, k, clusters_only = FALSE, alpha = 0.05, ... ){
 #' @param clusters_only boolean. If \code{TRUE} only the partition of the data 
 #' is returned as a vector. If \code{FALSE} the usual output of the 
 #' \link[cluster]{pam} function is returned.
-#' @param ... other arguments to pass to the \code{\link[cluster]{pam}}
+#' @param ... other arguments to pass to the \code{\link[cluster]{pam}}.
 #'
 #' @return If \code{clusters_only} is \code{TRUE} a vector of the new partition
 #'  of the data is returned, i.e a vector of integers (from \code{1:k}) 
@@ -134,7 +134,7 @@ tkmeans_clust <- function(df, k, clusters_only = FALSE, alpha = 0.05, ... ){
 #' integers (from \code{1:k}) indicating the cluster to which each observation 
 #' is allocated.
 #'  0 indicates outlying observations.}
-#' \item{...}{an object of class \code{"pam"}}
+#' \item{...}{an object of class \code{"pam"}}.
 #' 
 #' @seealso \code{\link[cluster]{pam}()}
 #'
@@ -174,7 +174,7 @@ pam_clust <- function(df, k, clusters_only = FALSE, ...){
 #'  \code{G}.
 #' @param clusters_only boolean. If \code{TRUE} only the partition of the data 
 #' is returned as a vector. If \code{FALSE} the usual output of the 
-#' \link[cluster]{pam} function is returned.
+#' [otrimle::rimle()] function is returned.
 #' @param ... other arguments to pass to [otrimle::rimle()].
 #'
 #' @return If \code{clusters_only} is \code{TRUE} a vector of the new partition
@@ -184,8 +184,8 @@ pam_clust <- function(df, k, clusters_only = FALSE, ...){
 #' 
 #' 
 #' Otherwise a list is returned with the following components:
-#' \item{clust_method}{the name of the clustering method, i.e "rimle".}
-#' \item{clusters}{the vector of the new partition of the data, i.e a vector of 
+#' \item{clust_method}{the name of the clustering method, i.e, "rimle".}
+#' \item{clusters}{the vector of the new partition of the data, i.e. a vector of 
 #' integers (from \code{1:k}) indicating the cluster to which each observation 
 #' is allocated.
 #'  0 indicates outlying observations.}
@@ -225,7 +225,7 @@ rimle_clust <- function(df, k, clusters_only = FALSE, ...){
 #'  \code{G}.
 #' @param clusters_only boolean. If \code{TRUE} only the partition of the data 
 #' is returned as a vector. If \code{FALSE} the usual output of the 
-#' \link[cluster]{pam} function is returned.
+#' [mclust::Mclust()] function is returned.
 #' @param ... other arguments to pass to [otrimle::rimle()].
 #' 
 #' @details

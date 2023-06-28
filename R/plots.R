@@ -4,10 +4,10 @@
 #'
 #' Extract the generalized kurtosis values of the components obtained via an
 #' ICS transformation and draw either a screeplot or a specific plot for a 
-#' given criterion. If an object of class `ICS_crit`  is given, then the 
+#' given criterion. If an object of class `ICS_crit` is given, then the 
 #' selected components are shaded on the plot.
 #' 
-#' @param object  an object inheriting from class \code{"ICS"} containing
+#' @param object an object inheriting from class \code{"ICS"} containing
 #' results from an ICS transformation or from class `ICS_crit`.
 #' @param select  an integer, character, or logical vector specifying for 
 #' which components to extract the generalized kurtosis values, or 
@@ -27,7 +27,7 @@
 #' `ICS_crit` object is given.
 #' @param alpha the transparency for shading the selected components in case 
 #' an `ICS_crit` object is given.
-#' @param ... not used
+#' @param ... not used.
 #' @author Andreas Alfons and Aurore Archimbaud
 #' @import ICS
 #' @import ggplot2
@@ -251,14 +251,14 @@ discriminatory_plot <- function(object,  size = 3, color = "lightblue", ...){
 #' 
 #' @param object a dataframe or \code{\link[=ICS-S3]{ICS}} class object
 #' @param select a vector of indexes of variables to plot. If `NULL` or 
-#' `FALSE`, all variables are selected. If `TRUE` only the first and 
+#' `FALSE`, all variables are selected. If `TRUE` only the first three and 
 #' last three are considered.
-#' @param clusters avector indicating the clusters of the data to color the 
+#' @param clusters a vector indicating the clusters of the data to color the 
 #' plot. By default `NULL`.
 #' @param text_size_factor a numeric factor for controlling the `axis.text`  
 #' and `strip.text`. 
 #' @param colors a vector of colors to use. One color for each cluster.
-#' @param ... not used
+#' @param ... not used.
 #' @export
 #' 
 #' @rdname component_plot

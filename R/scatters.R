@@ -129,7 +129,6 @@ tcov <- function(x, beta = 2) {
 
 
 # SCOV scatter matrix -----
-
 #' @name ICS_ucov
 #' @export
 ICS_scov <- function(x, location = TRUE, beta = 0.2) {
@@ -302,7 +301,6 @@ ucov <- function(x, beta = 0.2) {
   solve(scov_inv - beta * S_inv)
 }
 
-
 # ## reference implementation using package 'amap'
 # #' @importFrom amap W
 # #' @importFrom stats var
@@ -363,7 +361,7 @@ ICS_mlc <- function(x, location = FALSE, ...) {
 #' Local Shape Scatter Estimates for ICS
 #' 
 #' It is a wrapper for the local shape estimator of scatter
-#'  as computed by [fpc::localshape()].
+#' as computed by [fpc::localshape()].
 #' 
 #' @param x a numeric matrix or data frame.
 #' @param mscatter "mcd" or "cov" (default); specified minimum covariance 
@@ -413,8 +411,8 @@ ICS_lcov <- function(x, mscatter = "cov", proportion = 0.1, ...) {
 #' @param ... potential further arguments passed to [rrcov::CovMcd()].
 #' 
 #' @details
-#' - [ICS_mcd()]: computes the raw MCD estimates
-#' - [ICS_rmcd()]: computes the reweighted MCD estimates
+#' - [ICS_mcd()]: computes the raw MCD estimates.
+#' - [ICS_rmcd()]: computes the reweighted MCD estimates.
 #' 
 #' The raw estimates in combination of `nsamp`="deterministic" are available 
 #' in RForge `install.packages("robustbase", 

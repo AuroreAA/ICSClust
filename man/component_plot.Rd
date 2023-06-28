@@ -19,13 +19,13 @@ component_plot(object, ...)
 \arguments{
 \item{object}{a dataframe or \code{\link[=ICS-S3]{ICS}} class object}
 
-\item{...}{not used}
+\item{...}{not used.}
 
 \item{select}{a vector of indexes of variables to plot. If \code{NULL} or
-\code{FALSE}, all variables are selected. If \code{TRUE} only the first and
+\code{FALSE}, all variables are selected. If \code{TRUE} only the first three and
 last three are considered.}
 
-\item{clusters}{avector indicating the clusters of the data to color the
+\item{clusters}{a vector indicating the clusters of the data to color the
 plot. By default \code{NULL}.}
 
 \item{text_size_factor}{a numeric factor for controlling the \code{axis.text}

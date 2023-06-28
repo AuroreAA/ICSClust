@@ -30,11 +30,11 @@ of the data is returned, i.e a vector of integers (from \code{1:k})
 indicating the cluster to which each observation is allocated.
 
 Otherwise a list is returned with the following components:
-\item{clust_method}{the name of the clustering method, i.e "kmeans".}
-\item{clusters}{the vector of the new partition of the data, i.e a vector of
+\item{clust_method}{the name of the clustering method, i.e. "kmeans".}
+\item{clusters}{the vector of the new partition of the data, i.e. a vector of
 integers (from \code{1:k}) indicating the cluster to which each observation
 is allocated.}
-\item{...}{an object of class \code{"kmeans"}}
+\item{...}{an object of class \code{"kmeans"}}.
 }
 \description{
 Wrapper for performing k-means clustering from \code{\link[stats]{kmeans}}.

@@ -22,7 +22,7 @@ discriminatory_crit(object, ...)
 \arguments{
 \item{object}{object of class \code{ICS}.}
 
-\item{...}{not used}
+\item{...}{not used.}
 
 \item{clusters}{a vector indicating the true clusters of the data to compute
 the discriminatory power on it.}
@@ -33,17 +33,17 @@ Only "eta2" is implemented.}
 \item{nb_select}{the exact number of components to select.}
 
 \item{select_only}{boolean. If \code{TRUE} only the vector names of the selected
-invariant components is returned. If \code{FALSE} additional details are returned.}
+invariant components are returned. If \code{FALSE} additional details are returned.}
 
 \item{gen_kurtosis}{vector of generalized kurtosis values in case of \code{ICS}
 object.}
 }
 \value{
-If \code{select_only} is  \code{TRUE} a vector of the names of the invariant
+If \code{select_only} is \code{TRUE} a vector of the names of the invariant
 components or variables to select. If \code{FALSE} an object of class \code{ICS_crit}
 is returned with the following objects:
 \itemize{
-\item \code{crit}: the name of the criterion "discriminatory"
+\item \code{crit}: the name of the criterion "discriminatory".
 \item \code{method}: the name of the discriminatory power.
 \item \code{nb_select}: the number of components to select.
 \item \code{select}: the names of the invariant components or variables to select.
