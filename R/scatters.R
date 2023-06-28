@@ -16,7 +16,7 @@
 #' 
 #' @param x  a numeric matrix or data frame.
 #' @param beta  a positive numeric value specifying the tuning parameter of the 
-#' pairwise one-step M-estimator (defaults to 2), see \code{\link{tcov}()}.
+#' pairwise one-step M-estimator (default to 2), see \code{\link{tcov}()}.
 #'
 #' @return An object of class \code{"ICS_scatter"} with the following
 #' components:
@@ -187,7 +187,7 @@ scov <- function(x, beta = 0.2) {
 #' @param location  a logical indicating whether to include the sample
 #' mean as location estimate (defaults to \code{TRUE}).
 #' @param beta  a positive numeric value specifying the tuning parameter of the 
-#' estimator (defaults to 0.2), see \code{\link{ucov}()}.
+#' estimator (default to 0.2), see \code{\link{ucov}()}.
 #'
 #' @return An object of class \code{"ICS_scatter"} with the following
 #' components:

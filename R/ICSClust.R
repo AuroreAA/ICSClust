@@ -14,9 +14,10 @@
 #' @param criterion criterion to automatically decide which invariant components
 #'  to keep. Possible values are "med_crit", "normal_crit", "var_crit" and 
 #'  "discriminatory_crit". The default value is "med_crit". 
-#'  See below for more details.
-#' @param ICS_crit_args list of [med_crit()], [normal_crit()], [var_crit()] or 
-#' [discriminatory_crit()], arguments for choosing the components to keep.
+#'  See [med_crit()], [normal_crit()], [var_crit()] or 
+#' [discriminatory_crit()] for more details.
+#' @param ICS_crit_args list of arguments passed to [med_crit()], [normal_crit()],
+#' [var_crit()] or [discriminatory_crit()] for choosing the components to keep.
 #' @param method clustering method to perform. Possible implemented wrapper
 #'  functions are named "kmeans_clust", "tkmeans_clust", "pam_clust",
 #'  "mclust_clust" or "rimle_clust".
@@ -140,7 +141,7 @@ summary.ICSClust <- function(object, info = FALSE, digits = 4L, ...) {
   cat("\n", length(object$select), "components are selected:", object$select)
   
   # print information on clusters
-  cat("\n\n", length(object$clusters), "clusters are identified:\n")
+  cat("\n\n", length(unique(object$clusters)), "clusters are identified:\n")
   print(table(object$clusters))
   
   # return object invisibly

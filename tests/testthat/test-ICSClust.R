@@ -16,8 +16,8 @@
 # table(res$clusters, iris[,5])
 # component_plot(res$ICS_out, clusters = as.factor(res$clusters))
 # component_plot(res$ICS_out, clusters = iris[,5])
-#
-#
+# 
+# 
 # res <- ICSClust(X, nb_clusters = 3,
 #                 ICS_args = list(S1 = ICS_mcd, S2 = ICS_cov,
 #                                 S1_args = list(alpha = 0.5)),
@@ -27,7 +27,7 @@
 # table(res$clusters, iris[,5])
 # component_plot(res$ICS_out, select = res$select, clusters = as.factor(res$clusters))
 # component_plot(res$ICS_out, select = res$select, clusters = iris[,5])
-#
+# 
 # res <- ICSClust(X, nb_select = 1, nb_clusters = 3,
 #                 ICS_args = list(S1 = ICS_mcd, S2 = ICS_cov,
 #                                 S1_args = list(alpha = 0.5)),
@@ -36,7 +36,13 @@
 # table(res$clusters, iris[,5])
 # component_plot(res$ICS_out, clusters = as.factor(res$clusters))
 # component_plot(res$ICS_out, clusters = iris[,5])
-#
+# 
+# 
+# out <- ICSClust(X, nb_clusters = 3, 
+#          criterion = "med_crit")
+# 
+# ICSClust(X, nb_clusters = 2, criterion = "med_crit")
+# 
 # 
 # 
 # pct_clusters = c(0.5,0.5)
@@ -106,6 +112,6 @@
 # #summary(clust)
 # table(data$cluster, clust$cluster)
 # 
-
-
-
+# 
+# 
+# 

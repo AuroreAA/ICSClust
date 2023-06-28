@@ -243,7 +243,7 @@ discriminatory_plot <- function(object,  size = 3, color = "lightblue", ...){
 
 # Plot of the selected variables/components -------------------------------
 
-#' Scatterplot Matrix with densities
+#' Scatterplot Matrix with densities on the diagonal
 #' 
 #' Produce a scatterplot matrix of the component scores of a given dataframe 
 #' or an invariant coordinate system obtained via an ICS transformation with 
