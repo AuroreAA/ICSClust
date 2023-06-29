@@ -15,9 +15,9 @@ argument \code{x}.}
 
 \item{clusters_only}{boolean. If \code{TRUE} only the partition of the data
 is returned as a vector. If \code{FALSE} the usual output of the
-\link[cluster]{pam} function is returned.}
+\code{\link[cluster:pam]{cluster::pam()}} function is returned.}
 
-\item{...}{other arguments to pass to the \code{\link[cluster]{pam}}.}
+\item{...}{other arguments to pass to the \code{\link[cluster:pam]{cluster::pam()}}.}
 }
 \value{
 If \code{clusters_only} is \code{TRUE} a vector of the new partition
@@ -35,7 +35,7 @@ is allocated.
 }
 \description{
 Wrapper for performing Partitioning Around Medoids clustering from
-\code{\link[cluster]{pam}}.
+\code{\link[cluster:pam]{cluster::pam()}}.
 }
 \examples{
 \dontrun{
@@ -43,7 +43,7 @@ pam_clust(iris[,1:4], k = 3, clusters_only = TRUE)}
  
 }
 \seealso{
-\code{\link[cluster]{pam}()}
+\code{\link[cluster:pam]{cluster::pam()}}
 }
 \author{
 Andreas Alfons and Aurore Archimbaud

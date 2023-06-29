@@ -19,9 +19,10 @@ ICSClust(
 \arguments{
 \item{X}{a numeric matrix or data frame containing the data.}
 
-\item{nb_select}{the number of components to select. \code{NULL} by default.
-It is required in case \code{criterion} is either "med_crit", "var_crit" or
-"discriminatory_crit".}
+\item{nb_select}{the number of components to select.
+It is used only in case \code{criterion} is either "med_crit", "var_crit" or
+"discriminatory_crit".  By default it is set to \code{NULL}, i.e the number
+of components to select is the number of variables minus one.}
 
 \item{nb_clusters}{the number of clusters searched for.}
 
@@ -31,10 +32,12 @@ values of \code{\link[ICS]{ICS-S3}} are used.}
 \item{criterion}{criterion to automatically decide which invariant components
 to keep. Possible values are "med_crit", "normal_crit", "var_crit" and
 "discriminatory_crit". The default value is "med_crit".
-See below for more details.}
+See \code{\link[=med_crit]{med_crit()}}, \code{\link[=normal_crit]{normal_crit()}}, \code{\link[=var_crit]{var_crit()}} or
+\code{\link[=discriminatory_crit]{discriminatory_crit()}} for more details.}
 
-\item{ICS_crit_args}{list of \code{\link[=med_crit]{med_crit()}}, \code{\link[=normal_crit]{normal_crit()}}, \code{\link[=var_crit]{var_crit()}} or
-\code{\link[=discriminatory_crit]{discriminatory_crit()}}, arguments for choosing the components to keep.}
+\item{ICS_crit_args}{list of arguments passed to \code{\link[=med_crit]{med_crit()}}, \code{\link[=normal_crit]{normal_crit()}},
+\code{\link[=var_crit]{var_crit()}} or
+\code{\link[=discriminatory_crit]{discriminatory_crit()}} for choosing the components to keep.}
 
 \item{method}{clustering method to perform. Possible implemented wrapper
 functions are named "kmeans_clust", "tkmeans_clust", "pam_clust",
@@ -52,14 +55,16 @@ discriminatory criterion \code{\link{discriminatory_crit}}.}
 \value{
 An object with the following components:
 \itemize{
-\item ICS_out: An object of class \code{"ICS"}.
+\item \code{ICS_out}: An object of class \code{"ICS"}.
 See \code{\link[=ICS-S3]{ICS}}
-\item select: a vector of the names of the selected invariant
+\item \code{select}: a vector of the names of the selected invariant
 coordinates.
-\item clusters: a vector of the new partition of the data, i.e a vector
+\item \code{clusters}: a vector of the new partition of the data, i.e a vector
 of integers (from \code{1:k}) indicating the cluster to which each
 observation is allocated. 0 indicates outlying observations.
 }
+
+\code{summary()} and \code{plot()} methods are available.
 }
 \description{
 Sequential clustering approach: (i) dimension reduction through the Invariant
@@ -83,18 +88,26 @@ X <- iris[,1:4]
 # indicating the number of components to retain for the dimension reduction
 # step as well as the number of clusters searched for.
 out <- ICSClust(X, nb_select = 2, nb_clusters = 3)
+summary(out)
+plot(out)
 
 # changing the scatter pair to consider in ICS
 out <- ICSClust(X, nb_select = 1, nb_clusters = 3,
- ICS_args = list(S1 = ICS_mcd, S2 = ICS_cov,S1_args = list(alpha = 0.5)))
+ICS_args = list(S1 = ICS_mcd, S2 = ICS_cov,S1_args = list(alpha = 0.5)))
+summary(out)
+plot(out)
  
 # changing the criterion for choosing the invariant coordinates
 out <- ICSClust(X, nb_clusters = 3, criterion = "normal_crit",
 ICS_crit_args = list(level = 0.1, test = "anscombe.test", max_select = NULL))
+summary(out)
+plot(out)
 
 # changing the clustering method
-out <- ICSClust(X, nb_clusters = 3, method  = "tkmeans_clust",
- clustering_args = list(alpha = 0.1))
+out <- ICSClust(X, nb_clusters = 3, method  = "tkmeans_clust", 
+clustering_args = list(alpha = 0.1))
+summary(out)
+plot(out)
  }
 }
 \references{

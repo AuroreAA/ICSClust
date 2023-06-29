@@ -21,13 +21,13 @@
 #' For "med" criterion, the differences between the kurtosis values and the 
 #' median are plotted in absolute values. For "discriminatory" the 
 #' discriminatory power associated to the evaluated combinations are drawn.
-#' @param int the width for shading the selected components in case an 
+#' @param width the width for shading the selected components in case an 
 #' `ICS_crit` object is given.
 #' @param color the color for shading the selected components in case an 
 #' `ICS_crit` object is given.
 #' @param alpha the transparency for shading the selected components in case 
 #' an `ICS_crit` object is given.
-#' @param ... not used.
+#' 
 #' @author Andreas Alfons and Aurore Archimbaud
 #' @import ICS
 #' @import ggplot2
@@ -44,7 +44,7 @@
 #' select_plot(out, type = "lines")
 #' 
 #' # on an ICS_crit object
-#' select <- med_crit(res, nb_select = 1, select_only = FALSE)
+#' out <- med_crit(out, nb_select = 1, select_only = FALSE)
 #' select_plot(out, type = "lines")
 #' select_plot(out, screeplot = FALSE, type = "lines", color = "lightblue")
 #' }
@@ -54,9 +54,10 @@ select_plot <- function(object, ...) UseMethod("select_plot")
 #' @method select_plot default
 #' @rdname select_plot
 #' @export
-select_plot.default <- function(object, type = c("dots", "lines"),
-                                select = NULL, scale = FALSE, 
-                                screeplot = TRUE, ...) {
+select_plot.default <- function(object, select = NULL, scale = FALSE, 
+                                screeplot = TRUE, 
+                                type = c("dots", "lines"), width = 0.2, 
+                                color = "grey", alpha = 0.3, size = 3) {
   
   # Initialization
   type <- match.arg(type)
@@ -68,7 +69,8 @@ select_plot.default <- function(object, type = c("dots", "lines"),
   if(!(inherits(out, "data.frame") | inherits(out, "ICS_crit"))){
     stop("You can apply 'select_plot' only to an object of class 'ICS' or 'ICS_crit'.")
   }else{
-    select_plot(out, type = type, ...)
+    select_plot(out, type = type, width = width, color = color,
+                alpha = alpha)
   }
   
 }
@@ -77,22 +79,28 @@ select_plot.default <- function(object, type = c("dots", "lines"),
 #' @method select_plot data.frame
 #' @rdname select_plot
 #' @export
-select_plot.data.frame <- function(out, type = c("dots", "lines"), ...) {
-  scree_plot(out, type = type, ...)
+select_plot.data.frame <- function(out, type = c("dots", "lines"), 
+                                   width = 0.2, color = "grey",
+                                   alpha = 0.3) {
+  scree_plot(out, type = type, width = width, color = color,
+             alpha = alpha)
 }
 
 #' @method select_plot ICS_crit
 #' @rdname select_plot
 #' @export
-select_plot.ICS_crit <- function(out,  ...) {
+select_plot.ICS_crit <- function(out, type = c("dots", "lines"),
+                                 width = 0.2, color = "grey", alpha = 0.3,
+                                 size = 3) {
   crit <- out$crit
   if(!(crit %in% c("med", "discriminatory"))){
     stop("The non screeplot option is only available for 'med' or 
            'discriminatory' criteria.")
   }else if(crit == "med"){
-    med_plot(out, ...)
+    med_plot(out,  type = type, width = width, color = color,
+             alpha = alpha)
   }else if(crit == "discriminatory"){
-    discriminatory_plot(out, ...)
+    discriminatory_plot(out, color = color, size = size)
   }
   
 }
@@ -149,8 +157,8 @@ df_select_plot.default <- function(object, select = NULL, scale = FALSE,
 
 ## Plots -------------------------------------------------------------------
 #' @noRd
-scree_plot <- function(df, type = c("dots", "lines"), int = 0.2, color = "grey",
-                       alpha = 0.3, ...){
+scree_plot <- function(df, type = c("dots", "lines"), width = 0.2, color = "grey",
+                       alpha = 0.3){
   
   # Initialisation
   select_IC <- as.integer(sort(gsub("IC.", "", row.names(df)[df$select_IC])))
@@ -165,12 +173,12 @@ scree_plot <- function(df, type = c("dots", "lines"), int = 0.2, color = "grey",
     nb_last <- rev(select_IC)[which(rev(df$select_IC) == FALSE)[1]-1]
     
     if(length(nb_first) > 0){
-      df_zones <- rbind(df_zones, c(zone = crit, start = 1-int, 
-                                    end = nb_first +int))
+      df_zones <- rbind(df_zones, c(zone = crit, start = 1-width, 
+                                    end = nb_first+width))
     }
     if(length(nb_last) > 0){
-      df_zones <- rbind(df_zones, c(zone = crit, start = nb_last-int, 
-                                    end = nb_IC+int))
+      df_zones <- rbind(df_zones, c(zone = crit, start = nb_last-width, 
+                                    end = nb_IC+width))
     }
     
     colnames(df_zones) <-  c("zone", "start", "end")
@@ -207,20 +215,22 @@ scree_plot <- function(df, type = c("dots", "lines"), int = 0.2, color = "grey",
 }
 
 #' @noRd
-med_plot <- function(object, ...){
+med_plot <- function(object,  type = c("dots", "lines"), width = 0.2,
+                     color = "grey", alpha = 0.3){
   # Get the absolute differences from the generalized kurtosis and the median
   gen_kurtosis_diff_med <- object$gen_kurtosis_diff_med
   df <- data.frame( gen_kurtosis =  gen_kurtosis_diff_med,
                     select_IC = names(gen_kurtosis_diff_med) %in% object$select,
                     crit = object$crit)
   # Draw the plot
-  scree_plot(df, ... )+ 
-    labs(y = "|Generalized kurtosis - median|")
+  scree_plot(df, type = type, width = width, color = color,
+             alpha = alpha)
+  labs(y = "|Generalized kurtosis - median|")
   
 }
 
 #' @noRd
-discriminatory_plot <- function(object,  size = 3, color = "lightblue", ...){
+discriminatory_plot <- function(object,  size = 3, color = "lightblue"){
   # Get the discriminatory power values associated to the combinations of ICs
   # and order them
   power <- sort(object$power_combinations, decreasing = TRUE)
@@ -245,7 +255,7 @@ discriminatory_plot <- function(object,  size = 3, color = "lightblue", ...){
 
 #' Scatterplot Matrix with densities on the diagonal
 #' 
-#' Produce a scatterplot matrix of the component scores of a given dataframe 
+#' Produce a scatterplot matrix of the variables of a given dataframe 
 #' or an invariant coordinate system obtained via an ICS transformation with 
 #' densities on the diagonal for each cluster.
 #' 
@@ -258,7 +268,6 @@ discriminatory_plot <- function(object,  size = 3, color = "lightblue", ...){
 #' @param text_size_factor a numeric factor for controlling the `axis.text`  
 #' and `strip.text`. 
 #' @param colors a vector of colors to use. One color for each cluster.
-#' @param ... not used.
 #' @export
 #' 
 #' @rdname component_plot
@@ -272,17 +281,13 @@ discriminatory_plot <- function(object,  size = 3, color = "lightblue", ...){
 #' component_plot(out, select = c(1,4))
 #' }
 #' 
-component_plot <- function(object, ...) UseMethod("component_plot")
-
-#' @rdname component_plot
-#' @method component_plot default
 #' @import GGally
 #' @importFrom scales hue_pal 
 #' @export
-component_plot.default <- function(object, select = TRUE, 
-                                   clusters = NULL, 
-                                   text_size_factor = 8/6.5, 
-                                   colors = NULL, ...) {
+component_plot <- function(object, select = TRUE, 
+                           clusters = NULL, 
+                           text_size_factor = 8/6.5, 
+                           colors = NULL) {
   
   # Initialisation
   if(isFALSE(select)) select <- NULL

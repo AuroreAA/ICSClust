@@ -8,14 +8,12 @@
 \usage{
 var_crit(object, ...)
 
-\method{var_crit}{ICS}(object, ...)
+\method{var_crit}{ICS}(object, nb_select = NULL, select_only = FALSE)
 
 \method{var_crit}{default}(object, nb_select = NULL, select_only = FALSE)
 }
 \arguments{
 \item{object}{object of class \code{ICS}.}
-
-\item{...}{not used.}
 
 \item{nb_select}{the exact number of components to select.}
 
@@ -31,13 +29,22 @@ is returned with the following objects:
 \item \code{nb_select}: the number of components to select.
 \item \code{gen_kurtosis}: the vector of generalized kurtosis values.
 \item \code{select}: the names of the invariant components or variables to select.
-\item \code{RollVarX}: the rolling variances.
-\item \code{Order}: indexes of the ordered invariant components.
+\item \code{RollVarX}: the rolling variances of order d-\code{nb_select}.
+\item \code{Order}: indexes of the ordered invariant components such that the
+ones associated to the smallest variances of the eigenvalues are at the
+end.
 }
 }
 \description{
-Identifies non spherical invariant coordinates based on the rolling variance
-criterion used in \code{\link[ICtest:ICSboot]{ICtest::ICSboot()}}.
+Identifies non spherical invariant coordinates based on the rolling
+variance criterion used in the \code{ICSboot} function of the \code{ICtest}
+package. It computes rolling variances on the generalized eigenvalues
+obtained through ICS.
+}
+\details{
+Compute the rolling variance of the d-\code{nb_select} generalized
+eigenvalues where $d$ is the dimension of the data.  The number
+of non-spherical components should be at most equal to d-2.
 }
 \examples{
 \dontrun{
@@ -52,8 +59,7 @@ Tandem clustering with invariant coordinate selection.
 \emph{arXiv preprint arXiv:2212.06108}.
 }
 \seealso{
-\code{\link[=normal_crit]{normal_crit()}}, \code{\link[=med_crit]{med_crit()}}, \code{\link[=discriminatory_crit]{discriminatory_crit()}},
-\code{\link[ICtest:ICSboot]{ICtest::ICSboot()}}.
+\code{\link[=normal_crit]{normal_crit()}}, \code{\link[=med_crit]{med_crit()}}, \code{\link[=discriminatory_crit]{discriminatory_crit()}}.
 }
 \author{
 Andreas Alfons, Aurore Archimbaud and Klaus Nordhausen

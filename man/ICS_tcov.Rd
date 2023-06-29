@@ -10,7 +10,7 @@ ICS_tcov(x, beta = 2)
 \item{x}{a numeric matrix or data frame.}
 
 \item{beta}{a positive numeric value specifying the tuning parameter of the
-pairwise one-step M-estimator (defaults to 2), see \code{\link{tcov}()}.}
+pairwise one-step M-estimator (default to 2), see \code{\link{tcov}()}.}
 }
 \value{
 An object of class \code{"ICS_scatter"} with the following

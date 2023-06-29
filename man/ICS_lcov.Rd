@@ -20,8 +20,8 @@ distance computation.}
 \value{
 An object of class \code{"ICS_scatter"} with the following
 components:
-\item{location}{if requested, a numeric vector giving the location
-estimate.}
+\item{location}{this is NULL as the estimator does not use a
+location estimate.}
 \item{scatter}{a numeric matrix giving the estimate of the scatter matrix.}
 \item{label}{a character string providing a label for the scatter matrix.}
 }

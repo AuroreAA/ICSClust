@@ -16,7 +16,7 @@ ICS_ucov(x, location = TRUE, beta = 0.2)
 mean as location estimate (defaults to \code{TRUE}).}
 
 \item{beta}{a positive numeric value specifying the tuning parameter of the
-estimator (defaults to 0.2), see \code{\link{ucov}()}.}
+estimator (default to 0.2), see \code{\link{ucov}()}.}
 }
 \value{
 An object of class \code{"ICS_scatter"} with the following

@@ -15,7 +15,7 @@ argument \code{data}.}
 
 \item{clusters_only}{boolean. If \code{TRUE} only the partition of the data
 is returned as a vector. If \code{FALSE} the usual output of the
-\link[cluster]{pam} function is returned.}
+\code{\link[otrimle:rimle]{otrimle::rimle()}} function is returned.}
 
 \item{...}{other arguments to pass to \code{\link[otrimle:rimle]{otrimle::rimle()}}.}
 }

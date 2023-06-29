@@ -32,7 +32,6 @@
 #'
 #' \code{\link{tcov}()}, \code{\link{ucov}()}, \code{\link{ICS_ucov}()}
 #' 
-#' @examples
 #' 
 #' @export
 
@@ -93,7 +92,6 @@ ICS_tcov <- function(x, beta = 2) {
 #' @seealso
 #' \code{\link{ICS_tcov}()}, \code{\link{ucov}()}, \code{\link{ICS_ucov}()}
 #' 
-#' @examples
 #' 
 #' @useDynLib ICSClust, .registration = TRUE
 #' @export
@@ -201,7 +199,6 @@ scov <- function(x, beta = 0.2) {
 #'
 #' \code{\link{tcov}()}, \code{\link{ICS_tcov}()}, \code{\link{ucov}()}
 #' 
-#' @examples
 #' 
 #' @export
 
@@ -276,7 +273,6 @@ ICS_ucov <- function(x, location = TRUE, beta = 0.2) {
 #' @seealso
 #' \code{\link{ICS_ucov}()}, \code{\link{tcov}()}, \code{\link{ICS_tcov}()}
 #' 
-#' @examples
 #' 
 #' @export
 
@@ -372,8 +368,8 @@ ICS_mlc <- function(x, location = FALSE, ...) {
 #'
 #' @return An object of class \code{"ICS_scatter"} with the following
 #' components:
-#' \item{location}{if requested, a numeric vector giving the location
-#' estimate.}
+#' \item{location}{this is NULL as the estimator does not use a
+#' location estimate.}
 #' \item{scatter}{a numeric matrix giving the estimate of the scatter matrix.}
 #' \item{label}{a character string providing a label for the scatter matrix.}
 #' @author Andreas Alfons and Aurore Archimbaud

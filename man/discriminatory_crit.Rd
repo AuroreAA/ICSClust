@@ -8,24 +8,28 @@
 \usage{
 discriminatory_crit(object, ...)
 
-\method{discriminatory_crit}{ICS}(object, ...)
+\method{discriminatory_crit}{ICS}(
+  object,
+  clusters,
+  method = "eta2",
+  nb_select = NULL,
+  select_only = FALSE
+)
 
 \method{discriminatory_crit}{default}(
   object,
   clusters,
   method = "eta2",
   nb_select = NULL,
-  select_only = FALSE,
-  gen_kurtosis = NULL
+  select_only = FALSE
 )
 }
 \arguments{
-\item{object}{object of class \code{ICS}.}
+\item{object}{dataframe or object of class \code{ICS}.}
 
-\item{...}{not used.}
-
-\item{clusters}{a vector indicating the true clusters of the data to compute
-the discriminatory power on it.}
+\item{clusters}{a vector of the same length as the number of
+observations, indicating the true clusters. It is used to compute
+the discriminatory power based on it.}
 
 \item{method}{the name of the discriminatory power.
 Only "eta2" is implemented.}
@@ -34,13 +38,11 @@ Only "eta2" is implemented.}
 
 \item{select_only}{boolean. If \code{TRUE} only the vector names of the selected
 invariant components are returned. If \code{FALSE} additional details are returned.}
-
-\item{gen_kurtosis}{vector of generalized kurtosis values in case of \code{ICS}
-object.}
 }
 \value{
 If \code{select_only} is \code{TRUE} a vector of the names of the invariant
-components or variables to select. If \code{FALSE} an object of class \code{ICS_crit}
+components or variables to select.
+If \code{FALSE} an object of class \code{ICS_crit}
 is returned with the following objects:
 \itemize{
 \item \code{crit}: the name of the criterion "discriminatory".
@@ -83,8 +85,8 @@ Tandem clustering with invariant coordinate selection.
 \emph{arXiv preprint arXiv:2212.06108}.
 }
 \seealso{
-\code{\link[=normal_crit]{normal_crit()}}, \code{\link[=med_crit]{med_crit()}} \code{\link[=var_crit]{var_crit()}}.
+\code{\link[=normal_crit]{normal_crit()}}, \code{\link[=med_crit]{med_crit()}}, \code{\link[=var_crit]{var_crit()}}.
 }
 \author{
-Andreas Alfons, Aurore Archimbaud and Klaus Nordhausen
+Andreas Alfons, Aurore Archimbaud, Klaus Nordhausen and Anne Ruiz-Gazen
 }

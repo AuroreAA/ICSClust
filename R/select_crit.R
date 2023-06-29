@@ -1,12 +1,13 @@
-#' Selection of Non-normal Invariant Components Using Marginal Normality Tests
+#' Selection of Non-normal Invariant Components Using Marginal 
+#' Normality Tests
 #' 
 #' Identifies invariant coordinates that are non normal using univariate 
-#' normality tests as in
-#' [ICSOutlier::comp.norm.test()], except that both
-#' first and last components are investigated.
+#' normality tests as in the `comp.norm.test` function from the 
+#' `ICSOutlier` package, except that both the 
+#' first and last few components are investigated.
 #'
 #' @param object object of class `ICS` or a data frame or matrix.
-#' @param level the initial level used to make a decision based on the test 
+#' @param level the initial level used to make a decision based on the test
 #' p-values. See details. Default is 0.05.
 #' @param test name of the normality test to be used. Possibilities are 
 #' "jarque.test", "anscombe.test", "bonett.test", "agostino.test",
@@ -50,7 +51,7 @@
 #'  [jarque.test()], [anscombe.test()], 
 #' [bonett.test()], [agostino.test()], [stats::shapiro.test()].
 #'
-#' @author Andreas Alfons, Aurore Archimbaud and Klaus Nordhausen
+#' @author Andreas Alfons, Aurore Archimbaud, Klaus Nordhausen and Anne Ruiz-Gazen
 #' 
 #' @rdname normal_crit
 #' @examples
@@ -66,12 +67,18 @@ normal_crit <- function(object, ...) UseMethod("normal_crit")
 #' @import ICS
 #' @method normal_crit ICS
 #' @export
-normal_crit.ICS <- function(object, ...){
+normal_crit.ICS <- function(object, level = 0.05,  
+                            test = c("agostino.test", "jarque.test", 
+                                     "anscombe.test", "bonett.test", 
+                                     "shapiro.test"), 
+                            max_select = NULL, select_only = FALSE){
   # get the generalized values
   gen_kurtosis <- ICS::gen_kurtosis(object, scale = FALSE)
   
   # apply the normal criterion
-  normal_crit(ICS::components(object), gen_kurtosis = gen_kurtosis, ...)
+  normal_crit(ICS::components(object), gen_kurtosis = gen_kurtosis, 
+              level = level, test = test, max_select = max_select,
+              select_only = select_only)
 }
 
 
@@ -167,7 +174,6 @@ normal_crit.default <- function(object, level = 0.05,
 #' @param nb_select the exact number of components to select.
 #' @param select_only boolean. If `TRUE` only the vector names of the selected 
 #' invariant components is returned. If `FALSE` additional details are returned. 
-#' @param ... not used.
 #' @details
 #' Only valid if the `nb_select` is less than half of the number of components.
 #' 
@@ -210,8 +216,9 @@ med_crit <- function(object, ...) UseMethod("med_crit")
 #' @method med_crit ICS
 #' @rdname med_crit
 #' @export
-med_crit.ICS <- function(object, ...){
-  med_crit(ICS::gen_kurtosis(object, scale = FALSE), ...)
+med_crit.ICS <- function(object, nb_select = NULL, select_only = FALSE){
+  med_crit(ICS::gen_kurtosis(object, scale = FALSE), nb_select = nb_select,
+           select_only = select_only)
 }
 
 #' @method med_crit default
@@ -241,14 +248,21 @@ med_crit.default <- function(object, nb_select = NULL, select_only = FALSE){
 
 #' Selection of Invariant components using the var criterion
 #' 
-#' Identifies non spherical invariant coordinates based on the rolling variance
-#' criterion used in [ICtest::ICSboot()].
-#'
+#' Identifies non spherical invariant coordinates based on the rolling
+#' variance criterion used in the `ICSboot` function of the `ICtest`
+#' package. It computes rolling variances on the generalized eigenvalues
+#' obtained through ICS.
+#'   
 #' @param object object of class `ICS`.
 #' @param nb_select the exact number of components to select.
 #' @param select_only boolean. If `TRUE` only the vector names of the selected 
 #' invariant components is returned. If `FALSE` additional details are returned. 
-#' @param ... not used.
+#' 
+#' @details
+#'   Compute the rolling variance of the d-`nb_select` generalized 
+#'   eigenvalues where $d$ is the dimension of the data.  The number 
+#'   of non-spherical components should be at most equal to d-2.
+#' 
 #'
 #' @return If `select_only` is `TRUE` a vector of the names of the invariant
 #'  components or variables to select. If `FALSE` an object of class `ICS_crit`
@@ -257,8 +271,10 @@ med_crit.default <- function(object, nb_select = NULL, select_only = FALSE){
 #'  - `nb_select`: the number of components to select.
 #'  - `gen_kurtosis`: the vector of generalized kurtosis values.
 #'  - `select`: the names of the invariant components or variables to select.
-#'  - `RollVarX`: the rolling variances.
-#'  - `Order`: indexes of the ordered invariant components.
+#'  - `RollVarX`: the rolling variances of order d-`nb_select`.
+#'  - `Order`: indexes of the ordered invariant components such that the
+#'  ones associated to the smallest variances of the eigenvalues are at the
+#'  end.
 #' 
 #' @export
 #' @references
@@ -266,8 +282,7 @@ med_crit.default <- function(object, nb_select = NULL, select_only = FALSE){
 #' Tandem clustering with invariant coordinate selection. 
 #' \emph{arXiv preprint arXiv:2212.06108}.
 #' 
-#' @seealso [normal_crit()], [med_crit()], [discriminatory_crit()],
-#' [ICtest::ICSboot()].
+#' @seealso [normal_crit()], [med_crit()], [discriminatory_crit()].
 #' 
 #' @rdname var_crit
 #'
@@ -285,8 +300,9 @@ var_crit <- function(object, ...) UseMethod("var_crit")
 #' @method var_crit ICS
 #' @rdname var_crit
 #' @export
-var_crit.ICS <- function(object, ...){
-  var_crit(ICS::gen_kurtosis(object, scale = FALSE), ...)
+var_crit.ICS <- function(object,  nb_select = NULL, select_only = FALSE){
+  var_crit(ICS::gen_kurtosis(object, scale = FALSE), 
+           nb_select = NULL, select_only = FALSE)
 }
 
 #' @method var_crit default
@@ -353,17 +369,15 @@ fixOrder <- function (x, nb_spherical)
 #' Identifies invariant coordinates associated to the highest discriminatory 
 #' power (by default "eta2").
 #'
-#' @param object object of class `ICS`.
-#' @param clusters a vector indicating the true clusters of the data to compute
-#' the discriminatory power on it.
+#' @param object dataframe or object of class `ICS`.
+#' @param clusters a vector of the same length as the number of
+#'  observations, indicating the true clusters. It is used to compute
+#' the discriminatory power based on it.
 #' @param method the name of the discriminatory power. 
 #' Only "eta2" is implemented.
 #' @param nb_select the exact number of components to select.
 #' @param select_only boolean. If `TRUE` only the vector names of the selected 
 #' invariant components are returned. If `FALSE` additional details are returned. 
-#' @param gen_kurtosis vector of generalized kurtosis values in case of `ICS`
-#'  object.
-#' @param ... not used.
 #'
 #' @details
 #' The discriminatory power \eqn{\eta^{2} = 1 - \Lambda}, where \eqn{\Lambda}  
@@ -380,7 +394,8 @@ fixOrder <- function (x, nb_spherical)
 #' 
 #'
 #' @return If `select_only` is `TRUE` a vector of the names of the invariant
-#'  components or variables to select. If `FALSE` an object of class `ICS_crit`
+#'  components or variables to select. 
+#'  If `FALSE` an object of class `ICS_crit`
 #'  is returned with the following objects: 
 #'  - `crit`: the name of the criterion "discriminatory".
 #'  - `method`: the name of the discriminatory power.
@@ -401,9 +416,9 @@ fixOrder <- function (x, nb_spherical)
 #' Tandem clustering with invariant coordinate selection. 
 #' \emph{arXiv preprint arXiv:2212.06108}.
 #' 
-#' @seealso [normal_crit()], [med_crit()] [var_crit()].
+#' @seealso [normal_crit()], [med_crit()], [var_crit()].
 #'
-#' @author Andreas Alfons, Aurore Archimbaud and Klaus Nordhausen
+#' @author Andreas Alfons, Aurore Archimbaud, Klaus Nordhausen and Anne Ruiz-Gazen
 #' @import ICS
 #' @examples
 #' \dontrun{
@@ -419,10 +434,13 @@ discriminatory_crit <- function(object, ...) UseMethod("discriminatory_crit")
 #' @method discriminatory_crit ICS
 #' @rdname discriminatory_crit
 #' @export
-discriminatory_crit.ICS <- function(object, ...){
+discriminatory_crit.ICS <- function(object, clusters, method = "eta2", 
+                                    nb_select = NULL, select_only = FALSE){
   gen_kurtosis <- ICS::gen_kurtosis(object, scale = FALSE)
   discriminatory_crit(ICS::components(object), 
-                      gen_kurtosis = gen_kurtosis, ...)
+                       clusters = clusters,
+                      method = method, nb_select = nb_select, 
+                      select_only = FALSE, gen_kurtosis = gen_kurtosis)
 }
 
 
@@ -431,7 +449,7 @@ discriminatory_crit.ICS <- function(object, ...){
 #' @rdname discriminatory_crit
 #' @importFrom heplots etasq
 discriminatory_crit.default <- function(object, clusters, method = "eta2", 
-                                        nb_select = NULL, select_only = FALSE, gen_kurtosis = NULL){
+                                        nb_select = NULL, select_only = FALSE){
   # Initialization
   method <- match.arg(method)
   nb_select <- ifelse(is.null(nb_select), ncol(object)-1, nb_select)

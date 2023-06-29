@@ -11,24 +11,36 @@ select_plot(object, ...)
 
 \method{select_plot}{default}(
   object,
-  type = c("dots", "lines"),
   select = NULL,
   scale = FALSE,
   screeplot = TRUE,
-  ...
+  type = c("dots", "lines"),
+  width = 0.2,
+  color = "grey",
+  alpha = 0.3,
+  size = 3
 )
 
-\method{select_plot}{data.frame}(out, type = c("dots", "lines"), ...)
+\method{select_plot}{data.frame}(
+  out,
+  type = c("dots", "lines"),
+  width = 0.2,
+  color = "grey",
+  alpha = 0.3
+)
 
-\method{select_plot}{ICS_crit}(out, ...)
+\method{select_plot}{ICS_crit}(
+  out,
+  type = c("dots", "lines"),
+  width = 0.2,
+  color = "grey",
+  alpha = 0.3,
+  size = 3
+)
 }
 \arguments{
 \item{object}{an object inheriting from class \code{"ICS"} containing
 results from an ICS transformation or from class \code{ICS_crit}.}
-
-\item{...}{not used.}
-
-\item{type}{either "dots" or "lines" for the type of plot}
 
 \item{select}{an integer, character, or logical vector specifying for
 which components to extract the generalized kurtosis values, or
@@ -44,7 +56,9 @@ For "med" criterion, the differences between the kurtosis values and the
 median are plotted in absolute values. For "discriminatory" the
 discriminatory power associated to the evaluated combinations are drawn.}
 
-\item{int}{the width for shading the selected components in case an
+\item{type}{either "dots" or "lines" for the type of plot}
+
+\item{width}{the width for shading the selected components in case an
 \code{ICS_crit} object is given.}
 
 \item{color}{the color for shading the selected components in case an
@@ -69,7 +83,7 @@ select_plot(out)
 select_plot(out, type = "lines")
 
 # on an ICS_crit object
-select <- med_crit(res, nb_select = 1, select_only = FALSE)
+out <- med_crit(out, nb_select = 1, select_only = FALSE)
 select_plot(out, type = "lines")
 select_plot(out, screeplot = FALSE, type = "lines", color = "lightblue")
 }

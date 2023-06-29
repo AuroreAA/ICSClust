@@ -19,7 +19,7 @@ is returned as a vector. If \code{FALSE} the usual output of the
 
 \item{alpha}{the proportion of observations to be trimmed.}
 
-\item{...}{other arguments to pass to the \code{\link[tclust]{tkmeans}}}
+\item{...}{other arguments to pass to the \code{\link[tclust:tkmeans]{tclust::tkmeans()}}}
 }
 \value{
 If \code{clusters_only} is \code{TRUE} a vector of the new partition
@@ -36,14 +36,14 @@ is allocated. 0 indicates trimmed observations.}.
 }
 \description{
 Wrapper for performing trimmed k-kmeans clustering from
-\code{\link[tclust]{tkmeans}}.
+\code{\link[tclust:tkmeans]{tclust::tkmeans()}}.
 }
 \examples{
 \dontrun{
 tkmeans_clust(iris[,1:4], k = 3, alpha = 0.1, clusters_only = TRUE)}
 }
 \seealso{
-\code{\link[tclust]{tkmeans}()}
+\code{\link[tclust:tkmeans]{tclust::tkmeans()}}
 }
 \author{
 Andreas Alfons and Aurore Archimbaud

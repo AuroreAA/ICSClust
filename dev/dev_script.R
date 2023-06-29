@@ -39,7 +39,8 @@ person("Aurore", "Archimbaud", email = "aurore.archimbaud@live.fr",
        role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6511-9091"))
 person("Andreas", "Alfons", email = "alfons@ese.eur.nl",
        role = c("aut"))
-
+person("Ruiz-Gazen", "Anne", email = "anne.ruiz-gazen@tse-fr.eu",
+       role = c("aut"), comment = c(ORCID = "0000-0001-8970-8061"))
 
 ## Summary ----
 usethis::use_git()

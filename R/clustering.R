@@ -1,6 +1,6 @@
 #' *k*-means clustering
 #' 
-#' Wrapper for performing k-means clustering from \code{\link[stats]{kmeans}}.
+#' Wrapper for performing k-means clustering from [stats::kmeans()].
 #'
 #' @param df a numeric matrix or data frame of the data. It corresponds to the 
 #' argument \code{x}.
@@ -12,7 +12,7 @@
 #' @param iter.max the maximum number of iterations allowed.
 #' @param nstart if `centers` is a number, how many random sets should be 
 #' chosen?
-#' @param ... other arguments to pass to the \code{\link[stats]{kmeans}} function.
+#' @param ... other arguments to pass to the [stats::kmeans()] function.
 #'
 #' @return If \code{clusters_only} is \code{TRUE} a vector of the new partition
 #'  of the data is returned, i.e a vector of integers (from \code{1:k}) 
@@ -26,7 +26,7 @@
 #' is allocated.}
 #' \item{...}{an object of class \code{"kmeans"}}.
 #' 
-#' @seealso \code{\link[stats]{kmeans}()}
+#' @seealso [stats::kmeans()] 
 #' @export
 #' 
 #' @importFrom stats kmeans
@@ -56,7 +56,7 @@ kmeans_clust <- function(df, k, clusters_only = FALSE, iter.max = 100,
 #' Trimmed k-means clustering
 #' 
 #' Wrapper for performing trimmed k-kmeans clustering from 
-#' \code{\link[tclust]{tkmeans}}.
+#' [tclust::tkmeans()].
 #'
 #'
 #'
@@ -68,7 +68,7 @@ kmeans_clust <- function(df, k, clusters_only = FALSE, iter.max = 100,
 #' is returned as a vector. If \code{FALSE} the usual output of the 
 #' \link[tclust]{tkmeans} function is returned.
 #' @param alpha the proportion of observations to be trimmed.
-#' @param ... other arguments to pass to the \code{\link[tclust]{tkmeans}}
+#' @param ... other arguments to pass to the [tclust::tkmeans()]
 #'
 #' @return If \code{clusters_only} is \code{TRUE} a vector of the new partition 
 #' of the data is returned, i.e a vector of integers (from \code{1:k}) 
@@ -83,7 +83,7 @@ kmeans_clust <- function(df, k, clusters_only = FALSE, iter.max = 100,
 #'  is allocated. 0 indicates trimmed observations.}.
 #' \item{...}{an object of class \code{"tkmeans"}}.
 #' 
-#' @seealso \code{\link[tclust]{tkmeans}()}
+#' @seealso [tclust::tkmeans()]
 #' @export
 #' 
 #' @author Andreas Alfons and Aurore Archimbaud
@@ -109,7 +109,7 @@ tkmeans_clust <- function(df, k, clusters_only = FALSE, alpha = 0.05, ... ){
 #' Partitioning Around Medoids clustering
 #' 
 #' Wrapper for performing Partitioning Around Medoids clustering from 
-#' \code{\link[cluster]{pam}}.
+#' [cluster::pam()].
 #'
 #'
 #'
@@ -119,8 +119,8 @@ tkmeans_clust <- function(df, k, clusters_only = FALSE, alpha = 0.05, ... ){
 #'  \code{k}.
 #' @param clusters_only boolean. If \code{TRUE} only the partition of the data 
 #' is returned as a vector. If \code{FALSE} the usual output of the 
-#' \link[cluster]{pam} function is returned.
-#' @param ... other arguments to pass to the \code{\link[cluster]{pam}}.
+#' [cluster::pam()] function is returned.
+#' @param ... other arguments to pass to the [cluster::pam()].
 #'
 #' @return If \code{clusters_only} is \code{TRUE} a vector of the new partition
 #'  of the data is returned, i.e a vector of integers (from \code{1:k}) 
@@ -136,7 +136,7 @@ tkmeans_clust <- function(df, k, clusters_only = FALSE, alpha = 0.05, ... ){
 #'  0 indicates outlying observations.}
 #' \item{...}{an object of class \code{"pam"}}.
 #' 
-#' @seealso \code{\link[cluster]{pam}()}
+#' @seealso [cluster::pam()]
 #'
 #' @export
 #' @author Andreas Alfons and Aurore Archimbaud

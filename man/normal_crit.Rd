@@ -3,11 +3,19 @@
 \name{normal_crit}
 \alias{normal_crit}
 \alias{normal_crit.ICS}
-\title{Selection of Non-normal Invariant Components Using Marginal Normality Tests}
+\title{Selection of Non-normal Invariant Components Using Marginal
+Normality Tests}
 \usage{
 normal_crit(object, ...)
 
-\method{normal_crit}{ICS}(object, ...)
+\method{normal_crit}{ICS}(
+  object,
+  level = 0.05,
+  test = c("agostino.test", "jarque.test", "anscombe.test", "bonett.test",
+    "shapiro.test"),
+  max_select = NULL,
+  select_only = FALSE
+)
 }
 \arguments{
 \item{object}{object of class \code{ICS} or a data frame or matrix.}
@@ -47,9 +55,10 @@ is returned with the following objects:
 }
 }
 \description{
-Identifies invariant coordinates that are non-normal using univariate
-normality tests as in \code{ICSOutlier} package function \code{comp.norm.test()},
-except that both first and last components are investigated.
+Identifies invariant coordinates that are non normal using univariate
+normality tests as in the \code{comp.norm.test} function from the
+\code{ICSOutlier} package, except that both the
+first and last few components are investigated.
 }
 \details{
 The procedure sequentially tests the first and the last components until
@@ -76,5 +85,5 @@ Tandem clustering with invariant coordinate selection.
 \code{\link[=bonett.test]{bonett.test()}}, \code{\link[=agostino.test]{agostino.test()}}, \code{\link[stats:shapiro.test]{stats::shapiro.test()}}.
 }
 \author{
-Andreas Alfons, Aurore Archimbaud and Klaus Nordhausen
+Andreas Alfons, Aurore Archimbaud, Klaus Nordhausen and Anne Ruiz-Gazen
 }

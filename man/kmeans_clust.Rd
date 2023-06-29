@@ -22,7 +22,7 @@ the \link[stats]{kmeans} function is returned.}
 \item{nstart}{if \code{centers} is a number, how many random sets should be
 chosen?}
 
-\item{...}{other arguments to pass to the \code{\link[stats]{kmeans}} function.}
+\item{...}{other arguments to pass to the \code{\link[stats:kmeans]{stats::kmeans()}} function.}
 }
 \value{
 If \code{clusters_only} is \code{TRUE} a vector of the new partition
@@ -37,7 +37,7 @@ is allocated.}
 \item{...}{an object of class \code{"kmeans"}}.
 }
 \description{
-Wrapper for performing k-means clustering from \code{\link[stats]{kmeans}}.
+Wrapper for performing k-means clustering from \code{\link[stats:kmeans]{stats::kmeans()}}.
 }
 \examples{
 \dontrun{
@@ -45,7 +45,7 @@ kmeans_clust(iris[,1:4], k = 3, clusters_only = TRUE)}
 
 }
 \seealso{
-\code{\link[stats]{kmeans}()}
+\code{\link[stats:kmeans]{stats::kmeans()}}
 }
 \author{
 Andreas Alfons and Aurore Archimbaud
