@@ -27,6 +27,7 @@ devtools::install_github("AuroreAA/ICSClust")
 library(ICSClust)
 #> Loading required package: ICS
 #> Loading required package: mvtnorm
+#> Warning: package 'mvtnorm' was built under R version 4.3.1
 #> Registered S3 method overwritten by 'GGally':
 #>   method from   
 #>   +.gg   ggplot2
@@ -36,11 +37,17 @@ X <- iris[,-5]
 
 # run ICS
 ICS_out <- ICS(X)
-ICS_out
+summary(ICS_out)
 #> 
 #> ICS based on two scatter matrices
 #> S1: COV
 #> S2: COV4
+#> 
+#> Information on the algorithm:
+#> QR: TRUE
+#> whiten: FALSE
+#> fix_signs: scores
+#> center: FALSE
 #> 
 #> The generalized kurtosis measures of the components are:
 #>   IC.1   IC.2   IC.3   IC.4 
@@ -104,12 +111,40 @@ component_plot(X, select = c(1,4), clusters = iris[,5])
 ## Example of ICSClust
 
 ``` r
-library(ICSClust)
 
-# ICSClust requiICS_out at least 2 arguments:
+# ICSClust requires at least 2 arguments:
 # - X: data
 # - nb_clusters: nb of clusters
 ICS_out <- ICSClust(X, nb_clusters = 3)
+summary(ICS_out)
+#> 
+#> ICS based on two scatter matrices
+#> S1: COV
+#> S2: COV4
+#> 
+#> The generalized kurtosis measures of the components are:
+#>   IC.1   IC.2   IC.3   IC.4 
+#> 1.2074 1.0269 0.9292 0.7405 
+#> 
+#> The coefficient matrix of the linear transformation is:
+#>      Sepal.Length Sepal.Width Petal.Length Petal.Width
+#> IC.1     -0.52335      1.9933       2.3731     -4.4308
+#> IC.2      0.83296      1.3275      -1.2666      2.7900
+#> IC.3      3.05683     -2.2269      -1.6354      0.3654
+#> IC.4      0.05244      0.6032      -0.3483     -0.3798
+#> 
+#>  3 components are selected: IC.4 IC.1 IC.2
+#> 
+#>  3 clusters are identified:
+#> 
+#>  1  2  3 
+#> 38 62 50
+plot(ICS_out)
+```
+
+<img src="man/figuICS_out/README-ICSClust_ex-1.png" width="100%" />
+
+``` r
 
 # You can also mention the number of invariant components to keep
 ICS_out <- ICSClust(X, nb_select = 2, nb_clusters = 3)
@@ -117,13 +152,13 @@ ICS_out <- ICSClust(X, nb_select = 2, nb_clusters = 3)
 table(ICS_out$clusters, iris[,5])
 #>    
 #>     setosa versicolor virginica
-#>   1      1         25        31
-#>   2     49          0         0
-#>   3      0         25        19
+#>   1      0         25        19
+#>   2      1         25        31
+#>   3     49          0         0
 component_plot(ICS_out$ICS_out, select = ICS_out$select, clusters = as.factor(ICS_out$clusters))
 ```
 
-<img src="man/figuICS_out/README-ICSClust_ex-1.png" width="100%" />
+<img src="man/figuICS_out/README-ICSClust_ex-2.png" width="100%" />
 
 ``` r
 
@@ -135,12 +170,12 @@ table(ICS_out$clusters, iris[,5])
 #>    
 #>     setosa versicolor virginica
 #>   1      0          5        26
-#>   2      0         45        24
-#>   3     50          0         0
+#>   2     50          0         0
+#>   3      0         45        24
 component_plot(ICS_out$ICS_out, clusters = as.factor(ICS_out$clusters))
 ```
 
-<img src="man/figuICS_out/README-ICSClust_ex-2.png" width="100%" />
+<img src="man/figuICS_out/README-ICSClust_ex-3.png" width="100%" />
 
 ``` r
 
@@ -156,7 +191,7 @@ ICS_out <- ICSClust(X, nb_clusters = 3,
 component_plot(ICS_out$ICS_out, select = ICS_out$select, clusters = as.factor(ICS_out$clusters))
 ```
 
-<img src="man/figuICS_out/README-ICSClust_ex-3.png" width="100%" />
+<img src="man/figuICS_out/README-ICSClust_ex-4.png" width="100%" />
 
 ``` r
 
@@ -177,4 +212,4 @@ table(ICS_out$clusters, iris[,5])
 component_plot(ICS_out$ICS_out, clusters = as.factor(ICS_out$clusters))
 ```
 
-<img src="man/figuICS_out/README-ICSClust_ex-4.png" width="100%" />
+<img src="man/figuICS_out/README-ICSClust_ex-5.png" width="100%" />

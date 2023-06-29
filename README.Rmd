@@ -42,7 +42,7 @@ X <- iris[,-5]
 
 # run ICS
 ICS_out <- ICS(X)
-ICS_out
+summary(ICS_out)
 
 # Pot of generalized eigenvalues
 select_plot(ICS_out)
@@ -64,12 +64,13 @@ component_plot(X, select = c(1,4), clusters = iris[,5])
 ## Example of ICSClust
 
 ```{r ICSClust_ex}
-library(ICSClust)
 
-# ICSClust requiICS_out at least 2 arguments:
+# ICSClust requires at least 2 arguments:
 # - X: data
 # - nb_clusters: nb of clusters
 ICS_out <- ICSClust(X, nb_clusters = 3)
+summary(ICS_out)
+plot(ICS_out)
 
 # You can also mention the number of invariant components to keep
 ICS_out <- ICSClust(X, nb_select = 2, nb_clusters = 3)
