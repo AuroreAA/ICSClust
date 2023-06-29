@@ -131,11 +131,18 @@ ICSClust <- function(X, nb_select = NULL, nb_clusters = NULL, ICS_args = list(),
   
   # Clustering ----
   reduced_df <- ICS::components(ICS_out, select = select)
-  selected <- paste(colnames(reduced_df), collapse = ",")
-  clusters <- do.call(method,
-                      append(list(df = reduced_df, k = nb_clusters,
-                                  clusters_only = TRUE),
-                             clustering_args))
+  if(ncol(reduced_df) == 0){
+    clusters <- NULL
+    warning("No component has been selected.")
+  }else{
+    selected <- paste(colnames(reduced_df), collapse = ",")
+    clusters <- do.call(method,
+                        append(list(df = reduced_df, k = nb_clusters,
+                                    clusters_only = TRUE),
+                               clustering_args))
+    
+  }
+  
   
   out <- list(ICS_out = ICS_out, select = select, clusters = clusters)
   class(out) <- "ICSClust"
@@ -163,6 +170,10 @@ summary.ICSClust <- function(object, info = FALSE, digits = 4L, ...) {
 #' @method plot ICSClust
 #' @export
 plot.ICSClust <- function(object, ...) {
-  component_plot(object$ICS_out, select = object$select, 
-                 clusters = factor(object$clusters), ...)
+  if(length(object$select) == 0){
+    warning("No component has been selected.")
+  }else{
+    component_plot(object$ICS_out, select = object$select, 
+                   clusters = factor(object$clusters), ...)
+  }
 }

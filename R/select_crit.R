@@ -302,7 +302,8 @@ var_crit <- function(object, ...) UseMethod("var_crit")
 #' @export
 var_crit.ICS <- function(object,  nb_select = NULL, select_only = FALSE){
   var_crit(ICS::gen_kurtosis(object, scale = FALSE), 
-           nb_select = NULL, select_only = FALSE)
+           nb_select = nb_select,
+           select_only = select_only)
 }
 
 #' @method var_crit default
@@ -316,7 +317,7 @@ var_crit.default <- function(object, nb_select = NULL, select_only = FALSE){
   # if the number of non-spherical components is equal or higher to p-1,
   # it makes no sense to compute the rolling variance of one component
   if (nb_select >= (d-1)){
-    warning("The nb_select is higher or equal to the number of variables
+    stop("The nb_select is higher or equal to the number of variables
             minus one, so it makes no sense to select some components based on
             the rolling variance of only one invariant component.")
     out <- vector()
