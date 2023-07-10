@@ -12,7 +12,6 @@ Imports:
     cluster,
     fpc,
     GGally,
-    ggplot2,
     heplots,
     mclust,
     moments,
@@ -23,7 +22,8 @@ Imports:
     scales,
     tclust
 Depends:
-    ICS
+    ICS,
+    ggplot2
 LinkingTo: 
     Rcpp, 
     RcppArmadillo
