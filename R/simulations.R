@@ -75,13 +75,13 @@ mixture_sim = function(pct_clusters = c(0.5,0.5) , n = 500, p = 10, delta = 10){
 #' initial data set (outside of which to generate random noise).
 #' @param max  a numeric vector giving the maximum of each variable of the 
 #' initial data set (outside of which to generate random noise).
-#' @param mult  multiplication factor to expand the hyperrectangle around the 
-#' initial data (which is given by `min` and `max`). For instance, the default 
-#' value 2 gives a hyperrectangle for which each side is twice as long as the 
-#' range of the initial data.  The data are then drawn from a uniform 
-#' distribution on the expanded hyperrectangle from which the smaller 
-#' hyperrectangle around the data is cut out. See the examples for an 
-#' illustration.
+#' @param mult  multiplication factor (larger than 1) to expand the 
+#' hyperrectangle around the initial data (which is given by `min` and `max`). 
+#' For instance, the default value 2 gives a hyperrectangle for which each 
+#' side is twice as long as the range of the initial data.  The data are then 
+#' drawn from a uniform distribution on the expanded hyperrectangle from which 
+#' the smaller hyperrectangle around the data is cut out. See the examples for 
+#' an illustration.
 #' 
 #' @return A matrix of generated points.
 #' 
