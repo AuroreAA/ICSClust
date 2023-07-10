@@ -12,7 +12,7 @@ ICS_mlc(x, location = FALSE, ...)
 \item{location}{a logical indicating whether to include the M-estimate of
 location (defaults to \code{FALSE}).}
 
-\item{...}{potential further arguments passed to \code{\link[ICS:ICS_tM]{ICS::ICS_tM()}}.}
+\item{...}{potential further arguments passed to \code{\link[ICS:ICS_scatter]{ICS::ICS_tM()}}.}
 }
 \value{
 An object of class \code{"ICS_scatter"} with the following
@@ -27,7 +27,7 @@ It is a wrapper for the Cauchy estimator of location and scatter
 for a multivariate t-distribution, as computed by \code{\link[ICS:tM]{ICS::tM()}}.
 }
 \seealso{
-\code{\link[ICS:tM]{ICS::tM()}}, \code{\link[ICS:ICS_tM]{ICS::ICS_tM()}}
+\code{\link[ICS:tM]{ICS::tM()}}, \code{\link[ICS:ICS_scatter]{ICS::ICS_tM()}}
 }
 \author{
 Andreas Alfons and Aurore Archimbaud
