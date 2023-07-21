@@ -410,10 +410,6 @@ ICS_lcov <- function(x, mscatter = "cov", proportion = 0.1, ...) {
 #' - [ICS_mcd()]: computes the raw MCD estimates.
 #' - [ICS_rmcd()]: computes the reweighted MCD estimates.
 #' 
-#' The raw estimates in combination of `nsamp`="deterministic" are available 
-#' in RForge `install.packages("robustbase", 
-#' repos = c("http://R-Forge.R-project.org",
-#' "http://cran.at.r-project.org"), dep = TRUE)`
 #' 
 #' 
 #' @return An object of class \code{"ICS_scatter"} with the following

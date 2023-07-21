@@ -3,6 +3,7 @@
 \name{normal_crit}
 \alias{normal_crit}
 \alias{normal_crit.ICS}
+\alias{normal_crit.default}
 \title{Selection of Non-normal Invariant Components Using Marginal
 Normality Tests}
 \usage{
@@ -14,13 +15,25 @@ normal_crit(object, ...)
   test = c("agostino.test", "jarque.test", "anscombe.test", "bonett.test",
     "shapiro.test"),
   max_select = NULL,
-  select_only = FALSE
+  select_only = FALSE,
+  ...
+)
+
+\method{normal_crit}{default}(
+  object,
+  level = 0.05,
+  test = c("agostino.test", "jarque.test", "anscombe.test", "bonett.test",
+    "shapiro.test"),
+  max_select = NULL,
+  select_only = FALSE,
+  gen_kurtosis = NULL,
+  ...
 )
 }
 \arguments{
 \item{object}{object of class \code{ICS} or a data frame or matrix.}
 
-\item{...}{not used.}
+\item{\dots}{additional arguments are currently ignored.}
 
 \item{level}{the initial level used to make a decision based on the test
 p-values. See details. Default is 0.05.}

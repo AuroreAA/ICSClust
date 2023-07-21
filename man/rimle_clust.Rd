@@ -4,10 +4,10 @@
 \alias{rimle_clust}
 \title{Robust Improper Maximum Likelihood Clustering}
 \usage{
-rimle_clust(df, k, clusters_only = FALSE, ...)
+rimle_clust(X, k, clusters_only = FALSE, ...)
 }
 \arguments{
-\item{df}{a numeric matrix or data frame of the data. It corresponds to the
+\item{X}{a numeric matrix or data frame of the data. It corresponds to the
 argument \code{data}.}
 
 \item{k}{the number of clusters searched for. It corresponds to the argument

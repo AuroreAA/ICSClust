@@ -4,10 +4,10 @@
 \alias{tkmeans_clust}
 \title{Trimmed k-means clustering}
 \usage{
-tkmeans_clust(df, k, clusters_only = FALSE, alpha = 0.05, ...)
+tkmeans_clust(X, k, clusters_only = FALSE, alpha = 0.05, ...)
 }
 \arguments{
-\item{df}{a numeric matrix or data frame of the data. It corresponds to the
+\item{X}{a numeric matrix or data frame of the data. It corresponds to the
 argument \code{x}.}
 
 \item{k}{the number of clusters searched for. It corresponds to the argument

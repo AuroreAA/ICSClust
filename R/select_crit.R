@@ -18,7 +18,7 @@
 #' invariant components is returned. If `FALSE` additional details are returned.
 #' @param gen_kurtosis vector of generalized kurtosis values in case of `ICS`
 #'  object.
-#' @param ... not used.
+#' @param \dots  additional arguments are currently ignored.
 #'  
 #' @details
 #' The procedure sequentially tests the first and the last components until 
@@ -71,7 +71,7 @@ normal_crit.ICS <- function(object, level = 0.05,
                             test = c("agostino.test", "jarque.test", 
                                      "anscombe.test", "bonett.test", 
                                      "shapiro.test"), 
-                            max_select = NULL, select_only = FALSE){
+                            max_select = NULL, select_only = FALSE, ...){
   # get the generalized values
   gen_kurtosis <- ICS::gen_kurtosis(object, scale = FALSE)
   
@@ -83,6 +83,7 @@ normal_crit.ICS <- function(object, level = 0.05,
 
 
 #' @export
+#' @rdname normal_crit
 #' @method normal_crit default
 #' @importFrom moments jarque.test anscombe.test bonett.test agostino.test
 #' @importFrom stats shapiro.test
@@ -91,7 +92,7 @@ normal_crit.default <- function(object, level = 0.05,
                                          "anscombe.test", "bonett.test", 
                                          "shapiro.test"), 
                                 max_select = NULL, select_only = FALSE,
-                                gen_kurtosis = NULL){
+                                gen_kurtosis = NULL, ...){
 
   # Initialization
   test <- match.arg(test)
@@ -174,6 +175,9 @@ normal_crit.default <- function(object, level = 0.05,
 #' @param nb_select the exact number of components to select.
 #' @param select_only boolean. If `TRUE` only the vector names of the selected 
 #' invariant components is returned. If `FALSE` additional details are returned. 
+#' @param \dots  additional arguments are currently ignored.
+#' 
+#' 
 #' @details
 #' Only valid if the `nb_select` is less than half of the number of components.
 #' 
@@ -216,7 +220,7 @@ med_crit <- function(object, ...) UseMethod("med_crit")
 #' @method med_crit ICS
 #' @rdname med_crit
 #' @export
-med_crit.ICS <- function(object, nb_select = NULL, select_only = FALSE){
+med_crit.ICS <- function(object, nb_select = NULL, select_only = FALSE, ...){
   med_crit(ICS::gen_kurtosis(object, scale = FALSE), nb_select = nb_select,
            select_only = select_only)
 }
@@ -224,7 +228,7 @@ med_crit.ICS <- function(object, nb_select = NULL, select_only = FALSE){
 #' @method med_crit default
 #' @rdname med_crit
 #' @export
-med_crit.default <- function(object, nb_select = NULL, select_only = FALSE){
+med_crit.default <- function(object, nb_select = NULL, select_only = FALSE, ...){
   # Initialization
   nb_select <- ifelse(is.null(nb_select), length(object)-1, nb_select)
   
@@ -256,7 +260,8 @@ med_crit.default <- function(object, nb_select = NULL, select_only = FALSE){
 #' @param object object of class `ICS`.
 #' @param nb_select the exact number of components to select.
 #' @param select_only boolean. If `TRUE` only the vector names of the selected 
-#' invariant components is returned. If `FALSE` additional details are returned. 
+#' invariant components is returned. If `FALSE` additional details are returned.
+#' @param \dots  additional arguments are currently ignored. 
 #' 
 #' @details
 #'   Compute the rolling variance of the d-`nb_select` generalized 
@@ -300,7 +305,7 @@ var_crit <- function(object, ...) UseMethod("var_crit")
 #' @method var_crit ICS
 #' @rdname var_crit
 #' @export
-var_crit.ICS <- function(object,  nb_select = NULL, select_only = FALSE){
+var_crit.ICS <- function(object,  nb_select = NULL, select_only = FALSE, ...){
   var_crit(ICS::gen_kurtosis(object, scale = FALSE), 
            nb_select = nb_select,
            select_only = select_only)
@@ -309,7 +314,7 @@ var_crit.ICS <- function(object,  nb_select = NULL, select_only = FALSE){
 #' @method var_crit default
 #' @rdname var_crit
 #' @export
-var_crit.default <- function(object, nb_select = NULL, select_only = FALSE){
+var_crit.default <- function(object, nb_select = NULL, select_only = FALSE, ...){
   # Initialization
   d <- length(object)
   nb_select <- ifelse(is.null(nb_select), d-1, nb_select)
@@ -379,6 +384,7 @@ fixOrder <- function (x, nb_spherical)
 #' @param nb_select the exact number of components to select.
 #' @param select_only boolean. If `TRUE` only the vector names of the selected 
 #' invariant components are returned. If `FALSE` additional details are returned. 
+#' @param \dots  additional arguments are currently ignored.
 #'
 #' @details
 #' The discriminatory power \eqn{\eta^{2} = 1 - \Lambda}, where \eqn{\Lambda}  
@@ -436,7 +442,7 @@ discriminatory_crit <- function(object, ...) UseMethod("discriminatory_crit")
 #' @rdname discriminatory_crit
 #' @export
 discriminatory_crit.ICS <- function(object, clusters, method = "eta2", 
-                                    nb_select = NULL, select_only = FALSE){
+                                    nb_select = NULL, select_only = FALSE, ...){
   gen_kurtosis <- ICS::gen_kurtosis(object, scale = FALSE)
   discriminatory_crit(ICS::components(object), 
                        clusters = clusters,
@@ -450,7 +456,8 @@ discriminatory_crit.ICS <- function(object, clusters, method = "eta2",
 #' @rdname discriminatory_crit
 #' @importFrom heplots etasq
 discriminatory_crit.default <- function(object, clusters, method = "eta2", 
-                                        nb_select = NULL, select_only = FALSE){
+                                        nb_select = NULL, select_only = FALSE, 
+                                        ...){
   # Initialization
   method <- match.arg(method)
   nb_select <- ifelse(is.null(nb_select), ncol(object)-1, nb_select)

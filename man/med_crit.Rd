@@ -8,12 +8,14 @@
 \usage{
 med_crit(object, ...)
 
-\method{med_crit}{ICS}(object, nb_select = NULL, select_only = FALSE)
+\method{med_crit}{ICS}(object, nb_select = NULL, select_only = FALSE, ...)
 
-\method{med_crit}{default}(object, nb_select = NULL, select_only = FALSE)
+\method{med_crit}{default}(object, nb_select = NULL, select_only = FALSE, ...)
 }
 \arguments{
 \item{object}{object of class \code{ICS}.}
+
+\item{\dots}{additional arguments are currently ignored.}
 
 \item{nb_select}{the exact number of components to select.}
 

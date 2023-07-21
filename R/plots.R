@@ -27,6 +27,8 @@
 #' `ICS_crit` object is given.
 #' @param alpha the transparency for shading the selected components in case 
 #' an `ICS_crit` object is given.
+#' @param size size of the points. Only relevant for "discriminatory" criteria.
+#' @param \dots  additional arguments are currently ignored.
 #' 
 #' @author Andreas Alfons and Aurore Archimbaud
 #' @import ICS
@@ -57,7 +59,7 @@ select_plot <- function(object, ...) UseMethod("select_plot")
 select_plot.default <- function(object, select = NULL, scale = FALSE, 
                                 screeplot = TRUE, 
                                 type = c("dots", "lines"), width = 0.2, 
-                                color = "grey", alpha = 0.3, size = 3) {
+                                color = "grey", alpha = 0.3, size = 3, ...) {
   
   # Initialization
   type <- match.arg(type)
@@ -79,28 +81,28 @@ select_plot.default <- function(object, select = NULL, scale = FALSE,
 #' @method select_plot data.frame
 #' @rdname select_plot
 #' @export
-select_plot.data.frame <- function(out, type = c("dots", "lines"), 
+select_plot.data.frame <- function(object, type = c("dots", "lines"), 
                                    width = 0.2, color = "grey",
-                                   alpha = 0.3) {
-  scree_plot(out, type = type, width = width, color = color,
+                                   alpha = 0.3, ...){
+  scree_plot(object, type = type, width = width, color = color,
              alpha = alpha)
 }
 
 #' @method select_plot ICS_crit
 #' @rdname select_plot
 #' @export
-select_plot.ICS_crit <- function(out, type = c("dots", "lines"),
+select_plot.ICS_crit <- function(object, type = c("dots", "lines"),
                                  width = 0.2, color = "grey", alpha = 0.3,
-                                 size = 3) {
-  crit <- out$crit
+                                 size = 3, ...){
+  crit <- object$crit
   if(!(crit %in% c("med", "discriminatory"))){
     stop("The non screeplot option is only available for 'med' or 
            'discriminatory' criteria.")
   }else if(crit == "med"){
-    med_plot(out,  type = type, width = width, color = color,
+    med_plot(object,  type = type, width = width, color = color,
              alpha = alpha)
   }else if(crit == "discriminatory"){
-    discriminatory_plot(out, color = color, size = size)
+    discriminatory_plot(object, color = color, size = size)
   }
   
 }
@@ -173,12 +175,12 @@ scree_plot <- function(df, type = c("dots", "lines"), width = 0.2, color = "grey
     nb_last <- rev(select_IC)[which(rev(df$select_IC) == FALSE)[1]-1]
     
     if(length(nb_first) > 0){
-      df_zones <- rbind(df_zones, c(zone = crit, start = 1-width, 
-                                    end = nb_first+width))
+      df_zones <- rbind(df_zones, c(zone = crit, start = 1 - width, 
+                                    end = nb_first + width))
     }
     if(length(nb_last) > 0){
-      df_zones <- rbind(df_zones, c(zone = crit, start = nb_last-width, 
-                                    end = nb_IC+width))
+      df_zones <- rbind(df_zones, c(zone = crit, start = nb_last - width, 
+                                    end = nb_IC + width))
     }
     
     colnames(df_zones) <-  c("zone", "start", "end")
@@ -187,11 +189,11 @@ scree_plot <- function(df, type = c("dots", "lines"), width = 0.2, color = "grey
     df_zones$end <- as.numeric(df_zones$end)
     
   }
-  
-  
   # Initial plot 
   p <- df %>% 
-    ggplot(aes(x = rownames(df), index, y = gen_kurtosis, group = 0))+
+    ggplot(aes(x = rownames(df), 
+               #index,
+               y = gen_kurtosis, group = 0))+
     geom_point() +
     {if(type == "lines") geom_line()} +
     theme_minimal() +
@@ -201,12 +203,14 @@ scree_plot <- function(df, type = c("dots", "lines"), width = 0.2, color = "grey
   
   # Add shadow areas
   if(nrow(df_zones) > 0){
-    p <- p + geom_rect(data = df_zones,
+    p <- p + 
+      geom_rect(data = df_zones,
                        inherit.aes = FALSE,
-                       aes(xmin = start, xmax = end, ymin = -Inf, ymax = Inf,
-                           fill = zone),
-                       alpha = alpha)  +  scale_fill_manual('',
-                                                            values = color)+
+                       aes(xmin = .data$start, xmax = .data$end,
+                           ymin = -Inf, ymax = Inf,
+                           fill = .data$zone),
+                       alpha = alpha) +  
+      scale_fill_manual('', values = color) +
       theme(legend.position = "top")
   }
   
@@ -224,7 +228,7 @@ med_plot <- function(object,  type = c("dots", "lines"), width = 0.2,
                     crit = object$crit)
   # Draw the plot
   scree_plot(df, type = type, width = width, color = color,
-             alpha = alpha)
+             alpha = alpha) +
   labs(y = "|Generalized kurtosis - median|")
   
 }
@@ -240,8 +244,9 @@ discriminatory_plot <- function(object,  size = 3, color = "lightblue"){
                    crit = object$crit)
   # Plot
   df %>%
-    ggplot( aes(x = select_IC, y = power) ) +
-    geom_segment( aes(x = select_IC, xend = select_IC, y = 0, yend = power), 
+    ggplot( aes(x = .data$select_IC, y = .data$power) ) +
+    geom_segment( aes(x = .data$select_IC, xend = .data$select_IC, 
+                      y = 0, yend = power), 
                   color = "grey") +
     geom_point(size = size, color = color) +
     coord_flip() +
@@ -255,7 +260,7 @@ discriminatory_plot <- function(object,  size = 3, color = "lightblue"){
 
 #' Scatterplot Matrix with densities on the diagonal
 #' 
-#' Produce a scatterplot matrix of the variables of a given dataframe 
+#' Produce a gg-scatterplot matrix of the variables of a given dataframe 
 #' or an invariant coordinate system obtained via an ICS transformation with 
 #' densities on the diagonal for each cluster.
 #' 

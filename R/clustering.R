@@ -2,7 +2,7 @@
 #' 
 #' Wrapper for performing k-means clustering from [stats::kmeans()].
 #'
-#' @param df a numeric matrix or data frame of the data. It corresponds to the 
+#' @param X a numeric matrix or data frame of the data. It corresponds to the 
 #' argument \code{x}.
 #' @param k the number of clusters searched for. It corresponds to the argument
 #'  \code{centers}.
@@ -37,10 +37,10 @@
 #' \dontrun{
 #' kmeans_clust(iris[,1:4], k = 3, clusters_only = TRUE)}
 #' 
-kmeans_clust <- function(df, k, clusters_only = FALSE, iter.max = 100,
+kmeans_clust <- function(X, k, clusters_only = FALSE, iter.max = 100,
                          nstart = 20, ...){
   # Perform kmeans
-  clust <- kmeans(x = df, centers = k, iter.max = iter.max, nstart = nstart, 
+  clust <- kmeans(x = X, centers = k, iter.max = iter.max, nstart = nstart, 
                   ...)
   # Get the new partition
   out <-  clust$cluster
@@ -60,7 +60,7 @@ kmeans_clust <- function(df, k, clusters_only = FALSE, iter.max = 100,
 #'
 #'
 #'
-#' @param df a numeric matrix or data frame of the data. It corresponds to the 
+#' @param X a numeric matrix or data frame of the data. It corresponds to the 
 #' argument \code{x}.
 #' @param k the number of clusters searched for. It corresponds to the argument
 #'  \code{k}.
@@ -92,9 +92,9 @@ kmeans_clust <- function(df, k, clusters_only = FALSE, iter.max = 100,
 #' @examples
 #' \dontrun{
 #' tkmeans_clust(iris[,1:4], k = 3, alpha = 0.1, clusters_only = TRUE)}
-tkmeans_clust <- function(df, k, clusters_only = FALSE, alpha = 0.05, ... ){
+tkmeans_clust <- function(X, k, clusters_only = FALSE, alpha = 0.05, ... ){
   # Perform tkmeans
-  clust <- tclust::tkmeans(x = df, k = k, alpha = alpha, ...)
+  clust <- tclust::tkmeans(x = X, k = k, alpha = alpha, ...)
   
   # Get the new partition: the additional cluster of outliers are coded by 0
   out <-  clust$cluster
@@ -113,7 +113,7 @@ tkmeans_clust <- function(df, k, clusters_only = FALSE, alpha = 0.05, ... ){
 #'
 #'
 #'
-#' @param df a numeric matrix or data frame of the data. It corresponds to the 
+#' @param X a numeric matrix or data frame of the data. It corresponds to the 
 #' argument \code{x}.
 #' @param k the number of clusters searched for. It corresponds to the argument
 #'  \code{k}.
@@ -146,9 +146,9 @@ tkmeans_clust <- function(df, k, clusters_only = FALSE, alpha = 0.05, ... ){
 #' \dontrun{
 #' pam_clust(iris[,1:4], k = 3, clusters_only = TRUE)}
 #'  
-pam_clust <- function(df, k, clusters_only = FALSE, ...){
+pam_clust <- function(X, k, clusters_only = FALSE, ...){
   # Perform PAM
-  clust <- cluster::pam(x = df, k = k, diss = FALSE, ...)
+  clust <- cluster::pam(x = X, k = k, diss = FALSE, ...)
   
   # Get the new partition: the additional cluster of outliers are coded by 0
   out <- clust$clustering
@@ -168,7 +168,7 @@ pam_clust <- function(df, k, clusters_only = FALSE, ...){
 #' Wrapper for performing Robust Improper Maximum Likelihood Clustering 
 #' clustering from [otrimle::rimle()].
 #'
-#' @param df a numeric matrix or data frame of the data. It corresponds to the 
+#' @param X a numeric matrix or data frame of the data. It corresponds to the 
 #' argument \code{data}.
 #' @param k the number of clusters searched for. It corresponds to the argument
 #'  \code{G}.
@@ -200,9 +200,9 @@ pam_clust <- function(df, k, clusters_only = FALSE, ...){
 #' @examples
 #' \dontrun{
 #' rimle_clust(iris[,1:4], k = 3, clusters_only = TRUE)}
-rimle_clust <- function(df, k, clusters_only = FALSE, ...){
+rimle_clust <- function(X, k, clusters_only = FALSE, ...){
   # Perform rimle
-  clust <- otrimle::rimle(data = df, G = k,  ...)
+  clust <- otrimle::rimle(data = X, G = k,  ...)
   
   # Get the new partition: the additional cluster of outliers are coded by 0
   out <- clust$cluster
@@ -219,14 +219,14 @@ rimle_clust <- function(df, k, clusters_only = FALSE, ...){
 #' Wrapper for performing Model-Based Clustering from [mclust::Mclust()]
 #' allowing noise or not.
 #'
-#' @param df a numeric matrix or data frame of the data. It corresponds to the 
+#' @param X a numeric matrix or data frame of the data. It corresponds to the 
 #' argument \code{data}.
 #' @param k the number of clusters searched for. It corresponds to the argument
 #'  \code{G}.
 #' @param clusters_only boolean. If \code{TRUE} only the partition of the data 
 #' is returned as a vector. If \code{FALSE} the usual output of the 
 #' [mclust::Mclust()] function is returned.
-#' @param ... other arguments to pass to [otrimle::rimle()].
+#' @param ... other arguments to pass to [mclust::Mclust()].
 #' 
 #' @details
 #' - [mclust_clust()]: does not allow noise
@@ -245,7 +245,7 @@ rimle_clust <- function(df, k, clusters_only = FALSE, ...){
 #' integers (from \code{1:k}) indicating the cluster to which each observation 
 #' is allocated.
 #'  0 indicates outlying observations.}
-#' \item{...}{an object of class \code{"mclust"}}
+#' \item{...}{an object of class "\code{mclust}"}
 #' 
 #' @seealso [mclust::Mclust()]
 #'
@@ -256,9 +256,9 @@ rimle_clust <- function(df, k, clusters_only = FALSE, ...){
 #' @examples
 #' \dontrun{
 #' mclust_clust(iris[,1:4], k = 3, clusters_only = TRUE)}
-mclust_clust <- function(df, k, clusters_only = FALSE, ...){
+mclust_clust <- function(X, k, clusters_only = FALSE, ...){
   # Perform rimle
-  clust <- mclust::Mclust(df, G = k, ...)
+  clust <- mclust::Mclust(X, G = k, ...)
   # Get the new partition: the additional cluster of outliers are coded by 0
   out <- clust$classification
   
@@ -270,9 +270,9 @@ mclust_clust <- function(df, k, clusters_only = FALSE, ...){
 }
 #' @rdname mclust_clust
 #' @export
-rmclust_clust <- function(df, k, clusters_only = FALSE, ...){
+rmclust_clust <- function(X, k, clusters_only = FALSE, ...){
   # Perform rimle
-  clust <- mclust::Mclust(df, G = k, initialization = list(noise = TRUE), ...)
+  clust <- mclust::Mclust(X, G = k, initialization = list(noise = TRUE), ...)
   # Get the new partition: the additional cluster of outliers are coded by 0
   out <- clust$classification
   

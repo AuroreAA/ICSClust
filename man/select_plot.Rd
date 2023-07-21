@@ -18,29 +18,34 @@ select_plot(object, ...)
   width = 0.2,
   color = "grey",
   alpha = 0.3,
-  size = 3
+  size = 3,
+  ...
 )
 
 \method{select_plot}{data.frame}(
-  out,
-  type = c("dots", "lines"),
-  width = 0.2,
-  color = "grey",
-  alpha = 0.3
-)
-
-\method{select_plot}{ICS_crit}(
-  out,
+  object,
   type = c("dots", "lines"),
   width = 0.2,
   color = "grey",
   alpha = 0.3,
-  size = 3
+  ...
+)
+
+\method{select_plot}{ICS_crit}(
+  object,
+  type = c("dots", "lines"),
+  width = 0.2,
+  color = "grey",
+  alpha = 0.3,
+  size = 3,
+  ...
 )
 }
 \arguments{
 \item{object}{an object inheriting from class \code{"ICS"} containing
 results from an ICS transformation or from class \code{ICS_crit}.}
+
+\item{\dots}{additional arguments are currently ignored.}
 
 \item{select}{an integer, character, or logical vector specifying for
 which components to extract the generalized kurtosis values, or
@@ -66,6 +71,8 @@ discriminatory power associated to the evaluated combinations are drawn.}
 
 \item{alpha}{the transparency for shading the selected components in case
 an \code{ICS_crit} object is given.}
+
+\item{size}{size of the points. Only relevant for "discriminatory" criteria.}
 }
 \description{
 Extract the generalized kurtosis values of the components obtained via an

@@ -5,12 +5,12 @@
 \alias{rmclust_clust}
 \title{Model-Based Clustering}
 \usage{
-mclust_clust(df, k, clusters_only = FALSE, ...)
+mclust_clust(X, k, clusters_only = FALSE, ...)
 
-rmclust_clust(df, k, clusters_only = FALSE, ...)
+rmclust_clust(X, k, clusters_only = FALSE, ...)
 }
 \arguments{
-\item{df}{a numeric matrix or data frame of the data. It corresponds to the
+\item{X}{a numeric matrix or data frame of the data. It corresponds to the
 argument \code{data}.}
 
 \item{k}{the number of clusters searched for. It corresponds to the argument
@@ -20,7 +20,7 @@ argument \code{data}.}
 is returned as a vector. If \code{FALSE} the usual output of the
 \code{\link[mclust:Mclust]{mclust::Mclust()}} function is returned.}
 
-\item{...}{other arguments to pass to \code{\link[otrimle:rimle]{otrimle::rimle()}}.}
+\item{...}{other arguments to pass to \code{\link[mclust:Mclust]{mclust::Mclust()}}.}
 }
 \value{
 If \code{clusters_only} is \code{TRUE} a vector of the new partition
@@ -34,7 +34,7 @@ Otherwise a list is returned with the following components:
 integers (from \code{1:k}) indicating the cluster to which each observation
 is allocated.
 0 indicates outlying observations.}
-\item{...}{an object of class \code{"mclust"}}
+\item{...}{an object of class "\code{mclust}"}
 }
 \description{
 Wrapper for performing Model-Based Clustering from \code{\link[mclust:Mclust]{mclust::Mclust()}}

@@ -28,7 +28,7 @@ and \code{strip.text}.}
 \item{colors}{a vector of colors to use. One color for each cluster.}
 }
 \description{
-Produce a scatterplot matrix of the variables of a given dataframe
+Produce a gg-scatterplot matrix of the variables of a given dataframe
 or an invariant coordinate system obtained via an ICS transformation with
 densities on the diagonal for each cluster.
 }

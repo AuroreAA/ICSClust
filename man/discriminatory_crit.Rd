@@ -13,7 +13,8 @@ discriminatory_crit(object, ...)
   clusters,
   method = "eta2",
   nb_select = NULL,
-  select_only = FALSE
+  select_only = FALSE,
+  ...
 )
 
 \method{discriminatory_crit}{default}(
@@ -21,11 +22,14 @@ discriminatory_crit(object, ...)
   clusters,
   method = "eta2",
   nb_select = NULL,
-  select_only = FALSE
+  select_only = FALSE,
+  ...
 )
 }
 \arguments{
 \item{object}{dataframe or object of class \code{ICS}.}
+
+\item{\dots}{additional arguments are currently ignored.}
 
 \item{clusters}{a vector of the same length as the number of
 observations, indicating the true clusters. It is used to compute

@@ -4,10 +4,10 @@
 \alias{kmeans_clust}
 \title{\emph{k}-means clustering}
 \usage{
-kmeans_clust(df, k, clusters_only = FALSE, iter.max = 100, nstart = 20, ...)
+kmeans_clust(X, k, clusters_only = FALSE, iter.max = 100, nstart = 20, ...)
 }
 \arguments{
-\item{df}{a numeric matrix or data frame of the data. It corresponds to the
+\item{X}{a numeric matrix or data frame of the data. It corresponds to the
 argument \code{x}.}
 
 \item{k}{the number of clusters searched for. It corresponds to the argument

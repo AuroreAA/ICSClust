@@ -49,8 +49,9 @@ Authors@R:
 Author: 
     Aurore Archimbaud [aut, cre] (<https://orcid.org/0000-0002-6511-9091>),
     Andreas Alfons [aut] (<https://orcid.org/0000-0002-2513-3788>), 
-    Klaus Nordhausen [aut] (<https://orcid.org/0000-0002-3758-8501>)
-Maintainer: Aurore Archimbaud <archimbaud@ese.eur.nl>
+    Klaus Nordhausen [aut] (<https://orcid.org/0000-0002-3758-8501>),
+    Anne Ruiz-Gazen [aut] (<https://orcid.org/0000-0001-8970-8061>)
+Maintainer: Aurore Archimbaud <aurore.archimbaud@live.fr>
 RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)
 Suggests: 

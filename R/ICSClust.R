@@ -167,13 +167,20 @@ summary.ICSClust <- function(object, info = FALSE, digits = 4L, ...) {
   invisible(object)
 }
 
+#' Scatterplot Matrix with densities on the diagonal
+#' 
+#' Wrapper for [component_plot()].
+#' 
+#' @param x an object of class `ICSClust`. 
+#' @param \dots additional arguments to be passed down to [component_plot()]
+#' 
 #' @method plot ICSClust
 #' @export
-plot.ICSClust <- function(object, ...) {
-  if(length(object$select) == 0){
+plot.ICSClust <- function(x, ...) {
+  if(length(x$select) == 0){
     warning("No component has been selected.")
   }else{
-    component_plot(object$ICS_out, select = object$select, 
-                   clusters = factor(object$clusters), ...)
+    component_plot(x$ICS_out, select = x$select, 
+                   clusters = factor(x$clusters), ...)
   }
 }

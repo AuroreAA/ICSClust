@@ -4,10 +4,10 @@
 \alias{pam_clust}
 \title{Partitioning Around Medoids clustering}
 \usage{
-pam_clust(df, k, clusters_only = FALSE, ...)
+pam_clust(X, k, clusters_only = FALSE, ...)
 }
 \arguments{
-\item{df}{a numeric matrix or data frame of the data. It corresponds to the
+\item{X}{a numeric matrix or data frame of the data. It corresponds to the
 argument \code{x}.}
 
 \item{k}{the number of clusters searched for. It corresponds to the argument

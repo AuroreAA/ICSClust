@@ -40,9 +40,6 @@ as computed by \code{\link[rrcov:CovMcd]{rrcov::CovMcd()}}.
 \item \code{\link[=ICS_mcd]{ICS_mcd()}}: computes the raw MCD estimates.
 \item \code{\link[=ICS_rmcd]{ICS_rmcd()}}: computes the reweighted MCD estimates.
 }
-
-The raw estimates in combination of \code{nsamp}="deterministic" are available
-in RForge \code{install.packages("robustbase",  repos = c("http://R-Forge.R-project.org", "http://cran.at.r-project.org"), dep = TRUE)}
 }
 \seealso{
 \code{\link[rrcov:CovMcd]{rrcov::CovMcd()}}

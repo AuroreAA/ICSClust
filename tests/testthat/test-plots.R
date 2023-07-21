@@ -37,7 +37,7 @@
 # select_plot(select)
 # 
 # select <- discriminatory_crit(res, clusters = iris[,5], select_only = FALSE)
-# select_plot(select)
+# select_plot(select, scree)
 # select_plot(select, screeplot = FALSE)
 # 
 # 
