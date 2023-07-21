@@ -1,6 +1,11 @@
-#' Simulation of mixture of Gaussian distributions
+#' Simulation of a mixture of Gaussian distributions
+#' 
+#' Simulation of a \eqn{n \times p} data frame according to a mixture of \eqn{q}
+#' Gaussian distributions with \eqn{q < p}, different location parameters
+#' \eqn{\mu_1, \dots, \mu_q}, and the identify matrix as the covariance matrix.
 #'
-#' @param pct_clusters a vector of marginal probabilities for each group. 
+#' @param pct_clusters a vector of marginal probabilities for each group, i.e
+#' miwture weights. 
 #' Default is two 
 #' balanced clusters.
 #' @param n integer. The number of observations.
@@ -8,10 +13,15 @@
 #' @param delta integer. The location shift.
 #' 
 #' @details
-#' A mixture of *k* normal Gaussian distributions with the same parameters is 
-#' generated. 
-#' A location shift is added for each group *j* in only one dimension 
-#' (the variable *j-1*). 
+#' Let \eqn{X} be a \eqn{p}-variate real random vector distributed according to
+#' a mixture of \eqn{q} Gaussian distributions with \eqn{q < p}, 
+#' different location parameters \eqn{\mu_1, \dots, \mu_q}, and the same positive 
+#' definite covariance matrix \eqn{I_p}:
+#'  \deqn{X \sim \sum_{h=1}^{q} \epsilon_h \, {\cal N}(\mu_h,I_p),}
+#'  where \eqn{\epsilon_{1}, \dots, \epsilon_{q}} are mixture weights with 
+#'  \eqn{\epsilon_1 + \cdots + \epsilon_q = 1},  \eqn{\mu_1 = 0_p},
+#'   and  \eqn{\mu_{h+1} = \delta e_h} with \eqn{h = 1, \dots, q-1}.
+#'  
 #' 
 #'
 #' @return A dataframe of *n* observations and *p* variables with the first

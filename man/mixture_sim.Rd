@@ -2,12 +2,13 @@
 % Please edit documentation in R/simulations.R
 \name{mixture_sim}
 \alias{mixture_sim}
-\title{Simulation of mixture of Gaussian distributions}
+\title{Simulation of a mixture of Gaussian distributions}
 \usage{
 mixture_sim(pct_clusters = c(0.5, 0.5), n = 500, p = 10, delta = 10)
 }
 \arguments{
-\item{pct_clusters}{a vector of marginal probabilities for each group.
+\item{pct_clusters}{a vector of marginal probabilities for each group, i.e
+miwture weights.
 Default is two
 balanced clusters.}
 
@@ -23,13 +24,19 @@ variable
 indicating the cluster assignment.
 }
 \description{
-Simulation of mixture of Gaussian distributions
+Simulation of a \eqn{n \times p} data frame according to a mixture of \eqn{q}
+Gaussian distributions with \eqn{q < p}, different location parameters
+\eqn{\mu_1, \dots, \mu_q}, and the identify matrix as the covariance matrix.
 }
 \details{
-A mixture of \emph{k} normal Gaussian distributions with the same parameters is
-generated.
-A location shift is added for each group \emph{j} in only one dimension
-(the variable \emph{j-1}).
+Let \eqn{X} be a \eqn{p}-variate real random vector distributed according to
+a mixture of \eqn{q} Gaussian distributions with \eqn{q < p},
+different location parameters \eqn{\mu_1, \dots, \mu_q}, and the same positive
+definite covariance matrix \eqn{I_p}:
+\deqn{X \sim \sum_{h=1}^{q} \epsilon_h \, {\cal N}(\mu_h,I_p),}
+where \eqn{\epsilon_{1}, \dots, \epsilon_{q}} are mixture weights with
+\eqn{\epsilon_1 + \cdots + \epsilon_q = 1},  \eqn{\mu_1 = 0_p},
+and  \eqn{\mu_{h+1} = \delta e_h} with \eqn{h = 1, \dots, q-1}.
 }
 \examples{
 \dontrun{
