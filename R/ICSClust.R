@@ -102,7 +102,7 @@ ICSClust <- function(X, nb_select = NULL, nb_clusters = NULL, ICS_args = list(),
                                    "discriminatory_crit"), 
                      ICS_crit_args = list(),
                      method = c("kmeans_clust", "tkmeans_clust", "pam_clust",
-                                "mclust_clust", "rimle_clust"),
+                                "mclust_clust",  "rmclust_clust", "rimle_clust"),
                      clustering_args = list(),
                      clusters = NULL
 ){
