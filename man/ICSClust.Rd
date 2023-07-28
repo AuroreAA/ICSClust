@@ -11,7 +11,8 @@ ICSClust(
   ICS_args = list(),
   criterion = c("med_crit", "normal_crit", "var_crit", "discriminatory_crit"),
   ICS_crit_args = list(),
-  method = c("kmeans_clust", "tkmeans_clust", "pam_clust", "mclust_clust", "rimle_clust"),
+  method = c("kmeans_clust", "tkmeans_clust", "pam_clust", "mclust_clust",
+    "rmclust_clust", "rimle_clust"),
   clustering_args = list(),
   clusters = NULL
 )
@@ -53,7 +54,7 @@ it is \code{NULL} but it is required to choose the components based on the
 discriminatory criterion \code{\link{discriminatory_crit}}.}
 }
 \value{
-An object with the following components:
+An object of class \code{ICSClust} with the following components:
 \itemize{
 \item \code{ICS_out}: An object of class \code{"ICS"}.
 See \code{\link[=ICS-S3]{ICS}}
@@ -120,6 +121,7 @@ Tandem clustering with invariant coordinate selection.
 \code{\link[=var_crit]{var_crit()}}, \link[=ICS-S3]{ICS},
 \code{\link[=discriminatory_crit]{discriminatory_crit()}}, \code{\link[=kmeans_clust]{kmeans_clust()}}, \code{\link[=tkmeans_clust]{tkmeans_clust()}},
 \code{\link[=pam_clust]{pam_clust()}}, \code{\link[=rimle_clust]{rimle_clust()}}, \code{\link[=mclust_clust]{mclust_clust()}}
+\code{\link[=summary]{summary()}} and \code{\link[=plot]{plot()}} methods
 }
 \author{
 Andreas Alfons and Aurore Archimbaud

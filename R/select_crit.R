@@ -93,12 +93,12 @@ normal_crit.default <- function(object, level = 0.05,
                                          "shapiro.test"), 
                                 max_select = NULL, select_only = FALSE,
                                 gen_kurtosis = NULL, ...){
-
+  
   # Initialization
   test <- match.arg(test)
   comp_select <- colnames(object)
   max_select <- ifelse(is.null(max_select), ncol(object)-1, max_select)
-
+  
   
   # Apply marginal normality tests to all components and keep only the ones lower
   test_pvals <- apply(object, 2, test)
@@ -328,13 +328,14 @@ var_crit.default <- function(object, nb_select = NULL, select_only = FALSE, ...)
     out <- vector()
   }else{
     orderD <- fixOrder(object, d-nb_select)
-    out <- names(object)[orderD$Order[seq(0,nb_select)]]
-    if (!select_only) out <- append(list(crit = "var", nb_select = nb_select,
-                                         gen_kurtosis = object, select = out), 
-                                    orderD)
-    class(out) <- "ICS_crit"
+    out <- as.vector(names(object)[orderD$Order[seq(0,nb_select)]])
+    if (!select_only){
+      out <- append(list(crit = "var", nb_select = nb_select,
+                         gen_kurtosis = object, select = out), 
+                    orderD)
+      class(out) <- "ICS_crit"
+    }
   }
-  
   out
   
   
@@ -444,10 +445,18 @@ discriminatory_crit <- function(object, ...) UseMethod("discriminatory_crit")
 discriminatory_crit.ICS <- function(object, clusters, method = "eta2", 
                                     nb_select = NULL, select_only = FALSE, ...){
   gen_kurtosis <- ICS::gen_kurtosis(object, scale = FALSE)
-  discriminatory_crit(ICS::components(object), 
-                       clusters = clusters,
-                      method = method, nb_select = nb_select, 
-                      select_only = FALSE, gen_kurtosis = gen_kurtosis)
+  
+  if (is.null(clusters)){
+    stop("The 'clusters' argument is mandatory to compute the discriminatory 
+            power of the reduced data frame.")
+    out <- vector()
+  }else{
+    discriminatory_crit(ICS::components(object), 
+                        clusters = clusters,
+                        method = method, nb_select = nb_select, 
+                        select_only = select_only, gen_kurtosis = gen_kurtosis)
+  }
+  
 }
 
 

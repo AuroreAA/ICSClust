@@ -44,7 +44,7 @@
 #'  
 #'
 #' @return  
-#' An object with the following components:
+#' An object of class `ICSClust` with the following components:
 #' - `ICS_out`: An object of class \code{"ICS"}. 
 #' See \code{\link[=ICS-S3]{ICS}}
 #' - `select`: a vector of the names of the selected invariant
@@ -68,6 +68,8 @@
 #' [var_crit()], \link[=ICS-S3]{ICS}, 
 #' [discriminatory_crit()], [kmeans_clust()], [tkmeans_clust()], 
 #' [pam_clust()], [rimle_clust()], [mclust_clust()]
+#' [summary()] and [plot()] methods
+#' 
 #'
 #' @examples
 #' \dontrun{
@@ -125,6 +127,7 @@ ICSClust <- function(X, nb_select = NULL, nb_clusters = NULL, ICS_args = list(),
   if (criterion %in% c("discriminatory_crit")){
     ICS_crit_args <- append(ICS_crit_args, list(clusters = clusters))
   }
+ 
   select <- do.call(criterion, append(list(object = ICS_out,
                                            select_only = TRUE),
                                       ICS_crit_args))
@@ -137,7 +140,7 @@ ICSClust <- function(X, nb_select = NULL, nb_clusters = NULL, ICS_args = list(),
   }else{
     selected <- paste(colnames(reduced_df), collapse = ",")
     clusters <- do.call(method,
-                        append(list(df = reduced_df, k = nb_clusters,
+                        append(list(X = reduced_df, k = nb_clusters,
                                     clusters_only = TRUE),
                                clustering_args))
     
@@ -150,9 +153,23 @@ ICSClust <- function(X, nb_select = NULL, nb_clusters = NULL, ICS_args = list(),
 }
 
 
+#' Summarize an `ICSClust` object
+#' 
+#' Summarizes and prints an `ICSClust` object in an informative way.
+#' 
+#' @param object object of class `ICSClust`.
+#' @param info Logical, either TRUE or FALSE. If TRUE, print additional
+#' information on arguments used for computing scatter matrices
+#' (only named arguments that contain numeric, character, or logical scalars)
+#' and information on the parameters of the algorithm.
+#' Default is FALSE.
+#' @param digits  number of digits for the numeric output.
+#'
+#'
+#' @name summary.ICSClust
 #' @method summary ICSClust
 #' @export
-summary.ICSClust <- function(object, info = FALSE, digits = 4L, ...) {
+summary.ICSClust <- function(object, info = FALSE, digits = 4L) {
   # print information on ICS
   print(object$ICS_out, info = info, digits = digits)
   
@@ -174,6 +191,7 @@ summary.ICSClust <- function(object, info = FALSE, digits = 4L, ...) {
 #' @param x an object of class `ICSClust`. 
 #' @param \dots additional arguments to be passed down to [component_plot()]
 #' 
+#' @name plot.ICSClust
 #' @method plot ICSClust
 #' @export
 plot.ICSClust <- function(x, ...) {

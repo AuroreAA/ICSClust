@@ -58,6 +58,9 @@ testthat::test_file("tests/testthat/test-ICSClust.R")
 usethis::use_test("plots") # to create the test
 testthat::test_file("tests/testthat/test-plots.R")
 
+usethis::use_test("select_crit") # to create the test
+testthat::test_file("tests/testthat/test-select_crit.R")
+
 
 # GitHub Actions ------
 usethis::use_github_action_check_standard()

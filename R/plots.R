@@ -45,10 +45,18 @@
 #' select_plot(out)
 #' select_plot(out, type = "lines")
 #' 
-#' # on an ICS_crit object
+#' # on an ICS_crit object 
+#' # median criterion
 #' out <- med_crit(out, nb_select = 1, select_only = FALSE)
 #' select_plot(out, type = "lines")
-#' select_plot(out, screeplot = FALSE, type = "lines", color = "lightblue")
+#' select_plot(out, screeplot = FALSE, type = "lines", 
+#' color = "lightblue")
+#' 
+#' # discriminatory criterion
+#' out <- discriminatory_crit(out, clusters = iris[,5],
+#'  select_only = FALSE)
+#'  select_plot(out)
+#' 
 #' }
 #' 
 select_plot <- function(object, ...) UseMethod("select_plot")
