@@ -164,12 +164,12 @@ ICSClust <- function(X, nb_select = NULL, nb_clusters = NULL, ICS_args = list(),
 #' and information on the parameters of the algorithm.
 #' Default is FALSE.
 #' @param digits  number of digits for the numeric output.
-#'
+#' @param ... additional arguments are ignored.
 #'
 #' @name summary.ICSClust
 #' @method summary ICSClust
 #' @export
-summary.ICSClust <- function(object, info = FALSE, digits = 4L) {
+summary.ICSClust <- function(object, info = FALSE, digits = 4L, ...) {
   # print information on ICS
   print(object$ICS_out, info = info, digits = digits)
   

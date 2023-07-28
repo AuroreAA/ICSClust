@@ -4,7 +4,7 @@
 \alias{summary.ICSClust}
 \title{Summarize an \code{ICSClust} object}
 \usage{
-\method{summary}{ICSClust}(object, info = FALSE, digits = 4L)
+\method{summary}{ICSClust}(object, info = FALSE, digits = 4L, ...)
 }
 \arguments{
 \item{object}{object of class \code{ICSClust}.}
@@ -16,6 +16,8 @@ and information on the parameters of the algorithm.
 Default is FALSE.}
 
 \item{digits}{number of digits for the numeric output.}
+
+\item{...}{additional arguments are ignored.}
 }
 \description{
 Summarizes and prints an \code{ICSClust} object in an informative way.
