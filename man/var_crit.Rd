@@ -49,11 +49,10 @@ eigenvalues where $d$ is the dimension of the data.  The number
 of non-spherical components should be at most equal to d-2.
 }
 \examples{
-\dontrun{
 X <- iris[,-5]
 out <- ICS(X)
 var_crit(out, nb_select = 2, select_only = FALSE)
-}
+
 }
 \references{
 Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022).

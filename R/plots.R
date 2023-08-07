@@ -37,7 +37,6 @@
 #' 
 #' @rdname select_plot
 #' @examples
-#' \dontrun{
 #' X <- iris[,-5]
 #' out <- ICS(X)
 #' 
@@ -47,17 +46,16 @@
 #' 
 #' # on an ICS_crit object 
 #' # median criterion
-#' out <- med_crit(out, nb_select = 1, select_only = FALSE)
-#' select_plot(out, type = "lines")
-#' select_plot(out, screeplot = FALSE, type = "lines", 
+#' out_med <- med_crit(out, nb_select = 1, select_only = FALSE)
+#' select_plot(out_med, type = "lines")
+#' select_plot(out_med, screeplot = FALSE, type = "lines", 
 #' color = "lightblue")
 #' 
 #' # discriminatory criterion
-#' out <- discriminatory_crit(out, clusters = iris[,5],
+#' out_disc <- discriminatory_crit(out, clusters = iris[,5], 
 #'  select_only = FALSE)
-#'  select_plot(out)
+#' select_plot(out_disc)
 #' 
-#' }
 #' 
 select_plot <- function(object, ...) UseMethod("select_plot")
 
@@ -287,12 +285,10 @@ discriminatory_plot <- function(object,  size = 3, color = "lightblue"){
 #' 
 #' @author Andreas Alfons and Aurore Archimbaud
 #' @examples
-#' \dontrun{
 #' X <- iris[,1:4]
 #' component_plot(X)
 #' out <- ICS(X)
 #' component_plot(out, select = c(1,4))
-#' }
 #' 
 #' @import GGally
 #' @importFrom scales hue_pal 

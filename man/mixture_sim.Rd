@@ -39,10 +39,8 @@ where \eqn{\epsilon_{1}, \dots, \epsilon_{q}} are mixture weights with
 and  \eqn{\mu_{h+1} = \delta e_h} with \eqn{h = 1, \dots, q-1}.
 }
 \examples{
-\dontrun{
 X <- mixture_sim()
 summary(X)
-}
 }
 \author{
 Aurore Archimbaud

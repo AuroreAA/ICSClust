@@ -83,7 +83,6 @@ of the selected components.
 }
 }
 \examples{
-\dontrun{
 X <- iris[,1:4]
 
 # indicating the number of components to retain for the dimension reduction
@@ -109,7 +108,6 @@ out <- ICSClust(X, nb_clusters = 3, method  = "tkmeans_clust",
 clustering_args = list(alpha = 0.1))
 summary(out)
 plot(out)
- }
 }
 \references{
 Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022).

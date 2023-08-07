@@ -34,8 +34,7 @@
 #' @author Andreas Alfons and Aurore Archimbaud
 #'
 #' @examples
-#' \dontrun{
-#' kmeans_clust(iris[,1:4], k = 3, clusters_only = TRUE)}
+#' kmeans_clust(iris[,1:4], k = 3, clusters_only = TRUE)
 #' 
 kmeans_clust <- function(X, k, clusters_only = FALSE, iter.max = 100,
                          nstart = 20, ...){
@@ -90,8 +89,7 @@ kmeans_clust <- function(X, k, clusters_only = FALSE, iter.max = 100,
 #' @importFrom tclust tkmeans
 #'
 #' @examples
-#' \dontrun{
-#' tkmeans_clust(iris[,1:4], k = 3, alpha = 0.1, clusters_only = TRUE)}
+#' tkmeans_clust(iris[,1:4], k = 3, alpha = 0.1, clusters_only = TRUE)
 tkmeans_clust <- function(X, k, clusters_only = FALSE, alpha = 0.05, ... ){
   # Perform tkmeans
   clust <- tclust::tkmeans(x = X, k = k, alpha = alpha, ...)
@@ -143,8 +141,7 @@ tkmeans_clust <- function(X, k, clusters_only = FALSE, alpha = 0.05, ... ){
 #' @importFrom cluster pam
 #'
 #' @examples
-#' \dontrun{
-#' pam_clust(iris[,1:4], k = 3, clusters_only = TRUE)}
+#' pam_clust(iris[,1:4], k = 3, clusters_only = TRUE)
 #'  
 pam_clust <- function(X, k, clusters_only = FALSE, ...){
   # Perform PAM
@@ -198,8 +195,7 @@ pam_clust <- function(X, k, clusters_only = FALSE, ...){
 #' @importFrom otrimle rimle
 #'
 #' @examples
-#' \dontrun{
-#' rimle_clust(iris[,1:4], k = 3, clusters_only = TRUE)}
+#' rimle_clust(iris[,1:4], k = 3, clusters_only = TRUE)
 rimle_clust <- function(X, k, clusters_only = FALSE, ...){
   # Perform rimle
   clust <- otrimle::rimle(data = X, G = k,  ...)
@@ -254,8 +250,7 @@ rimle_clust <- function(X, k, clusters_only = FALSE, ...){
 #' @importFrom mclust Mclust mclustBIC
 #' @rdname mclust_clust
 #' @examples
-#' \dontrun{
-#' mclust_clust(iris[,1:4], k = 3, clusters_only = TRUE)}
+#' mclust_clust(iris[,1:4], k = 3, clusters_only = TRUE)
 mclust_clust <- function(X, k, clusters_only = FALSE, ...){
   # Perform rimle
   clust <- mclust::Mclust(X, G = k, ...)

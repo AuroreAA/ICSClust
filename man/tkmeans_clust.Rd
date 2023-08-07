@@ -39,8 +39,7 @@ Wrapper for performing trimmed k-kmeans clustering from
 \code{\link[tclust:tkmeans]{tclust::tkmeans()}}.
 }
 \examples{
-\dontrun{
-tkmeans_clust(iris[,1:4], k = 3, alpha = 0.1, clusters_only = TRUE)}
+tkmeans_clust(iris[,1:4], k = 3, alpha = 0.1, clusters_only = TRUE)
 }
 \seealso{
 \code{\link[tclust:tkmeans]{tclust::tkmeans()}}

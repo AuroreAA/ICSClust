@@ -32,10 +32,8 @@
 #' @importFrom mvtnorm rmvnorm
 #' @author Aurore Archimbaud
 #' @examples
-#' \dontrun{
 #' X <- mixture_sim()
 #' summary(X)
-#' }
 mixture_sim = function(pct_clusters = c(0.5,0.5) , n = 500, p = 10, delta = 10){
   
   # Checks and initialization of inputs

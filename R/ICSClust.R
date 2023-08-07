@@ -72,7 +72,6 @@
 #' 
 #'
 #' @examples
-#' \dontrun{
 #' X <- iris[,1:4]
 #' 
 #' # indicating the number of components to retain for the dimension reduction
@@ -98,7 +97,6 @@
 #' clustering_args = list(alpha = 0.1))
 #' summary(out)
 #' plot(out)
-#'  }
 ICSClust <- function(X, nb_select = NULL, nb_clusters = NULL, ICS_args = list(),
                      criterion = c("med_crit", "normal_crit", "var_crit",
                                    "discriminatory_crit"), 

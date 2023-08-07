@@ -40,8 +40,7 @@ is allocated.}
 Wrapper for performing k-means clustering from \code{\link[stats:kmeans]{stats::kmeans()}}.
 }
 \examples{
-\dontrun{
-kmeans_clust(iris[,1:4], k = 3, clusters_only = TRUE)}
+kmeans_clust(iris[,1:4], k = 3, clusters_only = TRUE)
 
 }
 \seealso{

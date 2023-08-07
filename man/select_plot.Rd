@@ -81,7 +81,6 @@ given criterion. If an object of class \code{ICS_crit} is given, then the
 selected components are shaded on the plot.
 }
 \examples{
-\dontrun{
 X <- iris[,-5]
 out <- ICS(X)
 
@@ -91,17 +90,16 @@ select_plot(out, type = "lines")
 
 # on an ICS_crit object 
 # median criterion
-out <- med_crit(out, nb_select = 1, select_only = FALSE)
-select_plot(out, type = "lines")
-select_plot(out, screeplot = FALSE, type = "lines", 
+out_med <- med_crit(out, nb_select = 1, select_only = FALSE)
+select_plot(out_med, type = "lines")
+select_plot(out_med, screeplot = FALSE, type = "lines", 
 color = "lightblue")
 
 # discriminatory criterion
-out <- discriminatory_crit(out, clusters = iris[,5],
+out_disc <- discriminatory_crit(out, clusters = iris[,5], 
  select_only = FALSE)
- select_plot(out)
+select_plot(out_disc)
 
-}
 
 }
 \author{

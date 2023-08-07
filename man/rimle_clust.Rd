@@ -38,8 +38,7 @@ Wrapper for performing Robust Improper Maximum Likelihood Clustering
 clustering from \code{\link[otrimle:rimle]{otrimle::rimle()}}.
 }
 \examples{
-\dontrun{
-rimle_clust(iris[,1:4], k = 3, clusters_only = TRUE)}
+rimle_clust(iris[,1:4], k = 3, clusters_only = TRUE)
 }
 \seealso{
 \code{\link[otrimle:rimle]{otrimle::rimle()}}

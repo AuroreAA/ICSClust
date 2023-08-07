@@ -38,8 +38,7 @@ Wrapper for performing Partitioning Around Medoids clustering from
 \code{\link[cluster:pam]{cluster::pam()}}.
 }
 \examples{
-\dontrun{
-pam_clust(iris[,1:4], k = 3, clusters_only = TRUE)}
+pam_clust(iris[,1:4], k = 3, clusters_only = TRUE)
  
 }
 \seealso{

@@ -77,11 +77,9 @@ where \eqn{E} is the within-group sum of squares and cross-products matrix
 and \eqn{T} is the total sum of squares and cross-products matrix.
 }
 \examples{
-\dontrun{
 X <- iris[,-5]
 out <- ICS(X)
 discriminatory_crit(out, clusters = iris[,5], select_only = FALSE)
-}
 }
 \references{
 Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022).

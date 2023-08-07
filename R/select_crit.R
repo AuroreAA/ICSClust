@@ -55,11 +55,9 @@
 #' 
 #' @rdname normal_crit
 #' @examples
-#' \dontrun{
 #' X <- iris[,-5]
 #' out <- ICS(X)
 #' normal_crit(out, level = 0.1, select_only = FALSE)
-#' }
 #' 
 normal_crit <- function(object, ...) UseMethod("normal_crit")
 
@@ -208,11 +206,9 @@ normal_crit.default <- function(object, level = 0.05,
 #' @author Andreas Alfons, Aurore Archimbaud and Klaus Nordhausen
 #' @import ICS
 #' @examples
-#' \dontrun{
 #' X <- iris[,-5]
 #' out <- ICS(X)
 #' med_crit(out, nb_select = 2, select_only = FALSE)
-#' }
 
 med_crit <- function(object, ...) UseMethod("med_crit")
 
@@ -294,11 +290,10 @@ med_crit.default <- function(object, nb_select = NULL, select_only = FALSE, ...)
 #' @author Andreas Alfons, Aurore Archimbaud and Klaus Nordhausen
 #' @import ICS
 #' @examples
-#' \dontrun{
 #' X <- iris[,-5]
 #' out <- ICS(X)
 #' var_crit(out, nb_select = 2, select_only = FALSE)
-#' }
+#' 
 var_crit <- function(object, ...) UseMethod("var_crit")
 
 #' @import ICS
@@ -429,11 +424,9 @@ fixOrder <- function (x, nb_spherical)
 #' @author Andreas Alfons, Aurore Archimbaud, Klaus Nordhausen and Anne Ruiz-Gazen
 #' @import ICS
 #' @examples
-#' \dontrun{
 #' X <- iris[,-5]
 #' out <- ICS(X)
 #' discriminatory_crit(out, clusters = iris[,5], select_only = FALSE)
-#' }
 
 #' @export
 discriminatory_crit <- function(object, ...) UseMethod("discriminatory_crit")

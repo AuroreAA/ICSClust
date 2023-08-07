@@ -33,12 +33,10 @@ or an invariant coordinate system obtained via an ICS transformation with
 densities on the diagonal for each cluster.
 }
 \examples{
-\dontrun{
 X <- iris[,1:4]
 component_plot(X)
 out <- ICS(X)
 component_plot(out, select = c(1,4))
-}
 
 }
 \author{

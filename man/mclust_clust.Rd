@@ -47,8 +47,7 @@ allowing noise or not.
 }
 }
 \examples{
-\dontrun{
-mclust_clust(iris[,1:4], k = 3, clusters_only = TRUE)}
+mclust_clust(iris[,1:4], k = 3, clusters_only = TRUE)
 }
 \seealso{
 \code{\link[mclust:Mclust]{mclust::Mclust()}}

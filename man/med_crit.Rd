@@ -44,11 +44,9 @@ the median.
 Only valid if the \code{nb_select} is less than half of the number of components.
 }
 \examples{
-\dontrun{
 X <- iris[,-5]
 out <- ICS(X)
 med_crit(out, nb_select = 2, select_only = FALSE)
-}
 }
 \references{
 Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022).

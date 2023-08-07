@@ -80,11 +80,9 @@ adjusted for multiple testing by taking the level as \code{level}/\emph{j} for t
 \emph{j}th component.
 }
 \examples{
-\dontrun{
 X <- iris[,-5]
 out <- ICS(X)
 normal_crit(out, level = 0.1, select_only = FALSE)
-}
 
 }
 \references{
