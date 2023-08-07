@@ -122,5 +122,5 @@ Tandem clustering with invariant coordinate selection.
 \code{\link[=summary]{summary()}} and \code{\link[=plot]{plot()}} methods
 }
 \author{
-Andreas Alfons and Aurore Archimbaud
+Aurore Archimbaud
 }

@@ -90,5 +90,5 @@ Tandem clustering with invariant coordinate selection.
 \code{\link[=normal_crit]{normal_crit()}}, \code{\link[=med_crit]{med_crit()}}, \code{\link[=var_crit]{var_crit()}}.
 }
 \author{
-Andreas Alfons, Aurore Archimbaud, Klaus Nordhausen and Anne Ruiz-Gazen
+Aurore Archimbaud and Anne Ruiz-Gazen
 }

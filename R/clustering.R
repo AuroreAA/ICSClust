@@ -31,7 +31,7 @@
 #' 
 #' @importFrom stats kmeans
 #' 
-#' @author Andreas Alfons and Aurore Archimbaud
+#' @author Aurore Archimbaud
 #'
 #' @examples
 #' kmeans_clust(iris[,1:4], k = 3, clusters_only = TRUE)
@@ -85,7 +85,7 @@ kmeans_clust <- function(X, k, clusters_only = FALSE, iter.max = 100,
 #' @seealso [tclust::tkmeans()]
 #' @export
 #' 
-#' @author Andreas Alfons and Aurore Archimbaud
+#' @author Aurore Archimbaud
 #' @importFrom tclust tkmeans
 #'
 #' @examples
@@ -137,7 +137,7 @@ tkmeans_clust <- function(X, k, clusters_only = FALSE, alpha = 0.05, ... ){
 #' @seealso [cluster::pam()]
 #'
 #' @export
-#' @author Andreas Alfons and Aurore Archimbaud
+#' @author Aurore Archimbaud
 #' @importFrom cluster pam
 #'
 #' @examples
@@ -191,7 +191,7 @@ pam_clust <- function(X, k, clusters_only = FALSE, ...){
 #' @seealso [otrimle::rimle()]
 #'
 #' @export
-#' @author Andreas Alfons and Aurore Archimbaud
+#' @author Aurore Archimbaud
 #' @importFrom otrimle rimle
 #'
 #' @examples
@@ -246,7 +246,7 @@ rimle_clust <- function(X, k, clusters_only = FALSE, ...){
 #' @seealso [mclust::Mclust()]
 #'
 #' @export
-#' @author Andreas Alfons and Aurore Archimbaud
+#' @author Aurore Archimbaud
 #' @importFrom mclust Mclust mclustBIC
 #' @rdname mclust_clust
 #' @examples

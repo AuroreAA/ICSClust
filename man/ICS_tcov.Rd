@@ -32,5 +32,5 @@ differences and therefore no location estimate is returned.
 \code{\link{tcov}()}, \code{\link{ucov}()}, \code{\link{ICS_ucov}()}
 }
 \author{
-Andreas Alfons and Aurore Archimbaud
+Andreas Alfons
 }

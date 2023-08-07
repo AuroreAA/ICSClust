@@ -62,7 +62,7 @@
 #' 
 #' @export
 #' 
-#' @author Andreas Alfons and Aurore Archimbaud
+#' @author Aurore Archimbaud
 #' 
 #' @seealso [med_crit()], [normal_crit()], 
 #' [var_crit()], \link[=ICS-S3]{ICS}, 
@@ -166,6 +166,7 @@ ICSClust <- function(X, nb_select = NULL, nb_clusters = NULL, ICS_args = list(),
 #'
 #' @name summary.ICSClust
 #' @method summary ICSClust
+#' @author Aurore Archimbaud
 #' @export
 summary.ICSClust <- function(object, info = FALSE, digits = 4L, ...) {
   # print information on ICS
@@ -191,6 +192,7 @@ summary.ICSClust <- function(object, info = FALSE, digits = 4L, ...) {
 #' 
 #' @name plot.ICSClust
 #' @method plot ICSClust
+#' @author Aurore Archimbaud
 #' @export
 plot.ICSClust <- function(x, ...) {
   if(length(x$select) == 0){

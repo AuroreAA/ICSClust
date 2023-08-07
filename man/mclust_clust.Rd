@@ -53,5 +53,5 @@ mclust_clust(iris[,1:4], k = 3, clusters_only = TRUE)
 \code{\link[mclust:Mclust]{mclust::Mclust()}}
 }
 \author{
-Andreas Alfons and Aurore Archimbaud
+Aurore Archimbaud
 }

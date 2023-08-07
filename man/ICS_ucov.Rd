@@ -37,5 +37,5 @@ related estimator that is based on a transformation as computed by
 \code{\link{tcov}()}, \code{\link{ICS_tcov}()}, \code{\link{ucov}()}
 }
 \author{
-Andreas Alfons and Aurore Archimbaud
+Andreas Alfons
 }

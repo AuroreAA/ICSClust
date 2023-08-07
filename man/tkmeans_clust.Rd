@@ -45,5 +45,5 @@ tkmeans_clust(iris[,1:4], k = 3, alpha = 0.1, clusters_only = TRUE)
 \code{\link[tclust:tkmeans]{tclust::tkmeans()}}
 }
 \author{
-Andreas Alfons and Aurore Archimbaud
+Aurore Archimbaud
 }

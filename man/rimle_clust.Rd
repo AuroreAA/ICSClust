@@ -44,5 +44,5 @@ rimle_clust(iris[,1:4], k = 3, clusters_only = TRUE)
 \code{\link[otrimle:rimle]{otrimle::rimle()}}
 }
 \author{
-Andreas Alfons and Aurore Archimbaud
+Aurore Archimbaud
 }

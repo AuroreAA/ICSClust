@@ -14,3 +14,6 @@
 \description{
 Wrapper for \code{\link[=component_plot]{component_plot()}}.
 }
+\author{
+Aurore Archimbaud
+}

@@ -421,7 +421,7 @@ fixOrder <- function (x, nb_spherical)
 #' 
 #' @seealso [normal_crit()], [med_crit()], [var_crit()].
 #'
-#' @author Andreas Alfons, Aurore Archimbaud, Klaus Nordhausen and Anne Ruiz-Gazen
+#' @author Aurore Archimbaud and Anne Ruiz-Gazen
 #' @import ICS
 #' @examples
 #' X <- iris[,-5]

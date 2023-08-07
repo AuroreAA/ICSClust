@@ -22,3 +22,6 @@ Default is FALSE.}
 \description{
 Summarizes and prints an \code{ICSClust} object in an informative way.
 }
+\author{
+Aurore Archimbaud
+}

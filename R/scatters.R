@@ -25,7 +25,7 @@
 #' \item{scatter}{a numeric matrix giving the estimate of the scatter matrix.}
 #' \item{label}{a character string providing a label for the scatter matrix.}
 #' 
-#' @author Andreas Alfons and Aurore Archimbaud
+#' @author Andreas Alfons
 #'
 #' @seealso
 #' \code{\link[ICS]{ICS}()}
@@ -192,7 +192,7 @@ scov <- function(x, beta = 0.2) {
 #' \item{scatter}{a numeric matrix giving the estimate of the scatter matrix.}
 #' \item{label}{a character string providing a label for the scatter matrix.}
 #' 
-#' @author Andreas Alfons and Aurore Archimbaud
+#' @author Andreas Alfons
 #'
 #' @seealso
 #' \code{\link[ICS]{ICS}()}

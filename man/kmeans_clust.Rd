@@ -47,5 +47,5 @@ kmeans_clust(iris[,1:4], k = 3, clusters_only = TRUE)
 \code{\link[stats:kmeans]{stats::kmeans()}}
 }
 \author{
-Andreas Alfons and Aurore Archimbaud
+Aurore Archimbaud
 }
