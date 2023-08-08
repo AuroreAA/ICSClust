@@ -449,7 +449,6 @@ discriminatory_crit.ICS <- function(object, clusters, method = "eta2",
                         method = method, nb_select = nb_select, 
                         select_only = select_only, gen_kurtosis = gen_kurtosis)
   }
-  
 }
 
 
@@ -458,8 +457,8 @@ discriminatory_crit.ICS <- function(object, clusters, method = "eta2",
 #' @rdname discriminatory_crit
 #' @importFrom heplots etasq
 discriminatory_crit.default <- function(object, clusters, method = "eta2", 
-                                        nb_select = NULL, select_only = FALSE, 
-                                        ...){
+                                        nb_select = NULL, select_only = FALSE,
+                                        gen_kurtosis = NULL, ...){
   # Initialization
   method <- match.arg(method)
   nb_select <- ifelse(is.null(nb_select), ncol(object)-1, nb_select)

@@ -78,7 +78,7 @@ select_plot.default <- function(object, select = NULL, scale = FALSE,
     stop("You can apply 'select_plot' only to an object of class 'ICS' or 'ICS_crit'.")
   }else{
     select_plot(out, type = type, width = width, color = color,
-                alpha = alpha)
+                alpha = alpha, screeplot = screeplot)
   }
   
 }
@@ -99,16 +99,19 @@ select_plot.data.frame <- function(object, type = c("dots", "lines"),
 #' @export
 select_plot.ICS_crit <- function(object, type = c("dots", "lines"),
                                  width = 0.2, color = "grey", alpha = 0.3,
-                                 size = 3, ...){
+                                 size = 3, screeplot = TRUE, ...){
   crit <- object$crit
-  if(!(crit %in% c("med", "discriminatory"))){
+  if(!(crit %in% c("med", "discriminatory")) & isFALSE(screeplot)){
     stop("The non screeplot option is only available for 'med' or 
            'discriminatory' criteria.")
-  }else if(crit == "med"){
+  }else if(crit == "med" & isFALSE(screeplot)){
     med_plot(object,  type = type, width = width, color = color,
              alpha = alpha)
-  }else if(crit == "discriminatory"){
+  }else if(crit == "discriminatory" & isFALSE(screeplot)){
     discriminatory_plot(object, color = color, size = size)
+  }else{
+    select_plot.default(object, type = type, width = width, color = color,
+                alpha = alpha, screeplot = screeplot)
   }
   
 }
@@ -169,6 +172,7 @@ scree_plot <- function(df, type = c("dots", "lines"), width = 0.2, color = "grey
                        alpha = 0.3){
   
   # Initialisation
+  type <- match.arg(type)
   select_IC <- as.integer(sort(gsub("IC.", "", row.names(df)[df$select_IC])))
   nb_IC <- nrow(df)
   crit <- paste("IC selected with the", unique(df$crit), "criterion")
@@ -227,6 +231,10 @@ scree_plot <- function(df, type = c("dots", "lines"), width = 0.2, color = "grey
 #' @noRd
 med_plot <- function(object,  type = c("dots", "lines"), width = 0.2,
                      color = "grey", alpha = 0.3){
+  
+  # Initialization
+  type <- match.arg(type)
+  
   # Get the absolute differences from the generalized kurtosis and the median
   gen_kurtosis_diff_med <- object$gen_kurtosis_diff_med
   df <- data.frame( gen_kurtosis =  gen_kurtosis_diff_med,
