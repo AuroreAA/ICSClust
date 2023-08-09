@@ -166,8 +166,8 @@ normal_crit.default <- function(object, level = 0.05,
 
 #' Selection of Invariant components using the med criterion
 #'
-#' Identifies invariant coordinates associated to the furthest eigenvalues from 
-#' the median.
+#' Identifies invariant coordinates as interesting whose generalized eigenvalues are the furtherest away 
+#' from the median of all generalized eigenvalues.
 #'
 #' @param object object of class `ICS`.
 #' @param nb_select the exact number of components to select.
@@ -177,9 +177,12 @@ normal_crit.default <- function(object, level = 0.05,
 #' 
 #' 
 #' @details
-#' Only valid if the `nb_select` is less than half of the number of components.
-#' 
-#'
+#' If more than half of the components are unintersting and have the same generalized eigenvalue then the median 
+#' of all generalized eigenvalues corresponds 
+#' to the unintersting component generalzed eigenvalue and of interest are components whose generalized eigenvalues differ 
+#' the most from the median. The motivation of the criterion depends therefore on the assumption that at least half of the 
+#' components have equal generalized eigenvalues.
+#'                              
 #' @return If `select_only` is  `TRUE` a vector of the names of the invariant
 #'  components or variables to select. If `FALSE` an object of class `ICS_crit`
 #'  is returned with the following objects: 
