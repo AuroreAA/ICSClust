@@ -5,7 +5,7 @@
 #' \eqn{\mu_1, \dots, \mu_q}, and the identify matrix as the covariance matrix.
 #'
 #' @param pct_clusters a vector of marginal probabilities for each group, i.e
-#' miwture weights. 
+#' mixture weights. 
 #' Default is two 
 #' balanced clusters.
 #' @param n integer. The number of observations.
@@ -24,9 +24,9 @@
 #'  
 #' 
 #'
-#' @return A dataframe of *n* observations and *p* variables with the first
+#' @return A dataframe of *n* observations and *p+1* variables with the first
 #' variable
-#' indicating the cluster assignment.
+#' indicating the cluster assignment using a character string.
 #' @export
 #' 
 #' @importFrom mvtnorm rmvnorm
