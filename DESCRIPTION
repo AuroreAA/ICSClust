@@ -41,7 +41,7 @@ Authors@R:
              role = "aut",
              comment = c(ORCID = "0000-0002-2513-3788")),
       person("Klaus", "Nordhausen", 
-             email = "klaus.k.nordhausen@jyu.fi",
+             email = "klausnordhausenR@jyu.fi",
              role = "aut", 
              comment = c(ORCID = "0000-0002-3758-8501")),
       person("Anne", "Ruiz-Gazen", 
