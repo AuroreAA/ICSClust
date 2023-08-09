@@ -8,6 +8,9 @@ Description: Implementation of Tandem Clustering with Invariant Coordinate
               selection of components.
 License: GPL (>= 3)
 Encoding: UTF-8
+Depends:
+    ICS,
+    ggplot2
 Imports: 
     cluster,
     fpc,
@@ -21,12 +24,11 @@ Imports:
     rrcov,
     scales,
     tclust
-Depends:
-    ICS,
-    ggplot2
 LinkingTo: 
     Rcpp, 
     RcppArmadillo
+Suggests: 
+    testthat (>= 3.0.0)
 URL: https://github.com/AuroreAA/ICSClust
 BugReports: https://github.com/AuroreAA/ICSClust/issues
 Authors@R: 
@@ -52,8 +54,6 @@ Author:
     Klaus Nordhausen [aut] (<https://orcid.org/0000-0002-3758-8501>),
     Anne Ruiz-Gazen [aut] (<https://orcid.org/0000-0001-8970-8061>)
 Maintainer: Aurore Archimbaud <aurore.archimbaud@live.fr>
-RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)
-Suggests: 
-    testthat (>= 3.0.0)
+RoxygenNote: 7.2.3
 Config/testthat/edition: 3
