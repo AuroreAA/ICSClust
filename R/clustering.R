@@ -218,7 +218,7 @@ rimle_clust <- function(X, k, clusters_only = FALSE, ...){
 #' @param X a numeric matrix or data frame of the data. It corresponds to the 
 #' argument \code{data}.
 #' @param k the number of clusters searched for. It corresponds to the argument
-#'  \code{G}.
+#'  \code{G} of function [mclust::Mclust()].
 #' @param clusters_only boolean. If \code{TRUE} only the partition of the data 
 #' is returned as a vector. If \code{FALSE} the usual output of the 
 #' [mclust::Mclust()] function is returned.

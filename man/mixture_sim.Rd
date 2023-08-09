@@ -8,7 +8,7 @@ mixture_sim(pct_clusters = c(0.5, 0.5), n = 500, p = 10, delta = 10)
 }
 \arguments{
 \item{pct_clusters}{a vector of marginal probabilities for each group, i.e
-miwture weights.
+mixture weights.
 Default is two
 balanced clusters.}
 
@@ -19,9 +19,9 @@ balanced clusters.}
 \item{delta}{integer. The location shift.}
 }
 \value{
-A dataframe of \emph{n} observations and \emph{p} variables with the first
+A dataframe of \emph{n} observations and \emph{p+1} variables with the first
 variable
-indicating the cluster assignment.
+indicating the cluster assignment using a character string.
 }
 \description{
 Simulation of a \eqn{n \times p} data frame according to a mixture of \eqn{q}

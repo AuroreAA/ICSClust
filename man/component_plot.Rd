@@ -13,7 +13,7 @@ component_plot(
 )
 }
 \arguments{
-\item{object}{a dataframe or \code{\link[=ICS-S3]{ICS}} class object}
+\item{object}{a dataframe or \code{\link[=ICS-S3]{ICS}} class object.}
 
 \item{select}{a vector of indexes of variables to plot. If \code{NULL} or
 \code{FALSE}, all variables are selected. If \code{TRUE} only the first three and
@@ -28,7 +28,7 @@ and \code{strip.text}.}
 \item{colors}{a vector of colors to use. One color for each cluster.}
 }
 \description{
-Produce a gg-scatterplot matrix of the variables of a given dataframe
+Produces a gg-scatterplot matrix of the variables of a given dataframe
 or an invariant coordinate system obtained via an ICS transformation with
 densities on the diagonal for each cluster.
 }

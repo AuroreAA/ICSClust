@@ -62,7 +62,7 @@ For "med" criterion, the differences between the kurtosis values and the
 median are plotted in absolute values. For "discriminatory" the
 discriminatory power associated to the evaluated combinations are drawn.}
 
-\item{type}{either "dots" or "lines" for the type of plot}
+\item{type}{either "dots" or "lines" for the type of plot.}
 
 \item{width}{the width for shading the selected components in case an
 \code{ICS_crit} object is given.}
@@ -76,7 +76,7 @@ an \code{ICS_crit} object is given.}
 \item{size}{size of the points. Only relevant for "discriminatory" criteria.}
 }
 \description{
-Extract the generalized kurtosis values of the components obtained via an
+Extracts the generalized kurtosis values of the components obtained via an
 ICS transformation and draw either a screeplot or a specific plot for a
 given criterion. If an object of class \code{ICS_crit} is given, then the
 selected components are shaded on the plot.

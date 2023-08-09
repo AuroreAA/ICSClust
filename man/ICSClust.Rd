@@ -37,16 +37,16 @@ See \code{\link[=med_crit]{med_crit()}}, \code{\link[=normal_crit]{normal_crit()
 \code{\link[=discriminatory_crit]{discriminatory_crit()}} for more details.}
 
 \item{ICS_crit_args}{list of arguments passed to \code{\link[=med_crit]{med_crit()}}, \code{\link[=normal_crit]{normal_crit()}},
-\code{\link[=var_crit]{var_crit()}} or
-\code{\link[=discriminatory_crit]{discriminatory_crit()}} for choosing the components to keep.}
+\code{\link[=var_crit]{var_crit()}} or \cr \code{\link[=discriminatory_crit]{discriminatory_crit()}} for choosing the components to keep.}
 
-\item{method}{clustering method to perform. Possible implemented wrapper
-functions are named "kmeans_clust", "tkmeans_clust", "pam_clust",
-"mclust_clust" or "rimle_clust".
+\item{method}{clustering method to perform. Currently implemented wrapper
+functions are "kmeans_clust", "tkmeans_clust", "pam_clust",
+"mclust_clust", "rmclust_clust" or "rimle_clust".
 The default value is "kmeans_clust".}
 
 \item{clustering_args}{list of \code{\link[=kmeans_clust]{kmeans_clust()}},
-\code{\link[=tkmeans_clust]{tkmeans_clust()}},  \code{\link[=pam_clust]{pam_clust()}}, \code{\link[=rimle_clust]{rimle_clust()}} or \code{\link[=mclust_clust]{mclust_clust()}}
+\code{\link[=tkmeans_clust]{tkmeans_clust()}},  \code{\link[=pam_clust]{pam_clust()}}, \code{\link[=rimle_clust]{rimle_clust()}}, \code{\link[=mclust_clust]{mclust_clust()}} or
+\code{\link[=rmclust_clust]{rmclust_clust()}}
 arguments for performing cluster analysis.}
 
 \item{clusters}{a vector indicating the true clusters of the data. By default,
@@ -80,6 +80,8 @@ Tandem clustering with ICS is a sequential method:
 selected based on a criterion.
 \item the clustering method is performed only on the subspace
 of the selected components.
+\item wrapper for several different clustering methods are provided. Users can however
+also write wrappers for other clustering methods.
 }
 }
 \examples{
@@ -117,8 +119,9 @@ Tandem clustering with invariant coordinate selection.
 \seealso{
 \code{\link[=med_crit]{med_crit()}}, \code{\link[=normal_crit]{normal_crit()}},
 \code{\link[=var_crit]{var_crit()}}, \link[=ICS-S3]{ICS},
-\code{\link[=discriminatory_crit]{discriminatory_crit()}}, \code{\link[=kmeans_clust]{kmeans_clust()}}, \code{\link[=tkmeans_clust]{tkmeans_clust()}},
-\code{\link[=pam_clust]{pam_clust()}}, \code{\link[=rimle_clust]{rimle_clust()}}, \code{\link[=mclust_clust]{mclust_clust()}}
+\code{\link[=discriminatory_crit]{discriminatory_crit()}}, \code{\link[=kmeans_clust]{kmeans_clust()}},
+\code{\link[=tkmeans_clust]{tkmeans_clust()}}, \code{\link[=pam_clust]{pam_clust()}},
+\code{\link[=rimle_clust]{rimle_clust()}}, \code{\link[=mclust_clust]{mclust_clust()}}
 \code{\link[=summary]{summary()}} and \code{\link[=plot]{plot()}} methods
 }
 \author{

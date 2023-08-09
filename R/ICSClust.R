@@ -18,14 +18,14 @@
 #'  See [med_crit()], [normal_crit()], [var_crit()] or 
 #' [discriminatory_crit()] for more details.
 #' @param ICS_crit_args list of arguments passed to [med_crit()], [normal_crit()],
-#' [var_crit()] or 
-#' [discriminatory_crit()] for choosing the components to keep.
+#' [var_crit()] or \cr [discriminatory_crit()] for choosing the components to keep.
 #' @param method clustering method to perform. Currently implemented wrapper
 #'  functions are "kmeans_clust", "tkmeans_clust", "pam_clust",
-#'  "mclust_clust" or "rimle_clust".
+#'  "mclust_clust", "rmclust_clust" or "rimle_clust".
 #'  The default value is "kmeans_clust". 
 #' @param clustering_args list of [kmeans_clust()], 
-#' [tkmeans_clust()],  [pam_clust()], [rimle_clust()] or [mclust_clust()] 
+#' [tkmeans_clust()],  [pam_clust()], [rimle_clust()], [mclust_clust()] or
+#' [rmclust_clust()]
 #' arguments for performing cluster analysis.
 #' @param clusters a vector indicating the true clusters of the data. By default,
 #' it is \code{NULL} but it is required to choose the components based on the 

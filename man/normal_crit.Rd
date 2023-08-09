@@ -48,8 +48,7 @@ Default is "agostino.test".}
 \item{select_only}{boolean. If \code{TRUE} only the vector names of the selected
 invariant components is returned. If \code{FALSE} additional details are returned.}
 
-\item{gen_kurtosis}{vector of generalized kurtosis values in case of \code{ICS}
-object.}
+\item{gen_kurtosis}{vector of generalized kurtosis values.}
 }
 \value{
 If \code{select_only} is  \code{TRUE} a vector of the names of the invariant

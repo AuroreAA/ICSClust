@@ -38,15 +38,18 @@ end.
 }
 }
 \description{
-Identifies non spherical invariant coordinates based on the rolling
-variance criterion used in the \code{ICSboot} function of the \code{ICtest}
+Identifies the interesting invariant coordinates based on the rolling
+variance criterion as used in the \code{ICSboot} function of the \code{ICtest}
 package. It computes rolling variances on the generalized eigenvalues
-obtained through ICS.
+obtained through \code{\link[ICS:ICS-S3]{ICS::ICS()}}.
 }
 \details{
-Compute the rolling variance of the d-\code{nb_select} generalized
-eigenvalues where $d$ is the dimension of the data.  The number
-of non-spherical components should be at most equal to d-2.
+Assuming that the generalized eigenvalues of the uninformative components are all the same
+means that the variance of these generalized eigenvalues must be minimal.
+Therefore when \code{nb_select} components should be selected, the method identifies
+the \code{p - nb_select} neighboring generalized eigenvalues with minimal variance,
+where \code{p} is the total number of components. The number of interesting components should be at
+most \code{p-2} as at least two uninteresting components are needed to compute a variance.
 }
 \examples{
 X <- iris[,-5]

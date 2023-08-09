@@ -16,8 +16,7 @@
 #' @param max_select the maximal number of components to select.
 #' @param select_only boolean. If `TRUE` only the vector names of the selected 
 #' invariant components is returned. If `FALSE` additional details are returned.
-#' @param gen_kurtosis vector of generalized kurtosis values in case of `ICS`
-#'  object.
+#' @param gen_kurtosis vector of generalized kurtosis values.
 #' @param \dots  additional arguments are currently ignored.
 #'  
 #' @details
@@ -254,7 +253,7 @@ med_crit.default <- function(object, nb_select = NULL, select_only = FALSE, ...)
 #' Identifies the interesting invariant coordinates based on the rolling
 #' variance criterion as used in the `ICSboot` function of the `ICtest`
 #' package. It computes rolling variances on the generalized eigenvalues
-#' obtained through ICS.
+#' obtained through [ICS::ICS()].
 #'   
 #' @param object object of class `ICS`.
 #' @param nb_select the exact number of components to select.
@@ -386,6 +385,7 @@ fixOrder <- function (x, nb_spherical)
 #' @param nb_select the exact number of components to select.
 #' @param select_only boolean. If `TRUE` only the vector names of the selected 
 #' invariant components are returned. If `FALSE` additional details are returned. 
+#' @param gen_kurtosis vector of generalized kurtosis values.
 #' @param \dots  additional arguments are currently ignored.
 #'
 #' @details

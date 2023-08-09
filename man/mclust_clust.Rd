@@ -14,7 +14,7 @@ rmclust_clust(X, k, clusters_only = FALSE, ...)
 argument \code{data}.}
 
 \item{k}{the number of clusters searched for. It corresponds to the argument
-\code{G}.}
+\code{G} of function \code{\link[mclust:Mclust]{mclust::Mclust()}}.}
 
 \item{clusters_only}{boolean. If \code{TRUE} only the partition of the data
 is returned as a vector. If \code{FALSE} the usual output of the
@@ -43,7 +43,7 @@ allowing noise or not.
 \details{
 \itemize{
 \item \code{\link[=mclust_clust]{mclust_clust()}}: does not allow noise
-\item \code{\link[=rmclust_clust]{rmclust_clust()}}: allow noise
+\item \code{\link[=rmclust_clust]{rmclust_clust()}}: allows noise
 }
 }
 \examples{

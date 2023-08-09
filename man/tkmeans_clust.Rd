@@ -31,7 +31,7 @@ Otherwise a list is returned with the following components:
 \item{clust_method}{the name of the clustering method, i.e. "tkmeans".}
 \item{clusters}{the vector of the new partition of the data, i.e. a vector of
 integers (from \code{1:k}) indicating the cluster to which each observation
-is allocated. 0 indicates trimmed observations.}.
+is allocated. 0 indicates trimmed observations.}
 \item{...}{an object of class \code{"tkmeans"}}.
 }
 \description{
