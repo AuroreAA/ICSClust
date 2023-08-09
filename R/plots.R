@@ -2,7 +2,7 @@
 
 #' Plot the Generalized Kurtosis Values of the ICS Transformation
 #'
-#' Extract the generalized kurtosis values of the components obtained via an
+#' Extracts the generalized kurtosis values of the components obtained via an
 #' ICS transformation and draw either a screeplot or a specific plot for a 
 #' given criterion. If an object of class `ICS_crit` is given, then the 
 #' selected components are shaded on the plot.
@@ -15,7 +15,7 @@
 #' components.
 #' @param scale  a logical indicating whether to scale the generalized 
 #' kurtosis values to have product 1 (defaults to \code{FALSE}).
-#' @param type either "dots" or "lines" for the type of plot
+#' @param type either "dots" or "lines" for the type of plot.
 #' @param screeplot boolean. If `TRUE` a plot of the generalized kurtosis 
 #' values is drawn. Otherwise it is context specific to the `ICS_crit` object.
 #' For "med" criterion, the differences between the kurtosis values and the 
@@ -274,11 +274,11 @@ discriminatory_plot <- function(object,  size = 3, color = "lightblue"){
 
 #' Scatterplot Matrix with densities on the diagonal
 #' 
-#' Produce a gg-scatterplot matrix of the variables of a given dataframe 
+#' Produces a gg-scatterplot matrix of the variables of a given dataframe 
 #' or an invariant coordinate system obtained via an ICS transformation with 
 #' densities on the diagonal for each cluster.
 #' 
-#' @param object a dataframe or \code{\link[=ICS-S3]{ICS}} class object
+#' @param object a dataframe or \code{\link[=ICS-S3]{ICS}} class object.
 #' @param select a vector of indexes of variables to plot. If `NULL` or 
 #' `FALSE`, all variables are selected. If `TRUE` only the first three and 
 #' last three are considered.
@@ -344,7 +344,7 @@ component_plot <- function(object, select = TRUE,
 
 #' Extract selected variables
 #' 
-#' Extract the selected variables for a given dataframe or an invariant 
+#' Extracts the selected variables for a given dataframe or an invariant 
 #' coordinate system obtained via an ICS transformation.
 #' 
 #' @param object a dataframe or \code{\link[=ICS-S3]{ICS}} class object
