@@ -20,10 +20,10 @@
 #' @param ICS_crit_args list of arguments passed to [med_crit()], [normal_crit()],
 #' [var_crit()] or 
 #' [discriminatory_crit()] for choosing the components to keep.
-#' @param method clustering method to perform. Possible implemented wrapper
-#'  functions are named "kmeans_clust", "tkmeans_clust", "pam_clust",
+#' @param method clustering method to perform. Currently implemented wrapper
+#'  functions are "kmeans_clust", "tkmeans_clust", "pam_clust",
 #'  "mclust_clust" or "rimle_clust".
-#'  The default value is "kmeans_clust".
+#'  The default value is "kmeans_clust". 
 #' @param clustering_args list of [kmeans_clust()], 
 #' [tkmeans_clust()],  [pam_clust()], [rimle_clust()] or [mclust_clust()] 
 #' arguments for performing cluster analysis.
@@ -41,7 +41,9 @@
 #'  
 #' - the clustering method is performed only on the subspace
 #'  of the selected components.
-#'  
+#'
+#' - wrapper for several different clustering methods are provided. Users can however
+#'   also write wrappers for other clustering methods.
 #'
 #' @return  
 #' An object of class `ICSClust` with the following components:
@@ -66,8 +68,9 @@
 #' 
 #' @seealso [med_crit()], [normal_crit()], 
 #' [var_crit()], \link[=ICS-S3]{ICS}, 
-#' [discriminatory_crit()], [kmeans_clust()], [tkmeans_clust()], 
-#' [pam_clust()], [rimle_clust()], [mclust_clust()]
+#' [discriminatory_crit()], [kmeans_clust()],
+#' [tkmeans_clust()], [pam_clust()],
+#' [rimle_clust()], [mclust_clust()]
 #' [summary()] and [plot()] methods
 #' 
 #'
