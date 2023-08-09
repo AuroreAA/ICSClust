@@ -79,7 +79,7 @@ kmeans_clust <- function(X, k, clusters_only = FALSE, iter.max = 100,
 #' \item{clust_method}{the name of the clustering method, i.e. "tkmeans".}
 #' \item{clusters}{the vector of the new partition of the data, i.e. a vector of 
 #' integers (from \code{1:k}) indicating the cluster to which each observation
-#'  is allocated. 0 indicates trimmed observations.}.
+#'  is allocated. 0 indicates trimmed observations.}
 #' \item{...}{an object of class \code{"tkmeans"}}.
 #' 
 #' @seealso [tclust::tkmeans()]
@@ -226,7 +226,7 @@ rimle_clust <- function(X, k, clusters_only = FALSE, ...){
 #' 
 #' @details
 #' - [mclust_clust()]: does not allow noise
-#' - [rmclust_clust()]: allow noise
+#' - [rmclust_clust()]: allows noise
 #' 
 #'
 #' @return If \code{clusters_only} is \code{TRUE} a vector of the new partition
