@@ -38,6 +38,7 @@ select_plot(object, ...)
   color = "grey",
   alpha = 0.3,
   size = 3,
+  screeplot = TRUE,
   ...
 )
 }

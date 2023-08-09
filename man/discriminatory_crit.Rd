@@ -23,6 +23,7 @@ discriminatory_crit(object, ...)
   method = "eta2",
   nb_select = NULL,
   select_only = FALSE,
+  gen_kurtosis = NULL,
   ...
 )
 }
