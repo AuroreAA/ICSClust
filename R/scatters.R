@@ -421,7 +421,7 @@ ICS_lcov <- function(x, mscatter = "cov", proportion = 0.1, ...) {
 #' 
 #' @seealso [rrcov::CovMcd()]
 #' @author Andreas Alfons and Aurore Archimbaud
-#' @rdname ICS_mcd_raw
+#' @name ICS_mcd
 #' @export
 #' @importFrom rrcov CovMcd
 ICS_mcd_raw <- function(x, location = FALSE,
@@ -439,7 +439,7 @@ ICS_mcd_raw <- function(x, location = FALSE,
 }
 
 
-#' @rdname ICS_mcd_raw
+#' @name ICS_mcd
 #' @export
 #' @importFrom rrcov CovMcd
 ICS_mcd_rwt <- function(x, location = FALSE, nsamp = "deterministic",
