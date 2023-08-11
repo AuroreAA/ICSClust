@@ -407,8 +407,8 @@ ICS_lcov <- function(x, mscatter = "cov", proportion = 0.1, ...) {
 #' @param ... potential further arguments passed to [rrcov::CovMcd()].
 #' 
 #' @details
-#' - [ICS_mcd()]: computes the raw MCD estimates.
-#' - [ICS_rmcd()]: computes the reweighted MCD estimates.
+#' - [ICS_mcd_raw()]: computes the raw MCD estimates.
+#' - [ICS_mcd_rwt()]: computes the reweighted MCD estimates.
 #' 
 #' 
 #' 
@@ -421,10 +421,10 @@ ICS_lcov <- function(x, mscatter = "cov", proportion = 0.1, ...) {
 #' 
 #' @seealso [rrcov::CovMcd()]
 #' @author Andreas Alfons and Aurore Archimbaud
-#' @rdname ICS_mcd
+#' @rdname ICS_mcd_raw
 #' @export
 #' @importFrom rrcov CovMcd
-ICS_mcd <- function(x, location = FALSE,
+ICS_mcd_raw <- function(x, location = FALSE,
                     nsamp = "deterministic",  alpha = 0.5, ...) {
   # compute scatter estimates
   mcd_out <- rrcov::CovMcd(x, raw.only = TRUE, alpha = alpha, nsamp = nsamp, 
@@ -439,10 +439,10 @@ ICS_mcd <- function(x, location = FALSE,
 }
 
 
-#' @rdname ICS_mcd
+#' @rdname ICS_mcd_raw
 #' @export
 #' @importFrom rrcov CovMcd
-ICS_rmcd <- function(x, location = FALSE, nsamp = "deterministic",
+ICS_mcd_rwt <- function(x, location = FALSE, nsamp = "deterministic",
                      alpha = 0.5, ...) {
   # compute scatter estimates
   rmcd_out <- rrcov::CovMcd(x, raw.only = FALSE, alpha = alpha, nsamp = nsamp,  

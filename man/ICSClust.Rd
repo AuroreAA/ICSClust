@@ -95,7 +95,7 @@ plot(out)
 
 # changing the scatter pair to consider in ICS
 out <- ICSClust(X, nb_select = 1, nb_clusters = 3,
-ICS_args = list(S1 = ICS_mcd, S2 = ICS_cov,S1_args = list(alpha = 0.5)))
+ICS_args = list(S1 = ICS_mcd_raw, S2 = ICS_cov,S1_args = list(alpha = 0.5)))
 summary(out)
 plot(out)
  

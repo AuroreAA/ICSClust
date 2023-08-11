@@ -27,7 +27,7 @@ devtools::install_github("AuroreAA/ICSClust")
 library(ICSClust)
 #> Loading required package: ICS
 #> Loading required package: mvtnorm
-#> Warning: package 'mvtnorm' was built under R version 4.3.1
+#> Loading required package: ggplot2
 #> Registered S3 method overwritten by 'GGally':
 #>   method from   
 #>   +.gg   ggplot2
@@ -46,8 +46,8 @@ summary(ICS_out)
 #> Information on the algorithm:
 #> QR: TRUE
 #> whiten: FALSE
-#> fix_signs: scores
 #> center: FALSE
+#> fix_signs: scores
 #> 
 #> The generalized kurtosis measures of the components are:
 #>   IC.1   IC.2   IC.3   IC.4 
@@ -153,8 +153,8 @@ table(ICS_out$clusters, iris[,5])
 #>    
 #>     setosa versicolor virginica
 #>   1      0         25        19
-#>   2      1         25        31
-#>   3     49          0         0
+#>   2     49          0         0
+#>   3      1         25        31
 component_plot(ICS_out$ICS_out, select = ICS_out$select, clusters = as.factor(ICS_out$clusters))
 ```
 
@@ -164,14 +164,14 @@ component_plot(ICS_out$ICS_out, select = ICS_out$select, clusters = as.factor(IC
 
 # to change the scatter pair
 ICS_out <- ICSClust(X, nb_select = 1, nb_clusters = 3,
-                ICS_args = list(S1 = ICS_mcd, S2 = ICS_cov,
+                ICS_args = list(S1 = ICS_mcd_raw, S2 = ICS_cov,
                                 S1_args = list(alpha = 0.5)))
 table(ICS_out$clusters, iris[,5])
 #>    
 #>     setosa versicolor virginica
 #>   1      0          5        26
-#>   2     50          0         0
-#>   3      0         45        24
+#>   2      0         45        24
+#>   3     50          0         0
 component_plot(ICS_out$ICS_out, clusters = as.factor(ICS_out$clusters))
 ```
 
@@ -182,7 +182,7 @@ component_plot(ICS_out$ICS_out, clusters = as.factor(ICS_out$clusters))
 
 # to change the criteria to select the invariant components
 ICS_out <- ICSClust(X, nb_clusters = 3,
-                ICS_args = list(S1 = ICS_mcd, S2 = ICS_cov,
+                ICS_args = list(S1 = ICS_mcd_raw, S2 = ICS_cov,
                                 S1_args = list(alpha = 0.5)),
                 criterion = "normal_crit",
                 ICS_crit_args = list(level = 0.1, test = "anscombe.test",
@@ -198,7 +198,7 @@ component_plot(ICS_out$ICS_out, select = ICS_out$select, clusters = as.factor(IC
 
 # to change the clustering method
 ICS_out <- ICSClust(X, nb_select = 1, nb_clusters = 3,
-                ICS_args = list(S1 = ICS_mcd, S2 = ICS_cov,
+                ICS_args = list(S1 = ICS_mcd_raw, S2 = ICS_cov,
                                 S1_args = list(alpha = 0.5)),
                 method  = "tkmeans_clust",
                 clustering_args = list(alpha = 0.1))
