@@ -21,8 +21,8 @@ ICSClust(
 \item{X}{a numeric matrix or data frame containing the data.}
 
 \item{nb_select}{the number of components to select.
-It is used only in case \code{criterion} is either "med_crit", "var_crit" or
-"discriminatory_crit".  By default it is set to \code{NULL}, i.e the number
+It is used only in case \code{criterion} is either \code{"med_crit"}, \code{"var_crit"}
+or \code{"discriminatory_crit"}.  By default it is set to \code{NULL}, i.e the number
 of components to select is the number of variables minus one.}
 
 \item{nb_clusters}{the number of clusters searched for.}
@@ -31,8 +31,8 @@ of components to select is the number of variables minus one.}
 values of \code{\link[ICS]{ICS-S3}} are used.}
 
 \item{criterion}{criterion to automatically decide which invariant components
-to keep. Possible values are "med_crit", "normal_crit", "var_crit" and
-"discriminatory_crit". The default value is "med_crit".
+to keep. Possible values are \code{"med_crit"}, \code{"normal_crit"}, \code{"var_crit"} and
+\code{"discriminatory_crit"}. The default value is \code{"med_crit"}.
 See \code{\link[=med_crit]{med_crit()}}, \code{\link[=normal_crit]{normal_crit()}}, \code{\link[=var_crit]{var_crit()}} or
 \code{\link[=discriminatory_crit]{discriminatory_crit()}} for more details.}
 
@@ -40,9 +40,9 @@ See \code{\link[=med_crit]{med_crit()}}, \code{\link[=normal_crit]{normal_crit()
 \code{\link[=var_crit]{var_crit()}} or \cr \code{\link[=discriminatory_crit]{discriminatory_crit()}} for choosing the components to keep.}
 
 \item{method}{clustering method to perform. Currently implemented wrapper
-functions are "kmeans_clust", "tkmeans_clust", "pam_clust",
-"mclust_clust", "rmclust_clust" or "rimle_clust".
-The default value is "kmeans_clust".}
+functions are \code{"kmeans_clust"}, \code{"tkmeans_clust"}, \code{"pam_clust"},
+\code{"mclust_clust"}, \code{"rmclust_clust"} or \code{"rimle_clust"}.
+The default value is \code{"kmeans_clust"}.}
 
 \item{clustering_args}{list of \code{\link[=kmeans_clust]{kmeans_clust()}},
 \code{\link[=tkmeans_clust]{tkmeans_clust()}},  \code{\link[=pam_clust]{pam_clust()}}, \code{\link[=rimle_clust]{rimle_clust()}}, \code{\link[=mclust_clust]{mclust_clust()}} or

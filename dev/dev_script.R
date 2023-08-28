@@ -1,7 +1,12 @@
 # Package development
 devtools::load_all()
+
+devtools::check(remote = TRUE)
 #renv::install("C:/Users/auror/OneDrive - Erasmus University Rotterdam/Packages/ICS_1.3-1.tar.gz")
 #renv::install("C:/Users/auror/Documents/EUR/OneDrive - Erasmus University Rotterdam/Packages/ICS_1.3-1.tar.gz")
+
+# renv::install("C:/Users/auror/Documents/EUR/OneDrive - Erasmus University Rotterdam/Packages/ICS_1.4-0.tar.gz")
+
 
 # install.packages("rrcov",
 #                  repos = c("http://R-Forge.R-project.org",

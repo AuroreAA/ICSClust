@@ -39,9 +39,9 @@ normal_crit(object, ...)
 p-values. See details. Default is 0.05.}
 
 \item{test}{name of the normality test to be used. Possibilities are
-"jarque.test", "anscombe.test", "bonett.test", "agostino.test",
-"shapiro.test".
-Default is "agostino.test".}
+\code{"jarque.test"}, \code{"anscombe.test"}, \code{"bonett.test"}, \code{"agostino.test"},
+\code{"shapiro.test"}.
+Default is \code{"agostino.test"}.}
 
 \item{max_select}{the maximal number of components to select.}
 

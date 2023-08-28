@@ -62,7 +62,7 @@ For "med" criterion, the differences between the kurtosis values and the
 median are plotted in absolute values. For "discriminatory" the
 discriminatory power associated to the evaluated combinations are drawn.}
 
-\item{type}{either "dots" or "lines" for the type of plot.}
+\item{type}{either \code{"dots"} or \code{"lines"} for the type of plot.}
 
 \item{width}{the width for shading the selected components in case an
 \code{ICS_crit} object is given.}

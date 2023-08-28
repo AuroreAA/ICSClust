@@ -37,7 +37,7 @@ observations, indicating the true clusters. It is used to compute
 the discriminatory power based on it.}
 
 \item{method}{the name of the discriminatory power.
-Only "eta2" is implemented.}
+Only \code{"eta2"} is implemented.}
 
 \item{nb_select}{the exact number of components to select.}
 

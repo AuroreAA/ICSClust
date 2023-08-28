@@ -16,8 +16,8 @@ ICS_mcd_rwt(x, location = FALSE, nsamp = "deterministic", alpha = 0.5, ...)
 \item{location}{a logical indicating whether to include the MCD-estimate of
 location (defaults to \code{FALSE}).}
 
-\item{nsamp}{number of subsets used for initial estimates or "best",
-"exact" or "deterministic" (default).}
+\item{nsamp}{number of subsets used for initial estimates or \code{"best"},
+\code{"exact"} or \code{"deterministic"} (default).}
 
 \item{alpha}{numeric parameter controlling the size of the subsets over
 which the determinant is minimized as in \code{\link[rrcov:CovMcd]{rrcov::CovMcd()}}.}

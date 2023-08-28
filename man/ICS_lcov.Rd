@@ -9,7 +9,7 @@ ICS_lcov(x, mscatter = "cov", proportion = 0.1, ...)
 \arguments{
 \item{x}{a numeric matrix or data frame.}
 
-\item{mscatter}{"mcd" or "cov" (default); specified minimum covariance
+\item{mscatter}{\code{"mcd"} or \code{"cov"} (default); specified minimum covariance
 determinant or classical covariance matrix to be used for Mahalanobis
 distance computation.}
 

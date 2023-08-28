@@ -15,7 +15,7 @@
 #' components.
 #' @param scale  a logical indicating whether to scale the generalized 
 #' kurtosis values to have product 1 (defaults to \code{FALSE}).
-#' @param type either "dots" or "lines" for the type of plot.
+#' @param type either `"dots"` or `"lines"` for the type of plot.
 #' @param screeplot boolean. If `TRUE` a plot of the generalized kurtosis 
 #' values is drawn. Otherwise it is context specific to the `ICS_crit` object.
 #' For "med" criterion, the differences between the kurtosis values and the 

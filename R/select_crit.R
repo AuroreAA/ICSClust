@@ -10,9 +10,9 @@
 #' @param level the initial level used to make a decision based on the test
 #' p-values. See details. Default is 0.05.
 #' @param test name of the normality test to be used. Possibilities are 
-#' "jarque.test", "anscombe.test", "bonett.test", "agostino.test",
-#'  "shapiro.test".
-#' Default is "agostino.test".
+#' `"jarque.test"`, `"anscombe.test"`, `"bonett.test"`, `"agostino.test"`,
+#'  `"shapiro.test"`.
+#' Default is `"agostino.test"`.
 #' @param max_select the maximal number of components to select.
 #' @param select_only boolean. If `TRUE` only the vector names of the selected 
 #' invariant components is returned. If `FALSE` additional details are returned.
@@ -381,7 +381,7 @@ fixOrder <- function (x, nb_spherical)
 #'  observations, indicating the true clusters. It is used to compute
 #' the discriminatory power based on it.
 #' @param method the name of the discriminatory power. 
-#' Only "eta2" is implemented.
+#' Only `"eta2"` is implemented.
 #' @param nb_select the exact number of components to select.
 #' @param select_only boolean. If `TRUE` only the vector names of the selected 
 #' invariant components are returned. If `FALSE` additional details are returned. 

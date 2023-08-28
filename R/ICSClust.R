@@ -6,23 +6,23 @@
 #'
 #' @param X a numeric matrix or data frame containing the data.
 #' @param nb_select the number of components to select. 
-#' It is used only in case \code{criterion} is either "med_crit", "var_crit" or 
-#' "discriminatory_crit".  By default it is set to \code{NULL}, i.e the number 
+#' It is used only in case \code{criterion} is either `"med_crit"`, `"var_crit"` 
+#' or `"discriminatory_crit"`.  By default it is set to \code{NULL}, i.e the number 
 #' of components to select is the number of variables minus one.
 #' @param nb_clusters the number of clusters searched for. 
 #' @param ICS_args list of \code{\link[ICS]{ICS-S3}} arguments. Otherwise, default 
 #' values of \code{\link[ICS]{ICS-S3}} are used.
 #' @param criterion criterion to automatically decide which invariant components
-#'  to keep. Possible values are "med_crit", "normal_crit", "var_crit" and 
-#'  "discriminatory_crit". The default value is "med_crit". 
+#'  to keep. Possible values are `"med_crit"`, `"normal_crit"`, `"var_crit"` and 
+#'  `"discriminatory_crit"`. The default value is `"med_crit"`. 
 #'  See [med_crit()], [normal_crit()], [var_crit()] or 
 #' [discriminatory_crit()] for more details.
 #' @param ICS_crit_args list of arguments passed to [med_crit()], [normal_crit()],
 #' [var_crit()] or \cr [discriminatory_crit()] for choosing the components to keep.
 #' @param method clustering method to perform. Currently implemented wrapper
-#'  functions are "kmeans_clust", "tkmeans_clust", "pam_clust",
-#'  "mclust_clust", "rmclust_clust" or "rimle_clust".
-#'  The default value is "kmeans_clust". 
+#'  functions are `"kmeans_clust"`, `"tkmeans_clust"`, `"pam_clust"`,
+#'  `"mclust_clust"`, `"rmclust_clust"` or `"rimle_clust"`.
+#'  The default value is `"kmeans_clust"`. 
 #' @param clustering_args list of [kmeans_clust()], 
 #' [tkmeans_clust()],  [pam_clust()], [rimle_clust()], [mclust_clust()] or
 #' [rmclust_clust()]

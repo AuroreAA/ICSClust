@@ -360,7 +360,7 @@ ICS_mlc <- function(x, location = FALSE, ...) {
 #' as computed by [fpc::localshape()].
 #' 
 #' @param x a numeric matrix or data frame.
-#' @param mscatter "mcd" or "cov" (default); specified minimum covariance 
+#' @param mscatter `"mcd"` or `"cov"` (default); specified minimum covariance 
 #' determinant or classical covariance matrix to be used for Mahalanobis
 #'  distance computation.
 #' @param proportion proportion of points to be considered as neighbourhood.
@@ -400,8 +400,8 @@ ICS_lcov <- function(x, mscatter = "cov", proportion = 0.1, ...) {
 #' @param x a numeric matrix or data frame.
 #' @param location  a logical indicating whether to include the MCD-estimate of
 #' location (defaults to `FALSE`). 
-#' @param nsamp number of subsets used for initial estimates or "best", 
-#' "exact" or "deterministic" (default).
+#' @param nsamp number of subsets used for initial estimates or `"best"`, 
+#' `"exact"` or `"deterministic"` (default).
 #' @param alpha numeric parameter controlling the size of the subsets over 
 #' which the determinant is minimized as in [rrcov::CovMcd()].
 #' @param ... potential further arguments passed to [rrcov::CovMcd()].
