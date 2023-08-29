@@ -55,7 +55,7 @@
 #'  of integers (from \code{1:k}) indicating the cluster to which each
 #'   observation is allocated. 0 indicates outlying observations.
 #'   
-#' [summary.ICSClust()] and [plot.ICSClust()] methods are available.
+#' [summary()][summary.ICSClust()] and [plot()][plot.ICSClust()] methods are available.
 #'  
 #' @references
 #' Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022). 

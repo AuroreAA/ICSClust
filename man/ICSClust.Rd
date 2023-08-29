@@ -65,7 +65,7 @@ of integers (from \code{1:k}) indicating the cluster to which each
 observation is allocated. 0 indicates outlying observations.
 }
 
-\code{\link[=summary.ICSClust]{summary.ICSClust()}} and \code{\link[=plot.ICSClust]{plot.ICSClust()}} methods are available.
+\link[=summary.ICSClust]{summary()} and \link[=plot.ICSClust]{plot()} methods are available.
 }
 \description{
 Sequential clustering approach: (i) dimension reduction through the Invariant
