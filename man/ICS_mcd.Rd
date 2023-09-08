@@ -2,9 +2,13 @@
 % Please edit documentation in R/scatters.R
 \name{ICS_mcd}
 \alias{ICS_mcd}
+\alias{ICS_mcd_raw}
+\alias{ICS_mcd_rwt}
 \title{MCD location and Scatter Estimates for ICS}
 \usage{
-ICS_mcd(x, location = FALSE, nsamp = "deterministic", alpha = 0.5, ...)
+ICS_mcd_raw(x, location = FALSE, nsamp = "deterministic", alpha = 0.5, ...)
+
+ICS_mcd_rwt(x, location = FALSE, nsamp = "deterministic", alpha = 0.5, ...)
 }
 \arguments{
 \item{x}{a numeric matrix or data frame.}
@@ -12,8 +16,8 @@ ICS_mcd(x, location = FALSE, nsamp = "deterministic", alpha = 0.5, ...)
 \item{location}{a logical indicating whether to include the MCD-estimate of
 location (defaults to \code{FALSE}).}
 
-\item{nsamp}{number of subsets used for initial estimates or "best",
-"exact" or "deterministic" (default).}
+\item{nsamp}{number of subsets used for initial estimates or \code{"best"},
+\code{"exact"} or \code{"deterministic"} (default).}
 
 \item{alpha}{numeric parameter controlling the size of the subsets over
 which the determinant is minimized as in \code{\link[rrcov:CovMcd]{rrcov::CovMcd()}}.}
@@ -29,13 +33,18 @@ estimate.}
 \item{label}{a character string providing a label for the scatter matrix.}
 }
 \description{
-It is a wrapper for the raw MCD estimator of location and scatter
+It is a wrapper for the (reweighted) MCD estimators of location and scatter
 as computed by \code{\link[rrcov:CovMcd]{rrcov::CovMcd()}}.
 }
 \details{
-The raw estimates in combination of \code{nsamp}="deterministic" are available
-in RForge \code{install.packages("robustbase",  repos = c("http://R-Forge.R-project.org", "http://cran.at.r-project.org"), dep = TRUE)}
+\itemize{
+\item \code{\link[=ICS_mcd_raw]{ICS_mcd_raw()}}: computes the raw MCD estimates.
+\item \code{\link[=ICS_mcd_rwt]{ICS_mcd_rwt()}}: computes the reweighted MCD estimates.
+}
 }
 \seealso{
-\code{\link[rrcov:CovMcd]{rrcov::CovMcd()}}, \code{\link[=ICS_rmcd]{ICS_rmcd()}}
+\code{\link[rrcov:CovMcd]{rrcov::CovMcd()}}
+}
+\author{
+Andreas Alfons and Aurore Archimbaud
 }

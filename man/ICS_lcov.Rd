@@ -9,8 +9,9 @@ ICS_lcov(x, mscatter = "cov", proportion = 0.1, ...)
 \arguments{
 \item{x}{a numeric matrix or data frame.}
 
-\item{mscatter}{"mcd" or "cov" (default); specified minimum covariance determinant or
-classical covariance matrix to be used for Mahalanobis distance computation.}
+\item{mscatter}{\code{"mcd"} or \code{"cov"} (default); specified minimum covariance
+determinant or classical covariance matrix to be used for Mahalanobis
+distance computation.}
 
 \item{proportion}{proportion of points to be considered as neighbourhood.}
 
@@ -19,8 +20,8 @@ classical covariance matrix to be used for Mahalanobis distance computation.}
 \value{
 An object of class \code{"ICS_scatter"} with the following
 components:
-\item{location}{if requested, a numeric vector giving the location
-estimate.}
+\item{location}{this is NULL as the estimator does not use a
+location estimate.}
 \item{scatter}{a numeric matrix giving the estimate of the scatter matrix.}
 \item{label}{a character string providing a label for the scatter matrix.}
 }
@@ -30,4 +31,7 @@ as computed by \code{\link[fpc:localshape]{fpc::localshape()}}.
 }
 \seealso{
 \code{\link[fpc:localshape]{fpc::localshape()}}
+}
+\author{
+Andreas Alfons and Aurore Archimbaud
 }

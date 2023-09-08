@@ -1,7 +1,16 @@
 # Package development
 devtools::load_all()
+
+devtools::check(remote = TRUE)
 #renv::install("C:/Users/auror/OneDrive - Erasmus University Rotterdam/Packages/ICS_1.3-1.tar.gz")
 #renv::install("C:/Users/auror/Documents/EUR/OneDrive - Erasmus University Rotterdam/Packages/ICS_1.3-1.tar.gz")
+
+# renv::install("C:/Users/auror/Documents/EUR/OneDrive - Erasmus University Rotterdam/Packages/ICS_1.4-0.tar.gz")
+
+
+# install.packages("rrcov",
+#                  repos = c("http://R-Forge.R-project.org",
+#                            "http://cran.at.r-project.org"), dep = FALSE)
 
 # res = ICS::ICS(iris[,1:4])
 # ICS::components(res, select = "IC.4")
@@ -22,8 +31,8 @@ usethis::use_package("ggplot2")
 usethis::use_package("mvtnorm")
 usethis::use_package("rrcov")
 usethis::use_package("scales")
-
-
+usethis::use_package("otrimle")
+usethis::use_package("mclust")
 
 usethis::rename_files("index_crit.R", "select_crit.R")
 
@@ -35,7 +44,8 @@ person("Aurore", "Archimbaud", email = "aurore.archimbaud@live.fr",
        role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6511-9091"))
 person("Andreas", "Alfons", email = "alfons@ese.eur.nl",
        role = c("aut"))
-
+person("Ruiz-Gazen", "Anne", email = "anne.ruiz-gazen@tse-fr.eu",
+       role = c("aut"), comment = c(ORCID = "0000-0001-8970-8061"))
 
 ## Summary ----
 usethis::use_git()
@@ -52,6 +62,9 @@ testthat::test_file("tests/testthat/test-ICSClust.R")
 
 usethis::use_test("plots") # to create the test
 testthat::test_file("tests/testthat/test-plots.R")
+
+usethis::use_test("select_crit") # to create the test
+testthat::test_file("tests/testthat/test-select_crit.R")
 
 
 # GitHub Actions ------

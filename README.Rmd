@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/AuroreAA/ICSClust/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/AuroreAA/ICSClust/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The goal of ICSClust is to ...
+The goal of `ICSClust` is to perform tandem clustering with invariant coordinate selection.
 
 ## Installation
 
@@ -42,11 +42,11 @@ X <- iris[,-5]
 
 # run ICS
 ICS_out <- ICS(X)
-ICS_out
+summary(ICS_out)
 
-# screeplot
-scree_plot(ICS_out)
-scree_plot(ICS_out, type = "lines")
+# Pot of generalized eigenvalues
+select_plot(ICS_out)
+select_plot(ICS_out, type = "lines")
 
 # pairs of all components
 component_plot(ICS_out)
@@ -64,12 +64,13 @@ component_plot(X, select = c(1,4), clusters = iris[,5])
 ## Example of ICSClust
 
 ```{r ICSClust_ex}
-library(ICSClust)
 
-# ICSClust requiICS_out at least 2 arguments:
+# ICSClust requires at least 2 arguments:
 # - X: data
 # - nb_clusters: nb of clusters
 ICS_out <- ICSClust(X, nb_clusters = 3)
+summary(ICS_out)
+plot(ICS_out)
 
 # You can also mention the number of invariant components to keep
 ICS_out <- ICSClust(X, nb_select = 2, nb_clusters = 3)
@@ -79,7 +80,7 @@ component_plot(ICS_out$ICS_out, select = ICS_out$select, clusters = as.factor(IC
 
 # to change the scatter pair
 ICS_out <- ICSClust(X, nb_select = 1, nb_clusters = 3,
-                ICS_args = list(S1 = ICS_mcd, S2 = ICS_cov,
+                ICS_args = list(S1 = ICS_mcd_raw, S2 = ICS_cov,
                                 S1_args = list(alpha = 0.5)))
 table(ICS_out$clusters, iris[,5])
 component_plot(ICS_out$ICS_out, clusters = as.factor(ICS_out$clusters))
@@ -87,7 +88,7 @@ component_plot(ICS_out$ICS_out, clusters = as.factor(ICS_out$clusters))
 
 # to change the criteria to select the invariant components
 ICS_out <- ICSClust(X, nb_clusters = 3,
-                ICS_args = list(S1 = ICS_mcd, S2 = ICS_cov,
+                ICS_args = list(S1 = ICS_mcd_raw, S2 = ICS_cov,
                                 S1_args = list(alpha = 0.5)),
                 criterion = "normal_crit",
                 ICS_crit_args = list(level = 0.1, test = "anscombe.test",
@@ -98,7 +99,7 @@ component_plot(ICS_out$ICS_out, select = ICS_out$select, clusters = as.factor(IC
 
 # to change the clustering method
 ICS_out <- ICSClust(X, nb_select = 1, nb_clusters = 3,
-                ICS_args = list(S1 = ICS_mcd, S2 = ICS_cov,
+                ICS_args = list(S1 = ICS_mcd_raw, S2 = ICS_cov,
                                 S1_args = list(alpha = 0.5)),
                 method  = "tkmeans_clust",
                 clustering_args = list(alpha = 0.1))

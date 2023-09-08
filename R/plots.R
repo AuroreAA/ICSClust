@@ -2,12 +2,12 @@
 
 #' Plot the Generalized Kurtosis Values of the ICS Transformation
 #'
-#' Extract the generalized kurtosis values of the components obtained via an
+#' Extracts the generalized kurtosis values of the components obtained via an
 #' ICS transformation and draw either a screeplot or a specific plot for a 
-#' given criterion. If an object of class `ICS_crit`  is given, then the 
+#' given criterion. If an object of class `ICS_crit` is given, then the 
 #' selected components are shaded on the plot.
 #' 
-#' @param object  an object inheriting from class \code{"ICS"} containing
+#' @param object an object inheriting from class \code{"ICS"} containing
 #' results from an ICS transformation or from class `ICS_crit`.
 #' @param select  an integer, character, or logical vector specifying for 
 #' which components to extract the generalized kurtosis values, or 
@@ -15,29 +15,57 @@
 #' components.
 #' @param scale  a logical indicating whether to scale the generalized 
 #' kurtosis values to have product 1 (defaults to \code{FALSE}).
-#' @param type either "dots" or "lines" for the type of plot
+#' @param type either `"dots"` or `"lines"` for the type of plot.
 #' @param screeplot boolean. If `TRUE` a plot of the generalized kurtosis 
 #' values is drawn. Otherwise it is context specific to the `ICS_crit` object.
 #' For "med" criterion, the differences between the kurtosis values and the 
 #' median are plotted in absolute values. For "discriminatory" the 
 #' discriminatory power associated to the evaluated combinations are drawn.
-#' @param int the width for shading the selected components in case an 
+#' @param width the width for shading the selected components in case an 
 #' `ICS_crit` object is given.
 #' @param color the color for shading the selected components in case an 
 #' `ICS_crit` object is given.
 #' @param alpha the transparency for shading the selected components in case 
 #' an `ICS_crit` object is given.
-#' @param ... not used
-#'
+#' @param size size of the points. Only relevant for "discriminatory" criteria.
+#' @param \dots  additional arguments are currently ignored.
+#' 
+#' @author Andreas Alfons and Aurore Archimbaud
 #' @import ICS
 #' @import ggplot2
 #' @export
+#' 
+#' @rdname select_plot
+#' @examples
+#' X <- iris[,-5]
+#' out <- ICS(X)
+#' 
+#' # on an ICS object
+#' select_plot(out)
+#' select_plot(out, type = "lines")
+#' 
+#' # on an ICS_crit object 
+#' # median criterion
+#' out_med <- med_crit(out, nb_select = 1, select_only = FALSE)
+#' select_plot(out_med, type = "lines")
+#' select_plot(out_med, screeplot = FALSE, type = "lines", 
+#' color = "lightblue")
+#' 
+#' # discriminatory criterion
+#' out_disc <- discriminatory_crit(out, clusters = iris[,5], 
+#'  select_only = FALSE)
+#' select_plot(out_disc)
+#' 
+#' 
 select_plot <- function(object, ...) UseMethod("select_plot")
 
+#' @method select_plot default
+#' @rdname select_plot
 #' @export
-select_plot.default <- function(object, type = c("dots", "lines"),
-                                select = NULL, scale = FALSE, 
-                                screeplot = TRUE, ...) {
+select_plot.default <- function(object, select = NULL, scale = FALSE, 
+                                screeplot = TRUE, 
+                                type = c("dots", "lines"), width = 0.2, 
+                                color = "grey", alpha = 0.3, size = 3, ...) {
   
   # Initialization
   type <- match.arg(type)
@@ -49,25 +77,41 @@ select_plot.default <- function(object, type = c("dots", "lines"),
   if(!(inherits(out, "data.frame") | inherits(out, "ICS_crit"))){
     stop("You can apply 'select_plot' only to an object of class 'ICS' or 'ICS_crit'.")
   }else{
-    select_plot(out, type = type, ...)
+    select_plot(out, type = type, width = width, color = color,
+                alpha = alpha, screeplot = screeplot)
   }
   
 }
 
-select_plot.data.frame <- function(out, type = c("dots", "lines"), ...) {
-  scree_plot(out, type = type, ...)
+
+#' @method select_plot data.frame
+#' @rdname select_plot
+#' @export
+select_plot.data.frame <- function(object, type = c("dots", "lines"), 
+                                   width = 0.2, color = "grey",
+                                   alpha = 0.3, ...){
+  scree_plot(object, type = type, width = width, color = color,
+             alpha = alpha)
 }
 
-
-select_plot.ICS_crit <- function(out,  ...) {
-  crit <- out$crit
-  if(!(crit %in% c("med", "discriminatory"))){
+#' @method select_plot ICS_crit
+#' @rdname select_plot
+#' @export
+select_plot.ICS_crit <- function(object, type = c("dots", "lines"),
+                                 width = 0.2, color = "grey", alpha = 0.3,
+                                 size = 3, screeplot = TRUE, ...){
+  crit <- object$crit
+  if(!(crit %in% c("med", "discriminatory")) & isFALSE(screeplot)){
     stop("The non screeplot option is only available for 'med' or 
            'discriminatory' criteria.")
-  }else if(crit == "med"){
-    med_plot(out, ...)
-  }else if(crit == "discriminatory"){
-    discriminatory_plot(out, ...)
+  }else if(crit == "med" & isFALSE(screeplot)){
+    med_plot(object,  type = type, width = width, color = color,
+             alpha = alpha)
+  }else if(crit == "discriminatory" & isFALSE(screeplot)){
+    discriminatory_plot(object, color = color, size = size)
+  }else{
+    select_plot.default(object, type = type, width = width, color = color,
+                alpha = alpha, screeplot = screeplot)
   }
   
 }
@@ -83,6 +127,7 @@ select_plot.ICS_crit <- function(out,  ...) {
 #' Extract the kurtosis values for an invariant 
 #' coordinate system obtained via an ICS transformation or for an object of 
 #' class 'ICS_crit'.
+#' @noRd
 df_select_plot <- function(object, select = NULL, scale = FALSE,
                            screeplot = TRUE) UseMethod("df_select_plot")
 
@@ -95,7 +140,7 @@ df_select_plot.ICS <- function(object, select = NULL, scale = FALSE,
              select_IC = FALSE, crit = NA)
 }
 
-
+#' @noRd
 df_select_plot.ICS_crit <- function(object, select = NULL, scale = FALSE, 
                                     screeplot = TRUE) {
   # If screeplot 
@@ -115,16 +160,19 @@ df_select_plot.ICS_crit <- function(object, select = NULL, scale = FALSE,
   }
 }
 
+#' @noRd
 df_select_plot.default <- function(object, select = NULL, scale = FALSE, 
                                    screeplot = TRUE){
   integer()
 }
 
 ## Plots -------------------------------------------------------------------
-
-scree_plot <- function(df, type = c("dots", "lines"), int = 0.2, color = "grey", alpha = 0.3, ...){
+#' @noRd
+scree_plot <- function(df, type = c("dots", "lines"), width = 0.2, color = "grey",
+                       alpha = 0.3){
   
   # Initialisation
+  type <- match.arg(type)
   select_IC <- as.integer(sort(gsub("IC.", "", row.names(df)[df$select_IC])))
   nb_IC <- nrow(df)
   crit <- paste("IC selected with the", unique(df$crit), "criterion")
@@ -137,10 +185,12 @@ scree_plot <- function(df, type = c("dots", "lines"), int = 0.2, color = "grey",
     nb_last <- rev(select_IC)[which(rev(df$select_IC) == FALSE)[1]-1]
     
     if(length(nb_first) > 0){
-      df_zones <- rbind(df_zones, c(zone = crit, start = 1-int, end = nb_first +int))
+      df_zones <- rbind(df_zones, c(zone = crit, start = 1 - width, 
+                                    end = nb_first + width))
     }
     if(length(nb_last) > 0){
-      df_zones <- rbind(df_zones, c(zone = crit, start = nb_last-int, end = nb_IC+int))
+      df_zones <- rbind(df_zones, c(zone = crit, start = nb_last - width, 
+                                    end = nb_IC + width))
     }
     
     colnames(df_zones) <-  c("zone", "start", "end")
@@ -149,11 +199,11 @@ scree_plot <- function(df, type = c("dots", "lines"), int = 0.2, color = "grey",
     df_zones$end <- as.numeric(df_zones$end)
     
   }
-  
-  
   # Initial plot 
   p <- df %>% 
-    ggplot(aes(x = rownames(df), index, y = gen_kurtosis, group = 0))+
+    ggplot(aes(x = rownames(df), 
+               #index,
+               y = gen_kurtosis, group = 0))+
     geom_point() +
     {if(type == "lines") geom_line()} +
     theme_minimal() +
@@ -163,11 +213,14 @@ scree_plot <- function(df, type = c("dots", "lines"), int = 0.2, color = "grey",
   
   # Add shadow areas
   if(nrow(df_zones) > 0){
-    p <- p + geom_rect(data = df_zones,
+    p <- p + 
+      geom_rect(data = df_zones,
                        inherit.aes = FALSE,
-                       aes(xmin = start, xmax = end, ymin = -Inf, ymax = Inf, fill = zone),
-                       alpha = alpha)  +  scale_fill_manual('',
-                                                            values = color)+
+                       aes(xmin = .data$start, xmax = .data$end,
+                           ymin = -Inf, ymax = Inf,
+                           fill = .data$zone),
+                       alpha = alpha) +  
+      scale_fill_manual('', values = color) +
       theme(legend.position = "top")
   }
   
@@ -175,21 +228,27 @@ scree_plot <- function(df, type = c("dots", "lines"), int = 0.2, color = "grey",
   
 }
 
-
-med_plot <- function(object, ...){
+#' @noRd
+med_plot <- function(object,  type = c("dots", "lines"), width = 0.2,
+                     color = "grey", alpha = 0.3){
+  
+  # Initialization
+  type <- match.arg(type)
+  
   # Get the absolute differences from the generalized kurtosis and the median
   gen_kurtosis_diff_med <- object$gen_kurtosis_diff_med
   df <- data.frame( gen_kurtosis =  gen_kurtosis_diff_med,
                     select_IC = names(gen_kurtosis_diff_med) %in% object$select,
                     crit = object$crit)
   # Draw the plot
-  scree_plot(df, ... )+ 
-    labs(y = "|Generalized kurtosis - median|")
+  scree_plot(df, type = type, width = width, color = color,
+             alpha = alpha) +
+  labs(y = "|Generalized kurtosis - median|")
   
 }
 
-
-discriminatory_plot <- function(object,  size = 3, color = "lightblue", ...){
+#' @noRd
+discriminatory_plot <- function(object,  size = 3, color = "lightblue"){
   # Get the discriminatory power values associated to the combinations of ICs
   # and order them
   power <- sort(object$power_combinations, decreasing = TRUE)
@@ -199,8 +258,10 @@ discriminatory_plot <- function(object,  size = 3, color = "lightblue", ...){
                    crit = object$crit)
   # Plot
   df %>%
-    ggplot( aes(x = select_IC, y = power) ) +
-    geom_segment( aes(x = select_IC, xend = select_IC, y = 0, yend = power), color = "grey") +
+    ggplot( aes(x = .data$select_IC, y = .data$power) ) +
+    geom_segment( aes(x = .data$select_IC, xend = .data$select_IC, 
+                      y = 0, yend = power), 
+                  color = "grey") +
     geom_point(size = size, color = color) +
     coord_flip() +
     theme_minimal() +
@@ -211,42 +272,39 @@ discriminatory_plot <- function(object,  size = 3, color = "lightblue", ...){
 
 # Plot of the selected variables/components -------------------------------
 
-#' Scatterplot Matrix with densities
+#' Scatterplot Matrix with densities on the diagonal
 #' 
-#' Produce a scatterplot matrix of the component scores of a given dataframe 
+#' Produces a gg-scatterplot matrix of the variables of a given dataframe 
 #' or an invariant coordinate system obtained via an ICS transformation with 
 #' densities on the diagonal for each cluster.
 #' 
-#' @param object a dataframe or [ICS::ICS-S3] class object
+#' @param object a dataframe or \code{\link[=ICS-S3]{ICS}} class object.
 #' @param select a vector of indexes of variables to plot. If `NULL` or 
-#' `FALSE`, all variables are selected. If `TRUE` only the first and last three are considered.
-#' @param clusters avector indicating the clusters of the data to color the 
+#' `FALSE`, all variables are selected. If `TRUE` only the first three and 
+#' last three are considered.
+#' @param clusters a vector indicating the clusters of the data to color the 
 #' plot. By default `NULL`.
 #' @param text_size_factor a numeric factor for controlling the `axis.text`  
 #' and `strip.text`. 
 #' @param colors a vector of colors to use. One color for each cluster.
-#' @param ... not used
 #' @export
 #' 
+#' @rdname component_plot
+#' 
+#' @author Andreas Alfons and Aurore Archimbaud
 #' @examples
-#' \dontrun{
-#' library(ICSClust)
 #' X <- iris[,1:4]
 #' component_plot(X)
 #' out <- ICS(X)
-#' component_plot(res, select = c(1,4))
-#' }
+#' component_plot(out, select = c(1,4))
 #' 
-component_plot <- function(object, ...) UseMethod("component_plot")
-
-#' @name component_plot
 #' @import GGally
 #' @importFrom scales hue_pal 
 #' @export
-component_plot.default <- function(object, select = TRUE, 
-                                   clusters = NULL, 
-                                   text_size_factor = 8/6.5, 
-                                   colors = NULL, ...) {
+component_plot <- function(object, select = TRUE, 
+                           clusters = NULL, 
+                           text_size_factor = 8/6.5, 
+                           colors = NULL) {
   
   # Initialisation
   if(isFALSE(select)) select <- NULL
@@ -286,18 +344,22 @@ component_plot.default <- function(object, select = TRUE,
 
 #' Extract selected variables
 #' 
-#' Extract the selected variables for a given dataframe or an invariant 
+#' Extracts the selected variables for a given dataframe or an invariant 
 #' coordinate system obtained via an ICS transformation.
 #' 
-#' @param object a dataframe or [ICS::ICS-S3] class object
+#' @param object a dataframe or \code{\link[=ICS-S3]{ICS}} class object
 #' @param select a vector of indexes of variables to plot. If `NULL` or 
-#' `FALSE`, all variables are selected. If `TRUE` only the first and last three are considered.
+#' `FALSE`, all variables are selected. If `TRUE` only the first and last three
+#'  are considered.
 #' @return A dataframe.
+#' @noRd
 df_component_plot <- function(object, select = NULL) UseMethod("df_component_plot")
 
 df_component_plot.default <- function(object, select = NULL){
   data.frame()
 }
+
+#' @noRd
 df_component_plot.ICS <- function(object, select = TRUE){
   # if select is an ICS_crit object we extract the selected components.
   if (inherits(select, "ICS_crit")){
@@ -315,6 +377,7 @@ df_component_plot.ICS <- function(object, select = TRUE){
   df_scores
 }
 
+#' @noRd
 df_component_plot.data.frame <- function(object, select = NULL){
   # Initialisation
   p <- ncol(object)

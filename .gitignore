@@ -1,6 +1,7 @@
 .Rproj.user
 .Rhistory
-.Rdata
+.Rdata;
+.Rprofile
 .httr-oauth
 renv/*
 .Rprofile

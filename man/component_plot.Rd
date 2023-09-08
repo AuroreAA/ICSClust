@@ -2,29 +2,24 @@
 % Please edit documentation in R/plots.R
 \name{component_plot}
 \alias{component_plot}
-\alias{component_plot.default}
-\title{Scatterplot Matrix with densities}
+\title{Scatterplot Matrix with densities on the diagonal}
 \usage{
-component_plot(object, ...)
-
-\method{component_plot}{default}(
+component_plot(
   object,
   select = TRUE,
   clusters = NULL,
   text_size_factor = 8/6.5,
-  colors = NULL,
-  ...
+  colors = NULL
 )
 }
 \arguments{
-\item{object}{a dataframe or \link[ICS:ICS-S3]{ICS::ICS-S3} class object}
-
-\item{...}{not used}
+\item{object}{a dataframe or \code{\link[=ICS-S3]{ICS}} class object.}
 
 \item{select}{a vector of indexes of variables to plot. If \code{NULL} or
-\code{FALSE}, all variables are selected. If \code{TRUE} only the first and last three are considered.}
+\code{FALSE}, all variables are selected. If \code{TRUE} only the first three and
+last three are considered.}
 
-\item{clusters}{avector indicating the clusters of the data to color the
+\item{clusters}{a vector indicating the clusters of the data to color the
 plot. By default \code{NULL}.}
 
 \item{text_size_factor}{a numeric factor for controlling the \code{axis.text}
@@ -33,17 +28,17 @@ and \code{strip.text}.}
 \item{colors}{a vector of colors to use. One color for each cluster.}
 }
 \description{
-Produce a scatterplot matrix of the component scores of a given dataframe
+Produces a gg-scatterplot matrix of the variables of a given dataframe
 or an invariant coordinate system obtained via an ICS transformation with
 densities on the diagonal for each cluster.
 }
 \examples{
-\dontrun{
-library(ICSClust)
 X <- iris[,1:4]
 component_plot(X)
 out <- ICS(X)
-component_plot(res, select = c(1,4))
-}
+component_plot(out, select = c(1,4))
 
+}
+\author{
+Andreas Alfons and Aurore Archimbaud
 }

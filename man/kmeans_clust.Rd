@@ -2,40 +2,50 @@
 % Please edit documentation in R/clustering.R
 \name{kmeans_clust}
 \alias{kmeans_clust}
-\title{k-means clustering}
+\title{\emph{k}-means clustering}
 \usage{
-kmeans_clust(df, k, clusters_only = FALSE, iter.max = 100, nstart = 20, ...)
+kmeans_clust(X, k, clusters_only = FALSE, iter.max = 100, nstart = 20, ...)
 }
 \arguments{
-\item{df}{a numeric matrix or data frame of the data. It corresponds to the argument \code{x}.}
+\item{X}{a numeric matrix or data frame of the data. It corresponds to the
+argument \code{x}.}
 
-\item{k}{the number of clusters searched for. It corresponds to the argument \code{centers}.}
+\item{k}{the number of clusters searched for. It corresponds to the argument
+\code{centers}.}
 
-\item{clusters_only}{boolean. If \code{TRUE} only the partition of the data is returned as a vector. If \code{FALSE} the usual output of the \link[stats]{kmeans} function is returned.}
+\item{clusters_only}{boolean. If \code{TRUE} only the partition of the data
+is returned as a vector. If \code{FALSE} the usual output of
+the \link[stats]{kmeans} function is returned.}
 
 \item{iter.max}{the maximum number of iterations allowed.}
 
-\item{nstart}{if \code{centers} is a number, how many random sets should be chosen?}
+\item{nstart}{if \code{centers} is a number, how many random sets should be
+chosen?}
 
-\item{...}{other arguments to pass to the \code{\link[stats]{kmeans}} function.}
+\item{...}{other arguments to pass to the \code{\link[stats:kmeans]{stats::kmeans()}} function.}
 }
 \value{
-If \code{clusters_only} is \code{TRUE} a vector of the new partition of the data is returned, i.e a vector of integers (from \code{1:k}) indicating the cluster to which each observation is allocated.
+If \code{clusters_only} is \code{TRUE} a vector of the new partition
+of the data is returned, i.e a vector of integers (from \code{1:k})
+indicating the cluster to which each observation is allocated.
 
 Otherwise a list is returned with the following components:
-\item{clust_method}{the name of the clustering method, i.e "kmeans".}
-\item{clusters}{the vector of the new partition of the data, i.e a vector of integers (from \code{1:k}) indicating the cluster to which each observation is allocated.}
-\item{...}{an object of class \code{"kmeans"}}
+\item{clust_method}{the name of the clustering method, i.e. "kmeans".}
+\item{clusters}{the vector of the new partition of the data, i.e. a vector of
+integers (from \code{1:k}) indicating the cluster to which each observation
+is allocated.}
+\item{...}{an object of class \code{"kmeans"}}.
 }
 \description{
-Wrapper for performing k-means clustering from \code{\link[stats]{kmeans}}.
+Wrapper for performing k-means clustering from \code{\link[stats:kmeans]{stats::kmeans()}}.
 }
 \examples{
-\dontrun{
-library(ICSClust)
-kmeans_clust(iris[,1:4], k = 3, clusters_only = TRUE)}
+kmeans_clust(iris[,1:4], k = 3, clusters_only = TRUE)
 
 }
 \seealso{
-\code{\link[stats]{kmeans}()}
+\code{\link[stats:kmeans]{stats::kmeans()}}
+}
+\author{
+Aurore Archimbaud
 }

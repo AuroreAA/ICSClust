@@ -2,14 +2,20 @@
 % Please edit documentation in R/select_crit.R
 \name{var_crit}
 \alias{var_crit}
+\alias{var_crit.ICS}
+\alias{var_crit.default}
 \title{Selection of Invariant components using the var criterion}
 \usage{
 var_crit(object, ...)
+
+\method{var_crit}{ICS}(object, nb_select = NULL, select_only = FALSE, ...)
+
+\method{var_crit}{default}(object, nb_select = NULL, select_only = FALSE, ...)
 }
 \arguments{
 \item{object}{object of class \code{ICS}.}
 
-\item{...}{not used}
+\item{\dots}{additional arguments are currently ignored.}
 
 \item{nb_select}{the exact number of components to select.}
 
@@ -17,7 +23,7 @@ var_crit(object, ...)
 invariant components is returned. If \code{FALSE} additional details are returned.}
 }
 \value{
-If \code{select_only} is  \code{TRUE} a vector of the names of the invariant
+If \code{select_only} is \code{TRUE} a vector of the names of the invariant
 components or variables to select. If \code{FALSE} an object of class \code{ICS_crit}
 is returned with the following objects:
 \itemize{
@@ -25,21 +31,31 @@ is returned with the following objects:
 \item \code{nb_select}: the number of components to select.
 \item \code{gen_kurtosis}: the vector of generalized kurtosis values.
 \item \code{select}: the names of the invariant components or variables to select.
-\item \code{RollVarX}: the rolling variances.
-\item \code{Order}: indexes of the ordered invariant components.
+\item \code{RollVarX}: the rolling variances of order d-\code{nb_select}.
+\item \code{Order}: indexes of the ordered invariant components such that the
+ones associated to the smallest variances of the eigenvalues are at the
+end.
 }
 }
 \description{
-Identifies non spherical invariant coordinates based on the rolling variance
-criterion used in \code{\link[ICtest:ICSboot]{ICtest::ICSboot()}}.
+Identifies the interesting invariant coordinates based on the rolling
+variance criterion as used in the \code{ICSboot} function of the \code{ICtest}
+package. It computes rolling variances on the generalized eigenvalues
+obtained through \code{\link[ICS:ICS-S3]{ICS::ICS()}}.
+}
+\details{
+Assuming that the generalized eigenvalues of the uninformative components are all the same
+means that the variance of these generalized eigenvalues must be minimal.
+Therefore when \code{nb_select} components should be selected, the method identifies
+the \code{p - nb_select} neighboring generalized eigenvalues with minimal variance,
+where \code{p} is the total number of components. The number of interesting components should be at
+most \code{p-2} as at least two uninteresting components are needed to compute a variance.
 }
 \examples{
-\dontrun{
-library(ICSClust)
 X <- iris[,-5]
 out <- ICS(X)
 var_crit(out, nb_select = 2, select_only = FALSE)
-}
+
 }
 \references{
 Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022).
@@ -47,6 +63,8 @@ Tandem clustering with invariant coordinate selection.
 \emph{arXiv preprint arXiv:2212.06108}.
 }
 \seealso{
-\code{\link[=normal_crit]{normal_crit()}}, \code{\link[=med_crit]{med_crit()}}, \code{\link[=discriminatory_crit]{discriminatory_crit()}},
-\code{\link[ICtest:ICSboot]{ICtest::ICSboot()}}.
+\code{\link[=normal_crit]{normal_crit()}}, \code{\link[=med_crit]{med_crit()}}, \code{\link[=discriminatory_crit]{discriminatory_crit()}}.
+}
+\author{
+Andreas Alfons, Aurore Archimbaud and Klaus Nordhausen
 }

@@ -2,14 +2,20 @@
 % Please edit documentation in R/select_crit.R
 \name{med_crit}
 \alias{med_crit}
+\alias{med_crit.ICS}
+\alias{med_crit.default}
 \title{Selection of Invariant components using the med criterion}
 \usage{
 med_crit(object, ...)
+
+\method{med_crit}{ICS}(object, nb_select = NULL, select_only = FALSE, ...)
+
+\method{med_crit}{default}(object, nb_select = NULL, select_only = FALSE, ...)
 }
 \arguments{
 \item{object}{object of class \code{ICS}.}
 
-\item{...}{not used}
+\item{\dots}{additional arguments are currently ignored.}
 
 \item{nb_select}{the exact number of components to select.}
 
@@ -21,7 +27,7 @@ If \code{select_only} is  \code{TRUE} a vector of the names of the invariant
 components or variables to select. If \code{FALSE} an object of class \code{ICS_crit}
 is returned with the following objects:
 \itemize{
-\item \code{crit}: the name of the criterion "med"
+\item \code{crit}: the name of the criterion "med".
 \item \code{nb_select}: the number of components to select.
 \item \code{gen_kurtosis}: the vector of generalized kurtosis values.
 \item \code{med_gen_kurtosis}: the median of the generalized kurtosis values.
@@ -31,19 +37,20 @@ kurtosis values and the median.
 }
 }
 \description{
-Identifies invariant coordinates associated to the furthest eigenvalues from
-the median.
+Identifies invariant coordinates as interesting whose generalized eigenvalues are the furtherest away
+from the median of all generalized eigenvalues.
 }
 \details{
-Only valid if the \code{nb_select} is less than half of the number of components.
+If more than half of the components are unintersting and have the same generalized eigenvalue then the median
+of all generalized eigenvalues corresponds
+to the unintersting component generalzed eigenvalue and of interest are components whose generalized eigenvalues differ
+the most from the median. The motivation of the criterion depends therefore on the assumption that at least half of the
+components have equal generalized eigenvalues.
 }
 \examples{
-\dontrun{
-library(ICSClust)
 X <- iris[,-5]
 out <- ICS(X)
 med_crit(out, nb_select = 2, select_only = FALSE)
-}
 }
 \references{
 Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022).
@@ -52,4 +59,7 @@ Tandem clustering with invariant coordinate selection.
 }
 \seealso{
 \code{\link[=normal_crit]{normal_crit()}}, \code{\link[=var_crit]{var_crit()}}, \code{\link[=discriminatory_crit]{discriminatory_crit()}}.
+}
+\author{
+Andreas Alfons, Aurore Archimbaud and Klaus Nordhausen
 }

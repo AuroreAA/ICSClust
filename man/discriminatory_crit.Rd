@@ -2,35 +2,57 @@
 % Please edit documentation in R/select_crit.R
 \name{discriminatory_crit}
 \alias{discriminatory_crit}
+\alias{discriminatory_crit.ICS}
+\alias{discriminatory_crit.default}
 \title{Selection of ICS components based on discriminatory power}
 \usage{
 discriminatory_crit(object, ...)
+
+\method{discriminatory_crit}{ICS}(
+  object,
+  clusters,
+  method = "eta2",
+  nb_select = NULL,
+  select_only = FALSE,
+  ...
+)
+
+\method{discriminatory_crit}{default}(
+  object,
+  clusters,
+  method = "eta2",
+  nb_select = NULL,
+  select_only = FALSE,
+  gen_kurtosis = NULL,
+  ...
+)
 }
 \arguments{
-\item{object}{object of class \code{ICS}.}
+\item{object}{dataframe or object of class \code{ICS}.}
 
-\item{...}{not used}
+\item{\dots}{additional arguments are currently ignored.}
 
-\item{clusters}{a vector indicating the true clusters of the data to compute
-the discriminatory power on it.}
+\item{clusters}{a vector of the same length as the number of
+observations, indicating the true clusters. It is used to compute
+the discriminatory power based on it.}
 
 \item{method}{the name of the discriminatory power.
-Only "eta2" is implemented.}
+Only \code{"eta2"} is implemented.}
 
 \item{nb_select}{the exact number of components to select.}
 
 \item{select_only}{boolean. If \code{TRUE} only the vector names of the selected
-invariant components is returned. If \code{FALSE} additional details are returned.}
+invariant components are returned. If \code{FALSE} additional details are returned.}
 
-\item{gen_kurtosis}{vector of generalized kurtosis values in case of \code{ICS}
-object.}
+\item{gen_kurtosis}{vector of generalized kurtosis values.}
 }
 \value{
-If \code{select_only} is  \code{TRUE} a vector of the names of the invariant
-components or variables to select. If \code{FALSE} an object of class \code{ICS_crit}
+If \code{select_only} is \code{TRUE} a vector of the names of the invariant
+components or variables to select.
+If \code{FALSE} an object of class \code{ICS_crit}
 is returned with the following objects:
 \itemize{
-\item \code{crit}: the name of the criterion "discriminatory"
+\item \code{crit}: the name of the criterion "discriminatory".
 \item \code{method}: the name of the discriminatory power.
 \item \code{nb_select}: the number of components to select.
 \item \code{select}: the names of the invariant components or variables to select.
@@ -58,12 +80,9 @@ where \eqn{E} is the within-group sum of squares and cross-products matrix
 and \eqn{T} is the total sum of squares and cross-products matrix.
 }
 \examples{
-\dontrun{
-library(ICSClust)
 X <- iris[,-5]
 out <- ICS(X)
 discriminatory_crit(out, clusters = iris[,5], select_only = FALSE)
-}
 }
 \references{
 Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022).
@@ -71,5 +90,8 @@ Tandem clustering with invariant coordinate selection.
 \emph{arXiv preprint arXiv:2212.06108}.
 }
 \seealso{
-\code{\link[=normal_crit]{normal_crit()}}, \code{\link[=med_crit]{med_crit()}} \code{\link[=var_crit]{var_crit()}}.
+\code{\link[=normal_crit]{normal_crit()}}, \code{\link[=med_crit]{med_crit()}}, \code{\link[=var_crit]{var_crit()}}.
+}
+\author{
+Aurore Archimbaud and Anne Ruiz-Gazen
 }
