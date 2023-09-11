@@ -9,7 +9,7 @@ Description: Implementation of Tandem Clustering with Invariant Coordinate
 License: GPL (>= 3)
 Encoding: UTF-8
 Depends:
-    ICS,
+    ICS (>= 1.4-0),
     ggplot2
 Imports: 
     cluster,
