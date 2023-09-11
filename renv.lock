@@ -58,7 +58,8 @@
     "ICS": {
       "Package": "ICS",
       "Version": "1.4-0",
-      "Source": "unknown",
+      "Source": "Repository",
+      "Repository": "CRAN",
       "Requirements": [
         "R",
         "graphics",
