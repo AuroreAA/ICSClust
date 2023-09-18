@@ -296,6 +296,11 @@ med_crit.default <- function(object, nb_select = NULL, select_only = FALSE, ...)
 #' Tandem clustering with invariant coordinate selection. 
 #' \emph{arXiv preprint arXiv:2212.06108}.
 #' 
+#' Radojicic, U., & Nordhausen, K. (2019). 
+#' Non-gaussian component analysis: Testing the dimension of the signal subspace.
+#'  In Workshop on Analytical Methods in Statistics (pp. 101–123). Springer. 
+#'  \doi{10.1007/978-3-030-48814-7_6}.
+#' 
 #' @seealso [normal_crit()], [med_crit()], [discriminatory_crit()].
 #' 
 #' @rdname var_crit

@@ -61,6 +61,11 @@ var_crit(out, nb_select = 2, select_only = FALSE)
 Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022).
 Tandem clustering with invariant coordinate selection.
 \emph{arXiv preprint arXiv:2212.06108}.
+
+Radojicic, U., & Nordhausen, K. (2019).
+Non-gaussian component analysis: Testing the dimension of the signal subspace.
+In Workshop on Analytical Methods in Statistics (pp. 101–123). Springer.
+\doi{10.1007/978-3-030-48814-7_6}.
 }
 \seealso{
 \code{\link[=normal_crit]{normal_crit()}}, \code{\link[=med_crit]{med_crit()}}, \code{\link[=discriminatory_crit]{discriminatory_crit()}}.
