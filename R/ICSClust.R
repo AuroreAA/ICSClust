@@ -154,12 +154,12 @@ ICSClust <- function(X, nb_select = NULL, nb_clusters = NULL, ICS_args = list(),
 }
 
 
-#' Summarize an `ICSClust` object
+#' Summary of an `ICSClust` object
 #' 
 #' Summarizes and prints an `ICSClust` object in an informative way.
 #' 
 #' @param object object of class `ICSClust`.
-#' @param info Logical, either TRUE or FALSE. If TRUE, print additional
+#' @param info logical, either TRUE or FALSE. If TRUE, prints additional
 #' information on arguments used for computing scatter matrices
 #' (only named arguments that contain numeric, character, or logical scalars)
 #' and information on the parameters of the algorithm.

@@ -35,7 +35,7 @@ is allocated. 0 indicates trimmed observations.}
 \item{...}{an object of class \code{"tkmeans"}}.
 }
 \description{
-Wrapper for performing trimmed k-kmeans clustering from
+Wrapper for performing trimmed k-means clustering from
 \code{\link[tclust:tkmeans]{tclust::tkmeans()}}.
 }
 \examples{

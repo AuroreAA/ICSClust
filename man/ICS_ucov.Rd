@@ -3,7 +3,7 @@
 \name{ICS_ucov}
 \alias{ICS_ucov}
 \alias{ICS_scov}
-\title{Simple robust estimators of scatter for ICS}
+\title{Simple robust estimates of scatter for ICS}
 \usage{
 ICS_scov(x, location = TRUE, beta = 0.2)
 

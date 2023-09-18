@@ -1,13 +1,13 @@
 # Plot of the generalized eigenvalues -------------------------------------
 
-#' Plot the Generalized Kurtosis Values of the ICS Transformation
+#' Plot of the Generalized Kurtosis Values of the ICS Transformation
 #'
 #' Extracts the generalized kurtosis values of the components obtained via an
-#' ICS transformation and draw either a screeplot or a specific plot for a 
+#' ICS transformation and draws either a screeplot or a specific plot for a 
 #' given criterion. If an object of class `ICS_crit` is given, then the 
 #' selected components are shaded on the plot.
 #' 
-#' @param object an object inheriting from class \code{"ICS"} containing
+#' @param object an object inheriting from class \code{"ICS"} and containing
 #' results from an ICS transformation or from class `ICS_crit`.
 #' @param select  an integer, character, or logical vector specifying for 
 #' which components to extract the generalized kurtosis values, or 

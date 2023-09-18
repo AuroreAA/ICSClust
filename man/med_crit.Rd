@@ -37,14 +37,14 @@ kurtosis values and the median.
 }
 }
 \description{
-Identifies invariant coordinates as interesting whose generalized eigenvalues are the furtherest away
+Identifies as interesting invariant coordinates whose generalized eigenvalues are the furthermost away
 from the median of all generalized eigenvalues.
 }
 \details{
-If more than half of the components are unintersting and have the same generalized eigenvalue then the median
+If more than half of the components are "uninteresting" and have the same generalized eigenvalue then the median
 of all generalized eigenvalues corresponds
-to the unintersting component generalzed eigenvalue and of interest are components whose generalized eigenvalues differ
-the most from the median. The motivation of the criterion depends therefore on the assumption that at least half of the
+to the uninteresting component generalized eigenvalue. The components of interest are the ones whose generalized eigenvalues differ
+the most from the median. The motivation of this criterion depends therefore on the assumption that at least half of the
 components have equal generalized eigenvalues.
 }
 \examples{

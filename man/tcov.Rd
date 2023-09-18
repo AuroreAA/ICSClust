@@ -2,7 +2,7 @@
 % Please edit documentation in R/scatters.R
 \name{tcov}
 \alias{tcov}
-\title{Pairwise one-step M-estimator of scatter}
+\title{Pairwise one-step M-estimate of scatter}
 \usage{
 tcov(x, beta = 2)
 }
@@ -16,7 +16,7 @@ pairwise one-step M-estimator (defaults to 2), see \sQuote{Details}.}
 A numeric matrix giving the pairwise one-step M-estimate of scatter.
 }
 \description{
-Compute a pairwise one-step M-estimator of scatter with weights based on
+Computes a pairwise one-step M-estimate of scatter with weights based on
 pairwise Mahalanobis distances. Note that it is based on pairwise
 differences and therefore does not require a location estimate.
 }

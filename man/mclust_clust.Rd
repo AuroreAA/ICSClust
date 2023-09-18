@@ -33,7 +33,7 @@ Otherwise a list is returned with the following components:
 \item{clusters}{the vector of the new partition of the data, i.e a vector of
 integers (from \code{1:k}) indicating the cluster to which each observation
 is allocated.
-0 indicates outlying observations.}
+0 indicates outlying observations for \code{\link[=rmclust_clust]{rmclust_clust()}} only.}
 \item{...}{an object of class "\code{mclust}"}
 }
 \description{

@@ -56,6 +56,11 @@ ggplot(data = df4, mapping = aes(x = x, y = y)) +
   geom_point()
 
 }
+\references{
+#' Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022).
+Tandem clustering with invariant coordinate selection.
+\emph{arXiv preprint arXiv:2212.06108}.
+}
 \author{
 Andreas Alfons
 }

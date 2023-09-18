@@ -26,7 +26,7 @@ indicating the cluster assignment using a character string.
 \description{
 Simulation of a \eqn{n \times p} data frame according to a mixture of \eqn{q}
 Gaussian distributions with \eqn{q < p}, different location parameters
-\eqn{\mu_1, \dots, \mu_q}, and the identify matrix as the covariance matrix.
+\eqn{\mu_1, \dots, \mu_q}, and the identity matrix as the covariance matrix.
 }
 \details{
 Let \eqn{X} be a \eqn{p}-variate real random vector distributed according to
@@ -41,6 +41,11 @@ and  \eqn{\mu_{h+1} = \delta e_h} with \eqn{h = 1, \dots, q-1}.
 \examples{
 X <- mixture_sim()
 summary(X)
+}
+\references{
+Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022).
+Tandem clustering with invariant coordinate selection.
+\emph{arXiv preprint arXiv:2212.06108}.
 }
 \author{
 Aurore Archimbaud

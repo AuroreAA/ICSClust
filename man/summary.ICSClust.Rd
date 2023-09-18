@@ -2,14 +2,14 @@
 % Please edit documentation in R/ICSClust.R
 \name{summary.ICSClust}
 \alias{summary.ICSClust}
-\title{Summarize an \code{ICSClust} object}
+\title{Summary of an \code{ICSClust} object}
 \usage{
 \method{summary}{ICSClust}(object, info = FALSE, digits = 4L, ...)
 }
 \arguments{
 \item{object}{object of class \code{ICSClust}.}
 
-\item{info}{Logical, either TRUE or FALSE. If TRUE, print additional
+\item{info}{logical, either TRUE or FALSE. If TRUE, prints additional
 information on arguments used for computing scatter matrices
 (only named arguments that contain numeric, character, or logical scalars)
 and information on the parameters of the algorithm.

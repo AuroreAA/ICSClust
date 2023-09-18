@@ -2,7 +2,7 @@
 % Please edit documentation in R/scatters.R
 \name{ICS_tcov}
 \alias{ICS_tcov}
-\title{Pairwise one-step M-estimator of scatter for ICS}
+\title{Pairwise one-step M-estimate of scatter for ICS}
 \usage{
 ICS_tcov(x, beta = 2)
 }

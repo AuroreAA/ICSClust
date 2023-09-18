@@ -3,7 +3,7 @@
 #' 
 #' Identifies invariant coordinates that are non normal using univariate 
 #' normality tests as in the `comp.norm.test` function from the 
-#' `ICSOutlier` package, except that both the 
+#' `ICSOutlier` package, with the difference that both the 
 #' first and last few components are investigated.
 #'
 #' @param object object of class `ICS` or a data frame or matrix.
@@ -45,6 +45,14 @@
 #' Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022). 
 #' Tandem clustering with invariant coordinate selection. 
 #' \emph{arXiv preprint arXiv:2212.06108}.
+#' 
+#' Archimbaud, A., Nordhausen, K., and Ruiz-Gazen, A. (2018). 
+#' ICSOutlier: Unsupervised Outlier Detection for Low-Dimensional Contamination Structure, 
+#' The RJournal, Vol. 10(1):234–250. \doi{10.32614/RJ-2018-034}
+#' 
+#' Archimbaud, A., Nordhausen, K., and Ruiz-Gazen, A. (2016). 
+#' ICSOutlier: Outlier Detection Using Invariant Coordinate Selection. 
+#' R package version 0.3-0
 #' 
 #' @seealso [med_crit()], [var_crit()], [discriminatory_crit()],
 #'  [jarque.test()], [anscombe.test()], 
@@ -165,7 +173,7 @@ normal_crit.default <- function(object, level = 0.05,
 
 #' Selection of Invariant components using the med criterion
 #'
-#' Identifies invariant coordinates as interesting whose generalized eigenvalues are the furtherest away 
+#' Identifies as interesting invariant coordinates whose generalized eigenvalues are the furthermost away 
 #' from the median of all generalized eigenvalues.
 #'
 #' @param object object of class `ICS`.
@@ -176,10 +184,10 @@ normal_crit.default <- function(object, level = 0.05,
 #' 
 #' 
 #' @details
-#' If more than half of the components are unintersting and have the same generalized eigenvalue then the median 
+#' If more than half of the components are "uninteresting" and have the same generalized eigenvalue then the median 
 #' of all generalized eigenvalues corresponds 
-#' to the unintersting component generalzed eigenvalue and of interest are components whose generalized eigenvalues differ 
-#' the most from the median. The motivation of the criterion depends therefore on the assumption that at least half of the 
+#' to the uninteresting component generalized eigenvalue. The components of interest are the ones whose generalized eigenvalues differ 
+#' the most from the median. The motivation of this criterion depends therefore on the assumption that at least half of the 
 #' components have equal generalized eigenvalues.
 #'                              
 #' @return If `select_only` is  `TRUE` a vector of the names of the invariant
