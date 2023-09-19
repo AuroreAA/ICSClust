@@ -39,7 +39,9 @@ the discriminatory power based on it.}
 \item{method}{the name of the discriminatory power.
 Only \code{"eta2"} is implemented.}
 
-\item{nb_select}{the exact number of components to select.}
+\item{nb_select}{the exact number of components to select.
+By default it is set to \code{NULL}, i.e the number
+of components to select is the number of clusters minus one.}
 
 \item{select_only}{boolean. If \code{TRUE} only the vector names of the selected
 invariant components are returned. If \code{FALSE} additional details are returned.}

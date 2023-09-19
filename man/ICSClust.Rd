@@ -23,7 +23,7 @@ ICSClust(
 \item{nb_select}{the number of components to select.
 It is used only in case \code{criterion} is either \code{"med_crit"}, \code{"var_crit"}
 or \code{"discriminatory_crit"}.  By default it is set to \code{NULL}, i.e the number
-of components to select is the number of variables minus one.}
+of components to select is the number of clusters minus one.}
 
 \item{nb_clusters}{the number of clusters searched for.}
 

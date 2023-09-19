@@ -177,7 +177,8 @@ normal_crit.default <- function(object, level = 0.05,
 #' from the median of all generalized eigenvalues.
 #'
 #' @param object object of class `ICS`.
-#' @param nb_select the exact number of components to select.
+#' @param nb_select the exact number of components to select. By default it is set to
+#' `NULL`, i.e the number of components to select is the number of variables minus one.
 #' @param select_only boolean. If `TRUE` only the vector names of the selected 
 #' invariant components is returned. If `FALSE` additional details are returned. 
 #' @param \dots  additional arguments are currently ignored.
@@ -264,7 +265,8 @@ med_crit.default <- function(object, nb_select = NULL, select_only = FALSE, ...)
 #' obtained through [ICS::ICS()].
 #'   
 #' @param object object of class `ICS`.
-#' @param nb_select the exact number of components to select.
+#' @param nb_select the exact number of components to select. By default it is set to
+#' `NULL`, i.e the number of components to select is the number of variables minus one.
 #' @param select_only boolean. If `TRUE` only the vector names of the selected 
 #' invariant components is returned. If `FALSE` additional details are returned.
 #' @param \dots  additional arguments are currently ignored. 
@@ -395,7 +397,9 @@ fixOrder <- function (x, nb_spherical)
 #' the discriminatory power based on it.
 #' @param method the name of the discriminatory power. 
 #' Only `"eta2"` is implemented.
-#' @param nb_select the exact number of components to select.
+#' @param nb_select the exact number of components to select. 
+#' By default it is set to \code{NULL}, i.e the number 
+#' of components to select is the number of clusters minus one.
 #' @param select_only boolean. If `TRUE` only the vector names of the selected 
 #' invariant components are returned. If `FALSE` additional details are returned. 
 #' @param gen_kurtosis vector of generalized kurtosis values.
@@ -463,6 +467,8 @@ discriminatory_crit.ICS <- function(object, clusters, method = "eta2",
             power of the reduced data frame.")
     out <- vector()
   }else{
+    # if nb_select is NULL we put the nb_clusters-1
+    nb_select <- ifelse(is.null(nb_select), length(unique(clusters))-1, nb_select)
     discriminatory_crit(ICS::components(object), 
                         clusters = clusters,
                         method = method, nb_select = nb_select, 

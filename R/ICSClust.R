@@ -8,7 +8,7 @@
 #' @param nb_select the number of components to select. 
 #' It is used only in case \code{criterion} is either `"med_crit"`, `"var_crit"` 
 #' or `"discriminatory_crit"`.  By default it is set to \code{NULL}, i.e the number 
-#' of components to select is the number of variables minus one.
+#' of components to select is the number of clusters minus one.
 #' @param nb_clusters the number of clusters searched for. 
 #' @param ICS_args list of \code{\link[ICS]{ICS-S3}} arguments. Otherwise, default 
 #' values of \code{\link[ICS]{ICS-S3}} are used.
@@ -123,6 +123,8 @@ ICSClust <- function(X, nb_select = NULL, nb_clusters = NULL, ICS_args = list(),
   
   # Choice of components ----
   if(criterion %in% c("med_crit", "var_crit", "discriminatory_crit")){
+    # if nb_select is NULL we put the nb_clusters-1
+    nb_select <- ifelse(is.null(nb_select), nb_clusters-1, nb_select)
     ICS_crit_args <- append(ICS_crit_args, c(nb_select = nb_select))
   }
   if (criterion %in% c("discriminatory_crit")){

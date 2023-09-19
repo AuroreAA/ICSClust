@@ -82,7 +82,7 @@ test_that("ICSClust - different criterion", {
   out <- ICSClust(X, nb_clusters = 3, criterion = "discriminatory",
                   clusters = iris[,5],
                   ICS_args = list(S1 = ICS_tcov, S2 = ICS_cov))
-  expect_equal(out$select, c("IC.1", "IC.2", "IC.3"))
+  expect_equal(out$select, c("IC.1", "IC.2"))
   
   # discriminatory criterion
   out <- ICSClust(X, nb_clusters = 3, criterion = "discriminatory",

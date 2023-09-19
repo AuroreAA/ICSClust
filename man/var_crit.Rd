@@ -17,7 +17,8 @@ var_crit(object, ...)
 
 \item{\dots}{additional arguments are currently ignored.}
 
-\item{nb_select}{the exact number of components to select.}
+\item{nb_select}{the exact number of components to select. By default it is set to
+\code{NULL}, i.e the number of components to select is the number of variables minus one.}
 
 \item{select_only}{boolean. If \code{TRUE} only the vector names of the selected
 invariant components is returned. If \code{FALSE} additional details are returned.}
