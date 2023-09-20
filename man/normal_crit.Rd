@@ -87,7 +87,7 @@ normal_crit(out, level = 0.1, select_only = FALSE)
 \references{
 Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022).
 Tandem clustering with invariant coordinate selection.
-\emph{arXiv preprint arXiv:2212.06108}.
+\emph{arXiv preprint arXiv:2212.06108}..
 
 Archimbaud, A., Nordhausen, K., and Ruiz-Gazen, A. (2018).
 ICSOutlier: Unsupervised Outlier Detection for Low-Dimensional Contamination Structure,

@@ -89,7 +89,7 @@ discriminatory_crit(out, clusters = iris[,5], select_only = FALSE)
 \references{
 Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022).
 Tandem clustering with invariant coordinate selection.
-\emph{arXiv preprint arXiv:2212.06108}.
+\emph{arXiv preprint arXiv:2212.06108}..
 }
 \seealso{
 \code{\link[=normal_crit]{normal_crit()}}, \code{\link[=med_crit]{med_crit()}}, \code{\link[=var_crit]{var_crit()}}.

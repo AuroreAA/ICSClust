@@ -44,7 +44,7 @@
 #' @references
 #' Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022). 
 #' Tandem clustering with invariant coordinate selection. 
-#' \emph{arXiv preprint arXiv:2212.06108}.
+#'  \emph{arXiv preprint arXiv:2212.06108}..
 #' 
 #' Archimbaud, A., Nordhausen, K., and Ruiz-Gazen, A. (2018). 
 #' ICSOutlier: Unsupervised Outlier Detection for Low-Dimensional Contamination Structure, 
@@ -210,7 +210,7 @@ normal_crit.default <- function(object, level = 0.05,
 #' @references
 #' Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022). 
 #' Tandem clustering with invariant coordinate selection. 
-#' \emph{arXiv preprint arXiv:2212.06108}.
+#'  \emph{arXiv preprint arXiv:2212.06108}..
 #' 
 #' @seealso [normal_crit()], [var_crit()], [discriminatory_crit()].
 #'
@@ -296,7 +296,7 @@ med_crit.default <- function(object, nb_select = NULL, select_only = FALSE, ...)
 #' @references
 #' Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022). 
 #' Tandem clustering with invariant coordinate selection. 
-#' \emph{arXiv preprint arXiv:2212.06108}.
+#'  \emph{arXiv preprint arXiv:2212.06108}..
 #' 
 #' Radojicic, U., & Nordhausen, K. (2019). 
 #' Non-gaussian component analysis: Testing the dimension of the signal subspace.
@@ -440,7 +440,7 @@ fixOrder <- function (x, nb_spherical)
 #' @references
 #' Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022). 
 #' Tandem clustering with invariant coordinate selection. 
-#' \emph{arXiv preprint arXiv:2212.06108}.
+#'  \emph{arXiv preprint arXiv:2212.06108}..
 #' 
 #' @seealso [normal_crit()], [med_crit()], [var_crit()].
 #'

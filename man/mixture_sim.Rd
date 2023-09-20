@@ -45,7 +45,7 @@ summary(X)
 \references{
 Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022).
 Tandem clustering with invariant coordinate selection.
-\emph{arXiv preprint arXiv:2212.06108}.
+\emph{arXiv preprint arXiv:2212.06108}..
 }
 \author{
 Aurore Archimbaud

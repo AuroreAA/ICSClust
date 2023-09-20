@@ -35,6 +35,8 @@
 #' @import ggplot2
 #' @export
 #' 
+#' @return An object of class `ggplot` (see [ggplot2::ggplot()]).
+#' 
 #' @rdname select_plot
 #' @examples
 #' X <- iris[,-5]
@@ -288,6 +290,8 @@ discriminatory_plot <- function(object,  size = 3, color = "lightblue"){
 #' and `strip.text`. 
 #' @param colors a vector of colors to use. One color for each cluster.
 #' @export
+#' 
+#' @return An object of class [GGally::ggmatrix()](see [GGally::ggpairs()]).
 #' 
 #' @rdname component_plot
 #' 

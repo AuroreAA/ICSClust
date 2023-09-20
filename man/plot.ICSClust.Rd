@@ -11,6 +11,9 @@
 
 \item{\dots}{additional arguments to be passed down to \code{\link[=component_plot]{component_plot()}}}
 }
+\value{
+An object of class \code{\link[GGally:ggmatrix]{GGally::ggmatrix()}}(see \code{\link[GGally:ggpairs]{GGally::ggpairs()}}).
+}
 \description{
 Wrapper for \code{\link[=component_plot]{component_plot()}}.
 }

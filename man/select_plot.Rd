@@ -75,6 +75,9 @@ an \code{ICS_crit} object is given.}
 
 \item{size}{size of the points. Only relevant for "discriminatory" criteria.}
 }
+\value{
+An object of class \code{ggplot} (see \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}).
+}
 \description{
 Extracts the generalized kurtosis values of the components obtained via an
 ICS transformation and draws either a screeplot or a specific plot for a
