@@ -28,7 +28,8 @@ and \code{strip.text}.}
 \item{colors}{a vector of colors to use. One color for each cluster.}
 }
 \value{
-An object of class \code{\link[GGally:ggmatrix]{GGally::ggmatrix()}}(see \code{\link[GGally:ggpairs]{GGally::ggpairs()}}).
+An object of class \code{\link[GGally:ggmatrix]{"ggmatrix"}} (see
+\code{\link[GGally:ggpairs]{GGally::ggpairs()}}).
 }
 \description{
 Produces a gg-scatterplot matrix of the variables of a given dataframe

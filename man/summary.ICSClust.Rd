@@ -7,12 +7,12 @@
 \method{summary}{ICSClust}(object, ...)
 }
 \arguments{
-\item{object}{object of class \code{ICSClust}.}
+\item{object}{object of class \code{"ICSClust"}.}
 
 \item{...}{additional arguments passed to \code{\link[=summary]{summary()}}}
 }
 \value{
-An object of class \code{ICSClust_summary} with the following components:
+An object of class \code{"ICSClust_summary"} with the following components:
 \itemize{
 \item \code{ICS_out}: \code{ICS_out} object
 \item \code{nb_comp}: number of selected components

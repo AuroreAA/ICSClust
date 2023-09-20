@@ -7,7 +7,7 @@
 \method{print}{ICSClust_summary}(x, info = FALSE, digits = 4L, ...)
 }
 \arguments{
-\item{x}{object of class \code{ICSClust_summary}.}
+\item{x}{object of class \code{"ICSClust_summary"}.}
 
 \item{info}{logical, either TRUE or FALSE. If TRUE, prints additional
 information on arguments used for computing scatter matrices
@@ -20,7 +20,7 @@ Default is FALSE.}
 \item{...}{additional arguments are ignored.}
 }
 \value{
-The supplied object of class \code{ICSClust_summary} is returned invisibly.
+The supplied object of class \code{"ICSClust_summary"} is returned invisibly.
 }
 \description{
 Prints an \code{ICSClust_summary} object in an informative way.

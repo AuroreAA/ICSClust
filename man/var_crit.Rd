@@ -13,7 +13,7 @@ var_crit(object, ...)
 \method{var_crit}{default}(object, nb_select = NULL, select_only = FALSE, ...)
 }
 \arguments{
-\item{object}{object of class \code{ICS}.}
+\item{object}{object of class \code{"ICS"}.}
 
 \item{\dots}{additional arguments are currently ignored.}
 
@@ -25,7 +25,7 @@ invariant components is returned. If \code{FALSE} additional details are returne
 }
 \value{
 If \code{select_only} is \code{TRUE} a vector of the names of the invariant
-components or variables to select. If \code{FALSE} an object of class \code{ICS_crit}
+components or variables to select. If \code{FALSE} an object of class \code{"ICS_crit"}
 is returned with the following objects:
 \itemize{
 \item \code{crit}: the name of the criterion "var".

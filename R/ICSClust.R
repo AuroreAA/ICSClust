@@ -46,7 +46,7 @@
 #'   also write wrappers for other clustering methods.
 #'
 #' @return  
-#' An object of class `ICSClust` with the following components:
+#' An object of class `"ICSClust"` with the following components:
 #' - `ICS_out`: An object of class \code{"ICS"}. 
 #' See \code{\link[=ICS-S3]{ICS}}
 #' - `select`: a vector of the names of the selected invariant
@@ -160,10 +160,10 @@ ICSClust <- function(X, nb_select = NULL, nb_clusters = NULL, ICS_args = list(),
 #' 
 #' Summarizes an `ICSClust` object in an informative way.
 #'
-#' @param object object of class `ICSClust`.
+#' @param object object of class `"ICSClust"`.
 #' @param ... additional arguments passed to [summary()]
 #'
-#' @return An object of class `ICSClust_summary` with the following components:
+#' @return An object of class `"ICSClust_summary"` with the following components:
 #' - `ICS_out`: `ICS_out` object
 #' - `nb_comp`: number of selected components
 #' - `select`: vector of names of selected components
@@ -192,7 +192,7 @@ summary.ICSClust <- function(object, ...) {
 #' 
 #' Prints an `ICSClust_summary` object in an informative way.
 #'
-#' @param x object of class `ICSClust_summary`.
+#' @param x object of class `"ICSClust_summary"`.
 #' @param info logical, either TRUE or FALSE. If TRUE, prints additional
 #' information on arguments used for computing scatter matrices
 #' (only named arguments that contain numeric, character, or logical scalars)
@@ -200,7 +200,7 @@ summary.ICSClust <- function(object, ...) {
 #' Default is FALSE.
 #' @param digits  number of digits for the numeric output.
 #' @param ... additional arguments are ignored.
-#' @return The supplied object of class `ICSClust_summary` is returned invisibly.
+#' @return The supplied object of class `"ICSClust_summary"` is returned invisibly.
 #' @export
 #' 
 #' @name print.ICSClust_summary
@@ -227,10 +227,11 @@ print.ICSClust_summary <-  function(x, info = FALSE, digits = 4L, ...) {
 #' 
 #' Wrapper for [component_plot()].
 #' 
-#' @param x an object of class `ICSClust`. 
+#' @param x an object of class `"ICSClust"`. 
 #' @param \dots additional arguments to be passed down to [component_plot()]
 #' 
-#' @return An object of class [GGally::ggmatrix()](see [GGally::ggpairs()]).
+#' @return An object of class [`"ggmatrix"`][GGally::ggmatrix()] (see 
+#' [GGally::ggpairs()]).
 #' 
 #' @name plot.ICSClust
 #' @method plot ICSClust

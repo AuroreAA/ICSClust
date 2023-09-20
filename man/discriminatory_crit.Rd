@@ -28,7 +28,7 @@ discriminatory_crit(object, ...)
 )
 }
 \arguments{
-\item{object}{dataframe or object of class \code{ICS}.}
+\item{object}{dataframe or object of class \code{"ICS"}.}
 
 \item{\dots}{additional arguments are currently ignored.}
 
@@ -51,7 +51,7 @@ invariant components are returned. If \code{FALSE} additional details are return
 \value{
 If \code{select_only} is \code{TRUE} a vector of the names of the invariant
 components or variables to select.
-If \code{FALSE} an object of class \code{ICS_crit}
+If \code{FALSE} an object of class \code{"ICS_crit"}
 is returned with the following objects:
 \itemize{
 \item \code{crit}: the name of the criterion "discriminatory".

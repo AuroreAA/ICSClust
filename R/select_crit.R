@@ -6,7 +6,7 @@
 #' `ICSOutlier` package, with the difference that both the 
 #' first and last few components are investigated.
 #'
-#' @param object object of class `ICS` or a data frame or matrix.
+#' @param object object of class `"ICS"` or a data frame or matrix.
 #' @param level the initial level used to make a decision based on the test
 #' p-values. See details. Default is 0.05.
 #' @param test name of the normality test to be used. Possibilities are 
@@ -26,7 +26,7 @@
 #' *j*th component.
 #' 
 #' @return If `select_only` is  `TRUE` a vector of the names of the invariant
-#'  components or variables to select. If `FALSE` an object of class `ICS_crit`
+#'  components or variables to select. If `FALSE` an object of class `"ICS_crit"`
 #'  is returned with the following objects: 
 #'  - `crit`: the name of the criterion "normal".
 #'  - `level`: the level of the test.
@@ -176,7 +176,7 @@ normal_crit.default <- function(object, level = 0.05,
 #' Identifies as interesting invariant coordinates whose generalized eigenvalues are the furthermost away 
 #' from the median of all generalized eigenvalues.
 #'
-#' @param object object of class `ICS`.
+#' @param object object of class `"ICS"`.
 #' @param nb_select the exact number of components to select. By default it is set to
 #' `NULL`, i.e the number of components to select is the number of variables minus one.
 #' @param select_only boolean. If `TRUE` only the vector names of the selected 
@@ -192,7 +192,7 @@ normal_crit.default <- function(object, level = 0.05,
 #' components have equal generalized eigenvalues.
 #'                              
 #' @return If `select_only` is  `TRUE` a vector of the names of the invariant
-#'  components or variables to select. If `FALSE` an object of class `ICS_crit`
+#'  components or variables to select. If `FALSE` an object of class `"ICS_crit"`
 #'  is returned with the following objects: 
 #'  - `crit`: the name of the criterion "med".
 #'  - `nb_select`: the number of components to select.
@@ -264,7 +264,7 @@ med_crit.default <- function(object, nb_select = NULL, select_only = FALSE, ...)
 #' package. It computes rolling variances on the generalized eigenvalues
 #' obtained through [ICS::ICS()].
 #'   
-#' @param object object of class `ICS`.
+#' @param object object of class `"ICS"`.
 #' @param nb_select the exact number of components to select. By default it is set to
 #' `NULL`, i.e the number of components to select is the number of variables minus one.
 #' @param select_only boolean. If `TRUE` only the vector names of the selected 
@@ -281,7 +281,7 @@ med_crit.default <- function(object, nb_select = NULL, select_only = FALSE, ...)
 #' 
 #'
 #' @return If `select_only` is `TRUE` a vector of the names of the invariant
-#'  components or variables to select. If `FALSE` an object of class `ICS_crit`
+#'  components or variables to select. If `FALSE` an object of class `"ICS_crit"`
 #'  is returned with the following objects: 
 #'  - `crit`: the name of the criterion "var".
 #'  - `nb_select`: the number of components to select.
@@ -391,7 +391,7 @@ fixOrder <- function (x, nb_spherical)
 #' Identifies invariant coordinates associated to the highest discriminatory 
 #' power (by default "eta2").
 #'
-#' @param object dataframe or object of class `ICS`.
+#' @param object dataframe or object of class `"ICS"`.
 #' @param clusters a vector of the same length as the number of
 #'  observations, indicating the true clusters. It is used to compute
 #' the discriminatory power based on it.
@@ -421,7 +421,7 @@ fixOrder <- function (x, nb_spherical)
 #'
 #' @return If `select_only` is `TRUE` a vector of the names of the invariant
 #'  components or variables to select. 
-#'  If `FALSE` an object of class `ICS_crit`
+#'  If `FALSE` an object of class `"ICS_crit"`
 #'  is returned with the following objects: 
 #'  - `crit`: the name of the criterion "discriminatory".
 #'  - `method`: the name of the discriminatory power.

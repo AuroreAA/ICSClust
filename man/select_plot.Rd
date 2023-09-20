@@ -44,7 +44,7 @@ select_plot(object, ...)
 }
 \arguments{
 \item{object}{an object inheriting from class \code{"ICS"} and containing
-results from an ICS transformation or from class \code{ICS_crit}.}
+results from an ICS transformation or from class \code{"ICS_crit"}.}
 
 \item{\dots}{additional arguments are currently ignored.}
 
@@ -76,12 +76,12 @@ an \code{ICS_crit} object is given.}
 \item{size}{size of the points. Only relevant for "discriminatory" criteria.}
 }
 \value{
-An object of class \code{ggplot} (see \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}).
+An object of class \code{"ggplot"} (see \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}).
 }
 \description{
 Extracts the generalized kurtosis values of the components obtained via an
 ICS transformation and draws either a screeplot or a specific plot for a
-given criterion. If an object of class \code{ICS_crit} is given, then the
+given criterion. If an object of class \code{"ICS_crit"} is given, then the
 selected components are shaded on the plot.
 }
 \examples{

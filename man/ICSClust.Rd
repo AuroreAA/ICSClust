@@ -54,7 +54,7 @@ it is \code{NULL} but it is required to choose the components based on the
 discriminatory criterion \code{\link{discriminatory_crit}}.}
 }
 \value{
-An object of class \code{ICSClust} with the following components:
+An object of class \code{"ICSClust"} with the following components:
 \itemize{
 \item \code{ICS_out}: An object of class \code{"ICS"}.
 See \code{\link[=ICS-S3]{ICS}}
