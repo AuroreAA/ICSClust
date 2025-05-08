@@ -133,6 +133,7 @@ select_plot.ICS_crit <- function(object, type = c("dots", "lines"),
 df_select_plot <- function(object, select = NULL, scale = FALSE,
                            screeplot = TRUE) UseMethod("df_select_plot")
 
+#' @noRd
 df_select_plot.ICS <- function(object, select = NULL, scale = FALSE, 
                                screeplot = TRUE) {
   
@@ -368,6 +369,7 @@ component_plot <- function(object, select = TRUE,
 #' @noRd
 df_component_plot <- function(object, select = NULL) UseMethod("df_component_plot")
 
+#' @noRd
 df_component_plot.default <- function(object, select = NULL){
   data.frame()
 }

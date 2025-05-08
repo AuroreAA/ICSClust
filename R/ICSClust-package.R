@@ -1,7 +1,5 @@
 #' @name ICSClust-package
 #'
-#' @docType package
-#'
 #' @title \packageTitle{ICSClust}
 #'
 #' @description \packageDescription{ICSClust}
@@ -23,4 +21,4 @@
 #'
 #' @keywords package
 
-NULL
+"_PACKAGE"
