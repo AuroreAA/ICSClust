@@ -13,18 +13,19 @@ med_crit(object, ...)
 \method{med_crit}{default}(object, nb_select = NULL, select_only = FALSE, ...)
 }
 \arguments{
-\item{object}{object of class \code{ICS}.}
+\item{object}{object of class \code{"ICS"}.}
 
 \item{\dots}{additional arguments are currently ignored.}
 
-\item{nb_select}{the exact number of components to select.}
+\item{nb_select}{the exact number of components to select. By default it is set to
+\code{NULL}, i.e the number of components to select is the number of variables minus one.}
 
 \item{select_only}{boolean. If \code{TRUE} only the vector names of the selected
 invariant components is returned. If \code{FALSE} additional details are returned.}
 }
 \value{
 If \code{select_only} is  \code{TRUE} a vector of the names of the invariant
-components or variables to select. If \code{FALSE} an object of class \code{ICS_crit}
+components or variables to select. If \code{FALSE} an object of class \code{"ICS_crit"}
 is returned with the following objects:
 \itemize{
 \item \code{crit}: the name of the criterion "med".
@@ -37,14 +38,14 @@ kurtosis values and the median.
 }
 }
 \description{
-Identifies invariant coordinates as interesting whose generalized eigenvalues are the furtherest away
+Identifies as interesting invariant coordinates whose generalized eigenvalues are the furthermost away
 from the median of all generalized eigenvalues.
 }
 \details{
-If more than half of the components are unintersting and have the same generalized eigenvalue then the median
+If more than half of the components are "uninteresting" and have the same generalized eigenvalue then the median
 of all generalized eigenvalues corresponds
-to the unintersting component generalzed eigenvalue and of interest are components whose generalized eigenvalues differ
-the most from the median. The motivation of the criterion depends therefore on the assumption that at least half of the
+to the uninteresting component generalized eigenvalue. The components of interest are the ones whose generalized eigenvalues differ
+the most from the median. The motivation of this criterion depends therefore on the assumption that at least half of the
 components have equal generalized eigenvalues.
 }
 \examples{
@@ -55,7 +56,7 @@ med_crit(out, nb_select = 2, select_only = FALSE)
 \references{
 Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022).
 Tandem clustering with invariant coordinate selection.
-\emph{arXiv preprint arXiv:2212.06108}.
+\emph{arXiv preprint arXiv:2212.06108}..
 }
 \seealso{
 \code{\link[=normal_crit]{normal_crit()}}, \code{\link[=var_crit]{var_crit()}}, \code{\link[=discriminatory_crit]{discriminatory_crit()}}.

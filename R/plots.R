@@ -1,14 +1,14 @@
 # Plot of the generalized eigenvalues -------------------------------------
 
-#' Plot the Generalized Kurtosis Values of the ICS Transformation
+#' Plot of the Generalized Kurtosis Values of the ICS Transformation
 #'
 #' Extracts the generalized kurtosis values of the components obtained via an
-#' ICS transformation and draw either a screeplot or a specific plot for a 
-#' given criterion. If an object of class `ICS_crit` is given, then the 
+#' ICS transformation and draws either a screeplot or a specific plot for a 
+#' given criterion. If an object of class `"ICS_crit"` is given, then the 
 #' selected components are shaded on the plot.
 #' 
-#' @param object an object inheriting from class \code{"ICS"} containing
-#' results from an ICS transformation or from class `ICS_crit`.
+#' @param object an object inheriting from class \code{"ICS"} and containing
+#' results from an ICS transformation or from class `"ICS_crit"`.
 #' @param select  an integer, character, or logical vector specifying for 
 #' which components to extract the generalized kurtosis values, or 
 #' \code{NULL} for extracting the generalized kurtosis values of all 
@@ -34,6 +34,8 @@
 #' @import ICS
 #' @import ggplot2
 #' @export
+#' 
+#' @return An object of class `"ggplot"` (see [ggplot2::ggplot()]).
 #' 
 #' @rdname select_plot
 #' @examples
@@ -288,6 +290,9 @@ discriminatory_plot <- function(object,  size = 3, color = "lightblue"){
 #' and `strip.text`. 
 #' @param colors a vector of colors to use. One color for each cluster.
 #' @export
+#' 
+#' @return An object of class [`"ggmatrix"`][GGally::ggmatrix()] (see 
+#' [GGally::ggpairs()]).
 #' 
 #' @rdname component_plot
 #' 

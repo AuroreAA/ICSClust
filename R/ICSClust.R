@@ -8,7 +8,7 @@
 #' @param nb_select the number of components to select. 
 #' It is used only in case \code{criterion} is either `"med_crit"`, `"var_crit"` 
 #' or `"discriminatory_crit"`.  By default it is set to \code{NULL}, i.e the number 
-#' of components to select is the number of variables minus one.
+#' of components to select is the number of clusters minus one.
 #' @param nb_clusters the number of clusters searched for. 
 #' @param ICS_args list of \code{\link[ICS]{ICS-S3}} arguments. Otherwise, default 
 #' values of \code{\link[ICS]{ICS-S3}} are used.
@@ -46,7 +46,7 @@
 #'   also write wrappers for other clustering methods.
 #'
 #' @return  
-#' An object of class `ICSClust` with the following components:
+#' An object of class `"ICSClust"` with the following components:
 #' - `ICS_out`: An object of class \code{"ICS"}. 
 #' See \code{\link[=ICS-S3]{ICS}}
 #' - `select`: a vector of the names of the selected invariant
@@ -60,7 +60,7 @@
 #' @references
 #' Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022). 
 #' Tandem clustering with invariant coordinate selection. 
-#' \emph{arXiv preprint arXiv:2212.06108}.
+#'  \emph{arXiv preprint arXiv:2212.06108}..
 #' 
 #' @export
 #' 
@@ -123,6 +123,8 @@ ICSClust <- function(X, nb_select = NULL, nb_clusters = NULL, ICS_args = list(),
   
   # Choice of components ----
   if(criterion %in% c("med_crit", "var_crit", "discriminatory_crit")){
+    # if nb_select is NULL we put the nb_clusters-1
+    nb_select <- ifelse(is.null(nb_select), nb_clusters-1, nb_select)
     ICS_crit_args <- append(ICS_crit_args, c(nb_select = nb_select))
   }
   if (criterion %in% c("discriminatory_crit")){
@@ -154,44 +156,82 @@ ICSClust <- function(X, nb_select = NULL, nb_clusters = NULL, ICS_args = list(),
 }
 
 
-#' Summarize an `ICSClust` object
+#' Summary of an `ICSClust` object
 #' 
-#' Summarizes and prints an `ICSClust` object in an informative way.
+#' Summarizes an `ICSClust` object in an informative way.
+#'
+#' @param object object of class `"ICSClust"`.
+#' @param ... additional arguments passed to [summary()]
+#'
+#' @return An object of class `"ICSClust_summary"` with the following components:
+#' - `ICS_out`: `ICS_out` object
+#' - `nb_comp`: number of selected components
+#' - `select`: vector of names of selected components
+#' - `nb_clusters`: number of clusters
+#' - `table_clusters`: frequency table of clusters
 #' 
-#' @param object object of class `ICSClust`.
-#' @param info Logical, either TRUE or FALSE. If TRUE, print additional
+#' 
+#' @export
+#' 
+#' @name summary.ICSClust
+#' @method summary ICSClust
+#' @author Aurore Archimbaud
+
+summary.ICSClust <- function(object, ...) {
+  out <- list(ICS_out = object$ICS_out,
+              nb_comp =  length(object$select),
+              select = object$select,
+              nb_clusters = length(unique(object$clusters)),
+              table_clusters = table(object$clusters))
+  
+  class(out) <- "ICSClust_summary"
+  out
+}
+
+#' Print of an `ICSClust_summary` object
+#' 
+#' Prints an `ICSClust_summary` object in an informative way.
+#'
+#' @param x object of class `"ICSClust_summary"`.
+#' @param info logical, either TRUE or FALSE. If TRUE, prints additional
 #' information on arguments used for computing scatter matrices
 #' (only named arguments that contain numeric, character, or logical scalars)
 #' and information on the parameters of the algorithm.
 #' Default is FALSE.
 #' @param digits  number of digits for the numeric output.
 #' @param ... additional arguments are ignored.
-#'
-#' @name summary.ICSClust
-#' @method summary ICSClust
-#' @author Aurore Archimbaud
+#' @return The supplied object of class `"ICSClust_summary"` is returned invisibly.
 #' @export
-summary.ICSClust <- function(object, info = FALSE, digits = 4L, ...) {
+#' 
+#' @name print.ICSClust_summary
+#' @method print ICSClust_summary
+#' @author Aurore Archimbaud
+print.ICSClust_summary <-  function(x, info = FALSE, digits = 4L, ...) {
   # print information on ICS
-  print(object$ICS_out, info = info, digits = digits)
+  print(x$ICS_out, info = info, digits = digits)
   
   # print information on selected components
-  cat("\n", length(object$select), "components are selected:", object$select)
+  cat("\n", x$nb_comp, "components are selected:", x$select)
   
   # print information on clusters
-  cat("\n\n", length(unique(object$clusters)), "clusters are identified:\n")
-  print(table(object$clusters))
+  cat("\n\n", x$nb_clusters, "clusters are identified:\n")
+  print(x$table_clusters)
   
   # return object invisibly
-  invisible(object)
+  invisible(x)
 }
+
+
 
 #' Scatterplot Matrix with densities on the diagonal
 #' 
 #' Wrapper for [component_plot()].
 #' 
-#' @param x an object of class `ICSClust`. 
+#' @param x an object of class `"ICSClust"`. 
 #' @param \dots additional arguments to be passed down to [component_plot()]
+#' 
+#' @return An object of class [`"ggmatrix"`][GGally::ggmatrix()] (see 
+#' [GGally::ggpairs()]).
 #' 
 #' @name plot.ICSClust
 #' @method plot ICSClust

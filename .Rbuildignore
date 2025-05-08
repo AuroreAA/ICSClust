@@ -6,3 +6,4 @@ dev/*
 ^LICENSE\.md$
 ^README\.Rmd$
 ^\.github$
+^\.Rprofile$

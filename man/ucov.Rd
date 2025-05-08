@@ -3,7 +3,7 @@
 \name{ucov}
 \alias{ucov}
 \alias{scov}
-\title{Simple robust estimators of scatter}
+\title{Simple robust estimates of scatter}
 \usage{
 scov(x, beta = 0.2)
 

@@ -11,7 +11,7 @@
   #'  the \link[stats]{kmeans} function is returned.
 #' @param iter.max the maximum number of iterations allowed.
 #' @param nstart if `centers` is a number, how many random sets should be 
-#' chosen?
+#' chosen.
 #' @param ... other arguments to pass to the [stats::kmeans()] function.
 #'
 #' @return If \code{clusters_only} is \code{TRUE} a vector of the new partition
@@ -54,7 +54,7 @@ kmeans_clust <- function(X, k, clusters_only = FALSE, iter.max = 100,
 
 #' Trimmed k-means clustering
 #' 
-#' Wrapper for performing trimmed k-kmeans clustering from 
+#' Wrapper for performing trimmed k-means clustering from 
 #' [tclust::tkmeans()].
 #'
 #'
@@ -240,7 +240,7 @@ rimle_clust <- function(X, k, clusters_only = FALSE, ...){
 #' \item{clusters}{the vector of the new partition of the data, i.e a vector of 
 #' integers (from \code{1:k}) indicating the cluster to which each observation 
 #' is allocated.
-#'  0 indicates outlying observations.}
+#'  0 indicates outlying observations for [rmclust_clust()] only.}
 #' \item{...}{an object of class "\code{mclust}"}
 #' 
 #' @seealso [mclust::Mclust()]

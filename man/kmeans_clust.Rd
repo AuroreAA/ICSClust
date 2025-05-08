@@ -20,7 +20,7 @@ the \link[stats]{kmeans} function is returned.}
 \item{iter.max}{the maximum number of iterations allowed.}
 
 \item{nstart}{if \code{centers} is a number, how many random sets should be
-chosen?}
+chosen.}
 
 \item{...}{other arguments to pass to the \code{\link[stats:kmeans]{stats::kmeans()}} function.}
 }

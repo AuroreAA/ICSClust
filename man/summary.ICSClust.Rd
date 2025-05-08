@@ -2,25 +2,27 @@
 % Please edit documentation in R/ICSClust.R
 \name{summary.ICSClust}
 \alias{summary.ICSClust}
-\title{Summarize an \code{ICSClust} object}
+\title{Summary of an \code{ICSClust} object}
 \usage{
-\method{summary}{ICSClust}(object, info = FALSE, digits = 4L, ...)
+\method{summary}{ICSClust}(object, ...)
 }
 \arguments{
-\item{object}{object of class \code{ICSClust}.}
+\item{object}{object of class \code{"ICSClust"}.}
 
-\item{info}{Logical, either TRUE or FALSE. If TRUE, print additional
-information on arguments used for computing scatter matrices
-(only named arguments that contain numeric, character, or logical scalars)
-and information on the parameters of the algorithm.
-Default is FALSE.}
-
-\item{digits}{number of digits for the numeric output.}
-
-\item{...}{additional arguments are ignored.}
+\item{...}{additional arguments passed to \code{\link[=summary]{summary()}}}
+}
+\value{
+An object of class \code{"ICSClust_summary"} with the following components:
+\itemize{
+\item \code{ICS_out}: \code{ICS_out} object
+\item \code{nb_comp}: number of selected components
+\item \code{select}: vector of names of selected components
+\item \code{nb_clusters}: number of clusters
+\item \code{table_clusters}: frequency table of clusters
+}
 }
 \description{
-Summarizes and prints an \code{ICSClust} object in an informative way.
+Summarizes an \code{ICSClust} object in an informative way.
 }
 \author{
 Aurore Archimbaud

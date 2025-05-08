@@ -2,7 +2,7 @@
 #' 
 #' Simulation of a \eqn{n \times p} data frame according to a mixture of \eqn{q}
 #' Gaussian distributions with \eqn{q < p}, different location parameters
-#' \eqn{\mu_1, \dots, \mu_q}, and the identify matrix as the covariance matrix.
+#' \eqn{\mu_1, \dots, \mu_q}, and the identity matrix as the covariance matrix.
 #'
 #' @param pct_clusters a vector of marginal probabilities for each group, i.e
 #' mixture weights. 
@@ -31,6 +31,12 @@
 #' 
 #' @importFrom mvtnorm rmvnorm
 #' @author Aurore Archimbaud
+#' 
+#' @references
+#' Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022). 
+#' Tandem clustering with invariant coordinate selection. 
+#'  \emph{arXiv preprint arXiv:2212.06108}..
+#' 
 #' @examples
 #' X <- mixture_sim()
 #' summary(X)
@@ -118,6 +124,11 @@ mixture_sim = function(pct_clusters = c(0.5,0.5) , n = 500, p = 10, delta = 10){
 #' 
 #' @importFrom stats runif
 #' @export
+#' 
+#' @references
+#' #' Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022). 
+#' Tandem clustering with invariant coordinate selection. 
+#' \emph{arXiv preprint arXiv:2212.06108}.
 
 runif_outside_range <- function(n, min = 0, max = 1, mult = 2) {
   # check number of observations

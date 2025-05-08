@@ -7,7 +7,7 @@
 # TCOV scatter matrix -----
 
 
-#' Pairwise one-step M-estimator of scatter for ICS
+#' Pairwise one-step M-estimate of scatter for ICS
 #' 
 #' Wrapper function for the pairwise one-step M-estimator of scatter with 
 #' weights based on pairwise Mahalanobis distances, as computed by 
@@ -44,9 +44,9 @@ ICS_tcov <- function(x, beta = 2) {
 }
 
 
-#' Pairwise one-step M-estimator of scatter
+#' Pairwise one-step M-estimate of scatter
 #' 
-#' Compute a pairwise one-step M-estimator of scatter with weights based on 
+#' Computes a pairwise one-step M-estimate of scatter with weights based on 
 #' pairwise Mahalanobis distances. Note that it is based on pairwise 
 #' differences and therefore does not require a location estimate.
 #' 
@@ -173,7 +173,7 @@ scov <- function(x, beta = 0.2) {
 # UCOV scatter matrix -----
 
 
-#' Simple robust estimators of scatter for ICS
+#' Simple robust estimates of scatter for ICS
 #' 
 #' Wrapper functions for the one-step M-estimator of scatter with weights based 
 #' on Mahalanobis distances as computed by \code{\link{scov}()}, or the simple 
@@ -216,7 +216,7 @@ ICS_ucov <- function(x, location = TRUE, beta = 0.2) {
 }
 
 
-#' Simple robust estimators of scatter
+#' Simple robust estimates of scatter
 #' 
 #' Compute a one-step M-estimator of scatter with weights based on Mahalanobis 
 #' distances, or a simple related estimator that is based on a transformation.

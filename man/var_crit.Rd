@@ -13,18 +13,19 @@ var_crit(object, ...)
 \method{var_crit}{default}(object, nb_select = NULL, select_only = FALSE, ...)
 }
 \arguments{
-\item{object}{object of class \code{ICS}.}
+\item{object}{object of class \code{"ICS"}.}
 
 \item{\dots}{additional arguments are currently ignored.}
 
-\item{nb_select}{the exact number of components to select.}
+\item{nb_select}{the exact number of components to select. By default it is set to
+\code{NULL}, i.e the number of components to select is the number of variables minus one.}
 
 \item{select_only}{boolean. If \code{TRUE} only the vector names of the selected
 invariant components is returned. If \code{FALSE} additional details are returned.}
 }
 \value{
 If \code{select_only} is \code{TRUE} a vector of the names of the invariant
-components or variables to select. If \code{FALSE} an object of class \code{ICS_crit}
+components or variables to select. If \code{FALSE} an object of class \code{"ICS_crit"}
 is returned with the following objects:
 \itemize{
 \item \code{crit}: the name of the criterion "var".
@@ -60,7 +61,12 @@ var_crit(out, nb_select = 2, select_only = FALSE)
 \references{
 Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022).
 Tandem clustering with invariant coordinate selection.
-\emph{arXiv preprint arXiv:2212.06108}.
+\emph{arXiv preprint arXiv:2212.06108}..
+
+Radojicic, U., & Nordhausen, K. (2019).
+Non-gaussian component analysis: Testing the dimension of the signal subspace.
+In Workshop on Analytical Methods in Statistics (pp. 101–123). Springer.
+\doi{10.1007/978-3-030-48814-7_6}.
 }
 \seealso{
 \code{\link[=normal_crit]{normal_crit()}}, \code{\link[=med_crit]{med_crit()}}, \code{\link[=discriminatory_crit]{discriminatory_crit()}}.

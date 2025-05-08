@@ -3,13 +3,15 @@ Type: Package
 Title: Tandem Clustering with Invariant Coordinate Selection
 Version: 0.1.1
 Date: 2025-05-08
-Description: Implementation of Tandem Clustering with Invariant Coordinate 
-              Selection with different scatter matrices and choices for the 
-              selection of components.
+Description: Implementation of tandem clustering with invariant coordinate 
+             selection with different scatter matrices and several choices 
+             for the selection of components as described in Alfons, A., 
+             Archimbaud, A., Nordhausen, K.and Ruiz-Gazen, A. (2024) 
+             <doi:10.1016/j.ecosta.2024.03.002>.
 License: GPL (>= 3)
 Encoding: UTF-8
 Depends:
-    ICS,
+    ICS (>= 1.4-0),
     ggplot2
 Imports: 
     cluster,

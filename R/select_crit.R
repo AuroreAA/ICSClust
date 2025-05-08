@@ -3,10 +3,10 @@
 #' 
 #' Identifies invariant coordinates that are non normal using univariate 
 #' normality tests as in the `comp.norm.test` function from the 
-#' `ICSOutlier` package, except that both the 
+#' `ICSOutlier` package, with the difference that both the 
 #' first and last few components are investigated.
 #'
-#' @param object object of class `ICS` or a data frame or matrix.
+#' @param object object of class `"ICS"` or a data frame or matrix.
 #' @param level the initial level used to make a decision based on the test
 #' p-values. See details. Default is 0.05.
 #' @param test name of the normality test to be used. Possibilities are 
@@ -26,7 +26,7 @@
 #' *j*th component.
 #' 
 #' @return If `select_only` is  `TRUE` a vector of the names of the invariant
-#'  components or variables to select. If `FALSE` an object of class `ICS_crit`
+#'  components or variables to select. If `FALSE` an object of class `"ICS_crit"`
 #'  is returned with the following objects: 
 #'  - `crit`: the name of the criterion "normal".
 #'  - `level`: the level of the test.
@@ -44,7 +44,15 @@
 #' @references
 #' Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022). 
 #' Tandem clustering with invariant coordinate selection. 
-#' \emph{arXiv preprint arXiv:2212.06108}.
+#'  \emph{arXiv preprint arXiv:2212.06108}..
+#' 
+#' Archimbaud, A., Nordhausen, K., and Ruiz-Gazen, A. (2018). 
+#' ICSOutlier: Unsupervised Outlier Detection for Low-Dimensional Contamination Structure, 
+#' The RJournal, Vol. 10(1):234–250. \doi{10.32614/RJ-2018-034}
+#' 
+#' Archimbaud, A., Nordhausen, K., and Ruiz-Gazen, A. (2016). 
+#' ICSOutlier: Outlier Detection Using Invariant Coordinate Selection. 
+#' R package version 0.3-0
 #' 
 #' @seealso [med_crit()], [var_crit()], [discriminatory_crit()],
 #'  [jarque.test()], [anscombe.test()], 
@@ -165,25 +173,26 @@ normal_crit.default <- function(object, level = 0.05,
 
 #' Selection of Invariant components using the med criterion
 #'
-#' Identifies invariant coordinates as interesting whose generalized eigenvalues are the furtherest away 
+#' Identifies as interesting invariant coordinates whose generalized eigenvalues are the furthermost away 
 #' from the median of all generalized eigenvalues.
 #'
-#' @param object object of class `ICS`.
-#' @param nb_select the exact number of components to select.
+#' @param object object of class `"ICS"`.
+#' @param nb_select the exact number of components to select. By default it is set to
+#' `NULL`, i.e the number of components to select is the number of variables minus one.
 #' @param select_only boolean. If `TRUE` only the vector names of the selected 
 #' invariant components is returned. If `FALSE` additional details are returned. 
 #' @param \dots  additional arguments are currently ignored.
 #' 
 #' 
 #' @details
-#' If more than half of the components are unintersting and have the same generalized eigenvalue then the median 
+#' If more than half of the components are "uninteresting" and have the same generalized eigenvalue then the median 
 #' of all generalized eigenvalues corresponds 
-#' to the unintersting component generalzed eigenvalue and of interest are components whose generalized eigenvalues differ 
-#' the most from the median. The motivation of the criterion depends therefore on the assumption that at least half of the 
+#' to the uninteresting component generalized eigenvalue. The components of interest are the ones whose generalized eigenvalues differ 
+#' the most from the median. The motivation of this criterion depends therefore on the assumption that at least half of the 
 #' components have equal generalized eigenvalues.
 #'                              
 #' @return If `select_only` is  `TRUE` a vector of the names of the invariant
-#'  components or variables to select. If `FALSE` an object of class `ICS_crit`
+#'  components or variables to select. If `FALSE` an object of class `"ICS_crit"`
 #'  is returned with the following objects: 
 #'  - `crit`: the name of the criterion "med".
 #'  - `nb_select`: the number of components to select.
@@ -201,7 +210,7 @@ normal_crit.default <- function(object, level = 0.05,
 #' @references
 #' Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022). 
 #' Tandem clustering with invariant coordinate selection. 
-#' \emph{arXiv preprint arXiv:2212.06108}.
+#'  \emph{arXiv preprint arXiv:2212.06108}..
 #' 
 #' @seealso [normal_crit()], [var_crit()], [discriminatory_crit()].
 #'
@@ -255,8 +264,9 @@ med_crit.default <- function(object, nb_select = NULL, select_only = FALSE, ...)
 #' package. It computes rolling variances on the generalized eigenvalues
 #' obtained through [ICS::ICS()].
 #'   
-#' @param object object of class `ICS`.
-#' @param nb_select the exact number of components to select.
+#' @param object object of class `"ICS"`.
+#' @param nb_select the exact number of components to select. By default it is set to
+#' `NULL`, i.e the number of components to select is the number of variables minus one.
 #' @param select_only boolean. If `TRUE` only the vector names of the selected 
 #' invariant components is returned. If `FALSE` additional details are returned.
 #' @param \dots  additional arguments are currently ignored. 
@@ -271,7 +281,7 @@ med_crit.default <- function(object, nb_select = NULL, select_only = FALSE, ...)
 #' 
 #'
 #' @return If `select_only` is `TRUE` a vector of the names of the invariant
-#'  components or variables to select. If `FALSE` an object of class `ICS_crit`
+#'  components or variables to select. If `FALSE` an object of class `"ICS_crit"`
 #'  is returned with the following objects: 
 #'  - `crit`: the name of the criterion "var".
 #'  - `nb_select`: the number of components to select.
@@ -286,7 +296,12 @@ med_crit.default <- function(object, nb_select = NULL, select_only = FALSE, ...)
 #' @references
 #' Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022). 
 #' Tandem clustering with invariant coordinate selection. 
-#' \emph{arXiv preprint arXiv:2212.06108}.
+#'  \emph{arXiv preprint arXiv:2212.06108}..
+#' 
+#' Radojicic, U., & Nordhausen, K. (2019). 
+#' Non-gaussian component analysis: Testing the dimension of the signal subspace.
+#'  In Workshop on Analytical Methods in Statistics (pp. 101–123). Springer. 
+#'  \doi{10.1007/978-3-030-48814-7_6}.
 #' 
 #' @seealso [normal_crit()], [med_crit()], [discriminatory_crit()].
 #' 
@@ -376,13 +391,15 @@ fixOrder <- function (x, nb_spherical)
 #' Identifies invariant coordinates associated to the highest discriminatory 
 #' power (by default "eta2").
 #'
-#' @param object dataframe or object of class `ICS`.
+#' @param object dataframe or object of class `"ICS"`.
 #' @param clusters a vector of the same length as the number of
 #'  observations, indicating the true clusters. It is used to compute
 #' the discriminatory power based on it.
 #' @param method the name of the discriminatory power. 
 #' Only `"eta2"` is implemented.
-#' @param nb_select the exact number of components to select.
+#' @param nb_select the exact number of components to select. 
+#' By default it is set to \code{NULL}, i.e the number 
+#' of components to select is the number of clusters minus one.
 #' @param select_only boolean. If `TRUE` only the vector names of the selected 
 #' invariant components are returned. If `FALSE` additional details are returned. 
 #' @param gen_kurtosis vector of generalized kurtosis values.
@@ -404,7 +421,7 @@ fixOrder <- function (x, nb_spherical)
 #'
 #' @return If `select_only` is `TRUE` a vector of the names of the invariant
 #'  components or variables to select. 
-#'  If `FALSE` an object of class `ICS_crit`
+#'  If `FALSE` an object of class `"ICS_crit"`
 #'  is returned with the following objects: 
 #'  - `crit`: the name of the criterion "discriminatory".
 #'  - `method`: the name of the discriminatory power.
@@ -423,7 +440,7 @@ fixOrder <- function (x, nb_spherical)
 #' @references
 #' Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022). 
 #' Tandem clustering with invariant coordinate selection. 
-#' \emph{arXiv preprint arXiv:2212.06108}.
+#'  \emph{arXiv preprint arXiv:2212.06108}..
 #' 
 #' @seealso [normal_crit()], [med_crit()], [var_crit()].
 #'
@@ -450,6 +467,8 @@ discriminatory_crit.ICS <- function(object, clusters, method = "eta2",
             power of the reduced data frame.")
     out <- vector()
   }else{
+    # if nb_select is NULL we put the nb_clusters-1
+    nb_select <- ifelse(is.null(nb_select), length(unique(clusters))-1, nb_select)
     discriminatory_crit(ICS::components(object), 
                         clusters = clusters,
                         method = method, nb_select = nb_select, 

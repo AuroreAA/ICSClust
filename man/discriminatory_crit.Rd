@@ -28,7 +28,7 @@ discriminatory_crit(object, ...)
 )
 }
 \arguments{
-\item{object}{dataframe or object of class \code{ICS}.}
+\item{object}{dataframe or object of class \code{"ICS"}.}
 
 \item{\dots}{additional arguments are currently ignored.}
 
@@ -39,7 +39,9 @@ the discriminatory power based on it.}
 \item{method}{the name of the discriminatory power.
 Only \code{"eta2"} is implemented.}
 
-\item{nb_select}{the exact number of components to select.}
+\item{nb_select}{the exact number of components to select.
+By default it is set to \code{NULL}, i.e the number
+of components to select is the number of clusters minus one.}
 
 \item{select_only}{boolean. If \code{TRUE} only the vector names of the selected
 invariant components are returned. If \code{FALSE} additional details are returned.}
@@ -49,7 +51,7 @@ invariant components are returned. If \code{FALSE} additional details are return
 \value{
 If \code{select_only} is \code{TRUE} a vector of the names of the invariant
 components or variables to select.
-If \code{FALSE} an object of class \code{ICS_crit}
+If \code{FALSE} an object of class \code{"ICS_crit"}
 is returned with the following objects:
 \itemize{
 \item \code{crit}: the name of the criterion "discriminatory".
@@ -87,7 +89,7 @@ discriminatory_crit(out, clusters = iris[,5], select_only = FALSE)
 \references{
 Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022).
 Tandem clustering with invariant coordinate selection.
-\emph{arXiv preprint arXiv:2212.06108}.
+\emph{arXiv preprint arXiv:2212.06108}..
 }
 \seealso{
 \code{\link[=normal_crit]{normal_crit()}}, \code{\link[=med_crit]{med_crit()}}, \code{\link[=var_crit]{var_crit()}}.

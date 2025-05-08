@@ -31,7 +31,7 @@ normal_crit(object, ...)
 )
 }
 \arguments{
-\item{object}{object of class \code{ICS} or a data frame or matrix.}
+\item{object}{object of class \code{"ICS"} or a data frame or matrix.}
 
 \item{\dots}{additional arguments are currently ignored.}
 
@@ -52,7 +52,7 @@ invariant components is returned. If \code{FALSE} additional details are returne
 }
 \value{
 If \code{select_only} is  \code{TRUE} a vector of the names of the invariant
-components or variables to select. If \code{FALSE} an object of class \code{ICS_crit}
+components or variables to select. If \code{FALSE} an object of class \code{"ICS_crit"}
 is returned with the following objects:
 \itemize{
 \item \code{crit}: the name of the criterion "normal".
@@ -69,7 +69,7 @@ is returned with the following objects:
 \description{
 Identifies invariant coordinates that are non normal using univariate
 normality tests as in the \code{comp.norm.test} function from the
-\code{ICSOutlier} package, except that both the
+\code{ICSOutlier} package, with the difference that both the
 first and last few components are investigated.
 }
 \details{
@@ -87,7 +87,15 @@ normal_crit(out, level = 0.1, select_only = FALSE)
 \references{
 Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022).
 Tandem clustering with invariant coordinate selection.
-\emph{arXiv preprint arXiv:2212.06108}.
+\emph{arXiv preprint arXiv:2212.06108}..
+
+Archimbaud, A., Nordhausen, K., and Ruiz-Gazen, A. (2018).
+ICSOutlier: Unsupervised Outlier Detection for Low-Dimensional Contamination Structure,
+The RJournal, Vol. 10(1):234–250. \doi{10.32614/RJ-2018-034}
+
+Archimbaud, A., Nordhausen, K., and Ruiz-Gazen, A. (2016).
+ICSOutlier: Outlier Detection Using Invariant Coordinate Selection.
+R package version 0.3-0
 }
 \seealso{
 \code{\link[=med_crit]{med_crit()}}, \code{\link[=var_crit]{var_crit()}}, \code{\link[=discriminatory_crit]{discriminatory_crit()}},

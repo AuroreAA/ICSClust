@@ -23,7 +23,7 @@ ICSClust(
 \item{nb_select}{the number of components to select.
 It is used only in case \code{criterion} is either \code{"med_crit"}, \code{"var_crit"}
 or \code{"discriminatory_crit"}.  By default it is set to \code{NULL}, i.e the number
-of components to select is the number of variables minus one.}
+of components to select is the number of clusters minus one.}
 
 \item{nb_clusters}{the number of clusters searched for.}
 
@@ -54,7 +54,7 @@ it is \code{NULL} but it is required to choose the components based on the
 discriminatory criterion \code{\link{discriminatory_crit}}.}
 }
 \value{
-An object of class \code{ICSClust} with the following components:
+An object of class \code{"ICSClust"} with the following components:
 \itemize{
 \item \code{ICS_out}: An object of class \code{"ICS"}.
 See \code{\link[=ICS-S3]{ICS}}
@@ -114,7 +114,7 @@ plot(out)
 \references{
 Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022).
 Tandem clustering with invariant coordinate selection.
-\emph{arXiv preprint arXiv:2212.06108}.
+\emph{arXiv preprint arXiv:2212.06108}..
 }
 \seealso{
 \code{\link[=med_crit]{med_crit()}}, \code{\link[=normal_crit]{normal_crit()}},
