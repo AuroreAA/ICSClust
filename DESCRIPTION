@@ -1,8 +1,8 @@
 Package: ICSClust
 Type: Package
 Title: Tandem Clustering with Invariant Coordinate Selection
-Version: 0.1.0
-Date: 2023-01-31
+Version: 0.1.1
+Date: 2025-05-08
 Description: Implementation of Tandem Clustering with Invariant Coordinate 
               Selection with different scatter matrices and choices for the 
               selection of components.
@@ -55,5 +55,5 @@ Author:
     Anne Ruiz-Gazen [aut] (<https://orcid.org/0000-0001-8970-8061>)
 Maintainer: Aurore Archimbaud <aurore.archimbaud@live.fr>
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 Config/testthat/edition: 3

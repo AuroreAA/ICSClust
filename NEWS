@@ -1,0 +1,5 @@
+LOG of the CHANGES in the package ICSClust
+
+Version 0.1.1
+
+* function component_plot() now adds a default title with the scatter pair in case of an "ICS"" object

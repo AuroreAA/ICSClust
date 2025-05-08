@@ -17,6 +17,14 @@ Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022).
 Tandem clustering with invariant coordinate selection.
 \emph{arXiv preprint arXiv:2212.06108}.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/AuroreAA/ICSClust}
+  \item Report bugs at \url{https://github.com/AuroreAA/ICSClust/issues}
+}
+
+}
 \author{
 \packageAuthor{ICSClust}
 

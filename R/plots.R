@@ -321,7 +321,10 @@ component_plot <- function(object, select = TRUE,
     df_plot <- data.frame(df, clusters  = clusters)
     column_labels <- colnames(df)
     if(is.null(colors)) colors <- scales::hue_pal()(length(unique(clusters)))
-    
+    # if we have an "ICS" object, we can add a default title
+    have_ICS <- inherits(object, "ICS")
+
+    # create plot
     p <- GGally::ggpairs(df_plot, aes(color = clusters, alpha = 0.4), 
                          upper = list(continuous = "points"),
                          columns = seq_along(column_labels), 
@@ -332,7 +335,12 @@ component_plot <- function(object, select = TRUE,
       theme_bw() +
       theme(axis.text = element_text(size = 9 * text_size_factor), 
             strip.text = element_text(size = 10 * text_size_factor))
+    if (have_ICS) {
+      title <- paste(object$S1_label, object$S2_label, sep = "-")
+      p <- p + ggtitle(label = title)
+    }
     
+    # return plot
     p
   }
 }
