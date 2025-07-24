@@ -5,7 +5,7 @@ Version: 0.1.1
 Date: 2023-09-20
 Description: Implementation of tandem clustering with invariant coordinate 
               selection with different scatter matrices and several choices for the 
-              selection of components as described in Alfons, A., Archimbaud, A., Nordhausen, K.and Ruiz-Gazen, A. (2024) <doi.org/10.1016/j.ecosta.2024.03.002>.
+              selection of components as described in Alfons, A., Archimbaud, A., Nordhausen, K.and Ruiz-Gazen, A. (2024) <doi:10.1016/j.ecosta.2024.03.002>.
 License: GPL (>= 3)
 Encoding: UTF-8
 Depends:
