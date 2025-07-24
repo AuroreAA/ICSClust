@@ -42,9 +42,10 @@
 #' 
 #' 
 #' @references
-#' Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022). 
+#' Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2024). 
 #' Tandem clustering with invariant coordinate selection. 
-#'  \emph{arXiv preprint arXiv:2212.06108}..
+#' Econometrics and Statistics.
+#'  \doi{10.1016/j.ecosta.2024.03.002}.
 #' 
 #' Archimbaud, A., Nordhausen, K., and Ruiz-Gazen, A. (2018). 
 #' ICSOutlier: Unsupervised Outlier Detection for Low-Dimensional Contamination Structure, 
@@ -55,8 +56,8 @@
 #' R package version 0.3-0
 #' 
 #' @seealso [med_crit()], [var_crit()], [discriminatory_crit()],
-#'  [jarque.test()], [anscombe.test()], 
-#' [bonett.test()], [agostino.test()], [stats::shapiro.test()].
+#'  [moments::jarque.test()], [moments::anscombe.test()], 
+#' [moments::bonett.test()], [moments::agostino.test()], [stats::shapiro.test()].
 #'
 #' @author Andreas Alfons, Aurore Archimbaud, Klaus Nordhausen and Anne Ruiz-Gazen
 #' 
@@ -208,9 +209,10 @@ normal_crit.default <- function(object, level = 0.05,
 #' @rdname med_crit
 #' 
 #' @references
-#' Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022). 
+#' Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2024). 
 #' Tandem clustering with invariant coordinate selection. 
-#'  \emph{arXiv preprint arXiv:2212.06108}..
+#' Econometrics and Statistics.
+#'  \doi{10.1016/j.ecosta.2024.03.002}.
 #' 
 #' @seealso [normal_crit()], [var_crit()], [discriminatory_crit()].
 #'
@@ -294,9 +296,10 @@ med_crit.default <- function(object, nb_select = NULL, select_only = FALSE, ...)
 #' 
 #' @export
 #' @references
-#' Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022). 
+#' Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2024). 
 #' Tandem clustering with invariant coordinate selection. 
-#'  \emph{arXiv preprint arXiv:2212.06108}..
+#' Econometrics and Statistics.
+#'  \doi{10.1016/j.ecosta.2024.03.002}.
 #' 
 #' Radojicic, U., & Nordhausen, K. (2019). 
 #' Non-gaussian component analysis: Testing the dimension of the signal subspace.
@@ -438,9 +441,10 @@ fixOrder <- function (x, nb_spherical)
 #' @rdname discriminatory_crit
 #' 
 #' @references
-#' Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2022). 
+#' Alfons, A., Archimbaud, A., Nordhausen, K., & Ruiz-Gazen, A. (2024). 
 #' Tandem clustering with invariant coordinate selection. 
-#'  \emph{arXiv preprint arXiv:2212.06108}..
+#' Econometrics and Statistics.
+#'  \doi{10.1016/j.ecosta.2024.03.002}.
 #' 
 #' @seealso [normal_crit()], [med_crit()], [var_crit()].
 #'
