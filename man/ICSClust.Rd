@@ -69,7 +69,7 @@ observation is allocated. 0 indicates outlying observations.
 }
 \description{
 Sequential clustering approach: (i) dimension reduction through the Invariant
-Coordinate Selection method using the \code{\link[=ICS-S3]{ICS}} function and (ii)
+Coordinate Selection method using the \code{\link[ICS]{ICS-S3}} function and (ii)
 clustering of the transformed data.
 }
 \details{

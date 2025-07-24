@@ -1,7 +1,7 @@
 #' Tandem clustering with ICS
 #' 
 #' Sequential clustering approach: (i) dimension reduction through the Invariant 
-#' Coordinate Selection method using the \code{\link[=ICS-S3]{ICS}} function and (ii)
+#' Coordinate Selection method using the \code{\link[ICS]{ICS-S3}} function and (ii)
 #' clustering of the transformed data. 
 #'
 #' @param X a numeric matrix or data frame containing the data.
