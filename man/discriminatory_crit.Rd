@@ -71,14 +71,14 @@ Wilks' partial eta-squared, computed using the \code{\link[heplots:etasq]{heplot
 function.
 }
 \details{
-The discriminatory power \eqn{\eta^{2} = 1 - \Lambda^{1/s}}, where \eqn{\Lambda}
-denotes Wilks' lambda, is evaluated for each combination of the
+The discriminatory power is evaluated for each combination of the
 first and/or last combinations of \code{nb_select} components. The combination
 achieving the highest discriminatory power is selected.
 
-More specifically, we compute
+More specifically, we compute \eqn{\eta^{2} = 1 - \Lambda^{1/s}}, where \eqn{\Lambda}
+denotes Wilks' lambda:
 \deqn{
-\eta^{2} = 1 - (\frac{\det(E)}{\det(T)})^{1/s},
+\Lambda = \frac{\det(E)}{\det(T)},
 }
 where \eqn{E} is the within-group sum of squares and cross-products matrix,
 \eqn{H} is the between-group sum of squares and cross-products matrix and
