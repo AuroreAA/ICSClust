@@ -2,7 +2,7 @@ Package: ICSClust
 Type: Package
 Title: Tandem Clustering with Invariant Coordinate Selection
 Version: 0.1.1
-Date: 2023-09-20
+Date: 2025-07-24
 Description: Implementation of tandem clustering with invariant coordinate 
               selection with different scatter matrices and several choices for the 
               selection of components as described in Alfons, A., Archimbaud, A., Nordhausen, K.and Ruiz-Gazen, A. (2024) <doi:10.1016/j.ecosta.2024.03.002>.
